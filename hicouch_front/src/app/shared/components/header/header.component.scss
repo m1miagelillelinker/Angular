@@ -1,0 +1,28 @@
+.header-content {
+    display: flex;
+    width: 100vw;
+    img {
+        height : 100px;
+        margin-right: 5%;
+    }
+    .search-bar {
+        margin-top: auto;
+        margin-bottom: auto;
+        height: 50px;
+        width: 70vw;
+        display: flex;
+        .search-field {
+            padding: 15px;
+            width: 100%;
+        }
+    }
+    .user-infos {
+        img {
+            height: 80px; 
+        }
+        margin-top: auto;
+        margin-bottom: auto;
+        margin-left: 5%;
+    }
+
+}
