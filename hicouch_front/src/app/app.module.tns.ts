@@ -6,6 +6,9 @@ import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 import { HeaderComponent } from './shared/components/header/header.component';
 import { TestService } from './shared/services/test.service';
+import { LoginComponent } from './login/login.component'; 
+
+
 
 // Uncomment and add to NgModule imports if you need to use two-way binding
 // import { NativeScriptFormsModule } from 'nativescript-angular/forms';
@@ -18,6 +21,7 @@ import { TestService } from './shared/services/test.service';
     AppComponent,
     HomeComponent,
     HeaderComponent,
+    LoginComponent,
   ],
   imports: [
     NativeScriptModule,
