@@ -2,14 +2,14 @@
     display: flex;
     width: 100vw;
     img {
-        height : 100px;
+        height : 130px;
         margin-right: 5%;
     }
     .search-bar {
         margin-top: auto;
         margin-bottom: auto;
         height: 50px;
-        width: 70vw;
+        width: 60vw;
         display: flex;
         .search-field {
             padding: 15px;
@@ -17,6 +17,7 @@
         }
     }
     .user-infos {
+        float:right;
         img {
             height: 80px; 
         }

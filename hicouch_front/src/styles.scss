@@ -1,0 +1,63 @@
+/* You can add global styles to this file, and also import other style files */
+
+
+@font-face {
+    font-family: 'ubuntu_google-font-bold-italic';
+    src: url('./assets/fonts/Ubuntu-BoldItalic.ttf') format('truetype');
+    font-weight: bold, bolder;
+    font-style: italic, oblique;
+  }
+  
+  @font-face {
+    font-family: 'ubuntu_google-font-italic';
+    src: url('./assets/fonts/Ubuntu-Italic.ttf') format('truetype');
+    font-weight: normal;
+    font-style: italic, oblique;
+  }
+  
+  @font-face {
+    font-family: 'ubuntu_google-font-light-italic';
+    src: url('./assets/fonts/Ubuntu-LightItalic.ttf') format('truetype');
+    font-weight: 100;
+    font-style: italic, oblique;
+  }
+  
+  @font-face {
+    font-family: 'ubuntu_google-font-light';
+    src: url('./assets/fonts/Ubuntu-Light.ttf') format('truetype');
+    font-weight: 100;
+    font-style: normal;
+  }
+  
+  @font-face {
+    font-family: 'ubuntu_google-font-bold';
+    src: url('./assets/fonts/Ubuntu-Bold.ttf') format('truetype');
+    font-weight: bold, bolder;
+    font-style: normal;
+  }
+  
+  @font-face {
+    font-family: 'ubuntu_google-font-medium-italic';
+    src: url('./assets/fonts/Ubuntu-Medium.ttf') format('truetype');
+    font-weight: 500;
+    font-style: italic,oblique;
+  }
+  
+  @font-face {
+    font-family: 'ubuntu_google-font-medium';
+    src: url('./assets/fonts/Ubuntu-Medium.ttf') format('truetype');
+    font-weight: 500;
+    font-style: normal;
+  }
+
+  @font-face {
+    font-family: 'ubuntu_google-font-regular';
+    src: url('./assets/fonts/Ubuntu-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+  }
+  
+  * {
+    font-family: 'ubuntu_google-font-regular';
+    
+  }

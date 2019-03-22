@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, Injector } from '@angular/core';
+import { Router, NavigationEnd } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -6,4 +7,17 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
+  constructor(
+    injector: Injector,
+    public router: Router
+) {
+    // tslint:disable-next-line:no-unused-expression
+    injector;
+
+    this.router.events.subscribe((event) => {
+        if (event instanceof NavigationEnd) {
+            const url = router.url;
+        }
+    });
+}
 }

@@ -16,13 +16,20 @@ export class HeaderComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.userService.getUser(1).subscribe(
-      (user: User) => {
-        console.log(user);
-        this.user = user;
-        this.userSelected.emit(this.user);
-      }
-    );
+    // TODO : DEMOCK ! 
+    // this.userService.getUser(1).subscribe(
+    //   (user: User) => {
+    //     console.log(user);
+    //     this.user = user;
+    //     this.userSelected.emit(this.user);
+    //   }
+    // );
+
+    this.user = {
+      id: 1,
+      firstName: 'Mocked',
+      lastName: 'User'
+    };
   }
 
 }
