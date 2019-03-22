@@ -1,10 +1,10 @@
 
 <p>{{title}}</p>
-<div *ngIf="user; else login">
+<div *ngIf="user">
 	Hello {{user.lastName}}
 </div>
 
-<ng-template #login>
+<ng-template #login *ngIf="!user">
 
 	<div id="login">
 	<!-- Connection area -->

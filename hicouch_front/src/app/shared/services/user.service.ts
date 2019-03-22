@@ -1,5 +1,9 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { User } from '../models/user';
+
+
 
 @Injectable({
   providedIn: 'root',
@@ -9,7 +13,12 @@ export class UserService {
   constructor(private http: HttpClient) {
   }
 
-  getUser(userid: number) {
-    return this.http.get(`//localhost:8080/user/${userid}`);
+
+  // getTest() {
+  //   return this.http.get('//localhost:8080/test');
+  // }
+
+  getUser(userid: number): Observable<User> {
+    return this.http.get<User>(`//localhost:8080/user/get?userId=${userid}`);
   }
 }
