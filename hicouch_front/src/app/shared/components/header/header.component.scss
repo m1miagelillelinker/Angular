@@ -1,10 +1,13 @@
 .header-content {
     display: flex;
     width: 100vw;
+    margin: 0 auto;
     img {
         height : 130px;
+        margin-left: 5%;
         margin-right: 5%;
     }
+    
     .search-bar {
         margin-top: auto;
         margin-bottom: auto;
@@ -19,7 +22,7 @@
     .user-infos {
         float:right;
         img {
-            height: 80px; 
+            height: 100px; 
         }
         margin-top: auto;
         margin-bottom: auto;
