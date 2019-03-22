@@ -4,7 +4,7 @@ import { User } from '../shared/models/user';
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
-  styleUrls: ['./home.component.css'],
+  styleUrls: ['./home.component.css', '../../styles.scss'],
 })
 export class HomeComponent implements OnInit {
   title = 'hicouch';
