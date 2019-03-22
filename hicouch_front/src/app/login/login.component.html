@@ -1,16 +1,44 @@
-<div id="login">
-	<!-- Connection area -->
-		<form >
-			
-			  <div class="credentials">
-			    <input type="email" placeholder="Adresse mail" name="uname" required>
-			    <input type="password" placeholder="Mot de passe" name="psw" required>
-			  </div>
-			
-			    <button type="submit">Login</button>
-			
-			  <div class="psw">
-			    <span ><a href="#">Mot de passe oublié ?</a></span>
-			  </div>
-		</form>
+<div class="login">
+	
+	<img src="/assets/images/logo.PNG"/>
+	
+	<form (ngSubmit)="onSubmit()">
+        <div class="credentials">
+        	<input type="email" placeholder="Adresse mail" name="email" formControlName="email" required>
+        	<input type="password" placeholder="Mot de passe" name="password" formControlName="password" required>
+		</div>
+		
+		<span ><a href="#">Mot de passe oublié ?</a></span>
+		<br>
+		<br>
+        <button type="submit">Connexion</button>
+     </form>
+     <br>
+	 <br>
+     <span onclick="document.getElementById('subscribe').style.display='inline'" >Tu n'a pas de compte ? Inscris toi ici ></span>
+</div>
+
+<div id="subscribe" class="modal">
+  <span onclick="document.getElementById('subscribe').style.display='none'" class="close" title="Close Modal">&times;</span>
+
+  <!-- Modal Content -->
+  <form class="modal-content animate">
+
+    <div class="container">
+      <label for="usename"><b>Ton nom d'utilisateur</b></label>
+      <input type="text" placeholder="Mot de passe" name="usename" required>
+      
+      <label for="mail"><b>Ton adresse mail</b></label>
+      <input type="text" placeholder="Ecrivez votre adresse mail" name="mail" required>
+
+      <label for="psw"><b>Ton mot de passe</b></label>
+      <input type="password" placeholder="Mot de passe" name="psw" required>
+      
+      <label for="psw"><b>Confirmation du mot de passe</b></label>
+      <input type="password" placeholder="Mot de passe" name="psw" required>
+
+      <button type="submit">S'inscrire</button>
+
+    </div>
+  </form>
 </div>
