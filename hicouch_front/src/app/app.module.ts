@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { TestService } from './shared/services/test.service';
+import { UserService } from './shared/services/user.service';
 import { HeaderComponent } from './shared/components/header/header.component';
 import { HomeComponent } from './home/home.component';
 
@@ -17,7 +17,7 @@ import { HomeComponent } from './home/home.component';
     BrowserModule,
     AppRoutingModule
   ],
-  providers: [TestService],
+  providers: [UserService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,4 +1,5 @@
-<app-header></app-header>
-<p>
-Magnifique application !
+<app-header (userSelected)="loadUser($event)"></app-header>
+<p>{{title}}</p>
+<p *ngIf="user">
+{{user.lastName}}
 </p>

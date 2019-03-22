@@ -2,12 +2,12 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
 @Injectable()
-export class TestService {
+export class UserService {
 
   constructor(private http: HttpClient) {
   }
 
-  getAll() {
-    return this.http.get('//localhost:8080/test');
+  getUser(userid: number) {
+    return this.http.get(`//localhost:8080/user/${userid}`);
   }
 }
