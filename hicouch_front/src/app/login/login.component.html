@@ -4,8 +4,8 @@
 	
 	<form (ngSubmit)="onSubmit()">
         <div class="credentials">
-        	<input type="email" placeholder="Adresse mail" name="email" formControlName="email" required>
-        	<input type="password" placeholder="Mot de passe" name="password" formControlName="password" required>
+        	<input type="email" placeholder="Adresse mail" name="email" required>
+        	<input type="password" placeholder="Mot de passe" name="password" required>
 		</div>
 		
 		<span ><a href="#">Mot de passe oublié ?</a></span>
@@ -15,16 +15,22 @@
      </form>
      <br>
 	 <br>
-     <span onclick="document.getElementById('subscribe').style.display='inline'" >Tu n'a pas de compte ? Inscris toi ici ></span>
+     <span class="subscribe" onclick="document.getElementById('subscribe').style.display='inline'" >Tu n'a pas de compte ? Inscris toi ici ></span>
 </div>
 
 <div id="subscribe" class="modal">
-  <span onclick="document.getElementById('subscribe').style.display='none'" class="close" title="Close Modal">&times;</span>
-
+  
   <!-- Modal Content -->
   <form class="modal-content animate">
-
-    <div class="container">
+	
+	<span onclick="document.getElementById('subscribe').style.display='none'" class="close">&times;</span>
+    	
+		<h1 class="title">{{title}}</h1>		
+		<br>
+		<br>
+		<br>
+		<br>
+    
       <label for="usename"><b>Ton nom d'utilisateur</b></label>
       <input type="text" placeholder="Mot de passe" name="usename" required>
       
@@ -39,6 +45,5 @@
 
       <button type="submit">S'inscrire</button>
 
-    </div>
   </form>
 </div>

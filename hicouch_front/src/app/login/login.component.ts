@@ -10,6 +10,7 @@ import { AuthenticationService } from '../services/login/authentification.servic
 })
 
 export class LoginComponent implements OnInit {
+    title = "HiCouch";
     user: User;
     form: FormGroup;
 
@@ -25,16 +26,11 @@ export class LoginComponent implements OnInit {
   }
 
   isFieldInvalid(field: string) {
-    return (
-      (!this.form.get(field).valid && this.form.get(field).touched) ||
-      (this.form.get(field).untouched && this.formSubmitAttempt)
-    );
+    
   }
 
   onSubmit() {
     if (this.form.valid) {
-      this.authService.login(this.form.value);
     }
-    this.formSubmitAttempt = true;
   }
 }

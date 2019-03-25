@@ -1,39 +1,65 @@
-.login {
-  	text-align:center;
-  }
-  
-  .login button, .login span{
-  	margin: 0 auto;
-  	display: table;
-  }
-  
-  input {
-  	margin: 10px;
-  	padding : 15px;
-  	display: inline-block;
-  	width: 200px;
-  }
-  
-  form >span {
-  	position: relative;
-  	left: 175px;
-  }
-  
-  
-  
-  button {
-  	padding: 10px;
-  }
-  
-  #subscribe{
-  	display: none;
-  }
-  
-  #subscribe input {
-  width: 100%;
-  padding: 12px 20px;
-  margin: 8px 0;
-  display: inline-block;
-  border: 1px solid #ccc;
-  box-sizing: border-box;
-}
+	.login {
+	  	text-align:center;
+	 }
+	  
+	input {
+	  margin: 10px;
+	  padding : 15px;
+	  display: inline-block;
+	  width: 200px;
+	}
+	  
+	.login form >span {
+	  position: relative;
+	  left: 175px;
+	}
+	
+	button {
+	  padding: 10px;
+	}
+	  
+	.subscribe {
+	  text-decoration: underline;
+	  cursor: pointer;
+	}
+	  
+	#subscribe input {
+	  width: 100%;
+	  padding: 12px 20px;
+	  margin: 8px 0;
+	  display: inline-block;
+	  border: 1px solid #ccc;
+	  box-sizing: border-box;
+	}
+	  
+	#subscribe {
+	  display: none; /* Hidden by default */
+	  position: fixed; /* Stay in place */
+	  z-index: 1; /* Sit on top */
+	  left: 0;
+	  top: 0;
+	  width: 100%;
+	  height: 100%;
+	  background-color: rgba(0,0,0,0.4);
+	}
+	
+	.modal-content {
+	  background-color: #fefefe;
+	  margin: 5% auto 15% auto; /* 5% from the top, 15% from the bottom and centered */
+	  border: 1px solid #888;
+	  width: 50%; 
+	  padding: 30px;
+	}
+	
+	.close {
+	  position: relative;
+	  left: 95%;
+  	  color: #000;
+      font-size: 35px;
+      font-weight: bold;
+	}
+	  
+	.close:hover, .close:focus {
+	  color: red;
+	  cursor: pointer;
+	 }
