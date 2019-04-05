@@ -10,6 +10,8 @@ import { HeaderComponent } from './shared/components/header/header.component';
 import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
 
+import { AuthenticationService } from './services/login/authentification.service';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -24,7 +26,7 @@ import { LoginComponent } from './login/login.component';
     ReactiveFormsModule,
     FormsModule
   ],
-  providers: [UserService],
+  providers: [UserService, AuthenticationService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

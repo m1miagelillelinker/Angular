@@ -11,15 +11,24 @@ import { AuthenticationService } from '../services/login/authentification.servic
 
 export class LoginComponent implements OnInit {
     title = "HiCouch";
-    submitted = false;
+    
+    
+    constructor(public auth: AuthenticationService) {
+        auth.handleAuthentication();
+    }
+    
+    ngOnInit() {
+        if (this.auth.isAuthenticated()) {
+          this.auth.renewTokens();
+        }
+    }
+
+    /*
+        submitted = false;
     success = false;
     
     user: User;
     form: FormGroup;
-
-    constructor(private formBuilder: FormBuilder) {
-    }
-    
     
     closeSubscribe() {
         document.getElementById('subscribe').style.display='none';
@@ -59,13 +68,6 @@ export class LoginComponent implements OnInit {
         }
     
         this.success = true;
-    }
+    }*/
     
-//    // The current application coordinates were pre-registered in a B2C tenant.
-//        var applicationConfig = {
-//            clientID: 'bf50a854-4e0c-4e21-95da-7b5b2424f025',
-//            authority: "https://login.microsoftonline.com/tfp/hicouch.onmicrosoft.com/B2C_1_mail",
-//            b2cScopes: ["https://hicouch.onmicrosoft.com/hello/demo.read"],
-//            webApi: 'http://localhost:5000/hello',
-//        };
 }

@@ -1,4 +1,45 @@
-<div class="login">
+<body><div class="login">
+	<div class="">
+	    <div class="">
+	        <img src="/assets/images/logo.png"/>
+	    </div>
+		
+		<div>
+			<form>
+				<button id="qsLoginBtn" class="btn btn-primary my-2 my-sm-0" *ngIf="!auth.isAuthenticated()" (click)="auth.login()" type="button">
+					<h3 class="text-center">
+				            Authentification
+					</h3>
+	        	</button>
+				<p class="text-right">
+					<a href="">Besoin d'aide sur l'authentification ?</a>
+				</p>
+	        </form>
+		</div>         
+	
+		<hr>
+	</div>
+	<div class="informations text-center">
+		<h3>Informations</h3>
+		<p class="infos">
+			Projet réalisé dans le cadre de l'UE Projet, Agilité et Innovation. 
+		</p>
+	</div>
+	<hr>
+	<div id="copy" class="text-center">Copyright © 2019 <a href="http://www.univ-lille.fr">Université de Lille</a></div>
+	
+</div> 
+
+
+
+
+
+
+
+
+
+
+<!-- <div class="login">
 	
 	<img src="/assets/images/logo.PNG"/>
 	
@@ -20,7 +61,6 @@
 
 <div id="subscribe" class="modal">
   
-  <!-- Modal Content -->
   <form class="modal-content animate" (ngSubmit)="signUp()">
 	
 	<span (click)="closeSubscribe()" class="close">&times;</span>
@@ -47,3 +87,5 @@
 
   </form>
 </div>
+-->
+</body>
