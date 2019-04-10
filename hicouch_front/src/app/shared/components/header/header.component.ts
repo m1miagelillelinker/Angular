@@ -1,4 +1,4 @@
-import { Component, OnInit, EventEmitter } from '@angular/core';
+import { Component, OnInit, EventEmitter, Input } from '@angular/core';
 import { UserService } from '../../services/user.service';
 import { User } from '../../models/user';
 
@@ -9,24 +9,13 @@ import { User } from '../../models/user';
 })
 export class HeaderComponent implements OnInit {
 
-  user: User;
+  @Input() user: User;
   userSelected = new EventEmitter();
   constructor(
     private userService: UserService
   ) { }
 
   ngOnInit() {
-    this.userService.getUser(1).subscribe(
-      (user: User) => {
-        console.log(user);
-        this.user = {
-          id: user.id,
-          firstName: user.firstName,
-          lastName: user.lastName,
-        };
-        this.userSelected.emit(this.user);
-      }
-    );
 
     // TODO : DEMOCK !
     // this.user = {
