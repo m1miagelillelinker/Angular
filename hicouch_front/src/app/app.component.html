@@ -1,2 +1,8 @@
-<app-header></app-header>
-<router-outlet></router-outlet>
+<div *ngIf="!user">
+    <app-login></app-login>
+</div>
+<div *ngIf="user">
+    <app-header [user]="user"></app-header>
+    <router-outlet></router-outlet>
+</div>
+

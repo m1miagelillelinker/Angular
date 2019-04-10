@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { User } from '../shared/models/user';
 import { UserService } from '../shared/services/user.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -8,17 +9,18 @@ import { UserService } from '../shared/services/user.service';
   styleUrls: ['./home.component.scss'],
 })
 export class HomeComponent implements OnInit {
-  title = "HiCouch";
-  user: User;
+  @Input() user: User;
 
   constructor(
     private userService: UserService,
+    private router: Router,
   ) { }
 
   ngOnInit() {
   }
 
-  loadUser(event: User) {
-    this.user = event;
+  goToProducts() {
+    this.router.navigate(['app/products']);
   }
+
 }
