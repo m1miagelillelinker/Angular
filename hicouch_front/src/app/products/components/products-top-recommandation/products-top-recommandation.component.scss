@@ -1,0 +1,41 @@
+.header {
+    width:100%;
+    display:inline-flex;
+    text-align: center;
+    div {
+      width:25%;
+      padding: 20px;
+      border-radius: 8px;
+      border: 1px solid grey;
+      border-left:none;
+      &:first-child {
+        border-left:1px solid grey;
+      }
+    }
+    div.selected{
+      background-color:white;
+      // color:#b52025;
+      font-weight:bold;
+  }
+  }
+  .content {
+    padding: 15px;
+    display:flex;
+    width:fit-content;
+    img {
+      height: 130px;
+    }
+    .infos {
+      display: block;
+      padding-left:10px;
+      .title {
+        font-size: 20px;
+        margin-bottom: 10px;
+      }
+      .description {
+        padding-bottom:10px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+    }
+  }

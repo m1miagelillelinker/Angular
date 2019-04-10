@@ -10,8 +10,8 @@ import { Movie, Book } from '../shared/models/product';
 export class ProductPageComponent implements OnInit {
   movie: Movie;
   productsRelated: any[] = [];
-  movieSelected = true;
-  bookSelected = false;
+  allProducts: any[] = [];
+
 
   constructor(
     private productService: ProductService,
@@ -24,19 +24,15 @@ export class ProductPageComponent implements OnInit {
     this.productService.getMovieById('tt0120737').subscribe((movie) => {
       this.productsRelated.push(movie);
       this.productsRelated.push(this.productService.getBook());
-      console.log(this.productsRelated);
+      this.allProducts.push(movie);
+      this.allProducts.push(this.productService.getBook());
+      this.allProducts.push(movie);
+      this.allProducts.push(this.productService.getBook());
+      this.allProducts.push(movie);
+      this.allProducts.push(this.productService.getBook());
     });
   }
 
-  selectTab(tab: string) {
-    if (tab === 'movie') {
-      this.movieSelected = true;
-      this.bookSelected = false;
-    } else {
-      this.bookSelected = true;
-      this.movieSelected = false;
-    }
-    console.log(this.productsRelated);
-  }
+
 
 }

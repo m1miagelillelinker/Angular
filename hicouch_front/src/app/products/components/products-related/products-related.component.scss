@@ -1,0 +1,18 @@
+.title{
+    margin-top: 20px;
+    font-size: 30px;
+}
+.banner {
+    background-color: #777777;
+    width:100%;
+    padding: 20px;
+    display:inline-flex;
+    justify-content: space-around;
+    .item{
+        .image {
+            img {
+                height: 150px;
+            }
+        }
+    }
+}

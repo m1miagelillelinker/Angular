@@ -20,52 +20,7 @@
 		</div>
 	</div>
 	<div class="related" *ngIf="productsRelated.length > 0">
-		<div class="header">
-			<div [ngClass]="{'selected': movieSelected}" (click)="selectTab('movie')">
-				Movie
-			</div>
-			<div [ngClass]="{'selected': bookSelected}" (click)="selectTab('book')">
-				Book
-			</div>
-			<div (click)="selectTab('tv')">
-				TVShow
-			</div>
-			<div (click)="selectTab('game')">
-				Game
-			</div>
-		</div>
-		<div *ngFor="let product of productsRelated">
-			<div class="content" *ngIf="movieSelected && product.Type==='movie'">
-				<div class="image">
-					<img src="{{product.Poster}}">
-				</div>
-				<div class="infos">
-					<div class="title">
-						{{product.Title}}
-					</div>
-					<div class="description">
-						{{product.Plot}}
-
-					</div>
-				</div>
-			</div>
-
-			<div class="content" *ngIf="bookSelected && product.type==='book'">
-				<div class="image">
-					<img src="assets/images/Harry-Potter-a-l-ecole-des-sorciers.jpg">
-				</div>
-				<div class="infos">
-					<div class="title">
-						{{product.title}}
-					</div>
-					<div class="description">
-						{{product.description}}
-
-					</div>
-				</div>
-
-			</div>
-		</div>
+		<app-products-top-recommandation [productsRelated]="productsRelated"></app-products-top-recommandation>
 	</div>
-
 </div>
+<app-products-related [allProducts]="allProducts"></app-products-related>

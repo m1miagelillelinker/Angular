@@ -1,0 +1,13 @@
+<div class="title">
+    Related Products : 
+</div>
+<div class="banner" >
+    <div class="item" *ngFor="let product of allProducts; let i = idx">
+        <div class="image" *ngIf="product.type==='book'">
+                <img src="assets/images/Harry-Potter-a-l-ecole-des-sorciers.jpg">
+        </div>
+        <div class="image" *ngIf="product.Type==='movie'">
+                <img src={{product.Poster}}>
+        </div>
+    </div>
+</div>

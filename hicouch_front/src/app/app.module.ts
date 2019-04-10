@@ -20,6 +20,10 @@ import { LoginComponent } from './login/login.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ProductPageComponent } from './products/product.page';
 import { ProductService } from './shared/services/product.service';
+import {
+  ProductsTopRecommandationComponent
+} from './products/components/products-top-recommandation/products-top-recommandation.component';
+import { ProductsRelatedComponent } from './products/components/products-related/products-related.component';
 
 @NgModule({
   declarations: [
@@ -28,6 +32,8 @@ import { ProductService } from './shared/services/product.service';
     HeaderComponent,
     LoginComponent,
     ProductPageComponent,
+    ProductsTopRecommandationComponent,
+    ProductsRelatedComponent,
   ],
   imports: [
     BrowserAnimationsModule,
