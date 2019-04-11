@@ -17,6 +17,18 @@ export class ProductsRelatedComponent implements OnInit {
   ngOnInit() {
   }
 
+  fetchList(number): any[] {
+      let tab = [];
+      if (number > 5) {
+        tab = this.allProducts.slice(5, this.currentIndex);
+        return tab;
+      } else {
+        tab = this.allProducts.slice(0, 5);
+        return tab;
+      }
+
+  }
+
   fetchIndex(direction) {
     if (direction === 'right') {
         if (this.currentIndex + 5 > this.allProducts.length) {

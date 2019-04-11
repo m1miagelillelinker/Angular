@@ -1,18 +1,38 @@
-.title{
-    margin-top: 20px;
-    font-size: 30px;
-}
+
 .banner {
     background-color: #777777;
     width:100%;
     padding: 20px;
-    display:inline-flex;
-    justify-content: space-around;
-    .item{
-        .image {
+
+    .title{
+        color: #f4f4f4;
+        margin-top: 20px;
+        font-size: 30px;
+        display: block;
+    }
+    .list {
+        width:100%;
+        display:inline-flex;
+        justify-content: space-around;
+        .item{
+            .image {
+                img {
+                    height: 150px;
+                }
+            }
+        }
+        .navigation-right, .navigation-left{
+            margin-top:auto;
+            margin-bottom:auto;
             img {
-                height: 150px;
+                height: 30px;
+            }
+        }
+        .navigation-left {
+            img {
+                transform: rotate(180deg);
             }
         }
     }
+    
 }

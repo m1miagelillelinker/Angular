@@ -22,6 +22,10 @@ export class ProductService {
     return this.http.get(`//localhost:8080/product/getBookByIdFromReferentiel?bookId=${idBook}`);
   }
 
+  getMovieByTitle(title: string) {
+    return this.http.get(`//localhost:8080/product/getFilmByTitleFromReferentiel?title=${title}`);
+  }
+
   getBook() {
     const book: Book = {
       id: '1',

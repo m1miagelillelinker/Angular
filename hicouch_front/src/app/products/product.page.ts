@@ -31,6 +31,10 @@ export class ProductPageComponent implements OnInit {
       this.allProducts.push(movie);
       this.allProducts.push(this.productService.getBook());
     });
+    this.productService.getMovieByTitle('Harry').subscribe((movie) => {
+      console.log(movie);
+      this.allProducts.push(movie);
+    });
   }
 
 

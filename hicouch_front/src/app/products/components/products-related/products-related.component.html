@@ -1,13 +1,25 @@
-<div class="title">
-    Related Products : 
-</div>
-<div class="banner" >
-    <div class="item" *ngFor="let product of allProducts; let i = idx">
-        <div class="image" *ngIf="product.type==='book'">
-                <img src="assets/images/Harry-Potter-a-l-ecole-des-sorciers.jpg">
+<div class="banner">
+        <div class="title">
+                Related Products :
         </div>
-        <div class="image" *ngIf="product.Type==='movie'">
-                <img src={{product.Poster}}>
+        <br />
+        <div class="list">
+                <div class="navigation-left">
+                        <img *ngIf="currentIndex > 0" (click)="fetchIndex('left')"
+                                src="assets/images/white-arrow-right.png">
+                </div>
+                <div class="item" *ngFor="let product of fetchList(currentIndex)">
+                        <div class="image" *ngIf="product.type==='book'">
+                                <img src="assets/images/Harry-Potter-a-l-ecole-des-sorciers.jpg">
+                        </div>
+                        <div class="image" *ngIf="product.Type==='movie'">
+                                <img src={{product.Poster}}>
+                        </div>
+                </div>
+                <div class="navigation-right">
+                        <img *ngIf="currentIndex <= allProducts.length" (click)="fetchIndex('right')"
+                                src="assets/images/white-arrow-right.png">
+                </div>
         </div>
-    </div>
+
 </div>
