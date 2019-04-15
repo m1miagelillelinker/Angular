@@ -18,6 +18,10 @@
       font-weight:bold;
   }
   }
+  :host {
+    height: 98%;
+    overflow: hidden;
+  }
   .content {
     padding: 15px;
     display:flex;
@@ -28,6 +32,7 @@
     .infos {
       display: block;
       padding-left:10px;
+
       .title {
         font-size: 20px;
         margin-bottom: 10px;
