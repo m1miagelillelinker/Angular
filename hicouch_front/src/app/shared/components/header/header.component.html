@@ -3,7 +3,7 @@
     <div class="search-bar">
         <input class="search-field" placeholder="Rechercher..."/>
     </div>
-    <div class="user-infos" >
+    <div class="user-infos" (click)="goToUser()">
         <img src="/assets/images/user.png"/>
         <p>{{user.firstName}} {{user.lastName}}</p>
     </div>

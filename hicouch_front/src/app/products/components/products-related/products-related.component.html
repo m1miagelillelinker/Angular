@@ -8,16 +8,22 @@
                         <img *ngIf="currentIndex > 0" (click)="fetchIndex('left')"
                                 src="assets/images/white-arrow-right.png">
                 </div>
-                <div class="item" *ngFor="let product of fetchList(currentIndex)">
+                <div class="item" *ngFor="let product of fetchList(currentIndex)" (click)="goTo(product.id)">
                         <div class="image" *ngIf="product.type==='book'">
-                                <img src="assets/images/Harry-Potter-a-l-ecole-des-sorciers.jpg">
+                                <img src="{{product.image}}">
                         </div>
                         <div class="image" *ngIf="product.Type==='movie'">
                                 <img src={{product.Poster}}>
                         </div>
+                        <div class="title2" *ngIf="product.type==='book'">
+                                {{product.title}}
+                        </div>
+                        <div class="title2" *ngIf="product.Type==='movie'">
+                                {{product.Title}}
+                        </div>
                 </div>
                 <div class="navigation-right">
-                        <img *ngIf="currentIndex <= allProducts.length" (click)="fetchIndex('right')"
+                        <img *ngIf="currentIndex < allProducts.length" (click)="fetchIndex('right')"
                                 src="assets/images/white-arrow-right.png">
                 </div>
         </div>

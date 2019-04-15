@@ -24,6 +24,7 @@ import {
   ProductsTopRecommandationComponent
 } from './products/components/products-top-recommandation/products-top-recommandation.component';
 import { ProductsRelatedComponent } from './products/components/products-related/products-related.component';
+import { AccountPageComponent } from './account/account.page';
 
 @NgModule({
   declarations: [
@@ -34,6 +35,7 @@ import { ProductsRelatedComponent } from './products/components/products-related
     ProductPageComponent,
     ProductsTopRecommandationComponent,
     ProductsRelatedComponent,
+    AccountPageComponent,
   ],
   imports: [
     BrowserAnimationsModule,

@@ -29,13 +29,13 @@ export class ProductService {
   getBook() {
     const book: Book = {
       id: '1',
-      title: 'Harry Potter à l école des sorciers',
+      title: 'Harry Potter à l\'école des sorciers',
       description: 'Harry est un sorcier',
       author: 'J.K. Rowling',
       year: '2003',
       genre: 'Fantastic',
       // tslint:disable-next-line:max-line-length
-      image: 'http://books.google.fr/books?id=nvijsUyJYR4C&printsec=frontcover&dq=Harry+Potter&hl=&cd=1&source=gbs_api',
+      image: 'assets/images/Harry-Potter-a-l-ecole-des-sorciers.jpg',
       type: 'book',
     };
     return book;

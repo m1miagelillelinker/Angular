@@ -14,6 +14,7 @@ export class ProductsTopRecommandationComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    console.log(this.productsRelated);
   }
 
 

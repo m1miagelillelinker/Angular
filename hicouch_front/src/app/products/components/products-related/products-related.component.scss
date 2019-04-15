@@ -2,7 +2,7 @@
 .banner {
     background-color: #777777;
     width:100%;
-    padding: 20px;
+    padding: 15px;
 
     .title{
         color: #f4f4f4;
@@ -15,9 +15,17 @@
         display:inline-flex;
         justify-content: space-around;
         .item{
+            background-color:rgba(0,0,0,0.2);
+            padding: 30px;
+            display: block;
+            width: min-content;
+            .title2 {
+                font-size: 18px;
+                text-align: center;
+            }
             .image {
                 img {
-                    height: 150px;
+                    height: 180px;
                 }
             }
         }
