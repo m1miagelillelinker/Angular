@@ -1,37 +1,90 @@
 
 .banner {
+    max-height: 60vh;
     background-color: #777777;
-    width:100%;
-    padding: 15px;
-
+    // width:100%;
+    margin:0;
+    padding: 10px;
     .title{
         color: #f4f4f4;
-        margin-top: 20px;
-        font-size: 30px;
-        display: block;
-    }
+        margin-top: 8px;
+        font-size: 1.5em;
+        width: 100%;
+        display:block;
+       
+        }
+        .navigation {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width:100%;
+            div {
+                margin:5px;
+                &#cercle {
+                    width: 10px;
+                    height: 10px;
+                    border-radius: 10px;
+                    background: gray;
+                    &.selected {
+                        background: white;
+                    }
+                }
+               &#cercle2 {
+                    width: 10px;
+                    height: 10px;
+                    border-radius: 10px;
+                    background: white;
+                    &.selected {
+                        background: white;
+                    }
+                }
+            }
+        }
+            
     .list {
         width:100%;
         display:inline-flex;
         justify-content: space-around;
+        height:100%;
         .item{
             background-color:rgba(0,0,0,0.2);
-            padding: 30px;
+            padding: 10px;
             display: block;
-            width: min-content;
+            width: calc(100% / 5);
+            max-width: 12%;
+            text-align:center;
+            .picto {
+                img {
+                    height: 15px;
+                }
+            }
             .title2 {
-                font-size: 18px;
+                margin-top:5px;
+                font-size: 1em;
                 text-align: center;
+                overflow: hidden;
+                white-space: nowrap;
+                text-overflow: ellipsis;
             }
             .image {
+                margin-top:auto;
+                margin-bottom:auto;
                 img {
-                    height: 180px;
+                    max-height:fit-content;
+                    width:90%;
+                    cursor: pointer;
+                }
+            }
+            &.add-product {
+                .image {
+                    margin-top:33%;
                 }
             }
         }
         .navigation-right, .navigation-left{
             margin-top:auto;
             margin-bottom:auto;
+            cursor: pointer;
             img {
                 height: 30px;
             }
@@ -41,6 +94,7 @@
                 transform: rotate(180deg);
             }
         }
+
     }
     
 }

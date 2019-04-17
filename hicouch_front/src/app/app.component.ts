@@ -29,7 +29,7 @@ export class AppComponent implements OnInit {
     }
 
     ngOnInit(): void {
-        this.userService.getUser(1).subscribe(
+        this.userService.getUser('2').subscribe(
             (user: User) => {
               console.log(user);
               this.user = {

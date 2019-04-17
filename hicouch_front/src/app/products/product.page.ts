@@ -22,12 +22,17 @@ export class ProductPageComponent implements OnInit {
   ngOnInit() {
     // tt3896198
     const productId = this.route.snapshot.paramMap.get('productId');
-    console.log(productId);
-    this.productService.getMovieById(productId).subscribe((movie: Movie) => {
+    this.productService.getMovieById(productId).subscribe((movie: any) => {
       this.movie = movie;
+      this.movie.title = movie.Title;
+      this.movie.type = movie.Type;
+      this.movie.description = movie.Plot;
     });
-    this.productService.getMovieById('tt0120737').subscribe((movie: Movie) => {
+    this.productService.getMovieById('tt0120737').subscribe((movie: any) => {
       movie.id = '1';
+      movie.title = movie.Title;
+      movie.type = movie.Type;
+      movie.description = movie.Plot;
       this.productsRelated.push(movie);
       this.productService.getBookById('9780613322744').subscribe((book: any) => {
         const mybook = book.items[0].volumeInfo;
@@ -41,7 +46,6 @@ export class ProductPageComponent implements OnInit {
           const mybook2 = book2.items[5].volumeInfo;
           mybook2.type = 'book';
           mybook2.image =  book2.items[5].volumeInfo.imageLinks.thumbnail;
-          console.log(book2);
           this.allProducts.push(mybook2);
         });
         this.allProducts.push(this.productService.getBook());
@@ -52,7 +56,9 @@ export class ProductPageComponent implements OnInit {
         this.allProducts.push(mybook);
       });
     });
-    this.productService.getMovieByTitle('Harry').subscribe((movie) => {
+    this.productService.getMovieByTitle('Harry').subscribe((movie: any) => {
+      movie.title = movie.Title;
+      movie.type = movie.Type;
       this.allProducts.push(movie);
     });
   }
