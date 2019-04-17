@@ -1,6 +1,7 @@
 import { Component, OnInit, EventEmitter, Input } from '@angular/core';
 import { UserService } from '../../services/user.service';
 import { User } from '../../models/user';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-header',
@@ -12,7 +13,8 @@ export class HeaderComponent implements OnInit {
   @Input() user: User;
   userSelected = new EventEmitter();
   constructor(
-    private userService: UserService
+    private userService: UserService,
+    private router: Router,
   ) { }
 
   ngOnInit() {
@@ -23,6 +25,10 @@ export class HeaderComponent implements OnInit {
     //   firstName: 'Mocked',
     //   lastName: 'User'
     // };
+  }
+
+  goToUser() {
+    this.router.navigate(['app/account', this.user.id]);
   }
 
 }

@@ -1,0 +1,45 @@
+<div class="header">
+    <div [ngClass]="{'selected': movieSelected}" (click)="selectTab('movie')">
+        Movie
+    </div>
+    <div [ngClass]="{'selected': bookSelected}" (click)="selectTab('book')">
+        Book
+    </div>
+    <div (click)="selectTab('tv')">
+        TVShow
+    </div>
+    <div (click)="selectTab('game')">
+        Game
+    </div>
+</div>
+<div *ngFor="let product of productsRelated">
+    <div class="content" *ngIf="movieSelected && product.Type==='movie'">
+        <div class="image">
+            <img src="{{product.Poster}}">
+        </div>
+        <div class="infos">
+            <div class="title">
+                {{product.titleShort}}
+            </div>
+            <p class="description">
+                {{product.descShort}}
+            </p>
+        </div>
+    </div>
+
+    <div class="content" *ngIf="bookSelected && product.type==='book'">
+        <div class="image">
+            <img src="{{product.image}}">
+        </div>
+        <div class="infos">
+            <div class="title">
+                {{product.titleShort}}
+            </div>
+            <div class="description">
+                {{product.descShort}}
+
+            </div>
+        </div>
+
+    </div>
+</div>

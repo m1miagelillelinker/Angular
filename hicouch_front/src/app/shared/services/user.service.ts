@@ -18,7 +18,7 @@ export class UserService {
   //   return this.http.get('//localhost:8080/test');
   // }
 
-  getUser(userid: number): Observable<User> {
+  getUser(userid: string): Observable<User> {
     return this.http.get<User>(`//localhost:8080/user/get?userId=${userid}`);
   }
 }

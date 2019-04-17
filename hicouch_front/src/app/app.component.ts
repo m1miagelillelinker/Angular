@@ -29,15 +29,15 @@ export class AppComponent implements OnInit {
     }
 
     ngOnInit(): void {
-        this.userService.getUser(1).subscribe(
-            (user: User) => {
-              console.log(user);
-              this.user = {
-                id: user.id,
-                firstName: user.firstName,
-                lastName: user.lastName,
-              };
-              this.userSelected.emit(this.user);
-            });
+        // this.userService.getUser('2').subscribe(
+        //     (user: User) => {
+        //       console.log(user);
+        //       this.user = {
+        //         id: user.id,
+        //         firstName: user.firstName,
+        //         lastName: user.lastName,
+        //       };
+        //       this.userSelected.emit(this.user);
+        //     });
     }
 }

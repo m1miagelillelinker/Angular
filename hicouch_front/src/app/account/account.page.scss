@@ -4,7 +4,7 @@
   .main {
     width: 60vw;
     height:40vh;
-    // border-radius: 10px;
+    border-radius: 10px;
     background-color: #ececec; 
     display:flex;
     .image {
@@ -15,10 +15,8 @@
     }
     .infos {
       display:block;
-      height: 98%;
-      overflow: hidden;
       .title {
-        font-size: 2em;
+        font-size: 40px;
         margin-top: 20px;
         margin-bottom: 20px;
       }
@@ -30,11 +28,11 @@
 
   .related {
     height: 40vh;
-    max-width: 35vw;
+    max-width: 30vw;
     margin-left:20px;
     background-color: #ececec;
-    // border-radius: 10px;
-    overflow: hidden;
+    border-radius: 10px;
+
   }
 
 

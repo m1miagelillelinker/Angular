@@ -21,6 +21,11 @@ import { LoginComponent } from './login/login.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ProductPageComponent } from './products/product.page';
 import { ProductService } from './shared/services/product.service';
+import {
+  ProductsTopRecommandationComponent
+} from './products/components/products-top-recommandation/products-top-recommandation.component';
+import { ProductsRelatedComponent } from './products/components/products-related/products-related.component';
+import { AccountPageComponent } from './account/account.page';
 import { AuthenticationService } from './shared/services/authentification.service';
 
 @NgModule({
@@ -30,6 +35,9 @@ import { AuthenticationService } from './shared/services/authentification.servic
     HeaderComponent,
     LoginComponent,
     ProductPageComponent,
+    ProductsTopRecommandationComponent,
+    ProductsRelatedComponent,
+    AccountPageComponent,
   ],
   imports: [
     BrowserAnimationsModule,
