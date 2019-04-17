@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { User } from '../shared/models/user';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { AuthenticationService } from '../services/login/authentification.service';
+import { AuthenticationService } from '../shared/services/authentification.service';
 
 @Component({
     selector: 'app-login',
@@ -10,13 +10,12 @@ import { AuthenticationService } from '../services/login/authentification.servic
 })
 
 export class LoginComponent implements OnInit {
-    title = "HiCouch";
-    
-    
+    title = 'HiCouch';
+
     constructor(public auth: AuthenticationService) {
         auth.handleAuthentication();
     }
-    
+
     ngOnInit() {
         if (this.auth.isAuthenticated()) {
           this.auth.renewTokens();
@@ -26,10 +25,10 @@ export class LoginComponent implements OnInit {
     /*
         submitted = false;
     success = false;
-    
+
     user: User;
     form: FormGroup;
-    
+
     closeSubscribe() {
         document.getElementById('subscribe').style.display='none';
     }
@@ -37,7 +36,7 @@ export class LoginComponent implements OnInit {
     displaySubscribe(){
         document.getElementById('subscribe').style.display='inline';
     }
-    
+
     ngOnInit() {
         this.form = this.formBuilder.group({
             name: ['', Validators.required],
@@ -56,18 +55,18 @@ export class LoginComponent implements OnInit {
         if (this.form.invalid) {
             return;
         }
-    
+
         this.success = true;
     }
-    
+
     signUp() {
         this.submitted = true;
 
         if (this.form.invalid) {
             return;
         }
-    
+
         this.success = true;
     }*/
-    
+
 }

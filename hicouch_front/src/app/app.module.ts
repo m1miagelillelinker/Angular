@@ -21,8 +21,7 @@ import { LoginComponent } from './login/login.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ProductPageComponent } from './products/product.page';
 import { ProductService } from './shared/services/product.service';
-
-import { AuthenticationService } from './services/login/authentification.service';
+import { AuthenticationService } from './shared/services/authentification.service';
 
 @NgModule({
   declarations: [
