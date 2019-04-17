@@ -4,7 +4,6 @@ import { Router } from '@angular/router';
 import * as auth0 from 'auth0-js';
 
 import { User } from '../../shared/models/user';
-import { HttpClient } from '@angular/common/http';
 
 @Injectable()
 export class AuthenticationService {
@@ -20,8 +19,7 @@ export class AuthenticationService {
     redirectUri: AUTH_CONFIG.callbackURL
   });
 
-  constructor(public router: Router,
-            private http: HttpClient) {
+  constructor(public router: Router) {
     this._idToken = '';
     this._accessToken = '';
     this._expiresAt = 0;
@@ -88,12 +86,4 @@ export class AuthenticationService {
     return this._accessToken && Date.now() < this._expiresAt;
   }
 
-
-    getCurrentUser() {
-        return this.http.get<User>(`//localhost:8080/user/get?userId=1`);
-    }
-
-    log() {
-        //
-    }
 }

@@ -1,8 +1,49 @@
-<div class="login">
+<body><div class="login">
+	<div class="">
+	    <div class="">
+	        <img src="/assets/images/logo.png"/>
+	    </div>
+		
+		<div>
+			<form>
+				<button id="qsLoginBtn" class="btn btn-primary my-2 my-sm-0" *ngIf="!auth.isAuthenticated()" (click)="auth.login()" type="button">
+					<h3 class="text-center">
+				            Authentification
+					</h3>
+	        	</button>
+				<p class="text-right">
+					<a href="">Besoin d'aide sur l'authentification ?</a>
+				</p>
+	        </form>
+		</div>         
+	
+		<hr>
+	</div>
+	<div class="informations text-center">
+		<h3>Informations</h3>
+		<p class="infos">
+			Projet réalisé dans le cadre de l'UE Projet, Agilité et Innovation. 
+		</p>
+	</div>
+	<hr>
+	<div id="copy" class="text-center">Copyright © 2019 <a href="http://www.univ-lille.fr">Université de Lille</a></div>
+	
+</div> 
+
+
+
+
+
+
+
+
+
+
+<!-- <div class="login">
 	
 	<img src="/assets/images/logo.PNG"/>
 	
-	<form (ngSubmit)="onSubmit()">
+	<form (ngSubmit)="signIn()">
         <div class="credentials">
         	<input type="email" placeholder="Adresse mail" name="email" required>
         	<input type="password" placeholder="Mot de passe" name="password" required>
@@ -15,15 +56,14 @@
      </form>
      <br>
 	 <br>
-     <span class="subscribe" onclick="document.getElementById('subscribe').style.display='inline'" >Tu n'a pas de compte ? Inscris toi ici ></span>
+     <span class="subscribe" (click)="displaySubscribe()" >Vous n'avez pas de compte ? Inscrivez vous ici ></span>
 </div>
 
 <div id="subscribe" class="modal">
   
-  <!-- Modal Content -->
-  <form class="modal-content animate">
+  <form class="modal-content animate" (ngSubmit)="signUp()">
 	
-	<span onclick="document.getElementById('subscribe').style.display='none'" class="close">&times;</span>
+	<span (click)="closeSubscribe()" class="close">&times;</span>
     	
 		<h1 class="title">{{title}}</h1>		
 		<br>
@@ -31,13 +71,13 @@
 		<br>
 		<br>
     
-      <label for="usename"><b>Ton nom d'utilisateur</b></label>
+      <label for="usename"><b>Votre nom d'utilisateur</b></label>
       <input type="text" placeholder="Mot de passe" name="usename" required>
       
-      <label for="mail"><b>Ton adresse mail</b></label>
+      <label for="mail"><b>Votre adresse mail</b></label>
       <input type="text" placeholder="Ecrivez votre adresse mail" name="mail" required>
 
-      <label for="psw"><b>Ton mot de passe</b></label>
+      <label for="psw"><b>Votre mot de passe</b></label>
       <input type="password" placeholder="Mot de passe" name="psw" required>
       
       <label for="psw"><b>Confirmation du mot de passe</b></label>
@@ -47,3 +87,5 @@
 
   </form>
 </div>
+-->
+</body>

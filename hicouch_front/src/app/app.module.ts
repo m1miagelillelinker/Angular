@@ -10,16 +10,19 @@ import {
 } from '@angular/material';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
+import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
+
 import { AppComponent } from './app.component';
 import { UserService } from './shared/services/user.service';
 import { HeaderComponent } from './shared/components/header/header.component';
 import { HomeComponent } from './home/home.component';
-import { HttpClientModule } from '@angular/common/http';
 import { LoginComponent } from './login/login.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ProductPageComponent } from './products/product.page';
 import { ProductService } from './shared/services/product.service';
+
+import { AuthenticationService } from './services/login/authentification.service';
 
 @NgModule({
   declarations: [
@@ -45,7 +48,10 @@ import { ProductService } from './shared/services/product.service';
   ],
   providers: [
     UserService,
-    ProductService
+    AuthenticationService,
+    ProductService,
+    ReactiveFormsModule,
+    FormsModule
   ],
   bootstrap: [AppComponent]
 })
