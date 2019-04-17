@@ -10,12 +10,13 @@ import {
 } from '@angular/material';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
+import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
+
 import { AppComponent } from './app.component';
 import { UserService } from './shared/services/user.service';
 import { HeaderComponent } from './shared/components/header/header.component';
 import { HomeComponent } from './home/home.component';
-import { HttpClientModule } from '@angular/common/http';
 import { LoginComponent } from './login/login.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ProductPageComponent } from './products/product.page';
@@ -25,6 +26,7 @@ import {
 } from './products/components/products-top-recommandation/products-top-recommandation.component';
 import { ProductsRelatedComponent } from './products/components/products-related/products-related.component';
 import { AccountPageComponent } from './account/account.page';
+import { AuthenticationService } from './shared/services/authentification.service';
 
 @NgModule({
   declarations: [
@@ -53,7 +55,10 @@ import { AccountPageComponent } from './account/account.page';
   ],
   providers: [
     UserService,
-    ProductService
+    AuthenticationService,
+    ProductService,
+    ReactiveFormsModule,
+    FormsModule
   ],
   bootstrap: [AppComponent]
 })

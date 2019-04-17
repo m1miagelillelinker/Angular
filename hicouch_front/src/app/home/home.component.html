@@ -1,6 +1,7 @@
-<div *ngIf="user">
-	Hello 
-	<button (click)="goToProducts()">see products</button>
+
+<div *ngIf="auth.isAuthenticated()">
+<h1 class="title">{{title}}</h1>
+	Hello {{user.lastName}}
 </div>
 <button (click)="goToProducts()">see products</button>
 
