@@ -8,9 +8,9 @@ import { ProductService } from '../shared/services/product.service';
 import { UserService } from '../shared/services/user.service';
 
 @Component({
-  selector: 'app-home',
-  templateUrl: './home.component.html',
-  styleUrls: ['./home.component.scss'],
+    selector: 'app-home',
+    templateUrl: './home.component.html',
+    styleUrls: ['./home.component.scss'],
 })
 export class HomeComponent implements OnInit {
   @Input() user: User;
@@ -41,9 +41,11 @@ export class HomeComponent implements OnInit {
       });
   }
 
-  goToProducts() {
-    this.router.navigate(['app/products']);
-  }
+    ngOnInit() {
+        if (this.auth.isAuthenticated()) {
+          this.loggedUser = this.auth.loggedUser();
+        }
+    }
 
   loadMoviePage(event) {
     console.log(event);
@@ -52,6 +54,9 @@ export class HomeComponent implements OnInit {
     this.router.navigate(['app/products/', event.id]);
     this.fetchProducts();
 }
+    goToProducts() {
+        this.router.navigate(['app/products']);
+    }
 
 fetchProducts() {
   // tt3896198
