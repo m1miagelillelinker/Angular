@@ -1,0 +1,11 @@
+<div class="menu">
+        <div class="activity" (click)="selectTab('activity')" [ngClass]="{'selected': activitySelected}">
+                Recent Activity
+        </div>
+        <div class="badges" (click)="selectTab('badges')" [ngClass]="{'selected': badgesSelected}">
+                Badges
+        </div>
+        <div class="friends" (click)="selectTab('friends')" [ngClass]="{'selected': friendsSelected}">
+                My friends
+        </div>
+</div>

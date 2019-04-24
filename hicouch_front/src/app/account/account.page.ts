@@ -22,7 +22,14 @@ export class AccountPageComponent implements OnInit {
     // tt3896198
     const userId = this.route.snapshot.paramMap.get('userId');
     this.userService.getUser(userId).subscribe((user) => {
-      this.user = user;
+      const myUser = {
+        id: user.id,
+        pseudo: user.pseudo,
+        score: user.score,
+        firstName: user.firstName,
+        lastName: user.lastName,
+      };
+      this.user = myUser;
     });
   }
 

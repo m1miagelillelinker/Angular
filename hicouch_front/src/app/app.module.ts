@@ -27,6 +27,7 @@ import {
 import { ProductsRelatedComponent } from './products/components/products-related/products-related.component';
 import { AccountPageComponent } from './account/account.page';
 import { AuthenticationService } from './shared/services/authentification.service';
+import { AccountSideMenuComponent } from './account/components/account-side-menu/account-side-menu.component';
 
 @NgModule({
   declarations: [
@@ -38,6 +39,7 @@ import { AuthenticationService } from './shared/services/authentification.servic
     ProductsTopRecommandationComponent,
     ProductsRelatedComponent,
     AccountPageComponent,
+    AccountSideMenuComponent,
   ],
   imports: [
     BrowserAnimationsModule,

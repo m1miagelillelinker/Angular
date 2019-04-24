@@ -1,5 +1,20 @@
+<div *ngIf="user" class="welcome">
+		Hello {{user.pseudo}} !
+	</div>
 <div *ngIf="user" class="content">
 	<div class="profile">
-	{{user.firstName}} {{user.lastName}}
+		<div class="display">
+				<img src="/assets/images/user.png" />
+				<div class="user-infos">
+					{{user.firstName}}
+					<br />
+					{{user.lastName}}
+				</div>
+		</div>
+		<div class="action" (click)="goToEdition()">
+			Edit My Profile
+		</div>
 	</div>
+
 </div>
+<app-account-side-menu></app-account-side-menu>
