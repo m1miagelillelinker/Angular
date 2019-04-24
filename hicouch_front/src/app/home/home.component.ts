@@ -1,3 +1,4 @@
+import { Injectable } from '@angular/core';
 import { Component, OnInit, Input } from '@angular/core';
 import { User } from '../shared/models/user';
 import { UserService } from '../shared/services/user.service';
@@ -9,20 +10,21 @@ import { AuthenticationService } from '../shared/services/authentification.servi
     templateUrl: './home.component.html',
     styleUrls: ['./home.component.scss'],
 })
+
+@Injectable()
 export class HomeComponent implements OnInit {
     //@Input() user: User;
-
+    private loggedUser : User;
 
     constructor(
         private userService: UserService,
         private router: Router,
-        public auth: AuthenticationService,
-        private loggedUser : User
+        public auth: AuthenticationService
     ) { }
 
     ngOnInit() {
         if (this.auth.isAuthenticated()) {
-          this.loggedUser = this.auth.loggedUser();
+          this.loggedUser = this.auth.loggedUser; 
         }
     }
 

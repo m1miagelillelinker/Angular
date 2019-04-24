@@ -12,7 +12,7 @@ export class AuthenticationService {
     private _idToken: string;
     private _accessToken: string;
     private _expiresAt: number;
-    public _loggedUser: User;
+    private _loggedUser: User;
 
     auth0 = new auth0.WebAuth({
         clientID: AUTH_CONFIG.clientID,
@@ -26,7 +26,6 @@ export class AuthenticationService {
         this._idToken = '';
         this._accessToken = '';
         this._expiresAt = 0;
-        this._loggedUser = new User();
     }
 
     get accessToken(): string {
@@ -38,7 +37,7 @@ export class AuthenticationService {
     }
 
     get loggedUser(): User {
-        return this.loggedUser;
+        return this._loggedUser;
     }
 
     public login(): void {
@@ -66,10 +65,8 @@ export class AuthenticationService {
         this._expiresAt = expiresAt;
         console.debug(this._accessToken);
         console.debug(this._idToken );
-
-        this.loggedUser.accessToken = this._accessToken;
-        this.loggedUser.idToken = this._idToken;
-        this.loggedUser.expiresAt = this._expiresAt;
+        
+        this._loggedUser = {id: null, lastName: null, firstName: null, accessToken: this._accessToken, idToken: this._idToken, expiresAt: this._expiresAt }
     }
 
     public renewTokens(): void {
