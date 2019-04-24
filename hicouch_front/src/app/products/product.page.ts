@@ -27,6 +27,9 @@ export class ProductPageComponent implements OnInit, OnDestroy {
     const productId = this.route.snapshot.paramMap.get('productId');
     this.productSubscription = this.productService.getMovieById(productId).subscribe((movie: any) => {
       this.movie = movie;
+      this.movie.title = movie.Title;
+      this.movie.type = movie.Type;
+      this.movie.description = movie.Plot;
     });
     this.productSubscription = this.productService.getMovieById('tt0120737').subscribe((movie: any) => {
       movie.id = '1';
@@ -55,6 +58,11 @@ export class ProductPageComponent implements OnInit, OnDestroy {
         this.allProducts.push(movie);
         this.allProducts.push(mybook);
       });
+    });
+    this.productService.getMovieByTitle('Harry').subscribe((movie: any) => {
+      movie.title = movie.Title;
+      movie.type = movie.Type;
+      this.allProducts.push(movie);
     });
     // this.productSubscription = this.productService.getMovieByTitle('Harry').subscribe((movie: any) => {
     //   movie.title = movie.Title;

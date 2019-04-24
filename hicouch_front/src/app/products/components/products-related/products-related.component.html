@@ -1,0 +1,44 @@
+<div class="banner">
+        <div class="title">
+                Related Products :
+        </div>
+                        <div class="navigation" *ngIf="totalPages">
+                                <div *ngFor="let in of counter(totalPages) ;let i = index">
+                                        <div id="cercle" *ngIf="i !== this.currentPage"></div>
+                                        <div id="cercle2" *ngIf="i === this.currentPage"></div>
+                                </div>
+                        </div>
+
+        <br />
+
+        <div class="list">
+                <div class="navigation-left">
+                        <img *ngIf="currentIndex > 0" (click)="fetchIndex('left')"
+                                src="assets/images/white-arrow-right.png">
+                </div>
+                <div class="item" *ngFor="let product of fetchList(currentIndex)" (click)="goTo(product.id)">
+                        <div class="picto">
+                                <img src="{{getPicto(product.type)}}">
+                        </div>
+                        <div class="image" *ngIf="product.type==='book'">
+                                <img src="{{product.image}}">
+                        </div>
+                        <div class="image" *ngIf="product.Type==='movie'">
+                                <img src={{product.Poster}}>
+                        </div>
+                        <div class="title2" (mouseover)="getTitle(product)">
+                                {{product.titleShort}}
+                        </div>
+                </div>
+                <div class="item add-product">
+                        <div class="image">
+                                <img src="/assets/images/plus.png">
+                        </div>
+                </div>
+                <div class="navigation-right">
+                        <img *ngIf="currentIndex < allProducts.length" (click)="fetchIndex('right')"
+                                src="assets/images/white-arrow-right.png">
+                </div>
+        </div>
+
+</div>
