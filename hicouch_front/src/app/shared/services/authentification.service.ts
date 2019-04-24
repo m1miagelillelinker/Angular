@@ -88,11 +88,6 @@ export class AuthenticationService {
     return this._accessToken && Date.now() < this._expiresAt;
   }
 
-
-    getCurrentUser() {
-        return this.http.get<User>(`//localhost:8080/user/get?userId=1`);
-    }
-
     log() {
         //
     }

@@ -14,7 +14,8 @@
     "android": "tns run android --bundle",
     "ios": "tns run ios --bundle",
     "mobile": "tns run --bundle",
-    "preview": "tns preview --bundle"
+    "preview": "tns preview --bundle",
+    "serve": "ng lint && ng serve"
   },
   "private": true,
   "dependencies": {
@@ -59,6 +60,7 @@
     "protractor": "^5.4.2",
     "ts-node": "~5.0.1",
     "tslint": "~5.9.1",
-    "typescript": "~3.1.1"
+    "typescript": "~3.1.1",
+    "tslint-config-airbnb": "^5.11.1"
   }
 }
