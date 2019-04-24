@@ -17,4 +17,9 @@
 	</div>
 
 </div>
-<app-account-side-menu></app-account-side-menu>
+<div class="second-part">
+		<app-account-side-menu (tabHasBeenSelected)="toggleFeature($event)"></app-account-side-menu>
+		<div class="feature" *ngIf="activitySelected">
+				<app-activity-field></app-activity-field>
+		</div>
+</div>

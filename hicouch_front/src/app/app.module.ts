@@ -28,6 +28,7 @@ import { ProductsRelatedComponent } from './products/components/products-related
 import { AccountPageComponent } from './account/account.page';
 import { AuthenticationService } from './shared/services/authentification.service';
 import { AccountSideMenuComponent } from './account/components/account-side-menu/account-side-menu.component';
+import { ActivityFieldComponent } from './account/components/activity-field/activity-field.component';
 
 @NgModule({
   declarations: [
@@ -40,6 +41,7 @@ import { AccountSideMenuComponent } from './account/components/account-side-menu
     ProductsRelatedComponent,
     AccountPageComponent,
     AccountSideMenuComponent,
+    ActivityFieldComponent,
   ],
   imports: [
     BrowserAnimationsModule,

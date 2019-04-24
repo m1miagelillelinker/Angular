@@ -12,6 +12,9 @@ import { UserService } from '../shared/services/user.service';
 })
 export class AccountPageComponent implements OnInit {
   user: User;
+  activitySelected = true;
+  friendsSelected = false;
+  badgesSelected = false;
 
   constructor(
     private userService: UserService,
@@ -31,6 +34,26 @@ export class AccountPageComponent implements OnInit {
       };
       this.user = myUser;
     });
+  }
+
+  toggleFeature(event: string) {
+    switch (event) {
+      case 'activity':
+        this.activitySelected = true;
+        this.friendsSelected = false;
+        this.badgesSelected = false;
+        break;
+      case 'friends':
+        this.activitySelected = false;
+        this.friendsSelected = true;
+        this.badgesSelected = false;
+        break;
+      case 'badges':
+        this.activitySelected = false;
+        this.friendsSelected = false;
+        this.badgesSelected = true;
+        break;
+    }
   }
 
 

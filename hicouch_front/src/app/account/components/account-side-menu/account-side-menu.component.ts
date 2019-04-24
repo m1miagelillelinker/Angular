@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, EventEmitter } from '@angular/core';
 import { Router } from '@angular/router';
 
 @Component({
@@ -11,6 +11,8 @@ export class AccountSideMenuComponent implements OnInit {
   activitySelected = true;
   friendsSelected = false;
   badgesSelected = false;
+
+  tabHasBeenSelected = new EventEmitter();
   constructor(
       private router: Router,
   ) { }
@@ -36,7 +38,7 @@ export class AccountSideMenuComponent implements OnInit {
         this.badgesSelected = true;
         break;
     }
-
+    this.tabHasBeenSelected.emit(tab);
 
   }
 
