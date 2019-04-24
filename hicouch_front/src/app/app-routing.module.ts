@@ -19,6 +19,7 @@ export const routes: Routes = [
   {
       path: 'app/home',
       component: HomeComponent,
+      pathMatch : 'full'
   },
   {
     path: 'app/products/:productId',
