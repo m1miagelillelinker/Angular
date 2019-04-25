@@ -29,6 +29,7 @@ import { AccountPageComponent } from './account/account.page';
 import { AuthenticationService } from './shared/services/authentification.service';
 import { AccountSideMenuComponent } from './account/components/account-side-menu/account-side-menu.component';
 import { ActivityFieldComponent } from './account/components/activity-field/activity-field.component';
+import { MainProductComponent } from './products/components/main-product/main-product.component';
 
 @NgModule({
   declarations: [
@@ -39,6 +40,7 @@ import { ActivityFieldComponent } from './account/components/activity-field/acti
     ProductPageComponent,
     ProductsTopRecommandationComponent,
     ProductsRelatedComponent,
+    MainProductComponent,
     AccountPageComponent,
     AccountSideMenuComponent,
     ActivityFieldComponent,

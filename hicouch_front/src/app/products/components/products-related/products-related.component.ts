@@ -37,11 +37,13 @@ export class ProductsRelatedComponent implements OnInit, OnChanges {
     });
       let tab = [];
       this.fetchNavigation();
-      if (number > 5) {
-        tab = this.allProducts.slice(5, this.currentIndex);
+      if (number >= 5) {
+        tab = this.allProducts.slice(5, this.currentIndex + 1);
+        console.log(tab);
         return tab;
       } else {
         tab = this.allProducts.slice(0, 5);
+        console.log(tab);
         return tab;
       }
   }
@@ -80,7 +82,7 @@ export class ProductsRelatedComponent implements OnInit, OnChanges {
   fetchIndex(direction) {
     if (direction === 'right') {
         this.currentPage += 1;
-        if (this.currentIndex + 5 > this.allProducts.length) {
+        if (this.currentIndex + 5 <= this.allProducts.length) {
             this.currentIndex += 5;
         } else {
             this.currentIndex = this.allProducts.length;
@@ -88,13 +90,14 @@ export class ProductsRelatedComponent implements OnInit, OnChanges {
     }
     if (direction === 'left') {
         this.currentPage -= 1;
-        if (this.currentIndex - 5 < 0) {
+        if (this.currentIndex - 5 >= 0) {
             this.currentIndex -= 5;
         } else {
             this.currentIndex = 0;
         }
 
     }
+    console.log(this.currentIndex);
     this.fetchList(this.currentIndex);
   }
 
