@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, OnChanges } from '@angular/core';
+import { Component, OnInit, Input, OnChanges, ChangeDetectorRef } from '@angular/core';
 import { Router } from '@angular/router';
 
 @Component({
@@ -17,6 +17,7 @@ export class ProductsRelatedComponent implements OnInit, OnChanges {
 
   constructor(
       private router: Router,
+      private changeDetectorRef: ChangeDetectorRef,
   ) { }
 
   ngOnInit() {
@@ -27,6 +28,7 @@ export class ProductsRelatedComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges() {
+    this.changeDetectorRef.detectChanges();
   }
 
   fetchList(number): any[] {
@@ -42,8 +44,6 @@ export class ProductsRelatedComponent implements OnInit, OnChanges {
         tab = this.allProducts.slice(0, 5);
         return tab;
       }
-
-
   }
 
   getPicto(type) {

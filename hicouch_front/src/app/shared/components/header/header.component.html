@@ -1,7 +1,7 @@
-<div class="header-content">
+<div class="header-content" *ngIf="user">
     <img src="/assets/images/logo.png"/>
     <div class="search-bar">
-        <input class="search-field" placeholder="Rechercher..."/>
+        <input #searchInput class="search-field" placeholder="Rechercher..." (keyup.enter)="onType(searchInput.value)"/>
     </div>
     <div class="user-infos" (click)="goToUser()">
         <img src="/assets/images/user.png"/>

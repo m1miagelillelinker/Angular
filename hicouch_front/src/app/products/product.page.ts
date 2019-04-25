@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, ChangeDetectorRef, OnChanges } from '@angular/core';
 import { ProductService } from '../shared/services/product.service';
 import { Movie, Book } from '../shared/models/product';
 import { ActivatedRoute, Route, Router } from '@angular/router';
@@ -9,7 +9,7 @@ import { Subscription } from 'rxjs';
   templateUrl: './product.page.html',
   styleUrls: ['./product.page.scss'],
 })
-export class ProductPageComponent implements OnInit, OnDestroy {
+export class ProductPageComponent implements OnInit, OnDestroy, OnChanges {
   movie: Movie;
   productsRelated: any[] = [];
   allProducts: any[] = [];
@@ -20,6 +20,8 @@ export class ProductPageComponent implements OnInit, OnDestroy {
   constructor(
     private productService: ProductService,
     private route: ActivatedRoute,
+    private router: Router,
+    private changeDetectorRef: ChangeDetectorRef,
   ) { }
 
   ngOnInit() {
@@ -38,25 +40,30 @@ export class ProductPageComponent implements OnInit, OnDestroy {
       movie.description = movie.Plot;
       this.productsRelated.push(movie);
       this.productService.getBookById('9780613322744').subscribe((book: any) => {
-        const mybook = book.items[0].volumeInfo;
-        mybook.type = 'book';
-        mybook.image =  book.items[0].volumeInfo.imageLinks.thumbnail;
-        this.allProducts.push(mybook);
-        this.productsRelated.push(mybook);
+        console.log(book);
+        if (book.items) {
+          const mybook = book.items[0].volumeInfo;
+          mybook.type = 'book';
+          mybook.image =  book.items[0].volumeInfo.imageLinks.thumbnail;
+          this.allProducts.push(mybook);
+          this.productsRelated.push(mybook);
+        }
         movie.id = '2';
         this.allProducts.push(movie);
         this.productService.getBookById('9782070524327').subscribe((book2: any) => {
-          const mybook2 = book2.items[5].volumeInfo;
-          mybook2.type = 'book';
-          mybook2.image =  book2.items[5].volumeInfo.imageLinks.thumbnail;
-          this.allProducts.push(mybook2);
+          if (book.items) {
+            const mybook2 = book2.items[5].volumeInfo;
+            mybook2.type = 'book';
+            mybook2.image =  book2.items[5].volumeInfo.imageLinks.thumbnail;
+            this.allProducts.push(mybook2);
+          }
         });
         this.allProducts.push(this.productService.getBook());
         movie.id = '3';
         this.allProducts.push(movie);
         movie.id = '4';
         this.allProducts.push(movie);
-        this.allProducts.push(mybook);
+        // this.allProducts.push(mybook);
       });
     });
     this.productService.getMovieByTitle('Harry').subscribe((movie: any) => {
@@ -75,6 +82,14 @@ export class ProductPageComponent implements OnInit, OnDestroy {
     if (this.productSubscription) { this.productSubscription.unsubscribe(); }
   }
 
+  ngOnChanges() {
+    // this.changeDetectorRef.detectChanges();
+  }
 
+  loadMoviePage(event) {
+    // this.changeDetectorRef.detectChanges();
+    console.log(event);
+    this.router.navigate(['app/products/:productId', event.imdbID]);
+}
 
 }

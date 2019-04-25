@@ -33,20 +33,13 @@ export class AppComponent implements OnInit, OnDestroy {
     }
 
     ngOnInit(): void {
-        // this.userService.getUser('2').subscribe(
-        //     (user: User) => {
-        //       console.log(user);
-        //       this.user = {
-        //         id: user.id,
-        //         firstName: user.firstName,
-        //         lastName: user.lastName,
-        //       };
-        //       this.userSelected.emit(this.user);
-        //     });
+
     }
 
     ngOnDestroy(): void {
         if (this.routerSubscription) { this.routerSubscription.unsubscribe(); }
         if (this.userSubscription) { this.userSubscription.unsubscribe(); }
     }
+
+
 }
