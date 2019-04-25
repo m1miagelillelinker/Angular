@@ -15,15 +15,15 @@ export class ProductService {
   }
 
   getMovieById(idMovie: string) {
-    return this.http.get(`//localhost:8080/product/getFilmByIdFromReferentiel?filmId=${idMovie}`);
+    return this.http.get(`//localhost:8090/product/getFilmByIdFromReferentiel?filmId=${idMovie}`);
   }
 
   getBookById(idBook: string) {
-    return this.http.get(`//localhost:8080/product/getBookByIdFromReferentiel?bookId=${idBook}`);
+    return this.http.get(`//localhost:8090/product/getBookByIdFromReferentiel?bookId=${idBook}`);
   }
 
   getMovieByTitle(title: string) {
-    return this.http.get(`//localhost:8080/product/getFilmByTitleFromReferentiel?title=${title}`);
+    return this.http.get(`//localhost:8090/product/getFilmByTitleFromReferentiel?title=${title}`);
   }
 
   getBook() {
