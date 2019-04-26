@@ -1,5 +1,10 @@
-import { Component, OnInit, Input, OnChanges } from '@angular/core';
+import { Component, OnInit, Input, OnChanges, Inject } from '@angular/core';
 import { Router } from '@angular/router';
+import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
+
+export interface DialogData {
+  nomProduct: string;
+}
 
 @Component({
   selector: 'app-products-related',
@@ -14,9 +19,12 @@ export class ProductsRelatedComponent implements OnInit, OnChanges {
   totalPages: number;
   currentPage = 0;
   displayTitle: string;
+  idProduct: number;
+  idAssociatedProduct: number;
 
   constructor(
       private router: Router,
+      public dialog: MatDialog,
   ) { }
 
   ngOnInit() {
@@ -97,9 +105,42 @@ export class ProductsRelatedComponent implements OnInit, OnChanges {
     }
     this.fetchList(this.currentIndex);
   }
+    
+  addAssociation() {
+      this.openDialog();
+  }
+    
+  openDialog(): void {
+      const dialogRef = this.dialog.open(ProductsRelatedAddDialog, {
+          width: '300px',
+          data: { nomProduct: this.idProduct, id2: null }
+      });
+
+      dialogRef.afterClosed().subscribe(result => {
+          console.log('The dialog was closed');
+          this.idAssociatedProduct = result;
+      });
+  }
+
 
   goTo(productId) {
       this.router.navigate(['app/products', productId]);
+  }
+
+}
+
+@Component({
+  selector: 'products-related-add-dialog',
+  template: '<p> Pop Up </p>',
+})
+export class ProductsRelatedAddDialog {
+
+  constructor(
+    public dialogRef: MatDialogRef<ProductsRelatedAddDialog>,
+      @Inject(MAT_DIALOG_DATA) public data: DialogData) {}
+
+  onNoClick(): void {
+    this.dialogRef.close();
   }
 
 }

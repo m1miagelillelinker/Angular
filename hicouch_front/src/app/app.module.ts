@@ -6,7 +6,8 @@ import {
   MatInputModule,
   MatRippleModule,
   MatDialogModule,
-  MatTabsModule
+  MatTabsModule,
+  MatCardModule
 } from '@angular/material';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
@@ -24,7 +25,7 @@ import { ProductService } from './shared/services/product.service';
 import {
   ProductsTopRecommandationComponent
 } from './products/components/products-top-recommandation/products-top-recommandation.component';
-import { ProductsRelatedComponent } from './products/components/products-related/products-related.component';
+import { ProductsRelatedComponent, ProductsRelatedAddDialog } from './products/components/products-related/products-related.component';
 import { AccountPageComponent } from './account/account.page';
 import { AuthenticationService } from './shared/services/authentification.service';
 
@@ -38,6 +39,7 @@ import { AuthenticationService } from './shared/services/authentification.servic
     ProductsTopRecommandationComponent,
     ProductsRelatedComponent,
     AccountPageComponent,
+    ProductsRelatedAddDialog,
   ],
   imports: [
     BrowserAnimationsModule,
@@ -52,6 +54,7 @@ import { AuthenticationService } from './shared/services/authentification.servic
     FormsModule,
     ReactiveFormsModule,
     MatTabsModule,
+    MatCardModule,
   ],
   providers: [
     UserService,
@@ -60,6 +63,9 @@ import { AuthenticationService } from './shared/services/authentification.servic
     ReactiveFormsModule,
     FormsModule
   ],
-  bootstrap: [AppComponent]
+  entryComponents: [
+      ProductsRelatedAddDialog,
+  ],
+  bootstrap: [AppComponent],
 })
 export class AppModule { }
