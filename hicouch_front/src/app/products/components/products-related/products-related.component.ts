@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, OnChanges, Inject } from '@angular/core';
 import { Router } from '@angular/router';
-import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
+import {MatDialog, MatDialogRef, MAT_DIALOG_DATA, MatSelectModule } from '@angular/material';
 
 export interface DialogData {
   nomProduct: string;
@@ -112,7 +112,7 @@ export class ProductsRelatedComponent implements OnInit, OnChanges {
     
   openDialog(): void {
       const dialogRef = this.dialog.open(ProductsRelatedAddDialog, {
-          width: '300px',
+          width: '500px',
           data: { nomProduct: this.idProduct, id2: null }
       });
 
@@ -131,7 +131,7 @@ export class ProductsRelatedComponent implements OnInit, OnChanges {
 
 @Component({
   selector: 'products-related-add-dialog',
-  template: '<p> Pop Up </p>',
+  templateUrl: 'products-related-add-dialog.html',
 })
 export class ProductsRelatedAddDialog {
 

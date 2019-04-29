@@ -7,7 +7,8 @@ import {
   MatRippleModule,
   MatDialogModule,
   MatTabsModule,
-  MatCardModule
+  MatCardModule,
+  MatSelectModule
 } from '@angular/material';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
@@ -55,6 +56,7 @@ import { AuthenticationService } from './shared/services/authentification.servic
     ReactiveFormsModule,
     MatTabsModule,
     MatCardModule,
+    MatSelectModule,
   ],
   providers: [
     UserService,

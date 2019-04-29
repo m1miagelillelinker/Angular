@@ -1,11 +1,27 @@
 <h1 mat-dialog-title>Associer {{data.nameProduct}} à </h1>
-<div mat-dialog-content>
+<div mat-dialog-content [formGroup]="form">
   <p>What's your favorite animal?</p>
   <mat-form-field>
-    <input matInput [(ngModel)]="data.animal">
+    <mat-select placeholder="Sélectionner un type"
+                formControlName="category">
+
+      <mat-option value="BOOK">
+        Livre</mat-option>
+      <mat-option value="MOVIE">
+        Film</mat-option>
+      <mat-option value="TVSHOW">
+        Série</mat-option>
+      <mat-option value="VIDEOGAMES">
+        Jeu-vidéo</mat-option>
+
+    </mat-select>
+  </mat-form-field>
+
+  <mat-form-field >
+    <textarea matInput placeholder="Pourquoi cette association ?"></textarea>
   </mat-form-field>
 </div>
 <div mat-dialog-actions>
   <button mat-button (click)="onNoClick()">Annuler</button>
-  <button mat-button [mat-dialog-close]="data.animal" cdkFocusInitial>Ok</button>
+  <button mat-button [mat-dialog-close]="data.animal" cdkFocusInitial>Soumettre</button>
 </div>
