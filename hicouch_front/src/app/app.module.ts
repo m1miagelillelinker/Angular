@@ -29,6 +29,7 @@ import { AccountPageComponent } from './account/account.page';
 import { AuthenticationService } from './shared/services/authentification.service';
 import { AccountSideMenuComponent } from './account/components/account-side-menu/account-side-menu.component';
 import { ActivityFieldComponent } from './account/components/activity-field/activity-field.component';
+import { SubscribeBtnComponent } from './account/components/subscribe-btn/subscribe-btn.component';
 
 @NgModule({
   declarations: [
@@ -42,6 +43,7 @@ import { ActivityFieldComponent } from './account/components/activity-field/acti
     AccountPageComponent,
     AccountSideMenuComponent,
     ActivityFieldComponent,
+    SubscribeBtnComponent,
   ],
   imports: [
     BrowserAnimationsModule,
