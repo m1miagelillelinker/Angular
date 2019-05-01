@@ -98,3 +98,16 @@
     }
     
 }
+
+.association-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.association-container > * {
+    width: 100%;
+}
+
+.association {
+    //background-color: bisque;
+}

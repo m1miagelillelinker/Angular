@@ -1,6 +1,10 @@
 import { Component, OnInit, Input, OnChanges, Inject } from '@angular/core';
+import { ProductService } from '../../../shared/services/product.service';
 import { Router } from '@angular/router';
-import {MatDialog, MatDialogRef, MAT_DIALOG_DATA, MatSelectModule } from '@angular/material';
+import {FormControl} from '@angular/forms';
+import {Observable} from 'rxjs';
+import {map, startWith} from 'rxjs/operators';
+import {MatDialog, MatDialogRef, MAT_DIALOG_DATA, MatSelectModule, MatAutocompleteModule } from '@angular/material';
 
 export interface DialogData {
   nomProduct: string;
@@ -105,14 +109,14 @@ export class ProductsRelatedComponent implements OnInit, OnChanges {
     }
     this.fetchList(this.currentIndex);
   }
-    
+
   addAssociation() {
       this.openDialog();
   }
-    
+
   openDialog(): void {
       const dialogRef = this.dialog.open(ProductsRelatedAddDialog, {
-          width: '500px',
+          width: '50%',
           data: { nomProduct: this.idProduct, id2: null }
       });
 
@@ -132,15 +136,64 @@ export class ProductsRelatedComponent implements OnInit, OnChanges {
 @Component({
   selector: 'products-related-add-dialog',
   templateUrl: 'products-related-add-dialog.html',
+    styleUrls: ['./products-related.component.scss'],
 })
 export class ProductsRelatedAddDialog {
+    Productstype = [
+        {value: 'BOOK', viewValue: 'Livre'},
+        {value: 'MOVIE', viewValue: 'Film'},
+        {value: 'TVSHOW', viewValue: 'Série'},
+        {value: 'VIDEOGAMES', viewValue: 'Jeu-Vidéo'}
+    ];
+    selectedType: string;
+    myControl = new FormControl();
+    options: any[] = [
+        /* {title: 'One'},
+        {title: 'Two'},
+        {title: 'Three'},*/
+        'One', 'Two', 'Three'];
+    listProductsFound: Observable<string[]>;
 
   constructor(
     public dialogRef: MatDialogRef<ProductsRelatedAddDialog>,
+    private productService: ProductService,
       @Inject(MAT_DIALOG_DATA) public data: DialogData) {}
 
   onNoClick(): void {
     this.dialogRef.close();
   }
+
+  searchProducts(value : string): void {
+      if(value.length > 2){
+          console.log(value);
+          if(this.selectedType == 'BOOK'){
+              // this.options = this.productService.getMovieByTitle(value);
+              console.log('Vous recherchez un livre');
+          }
+          if(this.selectedType == 'MOVIE'){
+              console.log('Vous recherchez un film');
+          }
+          if(this.selectedType == 'TVSHOW'){
+              console.log('Vous recherchez une série');
+          }
+          if(this.selectedType == 'VIDEOGAMES'){
+              console.log('Vous recherchez un jeu vidéo');
+          }
+      }
+  }
+
+    ngOnInit() {
+        this.listProductsFound = this.myControl.valueChanges
+            .pipe(
+                startWith(''),
+                map(value => this._filter(value))
+            );
+    }
+
+    private _filter(value: string): string[] {
+        const filterValue = value.toLowerCase();
+
+        return this.options.filter(option => option.toLowerCase().includes(filterValue));
+    }
 
 }
