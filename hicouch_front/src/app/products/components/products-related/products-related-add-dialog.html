@@ -13,11 +13,14 @@
   </mat-form-field>
 
   <mat-form-field>
-    <input #search matInput type="text" (keyup)="searchProducts(search.value)"  placeholder="Rechercher"
+    <input #search matInput type="text"  placeholder="Rechercher"
            [formControl]="myControl" [matAutocomplete]="auto">
-    <mat-autocomplete #auto="matAutocomplete">
-      <mat-option *ngFor="let product of listProductsFound | async" [value]="product">
-        {{product}}
+           <!--   (keyup)="searchProducts(search.value)" -->
+    <mat-autocomplete #auto="matAutocomplete" (optionSelected)="setSelectedOption($event.option.value)" [displayWith]="displayFn">
+    	<!--  <mat-autocomplete #auto="matAutocomplete" (optionSelected)="setSelectedOption($event.option.value.id)" [displayWith]="displayFn"> -->
+      <mat-option *ngFor="let product of listProductsFound | async" [value]="product.title">
+      <!-- <mat-option *ngFor="let product of listProductsFound | async" [value]="product">-->
+        {{product.title}}
       </mat-option>
     </mat-autocomplete>
   </mat-form-field>
@@ -28,6 +31,6 @@
 </div>
 <div mat-dialog-actions>
   <button mat-button (click)="onNoClick()">Annuler</button>
-  <button mat-button [mat-dialog-close]="data.animal" cdkFocusInitial>Soumettre</button>
+  <button mat-button [mat-dialog-close]="data.animal" (click)="addAssociation()" cdkFocusInitial>Soumettre</button>
 </div>
 </div>

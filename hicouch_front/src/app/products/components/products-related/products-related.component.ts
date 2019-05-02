@@ -147,11 +147,13 @@ export class ProductsRelatedAddDialog {
     ];
     selectedType: string;
     myControl = new FormControl();
-    options: any[] = [
-        /* {title: 'One'},
+    selectedOption;
+    options = [
+        {title: 'One'},
         {title: 'Two'},
-        {title: 'Three'},*/
-        'One', 'Two', 'Three'];
+        {title: 'Three'}
+        //'One', 'Two', 'Three'
+        ];
     listProductsFound: Observable<string[]>;
 
   constructor(
@@ -163,7 +165,7 @@ export class ProductsRelatedAddDialog {
     this.dialogRef.close();
   }
 
-  searchProducts(value : string): void {
+  /*searchProducts(value : string): void {
       if(value.length > 2){
           console.log(value);
           if(this.selectedType == 'BOOK'){
@@ -180,20 +182,54 @@ export class ProductsRelatedAddDialog {
               console.log('Vous recherchez un jeu vidéo');
           }
       }
-  }
+  }*/
 
     ngOnInit() {
         this.listProductsFound = this.myControl.valueChanges
             .pipe(
                 startWith(''),
                 map(value => this._filter(value))
+                //map(value => this._filter(value.title))
             );
     }
 
-    private _filter(value: string): string[] {
+    private _filter(value: string): any[] {
         const filterValue = value.toLowerCase();
-
-        return this.options.filter(option => option.toLowerCase().includes(filterValue));
+        console.log(value);
+        if (this.selectedType == 'BOOK') {
+            // this.options = this.productService.getBookByTitle(value);
+            console.log('Vous recherchez un livre');
+        }
+        if (this.selectedType == 'MOVIE') {
+            // this.options = this.productService.getMovieByTitle(filterValue);
+            console.log('Vous recherchez un film');
+        }
+        if (this.selectedType == 'TVSHOW') {
+            // this.options = this.productService.getTVShowByTitle(filterValue);
+            console.log('Vous recherchez une série');
+        }
+        if (this.selectedType == 'VIDEOGAMES') {
+            // this.options = this.productService.getVideoGameByTitle(filterValue);
+            console.log('Vous recherchez un jeu vidéo');
+        }
+        
+        return this.options.filter(option => option.title.toLowerCase().includes(filterValue));
+    }
+    
+    addAssociation() {
+        console.log("Associer");
+        //this.openDialog();
+    }
+    
+    setSelectedOption(value: string): void {
+        console.log("Option selected " + value);
+        // Si on a pu avoir "[value]="product"", ce sera setSelectedOption(id: number) avec id du product
+        //this.associationService.associate(id, this.product.id);   Service à créér 
+    }
+    
+    displayFn(product) {
+        // return product ? product.title : undefined;
+        return product ? product : undefined;
     }
 
 }
