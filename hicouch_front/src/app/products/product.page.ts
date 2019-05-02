@@ -1,11 +1,14 @@
 import { Component, OnInit, OnDestroy, ChangeDetectorRef, OnChanges } from '@angular/core';
 import { ProductService } from '../shared/services/product.service';
 import { Product } from '../shared/models/product';
-import { ActivatedRoute, Router } from '@angular/router';
-import { Subscription } from 'rxjs';
 import { AssociationService } from '../shared/services/association.service';
 import { Association } from '../shared/models/association';
 import { HicouchAPIService } from '../shared/services/hicouchAPI.service';
+import { Subscription, Observable } from 'rxjs';
+import { MatAutocompleteModule, MatIconModule } from '@angular/material';
+import {FormControl} from '@angular/forms';
+import {map, startWith} from 'rxjs/operators';
+import { ActivatedRoute, Route, Router } from '@angular/router';
 
 @Component({
   selector: 'app-product-page',
@@ -19,6 +22,10 @@ export class ProductPageComponent implements OnInit, OnDestroy, OnChanges {
   productId: string;
   idRelated: string;
   productSubscription: Subscription;
+
+    myControl = new FormControl();
+    tags: string[] = ['One', 'Two', 'Three'];
+    filteredTags: Observable<string[]>;
 
 
   constructor(
@@ -73,11 +80,24 @@ export class ProductPageComponent implements OnInit, OnDestroy, OnChanges {
           });
         }
       });
-    });
+      this.filteredTags = this.myControl.valueChanges
+          .pipe(
+          startWith(''),
+          map(value => this._filter(value))
+          );
   }
 
   ngOnDestroy() {
     if (this.productSubscription) { this.productSubscription.unsubscribe(); }
+  }
+    
+  private _filter(value: string): string[] {
+      const filterValue = value.toLowerCase();
+      return this.tags.filter(tag => tag.toLowerCase().includes(filterValue));
+  }
+    
+  submit() {
+      console.log("");
   }
 
   loadMoviePage(event) {

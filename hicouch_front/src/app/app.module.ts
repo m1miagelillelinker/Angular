@@ -10,6 +10,7 @@ import {
   MatCardModule,
   MatSelectModule,
   MatAutocompleteModule
+  MatIconModule
 } from '@angular/material';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
@@ -70,6 +71,7 @@ import { SearchProductComponent } from './shared/components/search-product/searc
     MatCardModule,
     MatSelectModule,
     MatAutocompleteModule,
+    MatIconModule,
   ],
   providers: [
     UserService,
