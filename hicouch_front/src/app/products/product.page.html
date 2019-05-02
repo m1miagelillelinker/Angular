@@ -1,22 +1,41 @@
-<div *ngIf="movie" class="content">
+<div  class="content">
 	<div class="main">
 		<div class="image">
-			<img src="{{movie.Poster}}">
+			<!-- <img src="{{movie.Poster}}"> -->
+			<img src="../../../assets/images/Harry-Potter-a-l-ecole-des-sorciers.jpg">
+			
 		</div>
 		<div class="infos">
 			<div class="title">
-				{{ movie.title }}
+			Avengers Endgame
+				<!--   {{ movie.title }}-->
 			</div>
 			<div class="author">
-				{{movie.Director}}
+				<!--   {{movie.Director}}
 				-
 				{{movie.Year}}
 				-
-				{{movie.Country}}
+				{{movie.Country}}-->
+				Les frères Russo
+				-
+				2019
+				-
+				Etats-Unis
 			</div>
 			<div class="description">
-				{{ movie.Plot }}
+				<!--   {{ movie.Plot }}-->
 			</div>
+		</div>
+		<div class="tag">
+			<mat-form-field class="tag-content"> 
+				<input type="text" placeholder="Ajouter un tag" matInput
+				[formControl]="myControl" [matAutocomplete]="auto"> <mat-icon (click)="submit()">navigate_next</mat-icon>
+				<mat-autocomplete #auto="matAutocomplete"> 
+					<mat-option *ngFor="let tag of filteredTags | async" [value]="tag">
+						{{tag}} 
+					</mat-option> 
+				</mat-autocomplete> 
+			</mat-form-field>
 		</div>
 	</div>
 	<div class="related" *ngIf="productsRelated.length > 0">

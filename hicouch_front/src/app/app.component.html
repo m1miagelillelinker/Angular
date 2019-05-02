@@ -1,8 +1,8 @@
-<div *ngIf="!user">
+<!--   <div *ngIf="!user">
         <app-login></app-login>
         <script type="text/javascript" src="node_modules/auth0-js/build/auth0.js"></script>
-</div>
-<div *ngIf="user">
+</div>-->
+<div > <!-- *ngIf="user" -->
         <app-header [user]="user"></app-header>
         <router-outlet></router-outlet>
     </div>

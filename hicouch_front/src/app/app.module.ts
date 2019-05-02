@@ -6,7 +6,9 @@ import {
   MatInputModule,
   MatRippleModule,
   MatDialogModule,
-  MatTabsModule
+  MatTabsModule,
+  MatAutocompleteModule,
+  MatIconModule
 } from '@angular/material';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
@@ -52,6 +54,8 @@ import { AuthenticationService } from './shared/services/authentification.servic
     FormsModule,
     ReactiveFormsModule,
     MatTabsModule,
+    MatAutocompleteModule,
+    MatIconModule,
   ],
   providers: [
     UserService,
