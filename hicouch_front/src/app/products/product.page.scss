@@ -25,9 +25,14 @@
       .author {
         margin-bottom: 20px;
       }
-    }
-    .tag {
-    	
+      .tag{
+        > * {
+          display: block;
+          input {
+            background-color : white;
+          }
+        }
+      }
     }
   }
 

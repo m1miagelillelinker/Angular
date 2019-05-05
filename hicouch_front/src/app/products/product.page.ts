@@ -1,5 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ProductService } from '../shared/services/product.service';
+import { TagService } from '../shared/services/tag.service';
 import { Movie, Book } from '../shared/models/product';
 import { ActivatedRoute, Route, Router } from '@angular/router';
 import { Subscription, Observable } from 'rxjs';
@@ -19,13 +20,16 @@ export class ProductPageComponent implements OnInit, OnDestroy {
 
     productSubscription: Subscription;
 
-    myControl = new FormControl();
+    tagControl = new FormControl();
     tags: string[] = ['One', 'Two', 'Three'];
     filteredTags: Observable<string[]>;
+
+    showInput = false;
 
 
   constructor(
     private productService: ProductService,
+    private tagService: TagService,
     private route: ActivatedRoute,
   ) { }
 
@@ -66,7 +70,7 @@ export class ProductPageComponent implements OnInit, OnDestroy {
               this.allProducts.push(mybook);
           });
       });
-      
+
       this.productService.getMovieByTitle('Harry').subscribe((movie: any) => {
           movie.title = movie.Title;
           movie.type = movie.Type;
@@ -77,31 +81,42 @@ export class ProductPageComponent implements OnInit, OnDestroy {
       //   movie.type = movie.Type;
       //   this.allProducts.push(movie);
    //});
-      
+
       // Tag
-      this.filteredTags = this.myControl.valueChanges
+      this.tags = this.tagService.getTags();
+      this.filteredTags = this.tagControl.valueChanges
           .pipe(
           startWith(''),
           map(value => this._filter(value))
           );
-      
+
       // Faire un requête pour recupérer une liste de tags existants
       // Qu'on stockera dans tags
-      // Et c'est sur cette liste qu'on filtera des trucs 
-      
+      // Et c'est sur cette liste qu'on filtera des trucs
+
   }
 
   ngOnDestroy() {
     if (this.productSubscription) { this.productSubscription.unsubscribe(); }
   }
-    
+
   private _filter(value: string): string[] {
       const filterValue = value.toLowerCase();
       return this.tags.filter(tag => tag.toLowerCase().includes(filterValue));
   }
-    
+
   submit() {
-      console.log("");
+      console.log(this.tagControl.value);
+      this.tagService.addTag(this.tagControl.value);
+      this.hideInputF();
+  }
+
+  showInputF() {
+      this.showInput = true;
+  }
+
+  hideInputF() {
+      this.showInput = false;
   }
 
 

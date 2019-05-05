@@ -25,18 +25,21 @@
 			<div class="description">
 				<!--   {{ movie.Plot }}-->
 			</div>
+			<div class="tag">
+				<button mat-button  (click)="showInputF()" >Ajouter un tag</button>
+				<mat-form-field *ngIf="showInput" >
+					<input type="search" matInput
+						   [formControl]="tagControl" [matAutocomplete]="auto">
+					<button mat-button matSuffix (click)="submit()" > <mat-icon>done</mat-icon> </button>
+					<mat-autocomplete #auto="matAutocomplete">
+						<mat-option *ngFor="let tag of filteredTags | async" [value]="tag">
+							{{tag}}
+						</mat-option>
+					</mat-autocomplete>
+				</mat-form-field>
+			</div>
 		</div>
-		<div class="tag">
-			<mat-form-field class="tag-content"> 
-				<input type="text" placeholder="Ajouter un tag" matInput
-				[formControl]="myControl" [matAutocomplete]="auto"> <mat-icon (click)="submit()">navigate_next</mat-icon>
-				<mat-autocomplete #auto="matAutocomplete"> 
-					<mat-option *ngFor="let tag of filteredTags | async" [value]="tag">
-						{{tag}} 
-					</mat-option> 
-				</mat-autocomplete> 
-			</mat-form-field>
-		</div>
+
 	</div>
 	<div class="related" *ngIf="productsRelated.length > 0">
 		<app-products-top-recommandation [productsRelated]="productsRelated"></app-products-top-recommandation>

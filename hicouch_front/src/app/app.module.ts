@@ -29,6 +29,7 @@ import {
 import { ProductsRelatedComponent } from './products/components/products-related/products-related.component';
 import { AccountPageComponent } from './account/account.page';
 import { AuthenticationService } from './shared/services/authentification.service';
+import { TagService } from './shared/services/tag.service';
 
 @NgModule({
   declarations: [
@@ -62,7 +63,8 @@ import { AuthenticationService } from './shared/services/authentification.servic
     AuthenticationService,
     ProductService,
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
+    TagService
   ],
   bootstrap: [AppComponent]
 })
