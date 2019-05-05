@@ -1,6 +1,15 @@
 .content {
   display:flex;
   padding:15px;
+      .tag{
+        > * {
+          display: block;
+          input {
+            background-color : white;
+          }
+        }
+      }
+    }
 
 
   .related {
