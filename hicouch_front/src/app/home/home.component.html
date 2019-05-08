@@ -1,7 +1,9 @@
-
+<!-- 
 <div *ngIf="auth.isAuthenticated()">
 <h1 class="title">{{title}}</h1>
 	Hello {{user.lastName}}
-</div>
-<button (click)="goToProducts()">see products</button>
+</div> -->
+<app-header [user]="user" (isMovieSearched)="loadMoviePage($event)"></app-header>
+
+<!-- <button (click)="goToProducts()">see products</button> -->
 

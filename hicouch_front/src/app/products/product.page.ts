@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy, ChangeDetectorRef, OnChanges } from '@angular/core';
 import { ProductService } from '../shared/services/product.service';
-import { Movie, Book } from '../shared/models/product';
+import { Movie, Book, Product } from '../shared/models/product';
 import { ActivatedRoute, Route, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 
@@ -10,9 +10,9 @@ import { Subscription } from 'rxjs';
   styleUrls: ['./product.page.scss'],
 })
 export class ProductPageComponent implements OnInit, OnDestroy, OnChanges {
-  movie: Movie;
-  productsRelated: any[] = [];
-  allProducts: any[] = [];
+  mainProduct: Product;
+  productsRelated: Product[] = [];
+  allProducts: Product[] = [];
   productId: string;
   idRelated: string;
   productSubscription: Subscription;
@@ -49,21 +49,22 @@ export class ProductPageComponent implements OnInit, OnDestroy, OnChanges {
     this.allProducts = [];
     this.productSubscription = this.productService.getMovieById(this.productId).subscribe((movie: any) => {
       if (movie) {
-        this.movie = movie;
-        this.movie.title = movie.Title;
-        this.movie.type = movie.Type;
-        this.movie.description = movie.Plot;
+        console.log(movie);
+        this.mainProduct = movie;
+        this.mainProduct.title = movie.title;
+        this.mainProduct.type = movie.type;
+        this.mainProduct.description = movie.description;
       }
     });
     this.productSubscription = this.productService.getMovieById(this.idRelated).subscribe((movie: any) => {
       movie.id = this.idRelated;
       if (movie) {
-        movie.title = movie.Title;
-        movie.type = movie.Type;
-        movie.description = movie.Plot;
+        movie.title = movie.title;
+        movie.type = movie.type;
+        movie.description = movie.description;
       }
       this.productsRelated.push(movie);
-      this.productService.getBookById('9782070543694').subscribe((book: any) => {
+      this.productService.getBookById('9781442499577').subscribe((book: any) => {
         console.log (book);
         if (book.items) {
 
@@ -89,8 +90,9 @@ export class ProductPageComponent implements OnInit, OnDestroy, OnChanges {
       });
     });
     this.productService.getMovieByTitle('Totoro').subscribe((movie: any) => {
-      movie.title = movie.Title;
-      movie.type = movie.Type;
+      movie.title = movie.title;
+      movie.type = movie.type;
+      movie.description = movie.description;
       this.allProducts.push(movie);
     });
   }
@@ -101,7 +103,7 @@ export class ProductPageComponent implements OnInit, OnDestroy, OnChanges {
 
   loadMoviePage(event) {
     // this.changeDetectorRef.detectChanges();
-    event.id = event.imdbID;
+    event.id = event.id;
     this.router.navigate(['app/products/', event.id]);
     this.fetchProducts();
 }

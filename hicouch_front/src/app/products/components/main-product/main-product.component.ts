@@ -9,7 +9,7 @@ import { Subscription } from 'rxjs';
   styleUrls: ['./main-product.component.scss'],
 })
 export class MainProductComponent implements OnInit, OnDestroy, OnChanges {
-  @Input() movie: any;
+  @Input() mainProduct: any;
   productSubscription: Subscription;
 
 
@@ -18,9 +18,11 @@ export class MainProductComponent implements OnInit, OnDestroy, OnChanges {
   ) { }
 
   ngOnInit() {
+    console.log(this.mainProduct);
   }
 
   ngOnChanges(changes) {
+    console.log(this.mainProduct);
     console.log(changes);
     this.changeRefDetecter.detectChanges();
   }

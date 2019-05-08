@@ -22,13 +22,12 @@ export class HeaderComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.userService.getUser('2').subscribe(
+    this.userService.getUser('1').subscribe(
       (user: User) => {
         console.log(user);
         this.user = {
           id: user.id,
           firstName: user.firstName,
-          lastName: user.lastName,
         };
         this.userSelected.emit(this.user);
       });
@@ -47,6 +46,7 @@ export class HeaderComponent implements OnInit {
 
   onType(value: string) {
     this.productService.getMovieByTitle(value).subscribe((movie) => {
+      console.log(movie);
       this.isMovieSearched.emit(movie);
     });
   }

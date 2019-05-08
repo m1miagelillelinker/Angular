@@ -1,3 +1,20 @@
+export interface Product {
+    id: number;
+    title: string;
+    description: string ;
+    country: string ;
+    director: string ;
+    year: string;
+    genre?: Tag;
+    image: string;
+    duration?: string;
+    type: string;
+}
+
+export interface Tag {
+    truc?: string;
+}
+
 export interface Movie {
     id: string;
     title: string;

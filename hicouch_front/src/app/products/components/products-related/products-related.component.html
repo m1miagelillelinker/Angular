@@ -20,11 +20,8 @@
                         <div class="picto">
                                 <img src="{{getPicto(product.type)}}">
                         </div>
-                        <div class="image" *ngIf="product.type==='book'">
+                        <div class="image">
                                 <img src="{{product.image}}">
-                        </div>
-                        <div class="image" *ngIf="product.Type==='movie'">
-                                <img src={{product.Poster}}>
                         </div>
                         <div class="title2" (mouseover)="getTitle(product)">
                                 {{product.titleShort}}

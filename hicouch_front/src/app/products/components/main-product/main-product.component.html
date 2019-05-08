@@ -1,21 +1,21 @@
-<div *ngIf="movie" class="content">
+<div *ngIf="mainProduct && mainProduct.title" class="content">
     <div class="main">
         <div class="image">
-            <img src="{{movie.Poster}}">
+            <img src="{{mainProduct.image}}">
         </div>
         <div class="infos">
             <div class="title">
-                {{ movie.title }}
+                {{ mainProduct.title }}
             </div>
             <div class="author">
-                {{movie.Director}}
+                {{mainProduct.director}}
                 -
-                {{movie.Year}}
+                {{mainProduct.year}}
                 -
-                {{movie.Country}}
+                {{mainProduct.country}}
             </div>
             <div class="description">
-                {{ movie.Plot }}
+                {{ mainProduct.description }}
             </div>
         </div>
     </div>

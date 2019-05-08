@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { User } from '../models/user';
-import { Movie, Book } from '../models/product';
+import { Movie, Book, Product } from '../models/product';
 
 
 
@@ -15,25 +15,25 @@ export class ProductService {
   }
 
   getMovieById(idMovie: string) {
-    return this.http.get(`//localhost:8090/product/getFilmByIdFromReferentiel?filmId=${idMovie}`);
+    return this.http.get(`https://hicjv2.azurewebsites.net/product/getFilmByIdFromReferentiel?filmId=${idMovie}`);
   }
 
   getBookById(idBook: string) {
-    return this.http.get(`//localhost:8090/product/getBookByIdFromReferentiel?bookId=${idBook}`);
+    return this.http.get(`https://hicjv2.azurewebsites.net/product/getBookByIdFromReferentiel?bookId=${idBook}`);
   }
 
   getMovieByTitle(title: string) {
-    return this.http.get(`//localhost:8090/product/getFilmByTitleFromReferentiel?title=${title}`);
+    return this.http.get(`https://hicjv2.azurewebsites.net/product/getFilmByTitleFromReferentiel?title=${title}`);
   }
 
-  getBook() {
-    const book: Book = {
-      id: '1',
+  getBook(): Product {
+    const book: Product = {
+      id: 1,
+      country: 'FR',
       title: 'Harry Potter à l\'école des sorciers',
       description: 'Harry est un sorcier',
-      author: 'J.K. Rowling',
+      director: 'J.K. Rowling',
       year: '2003',
-      genre: 'Fantastic',
       // tslint:disable-next-line:max-line-length
       image: 'assets/images/Harry-Potter-a-l-ecole-des-sorciers.jpg',
       type: 'book',
