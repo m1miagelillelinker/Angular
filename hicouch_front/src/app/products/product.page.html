@@ -1,21 +1,21 @@
 <div *ngIf="movie" class="content">
 	<div class="main">
 		<div class="image">
-			<img src="{{movie.Poster}}">
+			<img src="{{movie.image}}">
 		</div>
 		<div class="infos">
 			<div class="title">
 				{{ movie.title }}
 			</div>
 			<div class="author">
-				{{movie.Director}}
+				{{movie.director}}
 				-
-				{{movie.Year}}
+				{{movie.year}}
 				-
-				{{movie.Country}}
+				{{movie.country}}
 			</div>
 			<div class="description">
-				{{ movie.Plot }}
+				{{ movie.description }}
 			</div>
 		</div>
 	</div>

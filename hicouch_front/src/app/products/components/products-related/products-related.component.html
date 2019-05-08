@@ -16,18 +16,15 @@
                         <img *ngIf="currentIndex > 0" (click)="fetchIndex('left')"
                                 src="assets/images/white-arrow-right.png">
                 </div>
-                <div class="item" *ngFor="let product of fetchList(currentIndex)" (click)="goTo(product.id)">
+                <div class="item" *ngFor="let asso of fetchList(currentIndex)" (click)="goTo(asso.product.id)">
                         <div class="picto">
-                                <img src="{{getPicto(product.type)}}">
+                                <img src="{{getPicto(asso.product.type)}}">
                         </div>
-                        <div class="image" *ngIf="product.type==='book'">
-                                <img src="{{product.image}}">
+                        <div class="image">
+                                <img src="{{asso.product.image}}">
                         </div>
-                        <div class="image" *ngIf="product.Type==='movie'">
-                                <img src={{product.Poster}}>
-                        </div>
-                        <div class="title2" (mouseover)="getTitle(product)">
-                                {{product.titleShort}}
+                        <div class="title2" (mouseover)="getTitle(asso.product)">
+                                {{asso.product.title}}
                         </div>
                 </div>
                 <div class="item add-product">

@@ -3,6 +3,8 @@ import { ProductService } from '../shared/services/product.service';
 import { Movie, Book } from '../shared/models/product';
 import { ActivatedRoute, Route, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
+import {AssociationService} from '../shared/services/association.service';
+import {Association} from '../shared/models/association';
 
 @Component({
   selector: 'app-product-page',
@@ -11,14 +13,15 @@ import { Subscription } from 'rxjs';
 })
 export class ProductPageComponent implements OnInit, OnDestroy {
   movie: Movie;
-  productsRelated: any[] = [];
-  allProducts: any[] = [];
+  productsRelated: Association[] = [];
+  allProducts: Association[] = [];
 
   productSubscription: Subscription;
 
 
   constructor(
     private productService: ProductService,
+    private associationService: AssociationService,
     private route: ActivatedRoute,
   ) { }
 
@@ -27,10 +30,16 @@ export class ProductPageComponent implements OnInit, OnDestroy {
     const productId = this.route.snapshot.paramMap.get('productId');
     this.productSubscription = this.productService.getMovieById(productId).subscribe((movie: any) => {
       this.movie = movie;
-      this.movie.title = movie.Title;
+      this.movie.title = movie.title;
       this.movie.type = movie.Type;
-      this.movie.description = movie.Plot;
+      this.movie.description = movie.description;
+      this.movie.image = movie.image;
+      this.associationService.fetchtAssociationByProduct(this.movie.id).subscribe((json: any) => {
+        this.allProducts = json;
+        this.productsRelated = json;
+      });
     });
+    /*
     this.productSubscription = this.productService.getMovieById('tt0120737').subscribe((movie: any) => {
       movie.id = '1';
       movie.title = movie.Title;
@@ -58,17 +67,23 @@ export class ProductPageComponent implements OnInit, OnDestroy {
         this.allProducts.push(movie);
         this.allProducts.push(mybook);
       });
-    });
-    this.productService.getMovieByTitle('Harry').subscribe((movie: any) => {
+    });*/
+    /*this.productService.getMovieByTitle('Harry').subscribe((movie: any) => {
       movie.title = movie.Title;
       movie.type = movie.Type;
       this.allProducts.push(movie);
-    });
+    });*/
     // this.productSubscription = this.productService.getMovieByTitle('Harry').subscribe((movie: any) => {
     //   movie.title = movie.Title;
     //   movie.type = movie.Type;
     //   this.allProducts.push(movie);
     // });
+
+    /*this.associationService.fetchtAssociationByProduct(this.movie.id).subscribe((json: any) => {
+      this.productsRelated = Array.of(json);
+      console.log('aaaaa', this.productsRelated);
+    });*/
+
   }
 
   ngOnDestroy() {

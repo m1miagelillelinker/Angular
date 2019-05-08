@@ -5,6 +5,7 @@ import {FormControl} from '@angular/forms';
 import {Observable} from 'rxjs';
 import {map, startWith} from 'rxjs/operators';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA, MatSelectModule, MatAutocompleteModule } from '@angular/material';
+import {Association} from '../../../shared/models/association';
 
 export interface DialogData {
   nomProduct: string;
@@ -16,11 +17,11 @@ export interface DialogData {
   styleUrls: ['./products-related.component.scss'],
 })
 export class ProductsRelatedComponent implements OnInit, OnChanges {
-  @Input() allProducts: any;
+  @Input() allProducts: Array<Association>;
   movieSelected = true;
   bookSelected = false;
   currentIndex = 0;
-  totalPages: number;
+  totalPages = 1;
   currentPage = 0;
   displayTitle: string;
   idProduct: number;
@@ -41,10 +42,10 @@ export class ProductsRelatedComponent implements OnInit, OnChanges {
   ngOnChanges() {
   }
 
-  fetchList(number): any[] {
-    this.allProducts.forEach(p => {
-        p.titleShort = this.fetchTitle(p.title);
-    });
+  fetchList(number): Association[] {
+    /*this.allProducts.forEach(asso => {
+        asso.product.titleShort = this.fetchTitle(asso.product.title);
+    });*/
       let tab = [];
       this.fetchNavigation();
       if (number > 5) {
@@ -196,37 +197,37 @@ export class ProductsRelatedAddDialog {
     private _filter(value: string): any[] {
         const filterValue = value.toLowerCase();
         console.log(value);
-        if (this.selectedType == 'BOOK') {
+        if (this.selectedType === 'BOOK') {
             // this.options = this.productService.getBookByTitle(value);
             console.log('Vous recherchez un livre');
         }
-        if (this.selectedType == 'MOVIE') {
+        if (this.selectedType === 'MOVIE') {
             // this.options = this.productService.getMovieByTitle(filterValue);
             console.log('Vous recherchez un film');
         }
-        if (this.selectedType == 'TVSHOW') {
+        if (this.selectedType === 'TVSHOW') {
             // this.options = this.productService.getTVShowByTitle(filterValue);
             console.log('Vous recherchez une série');
         }
-        if (this.selectedType == 'VIDEOGAMES') {
+        if (this.selectedType === 'VIDEOGAMES') {
             // this.options = this.productService.getVideoGameByTitle(filterValue);
             console.log('Vous recherchez un jeu vidéo');
         }
-        
+
         return this.options.filter(option => option.title.toLowerCase().includes(filterValue));
     }
-    
+
     addAssociation() {
-        console.log("Associer");
+        console.log('Associer');
         //this.openDialog();
     }
-    
+
     setSelectedOption(value: string): void {
-        console.log("Option selected " + value);
+        console.log('Option selected ' + value);
         // Si on a pu avoir "[value]="product"", ce sera setSelectedOption(id: number) avec id du product
         //this.associationService.associate(id, this.product.id);   Service à créér 
     }
-    
+
     displayFn(product) {
         // return product ? product.title : undefined;
         return product ? product : undefined;
