@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, OnChanges, Inject } from '@angular/core';
+import { Component, OnInit, Input, OnChanges, Inject, ChangeDetectorRef } from '@angular/core';
 import { ProductService } from '../../../shared/services/product.service';
 import { Router } from '@angular/router';
 import {FormControl} from '@angular/forms';
@@ -45,9 +45,9 @@ export class ProductsRelatedComponent implements OnInit, OnChanges {
   }
 
   fetchList(number): Association[] {
-    /*this.allProducts.forEach(asso => {
-        asso.product.titleShort = this.fetchTitle(asso.product.title);
-    });*/
+    // this.allProducts.forEach(asso => {
+    //     asso.product.titleShort = this.fetchTitle(asso.product.title);
+    // });
       let tab = [];
       this.fetchNavigation();
       if (number >= 5) {
@@ -119,7 +119,7 @@ export class ProductsRelatedComponent implements OnInit, OnChanges {
   }
 
   openDialog(): void {
-      const dialogRef = this.dialog.open(ProductsRelatedAddDialog, {
+      const dialogRef = this.dialog.open(ProductsRelatedAddDialogComponent, {
           width: '50%',
           data: { nomProduct: this.idProduct, id2: null }
       });
@@ -138,11 +138,11 @@ export class ProductsRelatedComponent implements OnInit, OnChanges {
 }
 
 @Component({
-  selector: 'products-related-add-dialog',
+  selector: 'app-products-related-add-dialog',
   templateUrl: 'products-related-add-dialog.html',
     styleUrls: ['./products-related.component.scss'],
 })
-export class ProductsRelatedAddDialog {
+export class ProductsRelatedAddDialogComponent implements OnInit {
     Productstype = [
         {value: 'BOOK', viewValue: 'Livre'},
         {value: 'MOVIE', viewValue: 'Film'},
@@ -156,12 +156,12 @@ export class ProductsRelatedAddDialog {
         {title: 'One'},
         {title: 'Two'},
         {title: 'Three'}
-        //'One', 'Two', 'Three'
+        // 'One', 'Two', 'Three'
         ];
     listProductsFound: Observable<string[]>;
 
   constructor(
-    public dialogRef: MatDialogRef<ProductsRelatedAddDialog>,
+    public dialogRef: MatDialogRef<ProductsRelatedAddDialogComponent>,
     private productService: ProductService,
       @Inject(MAT_DIALOG_DATA) public data: DialogData) {}
 
@@ -193,7 +193,7 @@ export class ProductsRelatedAddDialog {
             .pipe(
                 startWith(''),
                 map(value => this._filter(value))
-                //map(value => this._filter(value.title))
+                // map(value => this._filter(value.title))
             );
     }
 
@@ -222,13 +222,13 @@ export class ProductsRelatedAddDialog {
 
     addAssociation() {
         console.log('Associer');
-        //this.openDialog();
+        // this.openDialog();
     }
 
     setSelectedOption(value: string): void {
         console.log('Option selected ' + value);
         // Si on a pu avoir "[value]="product"", ce sera setSelectedOption(id: number) avec id du product
-        //this.associationService.associate(id, this.product.id);   Service à créér 
+        // this.associationService.associate(id, this.product.id);   Service à créér
     }
 
     displayFn(product) {

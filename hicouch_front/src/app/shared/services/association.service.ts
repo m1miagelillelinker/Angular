@@ -11,7 +11,7 @@ export class AssociationService {
     constructor(private http: HttpClient) {
     }
 
-    fetchtAssociationByProduct(idProduct: string) {
+    fetchtAssociationByProduct(idProduct: number) {
         return this.http.get(`http://localhost:8080/association/byProduct?idProduct=${idProduct}`);
     }
 

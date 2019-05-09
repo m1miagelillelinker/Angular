@@ -1,5 +1,6 @@
+<app-header [user]="user" (isMovieSearched)="loadMoviePage($event)"></app-header>
 <div *ngIf="user" class="welcome">
-		Hello {{user.pseudo}} !
+		Hello {{user.firstName}} !
 	</div>
 <div *ngIf="user" class="content">
 	<div class="profile">
