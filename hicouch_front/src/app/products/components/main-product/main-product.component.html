@@ -1,0 +1,22 @@
+<div *ngIf="mainProduct && mainProduct.title" class="content">
+    <div class="main">
+        <div class="image">
+            <img src="{{mainProduct.image}}">
+        </div>
+        <div class="infos">
+            <div class="title">
+                {{ mainProduct.title }}
+            </div>
+            <div class="author">
+                {{mainProduct.director}}
+                -
+                {{mainProduct.year}}
+                -
+                {{mainProduct.country}}
+            </div>
+            <div class="description">
+                {{ mainProduct.description }}
+            </div>
+        </div>
+    </div>
+</div>

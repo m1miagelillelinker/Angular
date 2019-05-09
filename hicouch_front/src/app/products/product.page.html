@@ -1,26 +1,8 @@
-<div *ngIf="movie" class="content">
-	<div class="main">
-		<div class="image">
-			<img src="{{movie.Poster}}">
-		</div>
-		<div class="infos">
-			<div class="title">
-				{{ movie.title }}
-			</div>
-			<div class="author">
-				{{movie.Director}}
-				-
-				{{movie.Year}}
-				-
-				{{movie.Country}}
-			</div>
-			<div class="description">
-				{{ movie.Plot }}
-			</div>
-		</div>
-	</div>
-	<div class="related" *ngIf="productsRelated.length > 0">
+<app-header [user]="user" (isMovieSearched)="loadMoviePage($event)"></app-header>
+<div *ngIf="mainProduct " class="content">
+	<app-main-product [mainProduct]="mainProduct"></app-main-product>
+	<div class="related" *ngIf="productsRelated.length > 0 ">
 		<app-products-top-recommandation [productsRelated]="productsRelated"></app-products-top-recommandation>
 	</div>
 </div>
-<app-products-related [allProducts]="allProducts"></app-products-related>
+<app-products-related *ngIf="mainProduct && allProducts.length > 0" [allProducts]="allProducts"></app-products-related>

@@ -9,7 +9,7 @@ import { AccountPageComponent } from './account/account.page';
 export const routes: Routes = [
   {
       path: '',
-      redirectTo: 'app/login',
+      redirectTo: 'app/home', // TODO : when ready redirect to app/login
       pathMatch: 'full',
   },
   {

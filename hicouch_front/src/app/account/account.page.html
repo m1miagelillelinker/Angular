@@ -1,5 +1,28 @@
+<app-header [user]="user" (isMovieSearched)="loadMoviePage($event)"></app-header>
+<app-subscribe-btn class="sub" [isSubscribed]="sub" (toggledSubscription)="doSthg()"></app-subscribe-btn>
+
+<div *ngIf="user" class="welcome">
+		Hello {{user.firstName}} !
+	</div>
 <div *ngIf="user" class="content">
 	<div class="profile">
-	{{user.firstName}} {{user.lastName}}
+		<div class="display">
+				<img src="/assets/images/user.png" />
+				<div class="user-infos">
+					{{user.firstName}}
+					<br />
+					{{user.lastName}}
+				</div>
+		</div>
+		<div class="action" (click)="goToEdition()">
+			Edit My Profile
+		</div>
 	</div>
+
+</div>
+<div class="second-part">
+		<app-account-side-menu (tabHasBeenSelected)="toggleFeature($event)"></app-account-side-menu>
+		<div class="feature" *ngIf="activitySelected">
+				<app-activity-field></app-activity-field>
+		</div>
 </div>

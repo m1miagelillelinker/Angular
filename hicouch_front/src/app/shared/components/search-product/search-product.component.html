@@ -1,0 +1,22 @@
+<div id="search-bar">
+  <!-- <input class="search-input" id="search-input" type="text" #searchInput
+    (focus)="onFocus()" blur="onBlur()"
+    (keyup)="onType(searchInput.value)" (keyup.enter)="search(searchInput.value)" /> -->
+    <div class="search-bar">
+      <input #searchInput class="search-field" placeholder="Rechercher..." (keyup)="onType(searchInput.value)" (keyup.enter)="onType(searchInput.value)"/>
+      <button (click)="onType(searchInput.value)">Search</button>
+      
+  </div>
+</div>
+<div *ngIf="productList" id="search-autocomplete">
+  <div *ngFor="let product of productList" class="user-infos" (click)="selectProduct(product)">
+    <div class="picture">
+    </div>
+    <div class="user-name">
+      {{product.image}}
+      <div class="gid">
+        {{product.title}}
+      </div>
+    </div>
+  </div>
+</div>

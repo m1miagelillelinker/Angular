@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { User } from '../models/user';
-import { Movie, Book } from '../models/product';
+import { Movie, Book, Product } from '../models/product';
 
 
 
@@ -22,18 +22,18 @@ export class ProductService {
     return this.http.get(`//localhost:8080/product/getBookByIdFromReferentiel?bookId=${idBook}`);
   }
 
-  getMovieByTitle(title: string) {
+  getMovieByTitle(title: string): any {
     return this.http.get(`//localhost:8080/product/getFilmByTitleFromReferentiel?title=${title}`);
   }
 
-  getBook() {
-    const book: Book = {
-      id: '1',
+  getBook(): Product {
+    const book: Product = {
+      id: 1,
+      country: 'FR',
       title: 'Harry Potter à l\'école des sorciers',
       description: 'Harry est un sorcier',
-      author: 'J.K. Rowling',
+      director: 'J.K. Rowling',
       year: '2003',
-      genre: 'Fantastic',
       // tslint:disable-next-line:max-line-length
       image: 'assets/images/Harry-Potter-a-l-ecole-des-sorciers.jpg',
       type: 'book',
@@ -45,4 +45,5 @@ export class ProductService {
       return this.getMovieById('tt0120737');
     // return this.http.get<User>(`//localhost:8080/user/get?userId=${prod}`);
   }
+
 }

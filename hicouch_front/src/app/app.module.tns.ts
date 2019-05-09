@@ -5,8 +5,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 import { HeaderComponent } from './shared/components/header/header.component';
-import { TestService } from './shared/services/test.service';
-import { LoginComponent } from './login/login.component'; 
+import { SubscribeBtnComponent } from './account/components/subscribe-btn/subscribe-btn.component';
 
 
 
@@ -16,19 +15,20 @@ import { LoginComponent } from './login/login.component';
 // Uncomment and add to NgModule imports  if you need to use the HTTP wrapper
 // import { NativeScriptHttpClientModule } from 'nativescript-angular/http-client';
 
-@NgModule({
-  declarations: [
-    AppComponent,
-    HomeComponent,
-    HeaderComponent,
-    LoginComponent,
-  ],
-  imports: [
-    NativeScriptModule,
-    AppRoutingModule,
-  ],
-  providers: [TestService],
-  bootstrap: [AppComponent],
-  schemas: [NO_ERRORS_SCHEMA]
-})
-export class AppModule { }
+// @NgModule({
+//   declarations: [
+//     AppComponent,
+//     HomeComponent,
+//     HeaderComponent,
+//     LoginComponent,
+//   ],
+//   imports: [
+//     NativeScriptModule,
+//     AppRoutingModule,
+//   ],
+//   providers: [],
+//   bootstrap: [AppComponent],
+//   schemas: [NO_ERRORS_SCHEMA]
+// })
+
+// export class AppModule { }

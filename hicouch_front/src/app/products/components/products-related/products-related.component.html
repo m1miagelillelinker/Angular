@@ -11,32 +11,40 @@
 
         <br />
 
-        <div class="list">
+        <div class="list" *ngIf="allProducts">
                 <div class="navigation-left">
                         <img *ngIf="currentIndex > 0" (click)="fetchIndex('left')"
                                 src="assets/images/white-arrow-right.png">
                 </div>
-                <div class="item" *ngFor="let product of fetchList(currentIndex)" (click)="goTo(product.id)">
+                <div class="item" *ngFor="let asso of fetchList(currentIndex)" (click)="goTo(asso.productDTO.id)">
+                        <div class="picto">
+                                <img src="{{getPicto(asso.productDTO.type)}}">
+                        </div>
+                        <div class="image">
+                                <img src="{{asso.productDTO.image}}">
+                        </div>
+                        <div class="title2" (mouseover)="getTitle(asso.productDTO)">
+                                {{asso.productDTO.title}}
+                        </div>
+                </div>
+                <!-- <div class="item" *ngFor="let product of fetchList(currentIndex)" (click)="goTo(product.id)">
                         <div class="picto">
                                 <img src="{{getPicto(product.type)}}">
                         </div>
-                        <div class="image" *ngIf="product.type==='book'">
+                        <div class="image">
                                 <img src="{{product.image}}">
                         </div>
-                        <div class="image" *ngIf="product.Type==='movie'">
-                                <img src={{product.Poster}}>
-                        </div>
                         <div class="title2" (mouseover)="getTitle(product)">
-                                {{product.titleShort}}
+                                {{product.title}}
                         </div>
-                </div>
+                </div> -->
                 <div class="item add-product">
-                        <div class="image">
+                        <div class="image" (click)="addAssociation()">
                                 <img src="/assets/images/plus.png">
                         </div>
                 </div>
                 <div class="navigation-right">
-                        <img *ngIf="currentIndex < allProducts.length" (click)="fetchIndex('right')"
+                        <img *ngIf="currentIndex + 5 < allProducts.length" (click)="fetchIndex('right')"
                                 src="assets/images/white-arrow-right.png">
                 </div>
         </div>

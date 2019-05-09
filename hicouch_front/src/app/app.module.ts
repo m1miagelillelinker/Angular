@@ -6,7 +6,10 @@ import {
   MatInputModule,
   MatRippleModule,
   MatDialogModule,
-  MatTabsModule
+  MatTabsModule,
+  MatCardModule,
+  MatSelectModule,
+  MatAutocompleteModule
 } from '@angular/material';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
@@ -24,9 +27,15 @@ import { ProductService } from './shared/services/product.service';
 import {
   ProductsTopRecommandationComponent
 } from './products/components/products-top-recommandation/products-top-recommandation.component';
-import { ProductsRelatedComponent } from './products/components/products-related/products-related.component';
+// tslint:disable-next-line:max-line-length
+import { ProductsRelatedComponent, ProductsRelatedAddDialogComponent } from './products/components/products-related/products-related.component';
 import { AccountPageComponent } from './account/account.page';
 import { AuthenticationService } from './shared/services/authentification.service';
+import { AccountSideMenuComponent } from './account/components/account-side-menu/account-side-menu.component';
+import { ActivityFieldComponent } from './account/components/activity-field/activity-field.component';
+import { SubscribeBtnComponent } from './account/components/subscribe-btn/subscribe-btn.component';
+import { MainProductComponent } from './products/components/main-product/main-product.component';
+import { SearchProductComponent } from './shared/components/search-product/search-product.component';
 
 @NgModule({
   declarations: [
@@ -37,7 +46,13 @@ import { AuthenticationService } from './shared/services/authentification.servic
     ProductPageComponent,
     ProductsTopRecommandationComponent,
     ProductsRelatedComponent,
+    MainProductComponent,
     AccountPageComponent,
+    ProductsRelatedAddDialogComponent,
+    AccountSideMenuComponent,
+    ActivityFieldComponent,
+    SubscribeBtnComponent,
+    SearchProductComponent,
   ],
   imports: [
     BrowserAnimationsModule,
@@ -52,6 +67,9 @@ import { AuthenticationService } from './shared/services/authentification.servic
     FormsModule,
     ReactiveFormsModule,
     MatTabsModule,
+    MatCardModule,
+    MatSelectModule,
+    MatAutocompleteModule,
   ],
   providers: [
     UserService,
@@ -60,6 +78,9 @@ import { AuthenticationService } from './shared/services/authentification.servic
     ReactiveFormsModule,
     FormsModule
   ],
-  bootstrap: [AppComponent]
+  entryComponents: [
+      ProductsRelatedAddDialogComponent,
+  ],
+  bootstrap: [AppComponent],
 })
 export class AppModule { }
