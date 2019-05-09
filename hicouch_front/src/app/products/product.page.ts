@@ -3,6 +3,8 @@ import { ProductService } from '../shared/services/product.service';
 import { Movie, Book, Product } from '../shared/models/product';
 import { ActivatedRoute, Route, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
+import {AssociationService} from '../shared/services/association.service';
+import {Association} from '../shared/models/association';
 
 @Component({
   selector: 'app-product-page',
@@ -20,6 +22,7 @@ export class ProductPageComponent implements OnInit, OnDestroy, OnChanges {
 
   constructor(
     private productService: ProductService,
+    private associationService: AssociationService,
     private route: ActivatedRoute,
     private router: Router,
     private changeDetectorRef: ChangeDetectorRef,
@@ -44,25 +47,24 @@ export class ProductPageComponent implements OnInit, OnDestroy, OnChanges {
   }
   fetchProducts() {
     // tt3896198
-    // TODO : DEMOCK
-    this.productsRelated = [];
-    this.allProducts = [];
-    this.productSubscription = this.productService.getMovieById(this.productId).subscribe((movie: any) => {
-      if (movie) {
-        console.log(movie);
-        this.mainProduct = movie;
-        this.mainProduct.title = movie.title;
-        this.mainProduct.type = movie.type;
-        this.mainProduct.description = movie.description;
-      }
+    const productId = this.route.snapshot.paramMap.get('productId');
+    this.productSubscription = this.productService.getMovieById(productId).subscribe((movie: any) => {
+      this.movie = movie;
+      this.movie.title = movie.title;
+      this.movie.type = movie.Type;
+      this.movie.description = movie.description;
+      this.movie.image = movie.image;
+      this.associationService.fetchtAssociationByProduct(this.movie.id).subscribe((json: any) => {
+        this.allProducts = json;
+        this.productsRelated = json;
+      });
     });
-    this.productSubscription = this.productService.getMovieById(this.idRelated).subscribe((movie: any) => {
-      movie.id = this.idRelated;
-      if (movie) {
-        movie.title = movie.title;
-        movie.type = movie.type;
-        movie.description = movie.description;
-      }
+    /*
+    this.productSubscription = this.productService.getMovieById('tt0120737').subscribe((movie: any) => {
+      movie.id = '1';
+      movie.title = movie.Title;
+      movie.type = movie.Type;
+      movie.description = movie.Plot;
       this.productsRelated.push(movie);
       this.productService.getBookById('9781442499577').subscribe((book: any) => {
         console.log (book);
@@ -89,13 +91,23 @@ export class ProductPageComponent implements OnInit, OnDestroy, OnChanges {
         this.allProducts.push(movie);
         // this.allProducts.push(mybook);
       });
-    });
-    this.productService.getMovieByTitle('Totoro').subscribe((movie: any) => {
-      movie.title = movie.title;
-      movie.type = movie.type;
-      movie.description = movie.description;
+    });*/
+    /*this.productService.getMovieByTitle('Harry').subscribe((movie: any) => {
+      movie.title = movie.Title;
+      movie.type = movie.Type;
       this.allProducts.push(movie);
-    });
+    });*/
+    // this.productSubscription = this.productService.getMovieByTitle('Harry').subscribe((movie: any) => {
+    //   movie.title = movie.Title;
+    //   movie.type = movie.Type;
+    //   this.allProducts.push(movie);
+    // });
+
+    /*this.associationService.fetchtAssociationByProduct(this.movie.id).subscribe((json: any) => {
+      this.productsRelated = Array.of(json);
+      console.log('aaaaa', this.productsRelated);
+    });*/
+
   }
 
   ngOnDestroy() {

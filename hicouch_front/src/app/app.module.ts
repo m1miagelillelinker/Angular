@@ -6,7 +6,10 @@ import {
   MatInputModule,
   MatRippleModule,
   MatDialogModule,
-  MatTabsModule
+  MatTabsModule,
+  MatCardModule,
+  MatSelectModule,
+  MatAutocompleteModule
 } from '@angular/material';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
@@ -24,7 +27,7 @@ import { ProductService } from './shared/services/product.service';
 import {
   ProductsTopRecommandationComponent
 } from './products/components/products-top-recommandation/products-top-recommandation.component';
-import { ProductsRelatedComponent } from './products/components/products-related/products-related.component';
+import { ProductsRelatedComponent, ProductsRelatedAddDialog } from './products/components/products-related/products-related.component';
 import { AccountPageComponent } from './account/account.page';
 import { AuthenticationService } from './shared/services/authentification.service';
 import { AccountSideMenuComponent } from './account/components/account-side-menu/account-side-menu.component';
@@ -43,6 +46,7 @@ import { SearchProductComponent } from './shared/components/search-product/searc
     ProductsRelatedComponent,
     MainProductComponent,
     AccountPageComponent,
+    ProductsRelatedAddDialog,
     AccountSideMenuComponent,
     ActivityFieldComponent,
     SearchProductComponent,
@@ -60,6 +64,9 @@ import { SearchProductComponent } from './shared/components/search-product/searc
     FormsModule,
     ReactiveFormsModule,
     MatTabsModule,
+    MatCardModule,
+    MatSelectModule,
+    MatAutocompleteModule,
   ],
   providers: [
     UserService,
@@ -68,6 +75,9 @@ import { SearchProductComponent } from './shared/components/search-product/searc
     ReactiveFormsModule,
     FormsModule
   ],
-  bootstrap: [AppComponent]
+  entryComponents: [
+      ProductsRelatedAddDialog,
+  ],
+  bootstrap: [AppComponent],
 })
 export class AppModule { }

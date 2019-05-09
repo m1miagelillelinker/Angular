@@ -1,5 +1,15 @@
-import { Component, OnInit, Input, OnChanges, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, Input, OnChanges, Inject } from '@angular/core';
+import { ProductService } from '../../../shared/services/product.service';
 import { Router } from '@angular/router';
+import {FormControl} from '@angular/forms';
+import {Observable} from 'rxjs';
+import {map, startWith} from 'rxjs/operators';
+import {MatDialog, MatDialogRef, MAT_DIALOG_DATA, MatSelectModule, MatAutocompleteModule } from '@angular/material';
+import {Association} from '../../../shared/models/association';
+
+export interface DialogData {
+  nomProduct: string;
+}
 
 @Component({
   selector: 'app-products-related',
@@ -7,16 +17,19 @@ import { Router } from '@angular/router';
   styleUrls: ['./products-related.component.scss'],
 })
 export class ProductsRelatedComponent implements OnInit, OnChanges {
-  @Input() allProducts: any;
+  @Input() allProducts: Array<Association>;
   movieSelected = true;
   bookSelected = false;
   currentIndex = 0;
-  totalPages: number;
+  totalPages = 1;
   currentPage = 0;
   displayTitle: string;
+  idProduct: number;
+  idAssociatedProduct: number;
 
   constructor(
       private router: Router,
+      public dialog: MatDialog,
       private changeDetectorRef: ChangeDetectorRef,
   ) { }
 
@@ -31,10 +44,10 @@ export class ProductsRelatedComponent implements OnInit, OnChanges {
     this.changeDetectorRef.detectChanges();
   }
 
-  fetchList(number): any[] {
-    this.allProducts.forEach(p => {
-        p.titleShort = this.fetchTitle(p.title);
-    });
+  fetchList(number): Association[] {
+    /*this.allProducts.forEach(asso => {
+        asso.product.titleShort = this.fetchTitle(asso.product.title);
+    });*/
       let tab = [];
       this.fetchNavigation();
       if (number >= 5) {
@@ -101,8 +114,126 @@ export class ProductsRelatedComponent implements OnInit, OnChanges {
     this.fetchList(this.currentIndex);
   }
 
+  addAssociation() {
+      this.openDialog();
+  }
+
+  openDialog(): void {
+      const dialogRef = this.dialog.open(ProductsRelatedAddDialog, {
+          width: '50%',
+          data: { nomProduct: this.idProduct, id2: null }
+      });
+
+      dialogRef.afterClosed().subscribe(result => {
+          console.log('The dialog was closed');
+          this.idAssociatedProduct = result;
+      });
+  }
+
+
   goTo(productId) {
       this.router.navigate(['app/products', productId]);
   }
+
+}
+
+@Component({
+  selector: 'products-related-add-dialog',
+  templateUrl: 'products-related-add-dialog.html',
+    styleUrls: ['./products-related.component.scss'],
+})
+export class ProductsRelatedAddDialog {
+    Productstype = [
+        {value: 'BOOK', viewValue: 'Livre'},
+        {value: 'MOVIE', viewValue: 'Film'},
+        {value: 'TVSHOW', viewValue: 'Série'},
+        {value: 'VIDEOGAMES', viewValue: 'Jeu-Vidéo'}
+    ];
+    selectedType: string;
+    myControl = new FormControl();
+    selectedOption;
+    options = [
+        {title: 'One'},
+        {title: 'Two'},
+        {title: 'Three'}
+        //'One', 'Two', 'Three'
+        ];
+    listProductsFound: Observable<string[]>;
+
+  constructor(
+    public dialogRef: MatDialogRef<ProductsRelatedAddDialog>,
+    private productService: ProductService,
+      @Inject(MAT_DIALOG_DATA) public data: DialogData) {}
+
+  onNoClick(): void {
+    this.dialogRef.close();
+  }
+
+  /*searchProducts(value : string): void {
+      if(value.length > 2){
+          console.log(value);
+          if(this.selectedType == 'BOOK'){
+              // this.options = this.productService.getMovieByTitle(value);
+              console.log('Vous recherchez un livre');
+          }
+          if(this.selectedType == 'MOVIE'){
+              console.log('Vous recherchez un film');
+          }
+          if(this.selectedType == 'TVSHOW'){
+              console.log('Vous recherchez une série');
+          }
+          if(this.selectedType == 'VIDEOGAMES'){
+              console.log('Vous recherchez un jeu vidéo');
+          }
+      }
+  }*/
+
+    ngOnInit() {
+        this.listProductsFound = this.myControl.valueChanges
+            .pipe(
+                startWith(''),
+                map(value => this._filter(value))
+                //map(value => this._filter(value.title))
+            );
+    }
+
+    private _filter(value: string): any[] {
+        const filterValue = value.toLowerCase();
+        console.log(value);
+        if (this.selectedType === 'BOOK') {
+            // this.options = this.productService.getBookByTitle(value);
+            console.log('Vous recherchez un livre');
+        }
+        if (this.selectedType === 'MOVIE') {
+            // this.options = this.productService.getMovieByTitle(filterValue);
+            console.log('Vous recherchez un film');
+        }
+        if (this.selectedType === 'TVSHOW') {
+            // this.options = this.productService.getTVShowByTitle(filterValue);
+            console.log('Vous recherchez une série');
+        }
+        if (this.selectedType === 'VIDEOGAMES') {
+            // this.options = this.productService.getVideoGameByTitle(filterValue);
+            console.log('Vous recherchez un jeu vidéo');
+        }
+
+        return this.options.filter(option => option.title.toLowerCase().includes(filterValue));
+    }
+
+    addAssociation() {
+        console.log('Associer');
+        //this.openDialog();
+    }
+
+    setSelectedOption(value: string): void {
+        console.log('Option selected ' + value);
+        // Si on a pu avoir "[value]="product"", ce sera setSelectedOption(id: number) avec id du product
+        //this.associationService.associate(id, this.product.id);   Service à créér 
+    }
+
+    displayFn(product) {
+        // return product ? product.title : undefined;
+        return product ? product : undefined;
+    }
 
 }
