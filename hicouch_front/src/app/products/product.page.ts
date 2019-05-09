@@ -9,7 +9,7 @@ import { Subscription, Observable } from 'rxjs';
 import { MatAutocompleteModule, MatIconModule } from '@angular/material';
 import {FormControl} from '@angular/forms';
 import {map, startWith} from 'rxjs/operators';
-import { ActivatedRoute, Route, Router } from '@angular/router';
+import {Tag} from '../shared/models/tag';
 
 @Component({
   selector: 'app-product-page',
@@ -25,9 +25,8 @@ export class ProductPageComponent implements OnInit, OnDestroy, OnChanges {
   productSubscription: Subscription;
 
     tagControl = new FormControl();
-    tags: string[] = ['One', 'Two', 'Three'];
+    tags: Tag[];
     filteredTags: Observable<string[]>;
-
     showInput = false;
 
 
@@ -84,17 +83,7 @@ export class ProductPageComponent implements OnInit, OnDestroy, OnChanges {
           });
         }
       });
-      this.tags = this.tagService.getTags();
-      this.filteredTags = this.tagControl.valueChanges
-          .pipe(
-          startWith(''),
-          map(value => this._filter(value))
-          );
-      
-      // Faire un requête pour recupérer une liste de tags existants
-      // Qu'on stockera dans tags
-      // Et c'est sur cette liste qu'on filtera des trucs 
-      
+      this.tagService.getTags('tt0120737').subscribe((json: any) => this.tags = json);
   }
 
   ngOnDestroy() {
@@ -108,23 +97,18 @@ export class ProductPageComponent implements OnInit, OnDestroy, OnChanges {
 
   submit() {
       console.log(this.tagControl.value);
-      this.tagService.addTag(this.tagControl.value);
-      this.hideInputF();
+      this.tagService.addTag(this.tagControl.value, 'tt0120737')
+          .subscribe(() => this.tagService.getTags('tt0120737').subscribe((json: any) => this.tags = json));
+      this.setInputFVisibility(false);
   }
 
-  showInputF() {
-      this.showInput = true;
+  setInputFVisibility(visible: boolean) {
+      this.showInput = visible;
   }
   loadMoviePage(event) {
     event.id = event.id;
     this.router.navigate(['app/products/', event.id]);
     this.fetchProducts();
   }
-
-  hideInputF() {
-      this.showInput = false;
-  }
-
-
 
 }

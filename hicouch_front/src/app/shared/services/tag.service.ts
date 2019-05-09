@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 
 
 
@@ -11,11 +11,12 @@ export class TagService {
     constructor(private http: HttpClient) {
     }
 
-    getTags() : string[]{
-        return ; // this.http.get(`//localhost:8080/product/getFilmByIdFromReferentiel?filmId=${idMovie}`);
+    getTags(idProduit: string) {
+        return this.http.get(`http://localhost:8080/tag/byProduct?idProduit=${idProduit}`);
     }
 
-    addTag(tag: string) {
-        return ;
+    addTag(tag: string, idProduit: string) {
+        headers.append('Content-Type', 'application/json');
+        return this.http.put(`http://localhost:8080/tag/tagOnProduct?idProduit=${idProduit}&tag=${tag}`, {});
     }
 }
