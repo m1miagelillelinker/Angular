@@ -15,12 +15,12 @@ export class SearchProductComponent {
   inputIsFocused = false;
   @Output() searchValue = new EventEmitter();
   @Output() productSelected = new EventEmitter();
-  @Input() productList: ProductResult[];
+  @Input() productList: any[];
   @ViewChild('searchInput') searchInput: ElementRef;
 
-  selectProduct(product: ProductResult): void {
+  selectProduct(product: any): void {
     const newUser = {
-      id: Number(product.id),
+      id: product.id,
       title: product.title,
       image: product.image,
     };

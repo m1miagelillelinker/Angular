@@ -26,6 +26,10 @@ export class ProductService {
     return this.http.get(`//localhost:8080/product/getFilmByTitleFromReferentiel?title=${title}`);
   }
 
+  getMoviesByTitle(title: string): any {
+    return this.http.get(`//localhost:8080/product/getFilmsByTitleFromReferentiel?research=${title}`);
+  }
+
   getBook(): Product {
     const book: Product = {
       id: 1,
