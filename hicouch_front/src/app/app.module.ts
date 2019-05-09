@@ -33,6 +33,7 @@ import { AccountPageComponent } from './account/account.page';
 import { AuthenticationService } from './shared/services/authentification.service';
 import { AccountSideMenuComponent } from './account/components/account-side-menu/account-side-menu.component';
 import { ActivityFieldComponent } from './account/components/activity-field/activity-field.component';
+import { SubscribeBtnComponent } from './account/components/subscribe-btn/subscribe-btn.component';
 import { MainProductComponent } from './products/components/main-product/main-product.component';
 import { SearchProductComponent } from './shared/components/search-product/search-product.component';
 
@@ -50,6 +51,7 @@ import { SearchProductComponent } from './shared/components/search-product/searc
     ProductsRelatedAddDialogComponent,
     AccountSideMenuComponent,
     ActivityFieldComponent,
+    SubscribeBtnComponent,
     SearchProductComponent,
   ],
   imports: [
