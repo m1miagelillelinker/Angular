@@ -28,6 +28,7 @@ export class HeaderComponent implements OnInit {
         this.user = {
           id: user.id,
           firstName: user.firstName,
+          lastName: user.lastName,
         };
         this.userSelected.emit(this.user);
       });

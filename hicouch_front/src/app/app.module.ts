@@ -30,6 +30,7 @@ import { AuthenticationService } from './shared/services/authentification.servic
 import { AccountSideMenuComponent } from './account/components/account-side-menu/account-side-menu.component';
 import { ActivityFieldComponent } from './account/components/activity-field/activity-field.component';
 import { MainProductComponent } from './products/components/main-product/main-product.component';
+import { SearchProductComponent } from './shared/components/search-product/search-product.component';
 
 @NgModule({
   declarations: [
@@ -44,6 +45,7 @@ import { MainProductComponent } from './products/components/main-product/main-pr
     AccountPageComponent,
     AccountSideMenuComponent,
     ActivityFieldComponent,
+    SearchProductComponent,
   ],
   imports: [
     BrowserAnimationsModule,

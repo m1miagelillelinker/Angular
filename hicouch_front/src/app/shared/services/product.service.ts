@@ -22,7 +22,7 @@ export class ProductService {
     return this.http.get(`https://hicjv2.azurewebsites.net/product/getBookByIdFromReferentiel?bookId=${idBook}`);
   }
 
-  getMovieByTitle(title: string) {
+  getMovieByTitle(title: string): any {
     return this.http.get(`https://hicjv2.azurewebsites.net/product/getFilmByTitleFromReferentiel?title=${title}`);
   }
 

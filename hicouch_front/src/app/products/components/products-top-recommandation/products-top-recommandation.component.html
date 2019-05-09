@@ -13,9 +13,9 @@
     </div>
 </div>
 <div *ngFor="let product of productsRelated">
-    <div class="content" *ngIf="movieSelected && product.Type==='movie'">
+    <div class="content" *ngIf="movieSelected">
         <div class="image">
-            <img src="{{product.Poster}}">
+            <img src="{{product.image}}">
         </div>
         <div class="infos">
             <div class="title">
@@ -27,7 +27,7 @@
         </div>
     </div>
 
-    <div class="content" *ngIf="bookSelected && product.type==='book'">
+    <div class="content" *ngIf="bookSelected">
         <div class="image">
             <img src="{{product.image}}">
         </div>

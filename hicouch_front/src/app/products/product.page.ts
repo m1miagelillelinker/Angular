@@ -67,7 +67,6 @@ export class ProductPageComponent implements OnInit, OnDestroy, OnChanges {
       this.productService.getBookById('9781442499577').subscribe((book: any) => {
         console.log (book);
         if (book.items) {
-
           const mybook = book.items[0].volumeInfo;
           mybook.type = 'book';
           mybook.image =  'assets/images/everworld1.jpg';
@@ -77,11 +76,13 @@ export class ProductPageComponent implements OnInit, OnDestroy, OnChanges {
         }
         movie.id = this.idRelated;
         this.allProducts.push(movie);
-        this.productService.getBookById('9782070524327').subscribe((book2: any) => {
+        this.productService.getBookById('9781442499577').subscribe((book2: any) => {
+          if (book.items) {
             const mybook2 = book2.items[0].volumeInfo;
             mybook2.type = 'book';
             mybook2.image =  'assets/images/narnia.jpg';
             this.allProducts.push(mybook2);
+          }
         });
         this.allProducts.push(this.productService.getBook());
         movie.id = this.idRelated;

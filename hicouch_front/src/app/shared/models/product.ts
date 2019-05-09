@@ -11,6 +11,19 @@ export interface Product {
     type: string;
 }
 
+export interface ProductResult {
+    id: number;
+    title: string;
+    description?: string ;
+    country?: string ;
+    director?: string ;
+    year?: string;
+    genre?: Tag;
+    image: string;
+    duration?: string;
+    type: string;
+}
+
 export interface Tag {
     truc?: string;
 }
