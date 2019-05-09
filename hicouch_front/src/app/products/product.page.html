@@ -29,14 +29,14 @@
 			<div class="tags">
 			<span> Tags : </span>
 				<span *ngFor="let tag of tags">
-					{{tag}}
+					{{tag.value}}
 				</span>
 			</div>
 			<br>
 			<br>
 			
 			<div class="tag">
-				<button mat-button  (click)="showInputF()" >Ajouter un tag</button>
+				<button mat-button  (click)="setInputFVisibility(true)" >Ajouter un tag</button>
 				<mat-form-field *ngIf="showInput" >
 					<input type="search" matInput
 						   [formControl]="tagControl">
