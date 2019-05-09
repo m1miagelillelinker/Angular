@@ -15,15 +15,15 @@ export class ProductService {
   }
 
   getMovieById(idMovie: string) {
-    return this.http.get(`https://hicjv2.azurewebsites.net/product/getFilmByIdFromReferentiel?filmId=${idMovie}`);
+    return this.http.get(`//localhost:8080/product/getFilmByIdFromReferentiel?filmId=${idMovie}`);
   }
 
   getBookById(idBook: string) {
-    return this.http.get(`https://hicjv2.azurewebsites.net/product/getBookByIdFromReferentiel?bookId=${idBook}`);
+    return this.http.get(`//localhost:8080/product/getBookByIdFromReferentiel?bookId=${idBook}`);
   }
 
   getMovieByTitle(title: string): any {
-    return this.http.get(`https://hicjv2.azurewebsites.net/product/getFilmByTitleFromReferentiel?title=${title}`);
+    return this.http.get(`//localhost:8080/product/getFilmByTitleFromReferentiel?title=${title}`);
   }
 
   getBook(): Product {
@@ -39,11 +39,11 @@ export class ProductService {
       type: 'book',
     };
     return book;
-    // return this.http.get<User>(`https://hicjv2.azurewebsites.net/user/get?userId=${prod}`);
+    // return this.http.get<User>(`//localhost:8080/user/get?userId=${prod}`);
   }
   getMovie() {
       return this.getMovieById('tt0120737');
-    // return this.http.get<User>(`https://hicjv2.azurewebsites.net/user/get?userId=${prod}`);
+    // return this.http.get<User>(`//localhost:8080/user/get?userId=${prod}`);
   }
 
 }

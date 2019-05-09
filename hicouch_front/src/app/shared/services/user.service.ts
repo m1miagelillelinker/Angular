@@ -15,10 +15,10 @@ export class UserService {
 
 
   // getTest() {
-  //   return this.http.get('https://hicjv2.azurewebsites.net/test');
+  //   return this.http.get('//localhost:8080/test');
   // }
 
   getUser(userid: string): Observable<User> {
-    return this.http.get<User>(`https://hicjv2.azurewebsites.net/user/get?userId=${userid}`);
+    return this.http.get<User>(`//localhost:8080/user/get?userId=${userid}`);
   }
 }

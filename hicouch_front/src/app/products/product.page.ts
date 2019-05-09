@@ -13,7 +13,7 @@ import {Association} from '../shared/models/association';
 })
 export class ProductPageComponent implements OnInit, OnDestroy, OnChanges {
   mainProduct: Product;
-  productsRelated: Product[] = [];
+  productsRelated: any[] = [];
   allProducts: Product[] = [];
   productId: string;
   idRelated: string;
@@ -57,7 +57,14 @@ export class ProductPageComponent implements OnInit, OnDestroy, OnChanges {
       this.associationService.fetchtAssociationByProduct(this.mainProduct.id).subscribe((json: any) => {
         this.allProducts = json;
         this.productsRelated.push(json[0]);
-        this.productService.getBookById('9782809480665').subscribe((book: any) => {
+        this.productService.getBookById('9782070541270').subscribe((book: any) => {
+          book.type = 'book';
+          let asso = {
+            association: null,
+            productDTO: book,
+            product: null,
+          };
+          this.productsRelated.push(asso);
           console.log (book);
         });
         if (json.length === 0) {

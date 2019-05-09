@@ -12,11 +12,11 @@ export class AssociationService {
     }
 
     fetchtAssociationByProduct(idProduct: number) {
-        return this.http.get(`https://hicjv2.azurewebsites.net/association/byProduct?idProduct=${idProduct}`);
+        return this.http.get(`//localhost:8080/association/byProduct?idProduct=${idProduct}`);
     }
 
     createAssociation(idProductA: string, typeProductA: String, idProductB: string, typeProductB: String) {
-        return this.http.get('https://hicjv2.azurewebsites.net/association/create' +
+        return this.http.get('//localhost:8080/association/create' +
             '?idProductA=${idProductA}&idfournA=${typeProductA}&idProductB=${idProductB}&idfournB=${typeProductB}');
     }
 

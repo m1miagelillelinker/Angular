@@ -13,7 +13,7 @@
     </div>
 </div>
 <div *ngFor="let asso of productsRelated">
-    <div class="content" *ngIf="movieSelected">
+    <div class="content" *ngIf="movieSelected && asso.productDTO.type === 'movie'">
         <div class="image">
             <img src="{{asso.productDTO.image}}">
         </div>
@@ -27,16 +27,16 @@
         </div>
     </div>
 
-    <div class="content" *ngIf="bookSelected">
+    <div class="content" *ngIf="bookSelected && asso.productDTO.type === 'book'">
         <div class="image">
-            <img src="{{product.productDTO.image}}">
+            <img src="{{asso.productDTO.image}}">
         </div>
         <div class="infos">
             <div class="title">
-                {{product.productDTO.titleShort}}
+                {{asso.productDTO.titleShort}}
             </div>
             <div class="description">
-                {{product.productDTO.descShort}}
+                {{asso.productDTO.descShort}}
 
             </div>
         </div>
