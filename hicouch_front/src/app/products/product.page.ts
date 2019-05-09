@@ -5,6 +5,7 @@ import { ActivatedRoute, Route, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import {AssociationService} from '../shared/services/association.service';
 import {Association} from '../shared/models/association';
+import {HicouchAPIService} from '../shared/services/hicouchAPI.service';
 
 @Component({
   selector: 'app-product-page',
@@ -47,6 +48,9 @@ export class ProductPageComponent implements OnInit, OnDestroy, OnChanges {
   }
   fetchProducts() {
     // tt3896198
+
+    HicouchAPIService.getTagsByProduct('tt0120737').then((json:any) => this.allProducts = json);
+
     const productId = this.route.snapshot.paramMap.get('productId');
     this.productSubscription = this.productService.getMovieById(productId).subscribe((movie: any) => {
       this.mainProduct = movie;
