@@ -55,14 +55,15 @@
 }
 
 #search-autocomplete {
-  min-width: 700px;
-  padding: 20px 40px;
+  margin-left: 30px;
+  min-width: 53%;
+  padding: 20px 20px;
   padding-bottom: 0;
   display: block;
   max-height: 300px;
   position: absolute;
   z-index: 5;
-  background-color: #FFF;
+  background-color: #F7F7F7;
   border-bottom-left-radius: 12px;
   border-bottom-right-radius: 12px;
   overflow-y: auto;
@@ -73,7 +74,8 @@
     font-size: 14px;
     color: black;
     display: flex;
-    justify-content: space-around;
+    
+    // justify-content: space-around;
     border-bottom: 1px solid #f7f7f7;
     cursor: pointer;
 

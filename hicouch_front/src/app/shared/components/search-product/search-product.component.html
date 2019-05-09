@@ -11,12 +11,13 @@
 <div *ngIf="productList" id="search-autocomplete">
   <div *ngFor="let product of productList" class="user-infos" (click)="selectProduct(product)">
     <div class="picture">
+      <img src="{{product.image}}">
     </div>
     <div class="user-name">
-      {{product.image}}
-      <div class="gid">
+      {{product.title}}
+      <!-- <div class="gid">
         {{product.title}}
-      </div>
+      </div> -->
     </div>
   </div>
 </div>
