@@ -51,7 +51,9 @@ export class ProductsRelatedComponent implements OnInit, OnChanges {
     //     asso.product.titleShort = this.fetchTitle(asso.product.title);
     // });
     if (this.allProducts) {
-        this.allProducts.forEach(p => p.productDTO.type = 'movie');
+        this.allProducts.forEach(p => {
+            if (!p.productDTO.type) { p.productDTO.type = 'movie'; }
+        });
     }
       let tab = [];
       this.fetchNavigation();

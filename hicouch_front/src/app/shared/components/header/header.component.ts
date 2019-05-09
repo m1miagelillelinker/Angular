@@ -50,6 +50,7 @@ export class HeaderComponent implements OnInit {
   }
 
   onType(value: string) {
+    value = encodeURIComponent(value.trim());
     this.productService.getMovieByTitle(value).subscribe((movie) => {
       console.log(movie);
       this.isMovieSearched.emit(movie);

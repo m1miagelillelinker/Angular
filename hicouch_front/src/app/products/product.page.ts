@@ -14,7 +14,7 @@ import {Association} from '../shared/models/association';
 export class ProductPageComponent implements OnInit, OnDestroy, OnChanges {
   mainProduct: Product;
   productsRelated: any[] = [];
-  allProducts: Product[] = [];
+  allProducts: any[] = [];
   productId: string;
   idRelated: string;
   productSubscription: Subscription;
@@ -59,12 +59,13 @@ export class ProductPageComponent implements OnInit, OnDestroy, OnChanges {
         this.productsRelated.push(json[0]);
         this.productService.getBookById('9782070541270').subscribe((book: any) => {
           book.type = 'book';
-          let asso = {
+          const asso = {
             association: null,
             productDTO: book,
             product: null,
           };
           this.productsRelated.push(asso);
+          this.allProducts.push(asso);
           console.log (book);
         });
         if (json.length === 0) {
