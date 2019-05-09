@@ -5,7 +5,7 @@
         <button (click)="onType(searchInput.value)">Search</button>
         
     </div> -->
-<app-search-product [productList]="products" 
+<app-search-product class="search-field" [productList]="products" 
         (productSelected)="goToProduct($event)"
         (searchValue)="toggleSearchPropositions($event)"></app-search-product>
 
