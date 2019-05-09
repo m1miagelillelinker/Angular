@@ -45,6 +45,10 @@ export class HeaderComponent implements OnInit {
     this.router.navigate(['app/account', this.user.id]);
   }
 
+  goToHomePage() {
+    this.router.navigate(['app/home']);
+  }
+
   onType(value: string) {
     this.productService.getMovieByTitle(value).subscribe((movie) => {
       console.log(movie);

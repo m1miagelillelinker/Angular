@@ -1,5 +1,5 @@
 <div class="header-content" >
-    <img src="/assets/images/logo.png"/>
+    <img src="/assets/images/logo.png" (click)="goToHomePage()"/>
     <div class="search-bar">
         <input #searchInput class="search-field" placeholder="Rechercher..." (keyup.enter)="onType(searchInput.value)"/>
         <button (click)="onType(searchInput.value)">Search</button>
@@ -9,7 +9,7 @@
         (productSelected)="goToProduct($event)"
         (searchValue)="toggleSearchPropositions($event)"></app-search-product> -->
 
-    <div class="user-infos" (click)="goToUser()">
+    <div class="user-infos" (click)="goToUser()" *ngIf="user">
         <img src="/assets/images/user.png"/>
         <p></p>
          <p>{{user.firstName}} {{user.lastName}}</p> 

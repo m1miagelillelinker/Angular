@@ -12,31 +12,31 @@
         Game
     </div>
 </div>
-<div *ngFor="let product of productsRelated">
+<div *ngFor="let asso of productsRelated">
     <div class="content" *ngIf="movieSelected">
         <div class="image">
-            <img src="{{product.image}}">
+            <img src="{{asso.productDTO.image}}">
         </div>
         <div class="infos">
             <div class="title">
-                {{product.titleShort}}
+                {{asso.productDTO.titleShort}}
             </div>
             <p class="description">
-                {{product.descShort}}
+                {{asso.productDTO.descShort}}
             </p>
         </div>
     </div>
 
     <div class="content" *ngIf="bookSelected">
         <div class="image">
-            <img src="{{product.image}}">
+            <img src="{{product.productDTO.image}}">
         </div>
         <div class="infos">
             <div class="title">
-                {{product.titleShort}}
+                {{product.productDTO.titleShort}}
             </div>
             <div class="description">
-                {{product.descShort}}
+                {{product.productDTO.descShort}}
 
             </div>
         </div>

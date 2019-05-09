@@ -16,7 +16,7 @@ export class SubscribeBtnComponent implements OnInit {
   }
 
   toggleSubscribtion() {
-  	this.toggledSubscription.emit(this.isSubscribed);
+  this.toggledSubscription.emit(this.isSubscribed);
   }
 }
 

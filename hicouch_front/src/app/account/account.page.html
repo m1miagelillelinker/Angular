@@ -1,4 +1,6 @@
 <app-header [user]="user" (isMovieSearched)="loadMoviePage($event)"></app-header>
+<app-subscribe-btn class="sub" [isSubscribed]="sub" (toggledSubscription)="doSthg()"></app-subscribe-btn>
+
 <div *ngIf="user" class="welcome">
 		Hello {{user.firstName}} !
 	</div>

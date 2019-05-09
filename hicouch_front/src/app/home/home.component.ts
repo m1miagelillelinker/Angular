@@ -5,6 +5,7 @@ import { AuthenticationService } from '../shared/services/authentification.servi
 import { Product } from '../shared/models/product';
 import { Subscription } from 'rxjs';
 import { ProductService } from '../shared/services/product.service';
+import { UserService } from '../shared/services/user.service';
 
 @Component({
   selector: 'app-home',
@@ -23,11 +24,21 @@ export class HomeComponent implements OnInit {
   constructor(
     private router: Router,
     public auth: AuthenticationService,
-    public productService: ProductService
+    public productService: ProductService,
+    private userService: UserService
   ) { }
 
   ngOnInit() {
     // this.router.navigate(['app/products/', 'tt0120737']);
+    this.userService.getUser('1').subscribe(
+      (user: User) => {
+        console.log(user);
+        this.user = {
+          id: user.id,
+          firstName: user.firstName,
+          lastName: user.lastName,
+        };
+      });
   }
 
   goToProducts() {

@@ -17,6 +17,7 @@ export class ProductsTopRecommandationComponent implements OnInit, OnChanges {
 
   ngOnInit() {
     this.selectTab('movie');
+    console.log(this.productsRelated);
   }
 
   ngOnChanges() {
@@ -49,8 +50,9 @@ export class ProductsTopRecommandationComponent implements OnInit, OnChanges {
 
   selectTab(tab: string) {
     this.productsRelated.forEach(p => {
-      p.titleShort = this.fetchTitle(p.title);
-      p.descShort = this.fetchDesc(p.description);
+      p.productDTO.titleShort = this.fetchTitle(p.productDTO.title);
+      p.productDTO.descShort = this.fetchDesc(p.productDTO.description);
+      p.productDTO.type = 'movie';
     });
     if (tab === 'movie') {
       this.movieSelected = true;

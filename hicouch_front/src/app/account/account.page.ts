@@ -4,6 +4,7 @@ import { Movie, Book } from '../shared/models/product';
 import { ActivatedRoute } from '@angular/router';
 import { User } from '../shared/models/user';
 import { UserService } from '../shared/services/user.service';
+import { subscribeOn } from 'rxjs/operators';
 
 @Component({
   selector: 'app-account-page',
@@ -15,6 +16,7 @@ export class AccountPageComponent implements OnInit {
   activitySelected = true;
   friendsSelected = false;
   badgesSelected = false;
+  sub = true;
 
   constructor(
     private userService: UserService,
@@ -56,6 +58,8 @@ export class AccountPageComponent implements OnInit {
     }
   }
 
-
+  doSthg() {
+    this.sub = !this.sub;
+  }
 
 }

@@ -56,7 +56,10 @@ export class ProductPageComponent implements OnInit, OnDestroy, OnChanges {
       this.mainProduct.image = movie.image;
       this.associationService.fetchtAssociationByProduct(this.mainProduct.id).subscribe((json: any) => {
         this.allProducts = json;
-        this.productsRelated = json;
+        this.productsRelated.push(json[0]);
+        this.productService.getBookById('9782809480665').subscribe((book: any) => {
+          console.log (book);
+        });
         if (json.length === 0) {
           console.log('ah');
           // tslint:disable-next-line:no-shadowed-variable
@@ -65,7 +68,7 @@ export class ProductPageComponent implements OnInit, OnDestroy, OnChanges {
             movie.type = movie.type;
             movie.description = movie.description;
             this.productsRelated.push(movie);
-            this.productService.getBookById('9781442499577').subscribe((book: any) => {
+            this.productService.getBookById('9782809456820').subscribe((book: any) => {
               console.log (book);
               if (book.items) {
                 const mybook = book.items[0].volumeInfo;

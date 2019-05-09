@@ -34,10 +34,12 @@ export class ProductsRelatedComponent implements OnInit, OnChanges {
   ) { }
 
   ngOnInit() {
+
   }
 
   fetchNavigation() {
       this.totalPages = Math.ceil(this.allProducts.length / 5);
+
   }
 
   ngOnChanges() {
@@ -48,10 +50,13 @@ export class ProductsRelatedComponent implements OnInit, OnChanges {
     // this.allProducts.forEach(asso => {
     //     asso.product.titleShort = this.fetchTitle(asso.product.title);
     // });
+    if (this.allProducts) {
+        this.allProducts.forEach(p => p.productDTO.type = 'movie');
+    }
       let tab = [];
       this.fetchNavigation();
       if (number >= 5) {
-        tab = this.allProducts.slice(5, this.currentIndex + 1);
+        tab = this.allProducts.slice(number, number + 5);
         console.log(tab);
         return tab;
       } else {
@@ -95,17 +100,17 @@ export class ProductsRelatedComponent implements OnInit, OnChanges {
   fetchIndex(direction) {
     if (direction === 'right') {
         this.currentPage += 1;
-        if (this.currentIndex + 5 <= this.allProducts.length) {
-            this.currentIndex += 5;
-        } else {
+        this.currentIndex += 5;
+        if (this.currentIndex >= this.allProducts.length) {
             this.currentIndex = this.allProducts.length;
         }
+
+
     }
     if (direction === 'left') {
         this.currentPage -= 1;
-        if (this.currentIndex - 5 >= 0) {
-            this.currentIndex -= 5;
-        } else {
+        this.currentIndex -= 5;
+        if (this.currentIndex - 5 <= 0) {
             this.currentIndex = 0;
         }
 
