@@ -11,11 +11,11 @@ export class TagService {
     constructor(private http: HttpClient) {
     }
 
-    getTags() : string[]{
+    getTags(id: string) : string[]{
         return ; // this.http.get(`//localhost:8080/product/getFilmByIdFromReferentiel?filmId=${idMovie}`);
     }
 
-    addTag(tag: string) {
+    addTag(id: string, tag: string) {
         return ;
     }
 }

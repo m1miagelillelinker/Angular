@@ -4,7 +4,7 @@ import { TagService } from '../shared/services/tag.service';
 import { Movie, Book } from '../shared/models/product';
 import { ActivatedRoute, Route, Router } from '@angular/router';
 import { Subscription, Observable } from 'rxjs';
-import { MatAutocompleteModule, MatIconModule } from '@angular/material';
+import {MatIconModule } from '@angular/material';
 import {FormControl} from '@angular/forms';
 import {map, startWith} from 'rxjs/operators';
 
@@ -22,8 +22,6 @@ export class ProductPageComponent implements OnInit, OnDestroy {
 
     tagControl = new FormControl();
     tags: string[] = ['One', 'Two', 'Three'];
-    filteredTags: Observable<string[]>;
-
     showInput = false;
 
 
@@ -81,18 +79,9 @@ export class ProductPageComponent implements OnInit, OnDestroy {
       //   movie.type = movie.Type;
       //   this.allProducts.push(movie);
    //});
-
+      
       // Tag
-      this.tags = this.tagService.getTags();
-      this.filteredTags = this.tagControl.valueChanges
-          .pipe(
-          startWith(''),
-          map(value => this._filter(value))
-          );
-
-      // Faire un requête pour recupérer une liste de tags existants
-      // Qu'on stockera dans tags
-      // Et c'est sur cette liste qu'on filtera des trucs
+      //this.tags = this.tagService.getTags(this.movie.id);
 
   }
 
@@ -100,14 +89,9 @@ export class ProductPageComponent implements OnInit, OnDestroy {
     if (this.productSubscription) { this.productSubscription.unsubscribe(); }
   }
 
-  private _filter(value: string): string[] {
-      const filterValue = value.toLowerCase();
-      return this.tags.filter(tag => tag.toLowerCase().includes(filterValue));
-  }
-
   submit() {
       console.log(this.tagControl.value);
-      this.tagService.addTag(this.tagControl.value);
+      //this.tagService.addTag(this.movie.id, this.tagControl.value);
       this.hideInputF();
   }
 
