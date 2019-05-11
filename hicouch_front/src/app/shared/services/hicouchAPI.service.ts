@@ -92,6 +92,18 @@ export class HicouchAPIService {
 
     // product
 
+    getFilmByID(idProduct: string): any {
+        return this.get(this.productController + '/getFilmByIdFromReferentiel', [{key: 'filmId', value: idProduct}]);
+    }
+
+    getBookyID(idProduct: string): any {
+        return this.get(this.productController + '/getBookByIdFromReferentiel', [{key: 'bookId', value: idProduct}]);
+    }
+
+    searchFilm(searchTerms: string): any {
+        return this.get(this.productController + '/getFilmsByTitleFromReferentiel', [{key: 'research', value: searchTerms}]);
+    }
+
     // comment
 
 }
