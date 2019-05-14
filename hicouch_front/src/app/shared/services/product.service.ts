@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { User } from '../models/user';
 import { Movie, Book, Product } from '../models/product';
+import {HicouchAPIService} from './hicouchAPI.service';
 
 
 
@@ -11,23 +12,19 @@ import { Movie, Book, Product } from '../models/product';
 })
 export class ProductService {
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private api: HicouchAPIService) {
   }
 
   getMovieById(idMovie: string) {
-    return this.http.get(`//localhost:8080/product/getFilmByIdFromReferentiel?filmId=${idMovie}`);
+    return this.api.getFilmByID(idMovie);
   }
 
   getBookById(idBook: string) {
-    return this.http.get(`//localhost:8080/product/getBookByIdFromReferentiel?bookId=${idBook}`);
-  }
-
-  getMovieByTitle(title: string): any {
-    return this.http.get(`//localhost:8080/product/getFilmByTitleFromReferentiel?title=${title}`);
+    return this.api.getBookyID(idBook);
   }
 
   getMoviesByTitle(title: string): any {
-    return this.http.get(`//localhost:8080/product/getFilmsByTitleFromReferentiel?research=${title}`);
+    return this.api.searchFilm(title);
   }
 
   getBook(): Product {
@@ -45,9 +42,4 @@ export class ProductService {
     return book;
     // return this.http.get<User>(`//localhost:8080/user/get?userId=${prod}`);
   }
-  getMovie() {
-      return this.getMovieById('tt0120737');
-    // return this.http.get<User>(`//localhost:8080/user/get?userId=${prod}`);
-  }
-
 }

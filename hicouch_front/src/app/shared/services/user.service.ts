@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { User } from '../models/user';
+import {HicouchAPIService} from './hicouchAPI.service';
 
 
 
@@ -10,7 +11,7 @@ import { User } from '../models/user';
 })
 export class UserService {
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private api: HicouchAPIService) {
   }
 
 
@@ -18,7 +19,7 @@ export class UserService {
   //   return this.http.get('//localhost:8080/test');
   // }
 
-  getUser(userid: string): Observable<User> {
-    return this.http.get<User>(`//localhost:8080/user/get?userId=${userid}`);
+  getUser(userId: number): Observable<User> {
+    return this.api.getUser(userId);
   }
 }

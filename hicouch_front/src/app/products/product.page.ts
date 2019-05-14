@@ -49,8 +49,6 @@ export class ProductPageComponent implements OnInit, OnDestroy, OnChanges {
   fetchProducts() {
     // tt3896198
 
-    HicouchAPIService.getTagsByProduct('tt0120737').then((json:any) => this.allProducts = json);
-
     const productId = this.route.snapshot.paramMap.get('productId');
     this.productSubscription = this.productService.getMovieById(productId).subscribe((movie: any) => {
       this.mainProduct = movie;
@@ -80,7 +78,7 @@ export class ProductPageComponent implements OnInit, OnDestroy, OnChanges {
             movie.type = movie.type;
             movie.description = movie.description;
             this.productsRelated.push(movie);
-            this.productService.getBookById('9782809456820').subscribe((book: any) => {
+            /*this.productService.getBookById('9782809456820').subscribe((book: any) => {
               console.log (book);
               if (book.items) {
                 const mybook = book.items[0].volumeInfo;
@@ -104,14 +102,14 @@ export class ProductPageComponent implements OnInit, OnDestroy, OnChanges {
               movie.id = this.idRelated;
               this.allProducts.push(movie);
               // this.allProducts.push(mybook);
-            });
+            });*/
           });
           // tslint:disable-next-line:no-shadowed-variable
-          this.productService.getMovieByTitle('Harry').subscribe((movie: any) => {
+          /*this.productService.getMovieByTitle('Harry').subscribe((movie: any) => {
             movie.title = movie.title;
             movie.type = movie.type;
             this.allProducts.push(movie);
-          });
+          });*/
           // this.productSubscription = this.productService.getMovieByTitle('Harry').subscribe((movie: any) => {
           //   movie.title = movie.Title;
           //   movie.type = movie.Type;
