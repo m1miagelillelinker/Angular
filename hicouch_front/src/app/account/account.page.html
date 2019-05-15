@@ -15,11 +15,46 @@
 			Edit My Profile
 		</div>
 	</div>
+</div>
 
+<div class="profile-infos">
+	<img height="150px" width="150px" src="../../assets/images/tmp-avatar.jpg" />
+	<div class="username">
+		<span>Firstname</span>
+		<span>Lastname</span>
+	</div>
+
+	<div class="profile-progress">
+		<div class="progress-bar" [ngStyle]="{'width': profileProgress.fullProgress}"></div>
+		<div class="progress" [ngStyle]="{'width': profileProgress.userProgress}"></div>
+	</div>
 </div>
-<div class="second-part">
-		<app-account-side-menu (tabHasBeenSelected)="toggleFeature($event)"></app-account-side-menu>
-		<div class="feature" *ngIf="activitySelected">
-				<app-activity-field></app-activity-field>
+
+<div class="profile-actions">
+	<div class="actions-trigger">
+		<div class="badges">
+			<button (click)="showBadges()" [ngClass]="{'active': badgesSelected}">Badges</button>
 		</div>
+		<div class="friends">
+			<button (click)="showFriends()" [ngClass]="{'active': friendsSelected}">Amis</button>
+		</div>
+		<div class="activities">
+			<button (click)="showActivities()" [ngClass]="{'active': activitiesSelected}">Activités</button>
+		</div>
+	</div>
+	<div class="display">
+		<table>
+		  <thead>
+		    <tr>
+		      <th *ngFor="let column of table.columns">{{column}}</th>
+		    </tr>
+		  </thead>
+		  <tbody>
+		    <tr *ngFor="let row of table.rows">
+		      <td *ngFor="let item of row">{{item}}</td>
+		    </tr>
+		  </tbody>
+		</table>
+	</div>
 </div>
+
