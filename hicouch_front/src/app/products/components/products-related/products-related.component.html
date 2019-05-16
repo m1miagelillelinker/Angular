@@ -1,13 +1,32 @@
 <div class="banner">
         <div class="title">
-                Related Products :
+                <p>Related Products :</p>
+
         </div>
-                        <div class="navigation" *ngIf="totalPages">
-                                <div *ngFor="let in of counter(totalPages) ;let i = index">
-                                        <div id="cercle" *ngIf="i !== this.currentPage"></div>
-                                        <div id="cercle2" *ngIf="i === this.currentPage"></div>
-                                </div>
-                        </div>
+        <div class="filter">
+                <div class="filter-picto" [ngClass]="{'selected': movieSelected}">
+                        <img src="/assets/images/movie.png" (click)="selectType('movie')">
+
+                </div>
+                <div class="filter-picto" [ngClass]="{'selected': tvSelected}">
+                        <img src="/assets/images/computer.png" (click)="selectType('tvshow')">
+
+                </div>
+                <div class="filter-picto" [ngClass]="{'selected': bookSelected}">
+                        <img src="/assets/images/book-cover.png" (click)="selectType('book')">
+
+                </div>
+                <div class="filter-picto" [ngClass]="{'selected': gameSelected}">
+                        <img src="/assets/images/gamepad.png" (click)="selectType('game')">
+
+                </div>
+        </div>
+        <div class="navigation" *ngIf="totalPages">
+                <div *ngFor="let in of counter(totalPages) ;let i = index">
+                        <div id="cercle" *ngIf="i !== this.currentPage"></div>
+                        <div id="cercle2" *ngIf="i === this.currentPage"></div>
+                </div>
+        </div>
 
         <br />
 
@@ -27,17 +46,6 @@
                                 {{asso.product.title}}
                         </div>
                 </div>
-                <!-- <div class="item" *ngFor="let product of fetchList(currentIndex)" (click)="goTo(product.id)">
-                        <div class="picto">
-                                <img src="{{getPicto(product.type)}}">
-                        </div>
-                        <div class="image">
-                                <img src="{{product.image}}">
-                        </div>
-                        <div class="title2" (mouseover)="getTitle(product)">
-                                {{product.title}}
-                        </div>
-                </div> -->
                 <div class="item add-product">
                         <div class="image" (click)="addAssociation()">
                                 <img src="/assets/images/plus.png">
