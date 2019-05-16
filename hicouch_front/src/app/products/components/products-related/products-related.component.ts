@@ -59,11 +59,9 @@ export class ProductsRelatedComponent implements OnInit, OnChanges {
       this.fetchNavigation();
       if (number >= 5) {
         tab = this.allProducts.slice(number, number + 5);
-        console.log(tab);
         return tab;
       } else {
         tab = this.allProducts.slice(0, 5);
-        console.log(tab);
         return tab;
       }
   }

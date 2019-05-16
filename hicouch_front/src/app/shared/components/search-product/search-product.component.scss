@@ -10,17 +10,31 @@
   display: flex;
   align-items: center;
   padding-left: 24px;
+
   .search-bar {
     margin-top: auto;
     margin-bottom: auto;
     height: 50px;
     width: 60vw;
     display: flex;
+
     .search-field {
-        padding: 15px;
-        width: 100%;
+      padding: 15px;
+      width: 100%;
     }
-}
+
+    .mat-select {
+      // display: inline-block;
+      margin-top: 10px;
+      width: 20%;
+      outline: 0;
+
+    }
+    ::ng-deep .cdk-overlay-pane {
+      margin-top: 50px;
+      top: 75px !important;
+    }
+  }
 
   .search-input {
     margin-top: 20px;
