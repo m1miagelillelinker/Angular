@@ -65,27 +65,27 @@
   max-height: 300px;
   position: absolute;
   z-index: 5;
-  background-color: #F7F7F7;
+  background-color: #FFF;
+  border: 0.5px solid #bdbdbd;
   border-bottom-left-radius: 12px;
   border-bottom-right-radius: 12px;
   overflow-y: auto;
 
-  .user-infos {
-    padding: 20px 0;
-    height: 56px;
+  .prod-infos {
+    padding-bottom: 14px;
+    height: 34px;
     font-size: 14px;
     color: black;
     display: flex;
-    
+    margin-bottom: 10px;
     // justify-content: space-around;
-    border-bottom: 1px solid #f7f7f7;
+    border-bottom: 0.5px solid #bdbdbd;
     cursor: pointer;
 
     .picture {
       position: relative;
 
       img {
-        width: 43px;
         height: 44px;
         margin-right: 8px;
       }
