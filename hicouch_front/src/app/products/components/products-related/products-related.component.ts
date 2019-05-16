@@ -4,8 +4,9 @@ import { Router } from '@angular/router';
 import {FormControl} from '@angular/forms';
 import {Observable} from 'rxjs';
 import {map, startWith} from 'rxjs/operators';
-import {MatDialog, MatDialogRef, MAT_DIALOG_DATA, MatSelectModule, MatAutocompleteModule } from '@angular/material';
+import {MatDialog, MatDialogRef, MAT_DIALOG_DATA, MatSelectModule, MatAutocompleteModule, MatMenuModule } from '@angular/material';
 import {Association} from '../../../shared/models/association';
+import {Comment} from '../../../shared/models/comment';
 
 export interface DialogData {
   nomProduct: string;
@@ -27,6 +28,41 @@ export class ProductsRelatedComponent implements OnInit, OnChanges {
   idProduct: number;
   idAssociatedProduct: number;
 
+  m = {
+      id: 1,
+      title: "Avengers",
+      description: "",
+      country: "usa",
+      director: "Russo",
+      year: "2019",
+      genre: null,
+      image: "",
+      duration: "180",
+      type: 'movie'
+  }
+
+  asssoMeta  = {
+      id: 1,
+      idProduitA: "1",
+      idfournA: "5",
+      idProduitB: "2",
+      idfournB: "6",
+      idPair: 10
+  };
+  
+  asso =  {
+      association: this.asssoMeta,
+      product: this.m,
+      productDTO: this.m
+      // userVote: Vote;
+      // comments: Array<Commentaire>
+  }
+    
+  comments : Comment[] = [
+        {id: 1, subject: "Up", content: "Totalement d'accord avec.", userName: "Lovey"},
+        {id: 2, subject: ":(", content: "Hors sujet", userName: "Dovey"}
+  ]
+
   constructor(
       private router: Router,
       public dialog: MatDialog,
@@ -47,25 +83,26 @@ export class ProductsRelatedComponent implements OnInit, OnChanges {
   }
 
   fetchList(number): Association[] {
-    // this.allProducts.forEach(asso => {
-    //     asso.product.titleShort = this.fetchTitle(asso.product.title);
-    // });
-    if (this.allProducts) {
-        this.allProducts.forEach(p => {
-            if (!p.productDTO.type) { p.productDTO.type = 'movie'; }
-        });
-    }
-      let tab = [];
-      this.fetchNavigation();
-      if (number >= 5) {
-        tab = this.allProducts.slice(number, number + 5);
-        console.log(tab);
-        return tab;
-      } else {
-        tab = this.allProducts.slice(0, 5);
-        console.log(tab);
-        return tab;
-      }
+      // this.allProducts.forEach(asso => {
+      //     asso.product.titleShort = this.fetchTitle(asso.product.title);
+      // });
+//      if (this.allProducts) {
+//          this.allProducts.forEach(p => {
+//              if (!p.productDTO.type) { p.productDTO.type = 'movie'; }
+//          });
+//      }
+//      let tab = [];
+//      this.fetchNavigation();
+//      if (number >= 5) {
+//          tab = this.allProducts.slice(number, number + 5);
+//          console.log(tab);
+//          return tab;
+//      } else {
+//          tab = this.allProducts.slice(0, 5);
+//          console.log(tab);
+//          return tab;
+//      }
+      return [this.asso];
   }
 
   getPicto(type) {
@@ -139,7 +176,12 @@ export class ProductsRelatedComponent implements OnInit, OnChanges {
 
 
   goTo(productId) {
+      console.log("go to this product");
       this.router.navigate(['app/products', productId]);
+  }
+    
+  getComments(associationId){
+      console.log("get comments");
   }
 
 }
