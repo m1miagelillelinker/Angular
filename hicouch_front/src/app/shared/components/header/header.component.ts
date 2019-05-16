@@ -25,7 +25,6 @@ export class HeaderComponent implements OnInit {
   ngOnInit() {
     this.userService.getUser('1').subscribe(
       (user: User) => {
-        console.log(user);
         this.user = {
           id: user.id,
           firstName: user.firstName,
@@ -33,13 +32,6 @@ export class HeaderComponent implements OnInit {
         };
         this.userSelected.emit(this.user);
       });
-
-    // TODO : DEMOCK !
-    // this.user = {
-    //   id: 1,
-    //   firstName: 'Mocked',
-    //   lastName: 'User'
-    // };
   }
 
   goToUser() {
@@ -53,7 +45,6 @@ export class HeaderComponent implements OnInit {
   onType(value: string) {
     value = encodeURIComponent(value.trim());
     this.productService.getMoviesByTitle(value).subscribe((movie) => {
-      console.log(movie);
       this.products = movie;
       this.isMovieSearched.emit(movie);
     });
@@ -62,14 +53,12 @@ export class HeaderComponent implements OnInit {
   toggleSearchPropositions(value) {
     value = encodeURIComponent(value.trim());
     this.productService.getMoviesByTitle(value).subscribe((movie) => {
-      console.log(movie);
       this.products = movie;
       this.isMovieSearched.emit(movie);
     });
   }
 
   goToProduct(event) {
-    console.log(event);
     this.router.navigate(['app/products', event.id]);
   }
 

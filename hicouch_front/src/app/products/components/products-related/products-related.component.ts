@@ -52,7 +52,7 @@ export class ProductsRelatedComponent implements OnInit, OnChanges {
     // });
     if (this.allProducts) {
         this.allProducts.forEach(p => {
-            if (!p.productDTO.type) { p.productDTO.type = 'movie'; }
+            if (!p.product.type) { p.product.type = 'movie'; }
         });
     }
       let tab = [];
@@ -117,7 +117,6 @@ export class ProductsRelatedComponent implements OnInit, OnChanges {
         }
 
     }
-    console.log(this.currentIndex);
     this.fetchList(this.currentIndex);
   }
 
