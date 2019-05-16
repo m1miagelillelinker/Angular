@@ -3,7 +3,6 @@ import {Movie, Product} from './product';
 export interface Association {
     association: AssociationMeta;
     product: Product;
-    productDTO?: Product;
     // userVote: Vote;
     // comments: Array<Commentaire>
 }
