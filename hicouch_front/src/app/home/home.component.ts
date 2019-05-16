@@ -30,7 +30,7 @@ export class HomeComponent implements OnInit {
 
   ngOnInit() {
     // this.router.navigate(['app/products/', 'tt0120737']);
-    this.userService.getUser('1').subscribe(
+    this.userService.getUser(1).subscribe(
       (user: User) => {
         console.log(user);
         this.user = {
@@ -100,12 +100,12 @@ fetchProducts() {
       // this.allProducts.push(mybook);
     });
   });
-  this.productService.getMovieByTitle('Totoro').subscribe((movie: any) => {
+  /*this.productService.getMovieByTitle('Totoro').subscribe((movie: any) => {
     movie.title = movie.title;
     movie.type = movie.type;
     movie.description = movie.description;
     this.allProducts.push(movie);
-  });
+  });*/
 }
 
 

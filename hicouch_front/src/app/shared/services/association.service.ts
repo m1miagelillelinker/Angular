@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import {HicouchAPIService} from './hicouchAPI.service';
 
 
 
@@ -8,16 +9,15 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 })
 export class AssociationService {
 
-    constructor(private http: HttpClient) {
+    constructor(private http: HttpClient, private api: HicouchAPIService) {
     }
 
     fetchtAssociationByProduct(idProduct: number) {
-        return this.http.get(`//localhost:8080/association/byProduct?idProduct=${idProduct}`);
+        return this.http.get(`http://localhost:8080/association/byProduct?idProduct=${idProduct}`);
     }
 
-    createAssociation(idProductA: string, typeProductA: String, idProductB: string, typeProductB: String) {
-        return this.http.get('//localhost:8080/association/create' +
-            '?idProductA=${idProductA}&idfournA=${typeProductA}&idProductB=${idProductB}&idfournB=${typeProductB}');
+    createAssociation(idProductA: string, typeProductA: string, idProductB: string, typeProductB: string) {
+        return this.api.newAssociation(idProductA, typeProductA, idProductB, typeProductB);
     }
 
 }
