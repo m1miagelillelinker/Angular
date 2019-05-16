@@ -17,7 +17,7 @@
 
   .profile {
     width: 30%;
-    .display {
+    .displayActivites {
       display: flex;
       .user-infos {
         display:block;
@@ -85,7 +85,7 @@
 
     .progress {
       border-radius: 2px;
-      background: #ff2a32;
+      background: #7c0000;
     }
   }
 }
@@ -98,8 +98,8 @@
   button {
     cursor: pointer;
     outline: 0;
-    height: 30px;
-    width: 150px;
+    height: 50px;
+    width: 180px;
     margin-bottom: 10px;
     background-color: #3e3e3e;
     border: 1px solid #3e3e3e;
@@ -107,36 +107,37 @@
     border-radius: 2px;
 
     &.active {
-        background-color: #ff2a32;
-        border-color: #ff2a32;
+        background-color: #7c0000;
+        border-color: #7c0000;
     }
+    
   }
 
   .actions-trigger {
     width: 20%;
   }
 
-  .display {
+  .displayActivites {
     width: 80%;
     vertical-align: top;
 
     table {
       border-radius: 2px;
       text-align: left;
-      font-size: 13px;
+      font-size: 14px;
 
       thead, tbody, tr {
         width: 100%;
       }
 
       th, td {
-        width: 25%;
+        width: 29%;
         padding: 5px 20px;
       }
 
       th {
-        background: #ff2a32;
-        border: 1px solid #ff2a32;
+        background: #7c0000;
+        border: 1px solid #7c0000;
         color: white;
         font-weight: 400;
       }
@@ -164,4 +165,30 @@
       }
     }
   }
+  .displayFriends
+  ul {
+    list-style-type: none;
+    margin: 0;padding: 0;
+
+    li {
+        background: rgb(238, 238, 238);
+        padding: 2em;
+        border-radius: 4px;
+        margin-bottom: 7px;
+        display: grid;
+        grid-template-columns: 70px auto;
+
+        p {
+            font-weight: bold;
+            margin-left: 80px;
+            margin-top: 40px;
+            
+        }
+
+        img {
+            border-radius: 100%;
+            width: 100%;
+        }
+    }
+}
 }

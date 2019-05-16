@@ -16,45 +16,65 @@
 		</div>
 	</div>
 </div>
+<!-- Display the profile-information -->
 
+<!-- Display the profile-infos -->
 <div class="profile-infos">
 	<img height="150px" width="150px" src="../../assets/images/tmp-avatar.jpg" />
 	<div class="username">
 		<span>Firstname</span>
 		<span>Lastname</span>
 	</div>
-
+<!-- Display the profile-progess -->
 	<div class="profile-progress">
 		<div class="progress-bar" [ngStyle]="{'width': profileProgress.fullProgress}"></div>
 		<div class="progress" [ngStyle]="{'width': profileProgress.userProgress}"></div>
 	</div>
 </div>
 
+<!-- Display the buttoms of Activities/Badges/Amis -->
 <div class="profile-actions">
 	<div class="actions-trigger">
+		<div class="activities">
+					<button (click)="showActivities()" [ngClass]="{'active': activitiesSelected}">Activités</button>
+			</div>
 		<div class="badges">
 			<button (click)="showBadges()" [ngClass]="{'active': badgesSelected}">Badges</button>
 		</div>
 		<div class="friends">
 			<button (click)="showFriends()" [ngClass]="{'active': friendsSelected}">Amis</button>
 		</div>
-		<div class="activities">
-			<button (click)="showActivities()" [ngClass]="{'active': activitiesSelected}">Activités</button>
-		</div>
 	</div>
-	<div class="display">
+	<!-- Display the table of Activities -->
+	<!--
+	<div class="displayActivites">
 		<table>
 		  <thead>
 		    <tr>
-		      <th *ngFor="let column of table.columns">{{column}}</th>
+		      <th *ngFor="let column of tableActivites.columns">{{column}}</th>
 		    </tr>
 		  </thead>
 		  <tbody>
-		    <tr *ngFor="let row of table.rows">
+		    <tr *ngFor="let row of tableActivites.rows">
 		      <td *ngFor="let item of row">{{item}}</td>
 		    </tr>
 		  </tbody>
 		</table>
+	</div>
+-->
+	<!-- Display the Friends -->
+	<div class="displayFriends">
+		<h1>Friends</h1>
+		<ul>
+			<li *ngFor="let friend of tableFriends">
+				<img height="100px" width="50px" [src]="friend.image">
+				<p>{{friend.firstname+" "+friend.lastname }}</p>	
+			</li>
+		</ul>
+	</div>
+
+	<!-- Display the badges -->
+	<div class="displayBadges">
 	</div>
 </div>
 
