@@ -1,0 +1,4 @@
+<div>Comment Moderation</div>
+<ul>
+    <li *ngFor="let comment of commentaires">{{comment.commentaire}} <button (click)="acceptComment(comment.id)">Accept</button><button (click)="refuseComment(comment.id)">Refuse</button></li>
+</ul>

@@ -1,0 +1,6 @@
+<ul>
+    <li (click)="toggleFeature('tag')">Tag</li>
+    <li (click)="toggleFeature('comment')">Commentaires</li>
+</ul>
+<app-tag-moderation *ngIf="tagMode"></app-tag-moderation>
+<app-comment-moderation *ngIf="commentMode" ></app-comment-moderation>

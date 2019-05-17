@@ -14,7 +14,7 @@ export class HicouchAPIService {
     private associationController = '/association';
     private userController = '/user';
     private productController = '/product';
-    private commentController = '/comment';
+    private commentController = '/commentaire';
     private voteController = '/vote';
 
     constructor(private http: HttpClient) {
@@ -61,6 +61,10 @@ export class HicouchAPIService {
 
     refuseTag(idTag: number): any {
         return this.put(this.tagController + '/refuseTag', [{key: 'idTag', value: idTag}], {});
+    }
+
+    getTagsToModerate(): any {
+        return this.get(this.tagController + '/toModerate', []);
     }
 
     // abonnements
@@ -149,5 +153,17 @@ export class HicouchAPIService {
     }
 
     // comment
+
+    validateComment(idComment: number): any {
+        return this.put(this.commentController + '/validateCommentaire', [{key: 'idComment', value: idComment}], {});
+    }
+
+    refuseComment(idComment: number): any {
+        return this.put(this.commentController + '/refuseCommentaire', [{key: 'idComment', value: idComment}], {});
+    }
+
+    getCommentairesToModerate(): any {
+        return this.get(this.commentController + '/toModerate', []);
+    }
 
 }

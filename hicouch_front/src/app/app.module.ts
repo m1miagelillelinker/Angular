@@ -36,6 +36,9 @@ import { ActivityFieldComponent } from './account/components/activity-field/acti
 import { SubscribeBtnComponent } from './account/components/subscribe-btn/subscribe-btn.component';
 import { MainProductComponent } from './products/components/main-product/main-product.component';
 import { SearchProductComponent } from './shared/components/search-product/search-product.component';
+import {ModerationPageComponent} from './moderation/moderation.page';
+import {TagModerationComponent} from './moderation/components/tag-moderation/tag-moderation.component';
+import {CommentModerationComponent} from './moderation/components/comment-moderation/comment-moderation.component';
 
 @NgModule({
   declarations: [
@@ -53,6 +56,9 @@ import { SearchProductComponent } from './shared/components/search-product/searc
     ActivityFieldComponent,
     SubscribeBtnComponent,
     SearchProductComponent,
+    ModerationPageComponent,
+    TagModerationComponent,
+    CommentModerationComponent
   ],
   imports: [
     BrowserAnimationsModule,

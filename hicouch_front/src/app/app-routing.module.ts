@@ -5,6 +5,7 @@ import { NgModule } from '@angular/core';
 import { LoginComponent } from './login/login.component';
 import { ProductPageComponent } from './products/product.page';
 import { AccountPageComponent } from './account/account.page';
+import {ModerationPageComponent} from './moderation/moderation.page';
 
 export const routes: Routes = [
   {
@@ -28,6 +29,10 @@ export const routes: Routes = [
     path: 'app/account/:userId',
     component: AccountPageComponent,
   },
+  {
+    path: 'app/moderation',
+    component: ModerationPageComponent,
+    },
 ];
 
 @NgModule({
