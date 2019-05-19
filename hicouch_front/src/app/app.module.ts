@@ -14,7 +14,6 @@ import {
   MatListModule
 } from '@angular/material';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { MdePopoverModule } from '@material-extended/mde';
 
 import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
@@ -74,7 +73,6 @@ import { SearchProductComponent } from './shared/components/search-product/searc
     MatSelectModule,
     MatAutocompleteModule,
     MatIconModule,
-    MdePopoverModule,
     MatListModule,
   ],
   providers: [

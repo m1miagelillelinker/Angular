@@ -1,6 +1,10 @@
 export interface Comment {
     id: number;
-    subject?: string;
-    content: string;
-    userName: string;
+    commentaire: string;
+    note: number;
+    iduser: number;
+    idassoc: number;
+    status: number;
+    createdat: string;
+    updatedate: string;
 }

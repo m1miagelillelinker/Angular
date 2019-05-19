@@ -14,7 +14,7 @@
 			<img *ngIf="currentIndex > 0" (click)="fetchIndex('left')"
 				src="assets/images/white-arrow-right.png">
 		</div>
-		<div class="item" *ngFor="let asso of fetchList(currentIndex)" [mdePopoverTriggerFor]="commentaires">
+		<div class="item" *ngFor="let asso of fetchList(currentIndex)" (click)="showPopover()">
 <!-- 			(click)="goTo(asso.productDTO.id)"> -->
 			<div class="picto">
 				<img src="{{getPicto(asso.productDTO.type)}}">
@@ -25,26 +25,6 @@
 			<div class="title2" (mouseover)="getTitle(asso.productDTO)">
 				{{asso.productDTO.title}}</div>
 		</div>
-		<mde-popover #commentaires="mdePopover" [mdePopoverOverlapTrigger]="false"> 
-			<mat-card style="max-width: 300px"> 
-				<mat-card-content>
-					<h1 (click)="goTo(asso.productDTO.id)">{{asso.productDTO.title}} </h1>
-<!-- 					<mat-icon matBadge="22" matBadgeColor="accent" color="primary"> favorite </mat-icon> -->
-					<br />
-					<div class="comments">
-						A material design popover component created using Angular version 7
-						with the Angular CDK.
-						<mat-list> 
-							<mat-list-item *ngFor="let comment of comments">
-								<mat-icon matListIcon>folder</mat-icon>
-								<h3 matLine>{{comment.userName}} : {{comment.subject}}</h3>
-								<span class="demo-2" matLine> {{comment.content}} </span>
-							</mat-list-item> 
-						</mat-list>
-					</div>
-				</mat-card-content> 
-			</mat-card> 
-		</mde-popover>
 
 		<!-- <div class="item" *ngFor="let product of fetchList(currentIndex)" (click)="goTo(product.id)">
                         <div class="picto">
@@ -68,5 +48,21 @@
 				src="assets/images/white-arrow-right.png">
 		</div>
 	</div>
+
+    <div class="popover" *ngIf="showComments">
+        <h2 (click)="goTo(asso.productDTO.id)" class="popoverTitle">{{asso.productDTO.title}} </h2>
+        <br />
+        <div class="comments">
+            <mat-list>
+                <mat-list-item *ngFor="let comment of asso.comments">
+                    <!-- <img matListAvatar src="..." alt="...">-->
+                    <h3 matLine><span class="username" (click)="goToUserProfile(comment.iduser)">{{comment.iduser}}</span>&nbsp;&nbsp;
+                        <span class="date">{{comment.updatedate}}</span></h3>
+                    <p class="content" matLine> {{comment.commentaire}} </p>
+                    <span class="note" matLine><mat-icon (click)="riseNoteComment(comment)">thumb_up_alt</mat-icon>{{comment.note}}</span>
+                </mat-list-item>
+            </mat-list>
+        </div>
+    </div>
 
 </div>

@@ -1,10 +1,11 @@
 import { Component, OnInit, Input, OnChanges, Inject, ChangeDetectorRef } from '@angular/core';
 import { ProductService } from '../../../shared/services/product.service';
+import { CommentService } from '../../../shared/services/comment.service';
 import { Router } from '@angular/router';
 import {FormControl} from '@angular/forms';
 import {Observable} from 'rxjs';
 import {map, startWith} from 'rxjs/operators';
-import {MatDialog, MatDialogRef, MAT_DIALOG_DATA, MatSelectModule, MatAutocompleteModule, MatMenuModule } from '@angular/material';
+import {MatDialog, MatDialogRef, MAT_DIALOG_DATA, MatSelectModule, MatAutocompleteModule } from '@angular/material';
 import {Association} from '../../../shared/models/association';
 import {Comment} from '../../../shared/models/comment';
 
@@ -28,44 +29,49 @@ export class ProductsRelatedComponent implements OnInit, OnChanges {
   idProduct: number;
   idAssociatedProduct: number;
 
+  showComments: boolean;
+
   m = {
       id: 1,
-      title: "Avengers",
-      description: "",
-      country: "usa",
-      director: "Russo",
-      year: "2019",
+      title: 'Avengers',
+      description: '',
+      country: 'usa',
+      director: 'Russo',
+      year: '2019',
       genre: null,
-      image: "",
-      duration: "180",
+      image: '',
+      duration: '180',
       type: 'movie'
-  }
+  };
 
+    comments: Comment[] = [
+        {id: 1, commentaire: 'Totalement d\'accord avec.', note: 0, iduser: 1, idassoc: 1, status: 0,
+            createdat: 'Lundi 18 Mars 2018', updatedate: 'Lundi 18 Mars 2018'},
+        {id: 2, commentaire: 'Hors sujet', note: -1, iduser: 2, idassoc: 1, status: 0,
+            createdat: 'Lundi 18 Mars 2018', updatedate: 'Lundi 18 Mars 2018'}
+    ];
   asssoMeta  = {
       id: 1,
-      idProduitA: "1",
-      idfournA: "5",
-      idProduitB: "2",
-      idfournB: "6",
+      idProduitA: '1',
+      idfournA: '5',
+      idProduitB: '2',
+      idfournB: '6',
       idPair: 10
   };
-  
+
   asso =  {
       association: this.asssoMeta,
       product: this.m,
-      productDTO: this.m
+      productDTO: this.m,
       // userVote: Vote;
-      // comments: Array<Commentaire>
-  }
-    
-  comments : Comment[] = [
-        {id: 1, subject: "Up", content: "Totalement d'accord avec.", userName: "Lovey"},
-        {id: 2, subject: ":(", content: "Hors sujet", userName: "Dovey"}
-  ]
+      comments: this.comments
+  };
+
 
   constructor(
       private router: Router,
       public dialog: MatDialog,
+      private commentService: CommentService,
       private changeDetectorRef: ChangeDetectorRef,
   ) { }
 
@@ -176,13 +182,23 @@ export class ProductsRelatedComponent implements OnInit, OnChanges {
 
 
   goTo(productId) {
-      console.log("go to this product");
+      console.log('go to this product');
       this.router.navigate(['app/products', productId]);
   }
-    
-  getComments(associationId){
-      console.log("get comments");
+
+  showPopover() {
+      this.showComments = !this.showComments;
   }
+
+  riseNoteComment(comment: Comment) {
+      comment.note = comment.note + 1;
+      this.commentService.putComment(comment, comment.idassoc);
+  }
+
+    goToUserProfile(userId) {
+        console.log('go to the user profile who make the comment');
+        this.router.navigate(['app/account', userId]);
+    }
 
 }
 
