@@ -14,12 +14,12 @@ export class ModerationPageComponent implements OnInit, OnDestroy {
 
     tagMode = false;
     commentMode = false;
+    userMode = false;
 
     constructor(
         private route: ActivatedRoute,
         private router: Router,
-        private changeDetectorRef: ChangeDetectorRef,
-        private api: HicouchAPIService
+        private changeDetectorRef: ChangeDetectorRef
     ) { }
 
     ngOnInit() {
@@ -35,10 +35,17 @@ export class ModerationPageComponent implements OnInit, OnDestroy {
             case 'tag':
                 this.tagMode = true;
                 this.commentMode = false;
+                this.userMode = false;
                 break;
             case 'comment':
                 this.tagMode = false;
                 this.commentMode = true;
+                this.userMode = false;
+                break;
+            case 'user':
+                this.tagMode = false;
+                this.commentMode = false;
+                this.userMode = true;
                 break;
         }
     }

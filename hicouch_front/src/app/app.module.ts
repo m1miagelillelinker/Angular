@@ -39,6 +39,7 @@ import { SearchProductComponent } from './shared/components/search-product/searc
 import {ModerationPageComponent} from './moderation/moderation.page';
 import {TagModerationComponent} from './moderation/components/tag-moderation/tag-moderation.component';
 import {CommentModerationComponent} from './moderation/components/comment-moderation/comment-moderation.component';
+import {UserModerationComponent} from './moderation/components/user-moderation/user-moderation.component';
 
 @NgModule({
   declarations: [
@@ -58,7 +59,8 @@ import {CommentModerationComponent} from './moderation/components/comment-modera
     SearchProductComponent,
     ModerationPageComponent,
     TagModerationComponent,
-    CommentModerationComponent
+    CommentModerationComponent,
+    UserModerationComponent,
   ],
   imports: [
     BrowserAnimationsModule,

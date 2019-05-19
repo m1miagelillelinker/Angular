@@ -1,12 +1,15 @@
-export class signalement {
+import {Commentaire} from './commentaire';
+import {User} from './user';
+
+export class Signalement {
     id: number;
     typeSignalement: string;
-    signaledUserId: number;
-    signaledCommentId: number;
-    userId: number;
+    signaledUser: User;
+    commentaire: Commentaire;
+    auteur: User;
     message: string;
     status: number;
-    moderator: number;
+    moderator: User;
     createdAt: Date;
     updatedAt: Date;
 }
