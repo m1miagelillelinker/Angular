@@ -1,4 +1,4 @@
-<div>Comment Moderation</div>
+<div>User Moderation</div>
 <ul>
     <li *ngFor="let signalement of signalements">{{signalement.signaledUser.pseudo}}
         <button (click)="acceptSignalement(signalement.id)">Interdit</button>

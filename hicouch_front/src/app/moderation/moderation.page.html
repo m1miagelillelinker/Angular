@@ -1,3 +1,4 @@
+<app-header [user]="user" (isMovieSearched)="loadMoviePage($event)"></app-header>
 <ul>
     <li (click)="toggleFeature('tag')">Tag</li>
     <li (click)="toggleFeature('comment')">Commentaires</li>
