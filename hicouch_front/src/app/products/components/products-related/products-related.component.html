@@ -22,7 +22,7 @@
 			<div class="image">
 				<img src="{{asso.productDTO.image}}">
 			</div>
-			<div class="title2" (mouseover)="getTitle(asso.productDTO)">
+			<div class="title2" (mouseover)="getTitle(asso.productDTO)" (click)="goTo(asso.productDTO.id)">
 				{{asso.productDTO.title}}</div>
 		</div>
 
@@ -49,20 +49,7 @@
 		</div>
 	</div>
 
-    <div class="popover" *ngIf="showComments">
-        <h2 (click)="goTo(asso.productDTO.id)" class="popoverTitle">{{asso.productDTO.title}} </h2>
-        <br />
-        <div class="comments">
-            <mat-list>
-                <mat-list-item *ngFor="let comment of asso.comments">
-                    <!-- <img matListAvatar src="..." alt="...">-->
-                    <h3 matLine><span class="username" (click)="goToUserProfile(comment.iduser)">{{comment.iduser}}</span>&nbsp;&nbsp;
-                        <span class="date">{{comment.updatedate}}</span></h3>
-                    <p class="content" matLine> {{comment.commentaire}} </p>
-                    <span class="note" matLine><mat-icon (click)="riseNoteComment(comment)">thumb_up_alt</mat-icon>{{comment.note}}</span>
-                </mat-list-item>
-            </mat-list>
-        </div>
-    </div>
 
 </div>
+
+<app-product-related-comments #popover *ngIf="showComments" [asso]="asso"></app-product-related-comments>

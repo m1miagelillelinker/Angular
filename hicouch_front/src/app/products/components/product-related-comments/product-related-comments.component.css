@@ -1,0 +1,25 @@
+
+#popover {
+    padding: 50px;
+    /*background-color: white;*/
+    /*margin: 0 auto;*/
+    /*width: 100px;*/
+}
+
+.username {
+    color: maroon;
+    text-decoration: underline;
+}
+
+.date {
+    color: gray;
+    font-size: 10px;
+}
+
+.note {
+    text-align: left;
+}
+
+.popoverTitle {
+    text-decoration: underline;
+}

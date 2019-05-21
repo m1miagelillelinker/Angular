@@ -3,8 +3,8 @@ export interface Comment {
     commentaire: string;
     note: number;
     iduser: number;
-    idassoc: number;
+    idpair: number;
     status: number;
-    createdat: string;
-    updatedate: string;
+    createdat: Date;
+    updatedate: Date;
 }

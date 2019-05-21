@@ -45,10 +45,10 @@ export class ProductsRelatedComponent implements OnInit, OnChanges {
   };
 
     comments: Comment[] = [
-        {id: 1, commentaire: 'Totalement d\'accord avec.', note: 0, iduser: 1, idassoc: 1, status: 0,
-            createdat: 'Lundi 18 Mars 2018', updatedate: 'Lundi 18 Mars 2018'},
-        {id: 2, commentaire: 'Hors sujet', note: -1, iduser: 2, idassoc: 1, status: 0,
-            createdat: 'Lundi 18 Mars 2018', updatedate: 'Lundi 18 Mars 2018'}
+        {id: 1, commentaire: 'Totalement d\'accord avec.', note: 0, iduser: 1, idpair: 1, status: 0,
+            createdat: new Date(), updatedate: new Date()},
+        {id: 2, commentaire: 'Hors sujet', note: -1, iduser: 2, idpair: 1, status: 0,
+            createdat: new Date(), updatedate: new Date()}
     ];
   asssoMeta  = {
       id: 1,
@@ -63,15 +63,14 @@ export class ProductsRelatedComponent implements OnInit, OnChanges {
       association: this.asssoMeta,
       product: this.m,
       productDTO: this.m,
-      // userVote: Vote;
       comments: this.comments
+      // userVote: Vote;
   };
 
 
   constructor(
       private router: Router,
       public dialog: MatDialog,
-      private commentService: CommentService,
       private changeDetectorRef: ChangeDetectorRef,
   ) { }
 
@@ -188,17 +187,11 @@ export class ProductsRelatedComponent implements OnInit, OnChanges {
 
   showPopover() {
       this.showComments = !this.showComments;
+      if (this.showComments) {
+          //popover.scrollIntoView();
+          document.getElementById('popover').scrollIntoView(false);
+      }
   }
-
-  riseNoteComment(comment: Comment) {
-      comment.note = comment.note + 1;
-      this.commentService.putComment(comment, comment.idassoc);
-  }
-
-    goToUserProfile(userId) {
-        console.log('go to the user profile who make the comment');
-        this.router.navigate(['app/account', userId]);
-    }
 
 }
 
