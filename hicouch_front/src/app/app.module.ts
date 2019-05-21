@@ -11,7 +11,8 @@ import {
   MatSelectModule,
   MatAutocompleteModule,
   MatIconModule,
-  MatListModule
+  MatListModule,
+  MatProgressSpinnerModule
 } from '@angular/material';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
@@ -76,6 +77,7 @@ import { ProductRelatedCommentsComponent } from './products/components/product-r
     MatAutocompleteModule,
     MatIconModule,
     MatListModule,
+    MatProgressSpinnerModule,
   ],
   providers: [
     UserService,

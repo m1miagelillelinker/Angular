@@ -98,7 +98,7 @@ export class ProductPageComponent implements OnInit, OnDestroy, OnChanges {
               });
               this.allProducts.push(this.productService.getBook());
               movie.id = this.idRelated;
-              this.allProducts.push(movie);
+              this.allProductsallProducts.push(movie);
               // this.allProducts.push(mybook);
             });
           });

@@ -3,6 +3,7 @@ import {Association} from '../../../shared/models/association';
 import {Router} from '@angular/router';
 import {Comment} from '../../../shared/models/comment';
 import {CommentService} from '../../../shared/services/comment.service';
+import { FormControl, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-product-related-comments',
@@ -11,6 +12,11 @@ import {CommentService} from '../../../shared/services/comment.service';
 })
 export class ProductRelatedCommentsComponent implements OnInit {
   @Input() asso: Association;
+  commentContent = new FormControl('', [
+      Validators.maxLength(250)
+  ]);
+  comment: Comment ;
+  load: boolean;
 
   constructor(
       private router: Router,
@@ -33,6 +39,20 @@ export class ProductRelatedCommentsComponent implements OnInit {
   goToUserProfile(userId) {
     console.log('go to the user profile who make the comment');
     this.router.navigate(['app/account', userId]);
+  }
+
+  addComment() {
+      this.comment = {
+          id: 1, commentaire: this.commentContent.value, note: 0, iduser: 0, idpair: this.asso.association.idPair, status: 0,
+          createdat: new Date(), updatedate: new Date()
+      };
+      console.log('save comment');
+      this.commentService.putComment(this.comment, this.comment.idpair);
+      this.load = true;
+      setTimeout(() => {
+          window.location.reload();
+          this.load = false;
+      }, 1000);
   }
 
 }

@@ -1,7 +1,25 @@
 
 <div id="popover" >
   <h2 (click)="goTo(asso.productDTO.id)" class="popoverTitle">{{asso.productDTO.title}} </h2>
-  <div> </div>
+  <form>
+    <mat-form-field >
+      <mat-label>Votre commentaire</mat-label>
+      <textarea matInput
+                [formControl]="commentContent"
+                cdkTextareaAutosize
+                #autosize="cdkTextareaAutosize"
+                cdkAutosizeMinRows="2"
+                cdkAutosizeMaxRows="5"></textarea>
+    </mat-form-field>
+    <mat-error *ngIf="commentContent.hasError('maxlength')">
+      250 lettres maximum.
+    </mat-error>
+    <button mat-raised-button (click)="addComment()">Soumettre</button>
+    <span *ngIf="load"><mat-spinner>
+<!--    <app-progress-spinner class="example-margin" [backdropEnabled]="true" [positionGloballyCenter]="true">
+</app-progress-spinner>-->
+    </mat-spinner></span>
+  </form>
   <div class="comments">
     <mat-list>
       <mat-list-item *ngFor="let comment of asso.comments">
