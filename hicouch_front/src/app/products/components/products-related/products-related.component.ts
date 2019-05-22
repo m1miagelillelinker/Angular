@@ -188,7 +188,7 @@ export class ProductsRelatedComponent implements OnInit, OnChanges {
   showPopover() {
       this.showComments = !this.showComments;
       if (this.showComments) {
-          //popover.scrollIntoView();
+          // popover.scrollIntoView();
           document.getElementById('popover').scrollIntoView(false);
       }
   }
@@ -214,7 +214,6 @@ export class ProductsRelatedAddDialogComponent implements OnInit {
         {title: 'One'},
         {title: 'Two'},
         {title: 'Three'}
-        // 'One', 'Two', 'Three'
         ];
     listProductsFound: Observable<string[]>;
 

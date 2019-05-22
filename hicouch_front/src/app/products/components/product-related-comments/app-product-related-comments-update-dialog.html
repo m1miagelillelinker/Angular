@@ -1,0 +1,14 @@
+<div class="edit">
+    <div mat-dialog-content class="update-container" >
+
+        <h1 mat-dialog-title>Modifier ce commentzire</h1>
+
+        <mat-form-field >
+            <textarea matInput [formControl]="commentContentUpdate" placeholder="Commentez l'association"></textarea>
+        </mat-form-field>
+    </div>
+    <div mat-dialog-actions>
+        <button mat-button (click)="onNoClick()">Annuler</button>
+        <button mat-button (click)="editComment()" [mat-dialog-close]="" cdkFocusInitial>Soumettre</button>
+    </div>
+</div>

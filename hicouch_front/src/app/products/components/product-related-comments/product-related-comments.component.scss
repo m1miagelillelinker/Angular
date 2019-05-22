@@ -8,7 +8,6 @@
 
 .username {
     color: maroon;
-    text-decoration: underline;
 }
 
 .date {
@@ -21,5 +20,19 @@
 }
 
 .popoverTitle {
+
+}
+
+.url {
     text-decoration: underline;
+    cursor: pointer;
+}
+
+.signalement-container, .update-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.signalement-container > *, .update-container > * {
+    width: 100%;
 }
