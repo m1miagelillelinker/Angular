@@ -25,7 +25,7 @@ export class AccountPageComponent implements OnInit {
     rows: this.getActivities()
   }
 
-  tableFriends = [
+  subscribedUsers = [
     {lastname:"Avatar",firstname:"Avatar",image:"../../assets/images/profil.png"},
     {lastname:"Bond",firstname:"James",image:"../../assets/images/james.jpg"},
     {lastname:"DJ",firstname:"Robert",image:"../../assets/images/robert_DJ.jpg"}
@@ -104,5 +104,9 @@ export class AccountPageComponent implements OnInit {
   showActivities() {
     this.toggleFeature('activities');
     this.tableActivites.rows = this.getActivities();
+  }
+
+  showFriends() {
+    this.toggleFeature('friends');
   }
 }

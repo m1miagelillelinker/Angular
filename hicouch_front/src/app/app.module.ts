@@ -29,6 +29,9 @@ import { AccountPageComponent } from './account/account.page';
 import { AuthenticationService } from './shared/services/authentification.service';
 import { AccountSideMenuComponent } from './account/components/account-side-menu/account-side-menu.component';
 import { ActivityFieldComponent } from './account/components/activity-field/activity-field.component';
+import { DisplaySubscribersComponent } from './account/components/display-subscribers/display-subscribers.component';
+import { DisplayBadgesComponent } from './account/components/display-badges/display-badges.component';
+import { DisplayActivitiesComponent } from './account/components/display-activities/display-activities.component';
 
 @NgModule({
   declarations: [
@@ -42,6 +45,9 @@ import { ActivityFieldComponent } from './account/components/activity-field/acti
     AccountPageComponent,
     AccountSideMenuComponent,
     ActivityFieldComponent,
+    DisplaySubscribersComponent,
+    DisplayBadgesComponent,
+    DisplayActivitiesComponent,
   ],
   imports: [
     BrowserAnimationsModule,

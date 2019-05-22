@@ -62,17 +62,17 @@
 		</table>
 	</div>
 -->
-	<!-- Display the Friends -->
-	<div class="displayFriends">
-		<h1>Friends</h1>
-		<ul>
-			<li *ngFor="let friend of tableFriends">
-				<img height="100px" width="50px" [src]="friend.image">
-				<p>{{friend.firstname+" "+friend.lastname }}</p>	
-			</li>
-		</ul>
-	</div>
+	<!-- Display subcribers -->
+	<app-display-subscribers *ngIf="friendsSelected" title="Abonnées" [users]="subscribedUsers">
+	</app-display-subscribers>
 
+	<!-- Display subscriptions -->
+	<app-display-subscribers
+		*ngIf="friendsSelected"
+		[ngStyle]="{'margin-left': '100px'}" 
+		title="Abonnements" [users]="subscribedUsers">
+	</app-display-subscribers>
+	
 	<!-- Display the badges -->
 	<div class="displayBadges">
 	</div>
