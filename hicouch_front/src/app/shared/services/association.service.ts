@@ -16,8 +16,8 @@ export class AssociationService {
     }
 
     createAssociation(idProductA: string, typeProductA: String, idProductB: string, typeProductB: String) {
-        return this.http.get('//localhost:8080/association/create' +
-            '?idProductA=${idProductA}&idfournA=${typeProductA}&idProductB=${idProductB}&idfournB=${typeProductB}');
+        return this.http.put('//hicjv3.azurewebsites.net/association/create' +
+            '?idProductA=${idProductA}&idfournA=${typeProductA}&idProductB=${idProductB}&idfournB=${typeProductB}', null);
     }
 
 }

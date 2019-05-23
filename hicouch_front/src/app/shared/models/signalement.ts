@@ -1,11 +1,11 @@
 export interface Signalement {
-    id: number;
+    id?: number;
     typeSignalement: string;
     SignaledUserId: number;
     SignaledCommentId: number;
     message: string;
     idUser: number;
-    status: number;
-    createdat: Date;
-    updatedat: Date;
+    status?: number;
+    createdat?: Date;
+    updatedat?: Date;
 }

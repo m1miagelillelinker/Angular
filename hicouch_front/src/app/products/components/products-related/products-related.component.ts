@@ -8,6 +8,7 @@ import {map, startWith} from 'rxjs/operators';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA, MatSelectModule, MatAutocompleteModule } from '@angular/material';
 import {Association} from '../../../shared/models/association';
 import {Comment} from '../../../shared/models/comment';
+import {User} from '../../../shared/models/user';
 
 export interface DialogData {
   nomProduct: string;
@@ -29,7 +30,11 @@ export class ProductsRelatedComponent implements OnInit, OnChanges {
   idProduct: number;
   idAssociatedProduct: number;
 
-  showComments: boolean;
+    showComments: boolean;
+    assoComment: Association;
+    loggedUser: User = {
+        id: 15
+    };
 
   m = {
       id: 1,
@@ -45,7 +50,9 @@ export class ProductsRelatedComponent implements OnInit, OnChanges {
   };
 
     comments: Comment[] = [
-        {id: 1, commentaire: 'Totalement d\'accord avec.', note: 0, iduser: 1, idpair: 1, status: 0,
+        {id: 1, commentaire: 'Totalement d\'accord avec.', note: 0, iduser: 1, idpair: 1, status: 1,
+            createdat: new Date()}, // , updatedate: new Date()
+        {id: 3, commentaire: 'Hors sujet', note: 18, iduser: 15, idpair: 1, status: 0,
             createdat: new Date(), updatedate: new Date()},
         {id: 2, commentaire: 'Hors sujet', note: -1, iduser: 2, idpair: 1, status: 0,
             createdat: new Date(), updatedate: new Date()}
@@ -63,8 +70,11 @@ export class ProductsRelatedComponent implements OnInit, OnChanges {
       association: this.asssoMeta,
       product: this.m,
       productDTO: this.m,
-      comments: this.comments
-      // userVote: Vote;
+      comments: this.comments,
+      votes: 50,
+      userVote: {
+          idPair: this.asssoMeta.idPair, vote: -1, idUser: this.loggedUser.id
+      }
   };
 
 
@@ -185,9 +195,10 @@ export class ProductsRelatedComponent implements OnInit, OnChanges {
       this.router.navigate(['app/products', productId]);
   }
 
-  showPopover() {
+  showPopover(asso: Association) {
       this.showComments = !this.showComments;
       if (this.showComments) {
+          this.assoComment = asso;
           // popover.scrollIntoView();
           document.getElementById('popover').scrollIntoView(false);
       }

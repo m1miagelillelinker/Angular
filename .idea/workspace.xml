@@ -2,15 +2,19 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="08a18e6e-f763-4305-a637-9a015029be9e" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/hicouch_front/src/app/app.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/hicouch_front/src/app/app.module.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/hicouch_front/src/app/products/components/product-related-comments/product-related-comments.component.css" beforeDir="false" afterPath="$PROJECT_DIR$/hicouch_front/src/app/products/components/product-related-comments/product-related-comments.component.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hicouch_front/src/app/products/components/product-related-comments/app-product-related-comments-signal-dialog.html" beforeDir="false" afterPath="$PROJECT_DIR$/hicouch_front/src/app/products/components/product-related-comments/app-product-related-comments-signal-dialog.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hicouch_front/src/app/products/components/product-related-comments/app-product-related-comments-update-dialog.html" beforeDir="false" afterPath="$PROJECT_DIR$/hicouch_front/src/app/products/components/product-related-comments/app-product-related-comments-update-dialog.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/hicouch_front/src/app/products/components/product-related-comments/product-related-comments.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/hicouch_front/src/app/products/components/product-related-comments/product-related-comments.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/hicouch_front/src/app/products/components/product-related-comments/product-related-comments.component.tns.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/hicouch_front/src/app/products/components/product-related-comments/product-related-comments.component.scss" beforeDir="false" afterPath="$PROJECT_DIR$/hicouch_front/src/app/products/components/product-related-comments/product-related-comments.component.scss" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/hicouch_front/src/app/products/components/product-related-comments/product-related-comments.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/hicouch_front/src/app/products/components/product-related-comments/product-related-comments.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hicouch_front/src/app/products/components/products-related/products-related.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/hicouch_front/src/app/products/components/products-related/products-related.component.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/hicouch_front/src/app/products/components/products-related/products-related.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/hicouch_front/src/app/products/components/products-related/products-related.component.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/hicouch_front/src/app/products/product.page.ts" beforeDir="false" afterPath="$PROJECT_DIR$/hicouch_front/src/app/products/product.page.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/hicouch_front/src/app/shared/models/user.ts" beforeDir="false" afterPath="$PROJECT_DIR$/hicouch_front/src/app/shared/models/user.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hicouch_front/src/app/shared/models/association.ts" beforeDir="false" afterPath="$PROJECT_DIR$/hicouch_front/src/app/shared/models/association.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hicouch_front/src/app/shared/models/comment.ts" beforeDir="false" afterPath="$PROJECT_DIR$/hicouch_front/src/app/shared/models/comment.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hicouch_front/src/app/shared/models/signalement.ts" beforeDir="false" afterPath="$PROJECT_DIR$/hicouch_front/src/app/shared/models/signalement.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hicouch_front/src/app/shared/services/association.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/hicouch_front/src/app/shared/services/association.service.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/hicouch_front/src/app/shared/services/comment.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/hicouch_front/src/app/shared/services/comment.service.ts" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
@@ -23,13 +27,89 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300" />
+    <leaf>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/hicouch_front/src/app/products/components/product-related-comments/product-related-comments.component.scss">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="136">
+              <caret line="8" column="23" selection-start-line="8" selection-start-column="23" selection-end-line="8" selection-end-column="23" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/hicouch_front/src/app/products/components/product-related-comments/product-related-comments.component.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="425">
+              <caret line="54" selection-start-line="54" selection-end-line="54" />
+              <folding>
+                <element signature="e#175#181#0" expanded="true" />
+                <element signature="e#181#187#0" expanded="true" />
+                <element signature="e#1589#1595#0" expanded="true" />
+                <element signature="e#1595#1601#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/hicouch_front/src/app/products/components/product-related-comments/app-product-related-comments-update-dialog.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="204">
+              <caret line="12" column="109" selection-start-line="12" selection-start-column="109" selection-end-line="12" selection-end-column="109" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/hicouch_front/src/app/products/components/product-related-comments/app-product-related-comments-signal-dialog.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="187">
+              <caret line="11" column="52" selection-start-line="11" selection-start-column="52" selection-end-line="11" selection-end-column="52" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/hicouch_front/src/app/products/components/product-related-comments/product-related-comments.component.ts">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="272">
+              <caret line="113" column="52" lean-forward="true" selection-start-line="113" selection-start-column="52" selection-end-line="113" selection-end-column="52" />
+              <folding>
+                <element signature="e#0#63#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/hicouch_front/src/app/shared/models/vote.ts">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="51">
+              <caret line="3" column="9" selection-start-line="3" selection-start-column="9" selection-end-line="3" selection-end-column="9" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/hicouch_front/src/app/products/components/products-related/products-related.component.ts">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="238">
+              <caret line="56" column="84" selection-start-line="56" selection-start-column="84" selection-end-line="56" selection-end-column="84" />
+              <folding>
+                <element signature="e#0#95#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="TypeScript File" />
         <option value="HTML File" />
+        <option value="TypeScript File" />
       </list>
     </option>
   </component>
@@ -43,6 +123,8 @@
       <find>class</find>
       <find>DialogData</find>
       <find>MAT_DIALOG_DATA</find>
+      <find>subscribe</find>
+      <find>ProductsRelatedCommentSignalDialogComponent</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -51,26 +133,29 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/hicouch_front/src/app/shared/models/comment.ts" />
-        <option value="$PROJECT_DIR$/hicouch_front/src/app/shared/models/association.ts" />
         <option value="$PROJECT_DIR$/hicouch_front/src/app/products/components/products-related/products-related.component.scss" />
-        <option value="$PROJECT_DIR$/hicouch_front/src/app/products/components/products-related/products-related.component.html" />
-        <option value="$PROJECT_DIR$/hicouch_front/src/app/shared/models/signalement.ts" />
         <option value="$PROJECT_DIR$/hicouch_front/src/app/shared/services/user.service.ts" />
-        <option value="$PROJECT_DIR$/hicouch_front/src/app/shared/services/comment.service.ts" />
         <option value="$PROJECT_DIR$/hicouch_front/src/app/shared/services/signalement.service.ts" />
-        <option value="$PROJECT_DIR$/hicouch_front/src/app/products/components/products-related/products-related.component.ts" />
         <option value="$PROJECT_DIR$/hicouch_front/src/app/products/components/product-related-comments/app-product-related-comments-add-dialog.html" />
         <option value="$PROJECT_DIR$/hicouch_front/src/app/shared/models/user.ts" />
-        <option value="$PROJECT_DIR$/hicouch_front/src/app/products/product.page.ts" />
         <option value="$PROJECT_DIR$/hicouch_front/src/app/products/components/product-related-comments/product-related-comments.component.css" />
         <option value="$PROJECT_DIR$/hicouch_front/src/app/products/components/product-related-comments/product-related-comments.component.tns.css" />
+        <option value="$PROJECT_DIR$/hicouch_front/src/app/shared/models/signalement.ts" />
+        <option value="$PROJECT_DIR$/hicouch_front/src/app/products/components/products-related/products-related.component.html" />
+        <option value="$PROJECT_DIR$/hicouch_front/src/app/shared/services/comment.service.ts" />
+        <option value="$PROJECT_DIR$/hicouch_front/src/app/shared/services/association.service.ts" />
+        <option value="$PROJECT_DIR$/hicouch_front/src/app/shared/services/vote.service.ts" />
+        <option value="$PROJECT_DIR$/hicouch_front/src/app/products/product.page.ts" />
+        <option value="$PROJECT_DIR$/hicouch_front/src/app/shared/models/association.ts" />
         <option value="$PROJECT_DIR$/hicouch_front/src/app/app.module.ts" />
-        <option value="$PROJECT_DIR$/hicouch_front/src/app/products/components/product-related-comments/product-related-comments.component.html" />
-        <option value="$PROJECT_DIR$/hicouch_front/src/app/products/components/product-related-comments/product-related-comments.component.scss" />
+        <option value="$PROJECT_DIR$/hicouch_front/src/app/shared/models/comment.ts" />
         <option value="$PROJECT_DIR$/hicouch_front/src/app/products/components/product-related-comments/app-product-related-comments-signal-dialog.html" />
+        <option value="$PROJECT_DIR$/hicouch_front/src/app/shared/models/vote.ts" />
         <option value="$PROJECT_DIR$/hicouch_front/src/app/products/components/product-related-comments/app-product-related-comments-update-dialog.html" />
+        <option value="$PROJECT_DIR$/hicouch_front/src/app/products/components/product-related-comments/product-related-comments.component.scss" />
         <option value="$PROJECT_DIR$/hicouch_front/src/app/products/components/product-related-comments/product-related-comments.component.ts" />
+        <option value="$PROJECT_DIR$/hicouch_front/src/app/products/components/product-related-comments/product-related-comments.component.html" />
+        <option value="$PROJECT_DIR$/hicouch_front/src/app/products/components/products-related/products-related.component.ts" />
       </list>
     </option>
   </component>
@@ -252,16 +337,17 @@
       <workItem from="1558525042646" duration="13415000" />
       <workItem from="1558551885483" duration="796000" />
       <workItem from="1558552840381" duration="8193000" />
+      <workItem from="1558614466810" duration="15662000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="59854000" />
+    <option name="totallyTimeSpent" value="75516000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.30505952" />
+      <window_info content_ui="combo" id="Project" order="0" weight="0.30505952" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -280,6 +366,26 @@
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
     </layout>
+    <layout-to-restore>
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.30505952" />
+      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
+      <window_info id="Favorites" order="2" side_tool="true" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Find" order="1" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.32843137" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="bottom" id="TODO" order="6" />
+      <window_info anchor="bottom" id="Version Control" order="7" />
+      <window_info anchor="bottom" id="Docker" order="8" show_stripe_button="false" />
+      <window_info anchor="bottom" id="TypeScript" order="9" />
+      <window_info anchor="bottom" id="Terminal" order="10" />
+      <window_info anchor="bottom" id="Event Log" order="11" side_tool="true" weight="0.32843137" />
+      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+    </layout-to-restore>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
@@ -314,16 +420,6 @@
     <entry file="file://$PROJECT_DIR$/hicouch_front/src/app/products/components/products-related/products-related.component.tns.html">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/hicouch_front/src/app/shared/models/association.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="8" column="29" selection-start-line="8" selection-start-column="29" selection-end-line="8" selection-end-column="29" />
-          <folding>
-            <element signature="e#0#41#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/hicouch_front/src/app/products/product.page.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="170">
@@ -340,29 +436,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/hicouch_front/src/app/shared/models/comment.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="8" column="20" selection-start-line="8" selection-start-column="20" selection-end-line="8" selection-end-column="20" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/hicouch_front/src/app/shared/models/signalement.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret column="30" lean-forward="true" selection-start-column="30" selection-end-line="9" selection-end-column="20" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/hicouch_front/src/app/shared/services/association.service.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <folding>
-            <element signature="e#0#43#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/hicouch_front/src/app/shared/services/product.service.ts">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="595">
@@ -373,27 +446,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/hicouch_front/src/app/shared/services/user.service.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret column="43" lean-forward="true" selection-start-column="43" selection-end-column="43" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/hicouch_front/src/app/shared/services/signalement.service.ts">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="357">
           <caret line="21" column="69" selection-start-line="21" selection-start-column="69" selection-end-line="21" selection-end-column="69" />
-          <folding>
-            <element signature="e#0#43#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/hicouch_front/src/app/shared/services/comment.service.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="272">
-          <caret line="16" column="34" selection-start-line="16" selection-start-column="34" selection-end-line="16" selection-end-column="58" />
           <folding>
             <element signature="e#0#43#0" expanded="true" />
           </folding>
@@ -425,26 +481,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/hicouch_front/src/app/products/product.page.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1598">
-          <caret line="100" column="17" selection-start-line="100" selection-start-column="17" selection-end-line="100" selection-end-column="17" />
-          <folding>
-            <element signature="e#0#91#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/hicouch_front/src/app/app.module.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="445">
-          <caret line="102" column="6" lean-forward="true" selection-start-line="102" selection-start-column="6" selection-end-line="102" selection-end-column="6" />
-          <folding>
-            <element signature="e#0#58#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/hicouch_front/src/app/shared/models/user.ts">
       <provider selected="true" editor-type-id="text-editor">
         <state>
@@ -462,24 +498,137 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/hicouch_front/src/app/products/components/product-related-comments/app-product-related-comments-signal-dialog.html">
+    <entry file="file://$PROJECT_DIR$/hicouch_front/src/app/products/components/products-related/products-related.component.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="918">
+          <caret line="54" column="105" selection-start-line="54" selection-start-column="105" selection-end-line="54" selection-end-column="105" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/hicouch_front/src/app/shared/models/signalement.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret selection-end-column="15" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/hicouch_front/src/app/shared/services/association.service.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="306">
+          <caret line="18" column="32" selection-start-line="18" selection-start-column="32" selection-end-line="18" selection-end-column="56" />
+          <folding>
+            <element signature="e#0#43#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/hicouch_front/src/app/shared/services/user.service.ts">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="187">
-          <caret line="11" column="29" lean-forward="true" selection-start-line="11" selection-start-column="27" selection-end-line="11" selection-end-column="48" />
+          <caret line="11" lean-forward="true" selection-start-line="11" selection-end-line="11" />
+          <folding>
+            <element signature="e#0#43#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/hicouch_front/src/app/shared/services/comment.service.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="272">
+          <caret line="16" column="28" lean-forward="true" selection-start-line="16" selection-start-column="28" selection-end-line="16" selection-end-column="96" />
+          <folding>
+            <element signature="e#0#43#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/hicouch_front/src/app/shared/services/vote.service.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="323">
+          <caret line="19" column="35" lean-forward="true" selection-start-line="19" selection-start-column="35" selection-end-line="19" selection-end-column="35" />
+          <folding>
+            <element signature="e#0#43#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/hicouch_front/src/app/products/product.page.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="178">
+          <caret line="106" column="64" selection-start-line="106" selection-start-column="55" selection-end-line="106" selection-end-column="64" />
+          <folding>
+            <element signature="e#0#91#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/hicouch_front/src/app/shared/models/association.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="136">
+          <caret line="8" column="13" selection-start-line="8" selection-start-column="13" selection-end-line="8" selection-end-column="13" />
+          <folding>
+            <element signature="e#0#41#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/hicouch_front/node_modules/@angular/material/typings/esm5/checkbox/checkbox.d.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="194">
+          <caret line="53" column="21" selection-start-line="53" selection-start-column="21" selection-end-line="53" selection-end-column="21" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/hicouch_front/src/app/app.module.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="187">
+          <caret line="89" column="26" selection-start-line="89" selection-start-column="26" selection-end-line="89" selection-end-column="26" />
+          <folding>
+            <element signature="e#0#58#0" expanded="true" />
+            <element signature="e#1285#1429#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/hicouch_front/src/app/shared/models/comment.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="51">
+          <caret line="3" column="9" selection-start-line="3" selection-start-column="9" selection-end-line="3" selection-end-column="9" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/hicouch_front/src/app/products/components/product-related-comments/app-product-related-comments-update-dialog.html">
       <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="204">
+          <caret line="12" column="109" selection-start-line="12" selection-start-column="109" selection-end-line="12" selection-end-column="109" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/hicouch_front/src/app/products/components/product-related-comments/product-related-comments.component.scss">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="136">
+          <caret line="8" column="23" selection-start-line="8" selection-start-column="23" selection-end-line="8" selection-end-column="23" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/hicouch_front/src/app/products/components/product-related-comments/app-product-related-comments-signal-dialog.html">
+      <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="187">
-          <caret line="11" column="73" selection-start-line="11" selection-start-column="73" selection-end-line="11" selection-end-column="73" />
+          <caret line="11" column="52" selection-start-line="11" selection-start-column="52" selection-end-line="11" selection-end-column="52" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/hicouch_front/src/app/shared/models/vote.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="51">
+          <caret line="3" column="9" selection-start-line="3" selection-start-column="9" selection-end-line="3" selection-end-column="9" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/hicouch_front/src/app/products/components/product-related-comments/product-related-comments.component.ts">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="374">
-          <caret line="22" column="2" lean-forward="true" selection-start-line="22" selection-start-column="2" selection-end-line="22" selection-end-column="2" />
+        <state relative-caret-position="272">
+          <caret line="113" column="52" lean-forward="true" selection-start-line="113" selection-start-column="52" selection-end-line="113" selection-end-column="52" />
           <folding>
             <element signature="e#0#63#0" expanded="true" />
           </folding>
@@ -488,37 +637,24 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/hicouch_front/src/app/products/components/product-related-comments/product-related-comments.component.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="374">
-          <caret line="34" column="15" selection-start-line="34" selection-start-column="11" selection-end-line="34" selection-end-column="15" />
+        <state relative-caret-position="425">
+          <caret line="54" selection-start-line="54" selection-end-line="54" />
           <folding>
-            <element signature="e#1156#1162#0" expanded="true" />
-            <element signature="e#1162#1168#0" expanded="true" />
-            <element signature="e#1506#1512#0" expanded="true" />
-            <element signature="e#1512#1518#0" expanded="true" />
-            <element signature="e#1506#1512#0" expanded="true" />
-            <element signature="e#1512#1518#0" expanded="true" />
+            <element signature="e#175#181#0" expanded="true" />
+            <element signature="e#181#187#0" expanded="true" />
+            <element signature="e#1589#1595#0" expanded="true" />
+            <element signature="e#1595#1601#0" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/hicouch_front/src/app/products/components/product-related-comments/product-related-comments.component.scss">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="265">
-          <caret line="27" column="20" selection-start-line="27" selection-start-column="20" selection-end-line="27" selection-end-column="20" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/hicouch_front/src/app/products/components/products-related/products-related.component.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="9" column="10" lean-forward="true" selection-start-line="9" selection-start-column="10" selection-end-line="9" selection-end-column="10" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/hicouch_front/src/app/products/components/products-related/products-related.component.ts">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-4247">
-          <caret line="7" column="48" selection-start-line="7" selection-start-column="33" selection-end-line="7" selection-end-column="48" />
+        <state relative-caret-position="238">
+          <caret line="56" column="84" selection-start-line="56" selection-start-column="84" selection-end-line="56" selection-end-column="84" />
+          <folding>
+            <element signature="e#0#95#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

@@ -10,6 +10,7 @@ import {Signalement} from '../../../shared/models/signalement';
 import {SignalementService} from '../../../shared/services/signalement.service';
 import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from '@angular/material';
 import {ProductService} from '../../../shared/services/product.service';
+import {VoteService} from '../../../shared/services/vote.service';
 
 export interface DialogDataComment {
     comment: Comment;
@@ -23,29 +24,51 @@ export interface DialogDataComment {
 })
 export class ProductRelatedCommentsComponent implements OnInit {
     @Input() asso: Association;
+    @Input() loggedUser: User;
     commentContentAdd = new FormControl('', [
         Validators.maxLength(250)
     ]);
 
     load: boolean;
     userComment: User;
-    loggedUser: User = {
-        id: 15
-    };
+    canVote: boolean;
+    checked = false;
 
     constructor(
         private router: Router,
         private commentService: CommentService,
         private userService: UserService,
+        private voteService: VoteService,
         public dialog: MatDialog
     ) { }
 
     ngOnInit() {
+        this.canVoteF();
     }
 
     goTo(productId) {
         console.log('go to this product');
         this.router.navigate(['app/products', productId]);
+    }
+
+    canVoteF() {
+        (this.asso.userVote == null) ? this.canVote = true : this.canVote = false;
+    }
+
+    riseNoteAsso() {
+        const vote = {
+            idPair: this.asso.association.idPair, idUser: this.loggedUser.id
+        };
+        this.canVote = false;
+        this.voteService.vote(vote);
+    }
+
+    decreaseNoteAsso() {
+        const vote = {
+            idPair: this.asso.association.idPair, idUser: this.loggedUser.id
+        };
+        this.canVote = true;
+        this.voteService.unvote(vote);
     }
 
     riseNoteComment(comment: Comment) {
@@ -60,20 +83,19 @@ export class ProductRelatedCommentsComponent implements OnInit {
 
     addComment() {
         const comment = {
-            id: null, commentaire: this.commentContentAdd.value, note: 0, iduser: 0, idpair: this.asso.association.idPair, status: 0,
-            createdat: new Date(), updatedate: new Date()
+            commentaire: this.commentContentAdd.value, iduser: this.loggedUser.id,
+            idpair: this.asso.association.idPair, status: this.checked ? 0 : null
         };
-        console.log('save comment');
+        console.log(comment);
         this.commentService.putComment(comment, comment.idpair);
         this.animationLoad();
     }
 
     animationLoad() {
-        this.load = true;
-        setTimeout(() => {
-            window.location.reload();
-            this.load = false;
-        }, 1000);
+        const dialogRef = this.dialog.open(SpinnerDialogComponent, {
+            width: '15%',
+            disableClose: true
+        });
     }
 
     getUserSpeudo(userId: number) {
@@ -85,11 +107,11 @@ export class ProductRelatedCommentsComponent implements OnInit {
     }
 
     canEdit(comment: Comment) {
-        if (comment.iduser == this.loggedUser.id) {
-            return true;
-        } else {
-            return false;
-        }
+        return comment.iduser == this.loggedUser.id;
+    }
+
+    canSignal( comment: Comment) {
+        return comment.iduser != this.loggedUser.id;
     }
 
     showPopoverToSignal(comment: Comment) {
@@ -100,7 +122,9 @@ export class ProductRelatedCommentsComponent implements OnInit {
 
         dialogRef.afterClosed().subscribe(result => {
             console.log('The dialog for signalement was closed');
-            this.animationLoad();
+            if (result) {
+                this.animationLoad();
+            }
         });
 
     }
@@ -113,9 +137,24 @@ export class ProductRelatedCommentsComponent implements OnInit {
 
         dialogRef.afterClosed().subscribe(result => {
             console.log('The dialog to edit comment was closed');
-            this.animationLoad();
+            if (result) {
+                this.animationLoad();
+            }
         });
     }
+
+    showComment(comment: Comment) {
+        if (comment.status === 0 && comment.iduser === this.loggedUser.id) {
+            return true;
+        }
+        if (comment.status === 0 && comment.iduser !== this.loggedUser.id) {
+            return false;
+        }
+        if (comment.status !== 0) {
+            return true;
+        }
+    }
+
 
 }
 
@@ -129,6 +168,7 @@ export class ProductsRelatedCommentUpdateDialogComponent implements OnInit {
     commentContentUpdate = new FormControl('', [
         Validators.maxLength(250)
     ]);
+    checked = this.data.comment.status == 0 ? true : false;
 
     constructor(
         public dialogRef: MatDialogRef<ProductsRelatedCommentUpdateDialogComponent>,
@@ -177,9 +217,29 @@ export class ProductsRelatedCommentSignalDialogComponent implements OnInit {
 
     signalComment() {
         const signalement = {
-            id: null, typeSignalement: 'comment', SignaledUserId: null, SignaledCommentId: this.data.comment.id,
-            message: this.signalementContentAdd.value, idUser: this.data.user.id, status: 0, createdat: new Date(), updatedat: new Date()
+           typeSignalement: 'comment', SignaledUserId: null, SignaledCommentId: this.data.comment.id,
+            message: this.signalementContentAdd.value, idUser: this.data.user.id
         };
         this.signalementService.addSignalement(signalement);
     }
 }
+
+@Component({
+    selector: 'app-spinner-dialog',
+    template: '<mat-spinner></mat-spinner>',
+    styleUrls: ['./product-related-comments.component.scss'],
+})
+export class SpinnerDialogComponent implements OnInit {
+
+    constructor(
+        public dialogRef: MatDialogRef<SpinnerDialogComponent>) {}
+
+
+    ngOnInit() {
+        setTimeout(() => {
+            this.dialogRef.close();
+            window.location.reload();
+        }, 700);
+    }
+}
+

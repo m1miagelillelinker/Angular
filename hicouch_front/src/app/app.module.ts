@@ -12,7 +12,8 @@ import {
     MatAutocompleteModule,
     MatIconModule,
     MatListModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    MatCheckboxModule
 } from '@angular/material';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
@@ -41,7 +42,7 @@ import { MainProductComponent } from './products/components/main-product/main-pr
 import { SearchProductComponent } from './shared/components/search-product/search-product.component';
 import {
     ProductRelatedCommentsComponent,
-    ProductsRelatedCommentSignalDialogComponent, ProductsRelatedCommentUpdateDialogComponent
+    ProductsRelatedCommentSignalDialogComponent, ProductsRelatedCommentUpdateDialogComponent, SpinnerDialogComponent
 } from './products/components/product-related-comments/product-related-comments.component';
 import {CommentService} from './shared/services/comment.service';
 import {SignalementService} from './shared/services/signalement.service';
@@ -65,6 +66,7 @@ import {SignalementService} from './shared/services/signalement.service';
         ProductRelatedCommentsComponent,
         ProductsRelatedCommentSignalDialogComponent,
         ProductsRelatedCommentUpdateDialogComponent,
+        SpinnerDialogComponent
     ],
     imports: [
         BrowserAnimationsModule,
@@ -85,6 +87,7 @@ import {SignalementService} from './shared/services/signalement.service';
         MatIconModule,
         MatListModule,
         MatProgressSpinnerModule,
+        MatCheckboxModule,
     ],
     providers: [
         UserService,
@@ -98,7 +101,8 @@ import {SignalementService} from './shared/services/signalement.service';
     entryComponents: [
         ProductsRelatedAddDialogComponent,
         ProductsRelatedCommentUpdateDialogComponent,
-        ProductsRelatedCommentSignalDialogComponent
+        ProductsRelatedCommentSignalDialogComponent,
+        SpinnerDialogComponent
 
     ],
     bootstrap: [AppComponent],

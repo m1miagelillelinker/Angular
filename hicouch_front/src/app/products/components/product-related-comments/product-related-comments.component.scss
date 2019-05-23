@@ -2,8 +2,11 @@
 #popover {
     padding: 50px;
     /*background-color: white;*/
-    /*margin: 0 auto;*/
-    /*width: 100px;*/
+    margin: 0 auto;
+    width: 60%;
+    border: solid #7c0000;
+    margin-top: 10px;
+    border-radius: 10px;
 }
 
 .username {
@@ -20,7 +23,7 @@
 }
 
 .popoverTitle {
-
+    font-size: 35px;
 }
 
 .url {
@@ -33,6 +36,6 @@
     flex-direction: column;
 }
 
-.signalement-container > *, .update-container > * {
+.signalement-container > *, .update-container > *, .addComment > * {
     width: 100%;
 }

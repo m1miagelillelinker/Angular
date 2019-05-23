@@ -14,7 +14,7 @@
 			<img *ngIf="currentIndex > 0" (click)="fetchIndex('left')"
 				src="assets/images/white-arrow-right.png">
 		</div>
-		<div class="item" *ngFor="let asso of fetchList(currentIndex)" (click)="showPopover()">
+		<div class="item" *ngFor="let asso of fetchList(currentIndex)" (click)="showPopover(asso)">
 <!-- 			(click)="goTo(asso.productDTO.id)"> -->
 			<div class="picto">
 				<img src="{{getPicto(asso.productDTO.type)}}">
@@ -22,7 +22,7 @@
 			<div class="image">
 				<img src="{{asso.productDTO.image}}">
 			</div>
-			<div class="title2" (mouseover)="getTitle(asso.productDTO)" (click)="goTo(asso.productDTO.id)">
+			<div class="title2" (mouseover)="getTitle(asso.productDTO)">
 				{{asso.productDTO.title}}</div>
 		</div>
 
@@ -52,4 +52,4 @@
 
 </div>
 
-<app-product-related-comments #popover *ngIf="showComments" [asso]="asso"></app-product-related-comments>
+<app-product-related-comments #popover *ngIf="showComments" [asso]="assoComment" [loggedUser]="loggedUser"></app-product-related-comments>
