@@ -90,9 +90,9 @@ export class AccountPageComponent implements OnInit {
   getActivities() {
     return [
       [ 'Elise', 'a créé une nouvelle association', 'a créé un tag personnageFéminin', '06/juin/2019'],
-      [ 'activityrow2col1', 'activityrow2col2', 'activityrow2col3', 'activityrow2col4' ],
-      [ 'activityrow3col1', 'activityrow3col2', 'activityrow3col3', 'activityrow3col4' ],
-      [ 'activityrow4col1', 'activityrow4col2', 'activityrow4col3', 'activityrow4col4' ]
+      [ 'Mathieu', 'a créé une nouvelle association', 'a créé un tag BestMovies', '06/juillet/2019' ],
+      [ 'Anass', 'a modifié une nouvelle association', 'a créé un tag MarvelMovies', '06/juillet/2019' ],
+      [ 'Edouard', 'a créé une nouvelle association', 'a créé un tag DCMovies', '06/Août/2019' ]
     ];
   }
 
