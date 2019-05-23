@@ -19,7 +19,7 @@ export interface DialogData {
 export class ProductsRelatedComponent implements OnInit, OnChanges {
     @Input() allProducts: Array<Association>;
     @Input() filteredProducts: Array<Association>;
-    @Output() filters: EventEmitter<String> = new EventEmitter();
+    @Output() filters: EventEmitter<any> = new EventEmitter();
     movieSelected = true;
     bookSelected = true;
     tvSelected = true;
@@ -46,7 +46,7 @@ export class ProductsRelatedComponent implements OnInit, OnChanges {
     }
 
     fetchNavigation() {
-        this.totalPages = Math.ceil(this.allProducts.length / 5);
+        this.totalPages = Math.ceil(this.filteredProducts.length / 5);
 
     }
 
@@ -55,29 +55,6 @@ export class ProductsRelatedComponent implements OnInit, OnChanges {
     }
 
     fetchList(number: number): Association[] {
-        // this.allProducts.forEach(asso => {
-        //     asso.product.titleShort = this.fetchTitle(asso.product.title);
-        // });
-
-        if (this.allProducts) {
-            this.allProducts.forEach(p => {
-                if (!p.product.type) { p.product.type = 'movie'; }
-            });
-        }
-        // let productFiltered = this.allProducts;
-        //     if (!this.movieSelected) {
-        //         productFiltered = this.allProducts.filter((product) => product.type !== 'movie');
-        //         console.log(productFiltered);
-        //     }
-        //     if (!this.tvSelected) {
-        //         productFiltered = this.allProducts.filter((product) => product.type !== 'serie');
-        //     }
-        //     if (!this.bookSelected) {
-        //         productFiltered = this.allProducts.filter((product) => product.type !== 'book');
-        //     }
-        //     if (!this.gameSelected) {
-        //         productFiltered = this.allProducts.filter((product) => product.type !== 'game');
-        //     }
         let tab = [];
         this.fetchNavigation();
         if (number >= 5) {
@@ -184,12 +161,20 @@ export class ProductsRelatedComponent implements OnInit, OnChanges {
                 break;
         }
         this.filters.emit('');
+        const pute = [];
         if (this.movieSelected) {
-            this.filters.emit('movie');
+            pute.push('movie');
         }
         if (this.bookSelected) {
-            this.filters.emit('book');
+            pute.push('book');
         }
+        if (this.tvSelected) {
+            pute.push('series');
+        }
+        if (this.gameSelected) {
+            pute.push('game');
+        }
+        this.filters.emit(pute);
         // this.fetchList(this.currentIndex);
 
     }

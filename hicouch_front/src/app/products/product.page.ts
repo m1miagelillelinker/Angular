@@ -88,12 +88,29 @@ export class ProductPageComponent implements OnInit, OnDestroy, OnChanges {
     this.fetchProducts();
   }
 
-  filterList(event: string) {
-    if (event !== '') {
+  filterList(event) {
+    console.log(event);
+    this.filteredProducts = [];
+    if (event.length === 4) {
+      this.filteredProducts = this.allProducts;
+    } else {
+      if (event.length > 0 && event != null && event !== []) {
+        event.forEach(element => {
+          this.allProducts.forEach(asso => {
+            if (asso.product.type === element) {
+              this.filteredProducts.push(asso.product);
+            }
+          });
+        });
+      } else {
+        this.filteredProducts = [];
+       }
+    }
+
+      console.log(this.filteredProducts);
       // console.log(event);
       // this.allProducts.filter(p => console.log(p));
-      this.filteredProducts = this.allProducts.filter(asso => asso.product.type.toLowerCase() === event);
-    }
+
   }
 
 }
