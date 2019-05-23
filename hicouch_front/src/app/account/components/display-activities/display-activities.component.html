@@ -1,3 +1,14 @@
-<p>
-  display-activities works!
-</p>
+<div class="displayActivites">
+  <table>
+    <thead>
+      <tr>
+        <th *ngFor="let column of activities.columns">{{column}}</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let row of activities.rows">
+        <td *ngFor="let item of row">{{item}}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>

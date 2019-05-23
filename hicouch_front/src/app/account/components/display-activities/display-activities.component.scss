@@ -1,0 +1,48 @@
+.displayActivites {
+    width: 80%;
+    vertical-align: top;
+
+    table {
+      border-radius: 2px;
+      text-align: left;
+      font-size: 14px;
+
+      thead, tbody, tr {
+        width: 100%;
+      }
+
+      th, td {
+        width: 29%;
+        padding: 5px 20px;
+      }
+
+      th {
+        background: #7c0000;
+        border: 1px solid #7c0000;
+        color: white;
+        font-weight: 400;
+      }
+
+      td {
+        background: lightgray;
+      }
+
+      thead tr th:first-child {
+        border-top-left-radius: 4px;
+      }
+
+      thead tr th:last-child {
+        border-top-right-radius: 4px;
+      }
+
+      tbody tr:last-child {
+        td:first-child {
+          border-bottom-left-radius: 4px;
+        }
+
+        td:last-child {
+          border-bottom-right-radius: 4px;
+        }
+      }
+    }
+  }

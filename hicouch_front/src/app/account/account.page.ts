@@ -15,6 +15,7 @@ export class AccountPageComponent implements OnInit {
   activitiesSelected:boolean = true;
   friendsSelected:boolean = false;
   badgesSelected:boolean = false;
+  
   profileProgress = {
     fullProgress: '150px', //'150px',
     userProgress: '100px' // user.score * 150 / 100
@@ -35,7 +36,6 @@ export class AccountPageComponent implements OnInit {
     columns: ['Utilisateur', 'Badges', 'Label'],
     rows: this.getBadges()
   }
-
 
   constructor(
     private userService: UserService,
