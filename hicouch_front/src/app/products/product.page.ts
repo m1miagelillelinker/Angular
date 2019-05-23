@@ -16,6 +16,7 @@ export class ProductPageComponent implements OnInit, OnDestroy, OnChanges {
   mainProduct: Product;
   productsRelated: any[] = [];
   allProducts: any[] = [];
+  filteredProducts: any[] = [];
   productId: string;
   idRelated: string;
   productSubscription: Subscription;
@@ -52,6 +53,7 @@ export class ProductPageComponent implements OnInit, OnDestroy, OnChanges {
       this.mainProduct = movie;
       this.associationService.fetchtAssociationByProduct(this.mainProduct.id).subscribe((json: any) => {
         this.allProducts = json;
+        this.filteredProducts = this.allProducts;
         this.productsRelated.push(json[0]);
         this.productService.getBookById('9782070541270').subscribe((book: any) => {
           book.type = 'book';
@@ -84,6 +86,14 @@ export class ProductPageComponent implements OnInit, OnDestroy, OnChanges {
     event.id = event.id;
     this.router.navigate(['app/products/', event.id]);
     this.fetchProducts();
+  }
+
+  filterList(event: string) {
+    if (event !== '') {
+      // console.log(event);
+      // this.allProducts.filter(p => console.log(p));
+      this.filteredProducts = this.allProducts.filter(asso => asso.product.type.toLowerCase() === event);
+    }
   }
 
 }

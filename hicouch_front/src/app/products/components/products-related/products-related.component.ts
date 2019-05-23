@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, OnChanges, Inject, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, Input, OnChanges, Inject, ChangeDetectorRef, Output, EventEmitter } from '@angular/core';
 import { ProductService } from '../../../shared/services/product.service';
 import { Router } from '@angular/router';
 import { FormControl } from '@angular/forms';
@@ -18,6 +18,8 @@ export interface DialogData {
 })
 export class ProductsRelatedComponent implements OnInit, OnChanges {
     @Input() allProducts: Array<Association>;
+    @Input() filteredProducts: Array<Association>;
+    @Output() filters: EventEmitter<String> = new EventEmitter();
     movieSelected = true;
     bookSelected = true;
     tvSelected = true;
@@ -62,26 +64,27 @@ export class ProductsRelatedComponent implements OnInit, OnChanges {
                 if (!p.product.type) { p.product.type = 'movie'; }
             });
         }
-            // if (!this.movieSelected) {
-            //     productFiltered = this.allProducts.filter((product) => product.type === 'movie');
-            //     console.log(productFiltered);
-            // }
-            // if (!this.tvSelected) {
-            //     productFiltered = this.allProducts.filter((product) => product.type === 'serie');
-            // }
-            // if (!this.bookSelected) {
-            //     productFiltered = this.allProducts.filter((product) => product.type === 'book');
-            // }
-            // if (!this.gameSelected) {
-            //     productFiltered = this.allProducts.filter((product) => product.type === 'game');
-            // }
+        // let productFiltered = this.allProducts;
+        //     if (!this.movieSelected) {
+        //         productFiltered = this.allProducts.filter((product) => product.type !== 'movie');
+        //         console.log(productFiltered);
+        //     }
+        //     if (!this.tvSelected) {
+        //         productFiltered = this.allProducts.filter((product) => product.type !== 'serie');
+        //     }
+        //     if (!this.bookSelected) {
+        //         productFiltered = this.allProducts.filter((product) => product.type !== 'book');
+        //     }
+        //     if (!this.gameSelected) {
+        //         productFiltered = this.allProducts.filter((product) => product.type !== 'game');
+        //     }
         let tab = [];
         this.fetchNavigation();
         if (number >= 5) {
-            tab = this.allProducts.slice(number, number + 5);
+            tab = this.filteredProducts.slice(number, number + 5);
             return tab;
         } else {
-            tab = this.allProducts.slice(0, 5);
+            tab = this.filteredProducts.slice(0, 5);
             return tab;
         }
     }
@@ -142,46 +145,52 @@ export class ProductsRelatedComponent implements OnInit, OnChanges {
     }
 
     selectType(type: string) {
-        let idx;
         switch (type) {
             case 'movie':
                 this.movieSelected = !this.movieSelected;
-                if (this.movieSelected && this.filtersList.find(l => l === 'm') == null) {
-                    this.filtersList.push('m');
-                } else {
-                    idx = this.filtersList.findIndex(l => l === 'm');
-                    this.filtersList.splice(idx, 1);
-                }
+                // if (this.movieSelected && this.filtersList.find(l => l === 'm') == null) {
+                //     this.filtersList.push('m');
+                // } else {
+                //     idx = this.filtersList.findIndex(l => l === 'm');
+                //     this.filtersList.splice(idx, 1);
+                // }
                 break;
             case 'tvshow':
                 this.tvSelected = !this.tvSelected;
-                if (this.tvSelected && this.filtersList.find(l => l === 't') == null) {
-                    this.filtersList.push('t');
-                } else {
-                    idx = this.filtersList.findIndex(l => l === 't');
-                    this.filtersList.splice(idx, 1);
-                }
+                // if (this.tvSelected && this.filtersList.find(l => l === 't') == null) {
+                //     this.filtersList.push('t');
+                // } else {
+                //     idx = this.filtersList.findIndex(l => l === 't');
+                //     this.filtersList.splice(idx, 1);
+                // }
                 break;
             case 'book':
                 this.bookSelected = !this.bookSelected;
-                if (this.bookSelected && this.filtersList.find(l => l === 'b') == null) {
-                    this.filtersList.push('b');
-                } else {
-                    idx = this.filtersList.findIndex(l => l === 'b');
-                    this.filtersList.splice(idx, 1);
-                }
+                // if (this.bookSelected && this.filtersList.find(l => l === 'b') == null) {
+                //     this.filtersList.push('b');
+                // } else {
+                //     idx = this.filtersList.findIndex(l => l === 'b');
+                //     this.filtersList.splice(idx, 1);
+                // }
                 break;
             case 'game':
                 this.gameSelected = !this.gameSelected;
-                if (this.gameSelected && this.filtersList.find(l => l === 'g') == null) {
-                    this.filtersList.push('g');
-                } else {
-                    idx = this.filtersList.findIndex(l => l === 'g');
-                    this.filtersList.splice(idx, 1);
-                }
+                // if (this.gameSelected && this.filtersList.find(l => l === 'g') == null) {
+                //     this.filtersList.push('g');
+                // } else {
+                //     idx = this.filtersList.findIndex(l => l === 'g');
+                //     this.filtersList.splice(idx, 1);
+                // }
                 break;
         }
-        this.fetchList(0);
+        this.filters.emit('');
+        if (this.movieSelected) {
+            this.filters.emit('movie');
+        }
+        if (this.bookSelected) {
+            this.filters.emit('book');
+        }
+        // this.fetchList(this.currentIndex);
 
     }
 

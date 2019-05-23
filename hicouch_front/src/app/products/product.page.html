@@ -5,4 +5,4 @@
 		<app-products-top-recommandation [productsRelated]="productsRelated"></app-products-top-recommandation>
 	</div>
 </div>
-<app-products-related *ngIf="mainProduct && allProducts.length > 0" [allProducts]="allProducts"></app-products-related>
+<app-products-related *ngIf="mainProduct && allProducts.length > 0" (filters)="filterList($event)" [filteredProducts]="filteredProducts" [allProducts]="allProducts"></app-products-related>
