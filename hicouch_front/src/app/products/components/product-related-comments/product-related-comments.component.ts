@@ -29,8 +29,6 @@ export class ProductRelatedCommentsComponent implements OnInit {
         Validators.maxLength(250)
     ]);
 
-    load: boolean;
-    userComment: User;
     canVote: boolean;
     checked = false;
 
@@ -77,7 +75,7 @@ export class ProductRelatedCommentsComponent implements OnInit {
     }
 
     goToUserProfile(userId) {
-        console.log('go to the user profile who make the comment');
+        console.log('go to the user profile who made the comment');
         this.router.navigate(['app/account', userId]);
     }
 
@@ -98,12 +96,14 @@ export class ProductRelatedCommentsComponent implements OnInit {
         });
     }
 
+    // TODO : display name of user for each comment
     getUserSpeudo(userId: number) {
+        let user;
         this.userService.getUser(
             userId.toString()).subscribe(
-            value => {this.userComment = value; }
+            value => {user = value; }
         );
-        return this.userComment.pseudo;
+        return user.pseudo;
     }
 
     canEdit(comment: Comment) {
@@ -176,6 +176,8 @@ export class ProductsRelatedCommentUpdateDialogComponent implements OnInit {
         @Inject(MAT_DIALOG_DATA) public data: DialogDataComment) {}
 
     onNoClick(): void {
+
+        console.log(this.data.comment);
         this.dialogRef.close();
     }
 
@@ -184,10 +186,8 @@ export class ProductsRelatedCommentUpdateDialogComponent implements OnInit {
     }
 
     editComment() {
-        console.log(this.data.comment);
         this.data.comment.commentaire = this.commentContentUpdate.value;
-        console.log('update comment');
-        console.log(this.data.comment);
+        this.data.comment.status = (this.checked) ? 0 : null;
         this.commentService.putComment(this.data.comment, this.data.comment.idpair);
     }
 }
