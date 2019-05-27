@@ -18,7 +18,9 @@ export class AuthenticationService {
         clientID: AUTH_CONFIG.clientID,
         domain: AUTH_CONFIG.domain,
         responseType: 'token id_token',
-        redirectUri: AUTH_CONFIG.callbackURL
+        redirectUri: AUTH_CONFIG.callbackURL,
+        audience: 'http://localhost:8080',
+        scope: 'openid'
     });
 
     constructor(public router: Router,
