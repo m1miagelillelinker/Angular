@@ -50,7 +50,7 @@ export class ProductPageComponent implements OnInit, OnDestroy, OnChanges {
     const productId = this.route.snapshot.paramMap.get('productId');
     this.productSubscription = this.productService.getMovieById(productId).subscribe((movie: any) => {
       this.mainProduct = movie;
-      this.associationService.fetchtAssociationByProduct(this.mainProduct.id).subscribe((json: any) => {
+      this.associationService.fetchtAssociationByProduct(+this.mainProduct.id).subscribe((json: any) => {
         this.allProducts = json;
         this.productsRelated.push(json[0]);
         this.productService.getBookById('9782070541270').subscribe((book: any) => {

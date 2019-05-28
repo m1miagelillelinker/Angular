@@ -1,7 +1,7 @@
 import {Tag} from './tag';
 
 export interface Product {
-    id: string;
+    id: number;
     title: string;
     description: string ;
     country: string ;

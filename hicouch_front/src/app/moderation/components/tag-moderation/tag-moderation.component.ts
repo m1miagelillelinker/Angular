@@ -11,7 +11,6 @@ import {ActivatedRoute, Router} from '@angular/router';
     styleUrls: ['./tag-moderation.component.scss'],
 })
 export class TagModerationComponent implements OnInit, OnDestroy {
-
     tags: Array<Tag>;
 
     constructor(
@@ -26,7 +25,7 @@ export class TagModerationComponent implements OnInit, OnDestroy {
 
     }
 
-    loadTags(){
+    loadTags() {
         this.api.getTagsToModerate().subscribe((json: Array<Tag>) => this.tags = json);
     }
 

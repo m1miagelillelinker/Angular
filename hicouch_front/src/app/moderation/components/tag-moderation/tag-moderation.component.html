@@ -1,4 +1,12 @@
-<div>Tag Moderation</div>
-<ul>
-    <li *ngFor="let tag of tags">{{tag.value}} <button (click)="acceptTag(tag.id)">Accept</button><button (click)="refuseTag(tag.id)">Refuse</button></li>
-</ul>
+<div class="tab-content">
+    <h3> Modération des tags</h3>
+    <div *ngFor="let tag of tags" class="box">
+        <div class="content">
+            {{tag.value}}
+        </div>
+        <div>
+            <button (click)="acceptTag(tag.id)" class="button accept">Accepter</button>
+            <button (click)="refuseTag(tag.id)" class="button refuse">Refuser</button>
+        </div>
+    </div>
+</div>

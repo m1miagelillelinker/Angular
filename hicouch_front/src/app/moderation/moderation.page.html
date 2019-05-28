@@ -1,5 +1,5 @@
-<app-header [user]="user" (isMovieSearched)="loadMoviePage($event)"></app-header>
-<ul>
+<!--
+<ul class="nav nav-tabs">
     <li (click)="toggleFeature('tag')">Tag</li>
     <li (click)="toggleFeature('comment')">Commentaires</li>
     <li (click)="toggleFeature('user')">User</li>
@@ -7,3 +7,18 @@
 <app-tag-moderation *ngIf="tagMode"></app-tag-moderation>
 <app-comment-moderation *ngIf="commentMode" ></app-comment-moderation>
 <app-user-moderation *ngIf="userMode"></app-user-moderation>
+-->
+
+<app-header [user]="user" (isMovieSearched)="loadMoviePage($event)"></app-header>
+<h1 class="title">Modération des Signalements et des Tags</h1>
+<mat-tab-group animationDuration="200ms" class="tab-group" mat-align-tabs="end">
+    <mat-tab label="Tags">
+        <app-tag-moderation></app-tag-moderation>
+    </mat-tab>
+    <mat-tab label="Commentaires">
+        <app-comment-moderation></app-comment-moderation>
+    </mat-tab>
+    <mat-tab label="Utilisateurs">
+        <app-user-moderation></app-user-moderation>
+    </mat-tab>
+</mat-tab-group>

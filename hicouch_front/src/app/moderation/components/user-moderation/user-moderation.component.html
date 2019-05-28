@@ -1,7 +1,12 @@
-<div>User Moderation</div>
-<ul>
-    <li *ngFor="let signalement of signalements">{{signalement.signaledUser.pseudo}}
-        <button (click)="acceptSignalement(signalement.id)">Interdit</button>
-        <button (click)="refuseSignalement(signalement.id)">Autorisé</button>
-    </li>
-</ul>
+<div  class="tab-content">
+    <h3>Modération des profils d'utilisateurs</h3>
+    <div *ngFor="let signalement of signalements" class="box">
+        <div class="content">
+            {{signalement.signaledUser.pseudo}}
+        </div>
+        <div>
+            <button (click)="acceptSignalement(signalement.id)" class="button accept">Interdit</button>
+            <button (click)="refuseSignalement(signalement.id)" class="button refuse">Autorisé</button>
+        </div>
+    </div>
+</div>
