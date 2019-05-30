@@ -28,7 +28,7 @@ export class CommentModerationComponent implements OnInit, OnDestroy {
 
     loadCommentaires() {
         this.api.listCommentsToModerate()
-            .subscribe((json: Array<Signalement>) => this.signalements = json.filter(c => c.commentaire !== undefined)); // double check
+            .subscribe((json: Array<Signalement>) => this.signalements = json.filter(c => c.signaledComment !== undefined)); // double check
     }
 
     acceptSignalement(idSignalement: number) {

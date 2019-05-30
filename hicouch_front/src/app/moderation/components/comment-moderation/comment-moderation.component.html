@@ -2,7 +2,7 @@
     <h3>Modération des commentaires</h3>
     <div *ngFor="let signalement of signalements" class="box">
         <div class="content">
-            {{signalement.commentaire.commentaire}}
+            {{signalement.signaledComment.commentaire}}
         </div>
         <div>
             <button (click)="acceptSignalement(signalement.id)" class="button accept">Interdit</button>

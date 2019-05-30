@@ -5,7 +5,7 @@ export class Signalement {
     id: number;
     typeSignalement: string;
     signaledUser: User;
-    commentaire: Commentaire;
+    signaledComment: Commentaire;
     auteur: User;
     message: string;
     status: number;
