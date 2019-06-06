@@ -71,6 +71,7 @@ import { SearchProductComponent } from './shared/components/search-product/searc
     MatCardModule,
     MatSelectModule,
     MatAutocompleteModule,
+    MatIconModule
   ],
   providers: [
     UserService,

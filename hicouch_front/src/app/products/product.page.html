@@ -2,9 +2,9 @@
 <div *ngIf="mainProduct " class="content">
 	<app-main-product [tags]="tags"[mainProduct]="mainProduct"></app-main-product>
 		
+<div class="related" *ngIf="productsRelated.length > 0 ">
+	<app-products-top-recommandation [productsRelated]="productsRelated"></app-products-top-recommandation>
+</div>
 	</div>
 
-<div class="related" *ngIf="productsRelated.length > 0 ">
-		<app-products-top-recommandation [productsRelated]="productsRelated"></app-products-top-recommandation>
-</div>
 <app-products-related *ngIf="mainProduct && allProducts.length > 0" [allProducts]="allProducts"></app-products-related>
