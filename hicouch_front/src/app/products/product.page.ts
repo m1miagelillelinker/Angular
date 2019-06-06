@@ -20,6 +20,7 @@ export class ProductPageComponent implements OnInit, OnDestroy, OnChanges {
   mainProduct: Product;
   productsRelated: any[] = [];
   allProducts: any[] = [];
+  filteredProducts: any[] = [];
   productId: string;
   idRelated: string;
   productSubscription: Subscription;
@@ -62,6 +63,7 @@ export class ProductPageComponent implements OnInit, OnDestroy, OnChanges {
       this.mainProduct = movie;
       this.associationService.fetchtAssociationByProduct(this.mainProduct.id).subscribe((json: any) => {
         this.allProducts = json;
+        this.filteredProducts = this.allProducts;
         this.productsRelated.push(json[0]);
         this.productService.getBookById('9782070541270').subscribe((book: any) => {
           book.type = 'book';
@@ -109,6 +111,31 @@ export class ProductPageComponent implements OnInit, OnDestroy, OnChanges {
     event.id = event.id;
     this.router.navigate(['app/products/', event.id]);
     this.fetchProducts();
+  }
+
+  filterList(event) {
+    console.log(event);
+    this.filteredProducts = [];
+    if (event.length === 4) {
+      this.filteredProducts = this.allProducts;
+    } else {
+      if (event.length > 0 && event != null && event !== []) {
+        event.forEach(element => {
+          this.allProducts.forEach(asso => {
+            if (asso.product.type === element) {
+              this.filteredProducts.push(asso.product);
+            }
+          });
+        });
+      } else {
+        this.filteredProducts = [];
+       }
+    }
+
+      console.log(this.filteredProducts);
+      // console.log(event);
+      // this.allProducts.filter(p => console.log(p));
+
   }
 
 }

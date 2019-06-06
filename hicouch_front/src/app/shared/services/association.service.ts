@@ -13,7 +13,7 @@ export class AssociationService {
     }
 
     fetchtAssociationByProduct(idProduct: number) {
-        return this.http.get(`http://localhost:8080/association/byProduct?idProduct=${idProduct}`);
+        return this.api.getAssociationByProduct(idProduct);
     }
 
     createAssociation(idProductA: string, typeProductA: string, idProductB: string, typeProductB: string) {

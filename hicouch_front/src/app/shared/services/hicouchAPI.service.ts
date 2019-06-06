@@ -6,7 +6,7 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
 })
 export class HicouchAPIService {
 
-    private DOMAIN = 'http://localhost:8080';
+    private DOMAIN = 'https://hicjv3.azurewebsites.net';
 
     private tagController = '/tag';
     private abonnementController = '/abonnement';
@@ -99,7 +99,7 @@ export class HicouchAPIService {
 
     // associations
 
-    getAssociationByProduct(idProduct: string): any {
+    getAssociationByProduct(idProduct: number): any {
         return this.get(this.associationController + '/byProduct', [{key: 'idProduct', value: idProduct}]);
     }
 

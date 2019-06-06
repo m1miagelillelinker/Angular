@@ -7,10 +7,10 @@
       width:25%;
       padding: 20px;
       // border-radius: 8px;
-      border: 1px solid grey;
+      border: 1px solid #bdbdbd;
       border-left:none;
       &:first-child {
-        border-left:1px solid grey;
+        border-left:1px solid #bdbdbd;
       }
     }
     div.selected{
