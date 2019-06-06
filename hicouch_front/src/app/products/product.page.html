@@ -2,6 +2,33 @@
 <div *ngIf="mainProduct " class="content">
 	<app-main-product [mainProduct]="mainProduct"></app-main-product>
 	<div class="related" *ngIf="productsRelated.length > 0 ">
+		<div class="tag">
+			<mat-form-field class="tag-content"> 
+				<input type="text" placeholder="Ajouter un tag" matInput
+				[formControl]="myControl" [matAutocomplete]="auto"> <mat-icon (click)="submit()">navigate_next</mat-icon>
+				<mat-autocomplete #auto="matAutocomplete"> 
+					<mat-option *ngFor="let tag of filteredTags | async" [value]="tag">
+						{{tag}} 
+					</mat-option> 
+				</mat-autocomplete> 
+			</mat-form-field>
+		</div>
+			<div class="tags">
+			<span> Tags : </span>
+				<span *ngFor="let tag of tags">
+					{{tag.value}}
+				</span>
+			</div>
+			<br>
+			<br>
+			<div class="tag">
+				<button mat-button  (click)="setInputFVisibility(true)" >Ajouter un tag</button>
+				<mat-form-field *ngIf="showInput" >
+					<input type="search" matInput
+						   [formControl]="tagControl">
+					<button mat-button matSuffix [disabled]="!tagControl.value" (click)="submit()" > <mat-icon>done</mat-icon> </button>
+				</mat-form-field>
+			</div>
 		<app-products-top-recommandation [productsRelated]="productsRelated"></app-products-top-recommandation>
 	</div>
 </div>

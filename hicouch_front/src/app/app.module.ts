@@ -10,6 +10,7 @@ import {
   MatCardModule,
   MatSelectModule,
   MatAutocompleteModule
+  MatIconModule
 } from '@angular/material';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
@@ -36,6 +37,7 @@ import { ActivityFieldComponent } from './account/components/activity-field/acti
 import { SubscribeBtnComponent } from './account/components/subscribe-btn/subscribe-btn.component';
 import { MainProductComponent } from './products/components/main-product/main-product.component';
 import { SearchProductComponent } from './shared/components/search-product/search-product.component';
+import { TagService } from './shared/services/tag.service';
 
 @NgModule({
   declarations: [
@@ -70,13 +72,15 @@ import { SearchProductComponent } from './shared/components/search-product/searc
     MatCardModule,
     MatSelectModule,
     MatAutocompleteModule,
+    MatIconModule,
   ],
   providers: [
     UserService,
     AuthenticationService,
     ProductService,
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
+    TagService
   ],
   entryComponents: [
       ProductsRelatedAddDialogComponent,
