@@ -1,0 +1,63 @@
+
+.displayBadges {
+  ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    width: auto;
+    height: auto;
+
+    li {
+      background: rgba(114, 50, 34, 0.671);
+      padding: 1em;
+      border-radius: 10px;
+      margin-bottom: 4px;
+      display: grid;
+      grid-template-columns: 70px auto;
+
+      p {
+          font-weight: bold;
+          margin-left: 30px;
+          margin-top: 40px;
+      }
+      .libelle{
+        display: grid;
+      }
+
+      img {
+          border-radius: 100%;
+          width: 100%;
+      }
+    }
+    .profile-progress {
+      position: relative;
+      margin-top: 10px;
+      width: 150px;
+      margin-left: 15px;
+  
+      > * {
+        position: absolute;
+        height: 10px;
+        left: 0;
+        top: 0;
+      }
+  
+      .progress-bar {
+        border-radius: 2px;
+        background-color: lightgray;
+      }
+  
+      .progress {
+        border-radius: 2px;
+        background: #7c0000;
+      }
+    }  
+  }
+  
+
+  
+
+
+
+
+ }

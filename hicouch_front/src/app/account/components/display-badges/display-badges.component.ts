@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit ,Input} from '@angular/core'
 
 @Component({
   selector: 'app-display-badges',
@@ -7,7 +7,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DisplayBadgesComponent implements OnInit {
 
-  constructor() { }
+  @Input() title: String;
+  @Input() badges: Array<Object>;
+
+  profileProgress = {
+    fullProgress: '150px', //'150px',
+    userProgress: '100px', // user.score * 150 / 100
+     
+  }
+  
+  constructor() {}
 
   ngOnInit() {
   }

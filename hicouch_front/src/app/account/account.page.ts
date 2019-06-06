@@ -18,7 +18,8 @@ export class AccountPageComponent implements OnInit {
   
   profileProgress = {
     fullProgress: '150px', //'150px',
-    userProgress: '100px' // user.score * 150 / 100
+    userProgress: '100px', // user.score * 150 / 100
+     
   }
 
   tableActivites = {
@@ -31,11 +32,24 @@ export class AccountPageComponent implements OnInit {
     {lastname:"Bond",firstname:"James",image:"../../assets/images/james.jpg"},
     {lastname:"DJ",firstname:"Robert",image:"../../assets/images/robert_DJ.jpg"}
   ];
+
+  badgesCommentaire = [
+    {intitule:"Youngling",libelle:"Vous avez fait 10 commentaires !!",image:"../../assets/images/youngling.png",score:"80"},
+    {intitule:"Padawab",libelle:"Vous avez fait 100 commentaires !!",image:"../../assets/images/padawan.png",score:"0"},
+    {intitule:"Knight",libelle:"Vous avez fait 1000 commentaires !!",image:"../../assets/images/knight.png",score:"0"},
+    {intitule:"Master",libelle:"Vous avez fait 3000 commentaires !!",image:"../../assets/images/master.png",score:"0"},
+    {intitule:"Grand Master",libelle:"Vous avez fait plus de 5000 commentaires !!",image:"../../assets/images/grandmaster.jpg",score:"0"}
+  ];
+
+  badgesAssociation = [
+    {intitule:"Youngling",libelle:"Vous avez fait 10 Associations !!",image:"../../assets/images/cup.jpg",score:"150"},
+    {intitule:"Padawab",libelle:"Vous avez fait 100 Associations !!",image:"../../assets/images/cup.jpg",score:"100"},
+    {intitule:"Knight",libelle:"Vous avez fait 1000 Associations !!",image:"../../assets/images/cup.jpg",score:"0"},
+    {intitule:"Master",libelle:"Vous avez fait 3000 Associations !!",image:"../../assets/images/cup.jpg",score:"0"},
+    {intitule:"Grand Master",libelle:"Vous avez fait plus de 5000 Associations !!",image:"../../assets/images/cup.jpg",score:"0"}
+  ];
    
-  tableBadges = {
-    columns: ['Utilisateur', 'Badges', 'Label'],
-    rows: this.getBadges()
-  }
+  
 
   constructor(
     private userService: UserService,
@@ -77,15 +91,6 @@ export class AccountPageComponent implements OnInit {
     }
   }
 
-  getBadges() {
-    return [
-      [ 'badgerow1col1', 'badgerow1col2', 'badgerow1col3'],
-      [ 'badgerow2col1', 'badgerow2col2', 'badgerow2col3'],
-      [ 'badgerow3col1', 'badgerow3col2', 'badgerow3col3'],
-      [ 'badgerow4col1', 'badgerow4col2', 'badgerow4col3']
-    ];
-  }
-
 
   getActivities() {
     return [
@@ -98,7 +103,6 @@ export class AccountPageComponent implements OnInit {
 
   showBadges() {
     this.toggleFeature('badges');
-    this.tableBadges.rows = this.getBadges();
   }
 
   showActivities() {

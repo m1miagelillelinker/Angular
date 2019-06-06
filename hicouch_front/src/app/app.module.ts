@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import {MatCardModule} from '@angular/material/card';
 import {
   MatButtonModule,
   MatFormFieldModule,
@@ -62,6 +63,7 @@ import { DisplayActivitiesComponent } from './account/components/display-activit
     FormsModule,
     ReactiveFormsModule,
     MatTabsModule,
+    MatCardModule,
   ],
   providers: [
     UserService,
