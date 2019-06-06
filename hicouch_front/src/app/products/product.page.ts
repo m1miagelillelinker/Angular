@@ -64,13 +64,6 @@ export class ProductPageComponent implements OnInit, OnDestroy, OnChanges {
         });
         if (json.length === 0) {
           console.log('ah');
-          // tslint:disable-next-line:no-shadowed-variable
-          this.productSubscription = this.productService.getMovieById('tt0120737').subscribe((movie: any) => {
-            movie.title = movie.title;
-            movie.type = movie.type;
-            movie.description = movie.description;
-            this.productsRelated.push(movie);
-          });
         }
       });
     });

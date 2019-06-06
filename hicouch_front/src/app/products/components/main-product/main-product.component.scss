@@ -1,8 +1,9 @@
-.main {
+.content {
+  background-color: #ececec; 
+  .main {
     width: 60vw;
     height:40vh;
     // border-radius: 10px;
-    background-color: #ececec; 
     display:flex;
     .image {
       img {
@@ -23,4 +24,24 @@
         margin-bottom: 20px;
       }
     }
+
   }
+  .tag{
+    > * {
+      width:50%;
+      display: block;
+      input {
+        background-color : white;
+      }
+    }
+  }
+  .tag{
+    > * {
+      width:50%;
+      display: block;
+      input {
+        background-color : white;
+      }
+    }
+  }
+}
