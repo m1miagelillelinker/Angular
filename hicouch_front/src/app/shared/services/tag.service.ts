@@ -16,6 +16,7 @@ export class TagService {
     }
 
     addTag(tag: string, idProduit: string) {
+        const headers = new HttpHeaders();
         headers.append('Content-Type', 'application/json');
         return this.http.put(`http://localhost:8080/tag/tagOnProduct?idProduit=${idProduit}&tag=${tag}`, {});
     }

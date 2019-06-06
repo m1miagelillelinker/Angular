@@ -9,6 +9,14 @@
           }
         }
       }
+      .tag{
+        > * {
+          display: block;
+          input {
+            background-color : white;
+          }
+        }
+      }
     }
 
 
