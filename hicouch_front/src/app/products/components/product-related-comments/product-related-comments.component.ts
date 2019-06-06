@@ -6,7 +6,6 @@ import {User} from '../../../shared/models/user';
 import {CommentService} from '../../../shared/services/comment.service';
 import { FormControl, Validators } from '@angular/forms';
 import { UserService } from '../../../shared/services/user.service';
-import {Signalement} from '../../../shared/models/signalement';
 import {SignalementService} from '../../../shared/services/signalement.service';
 import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from '@angular/material';
 import {ProductService} from '../../../shared/services/product.service';
@@ -119,14 +118,12 @@ export class ProductRelatedCommentsComponent implements OnInit {
             width: '50%',
             data: { comment: comment, user: this.loggedUser }
         });
-
         dialogRef.afterClosed().subscribe(result => {
             console.log('The dialog for signalement was closed');
             if (result) {
                 this.animationLoad();
             }
         });
-
     }
 
     showPopoverToEdit(comment: Comment) {
@@ -134,7 +131,6 @@ export class ProductRelatedCommentsComponent implements OnInit {
             width: '50%',
             data: { comment: comment, user: this.loggedUser }
         });
-
         dialogRef.afterClosed().subscribe(result => {
             console.log('The dialog to edit comment was closed');
             if (result) {
@@ -154,8 +150,6 @@ export class ProductRelatedCommentsComponent implements OnInit {
             return true;
         }
     }
-
-
 }
 
 
@@ -176,7 +170,6 @@ export class ProductsRelatedCommentUpdateDialogComponent implements OnInit {
         @Inject(MAT_DIALOG_DATA) public data: DialogDataComment) {}
 
     onNoClick(): void {
-
         console.log(this.data.comment);
         this.dialogRef.close();
     }
@@ -233,7 +226,6 @@ export class SpinnerDialogComponent implements OnInit {
 
     constructor(
         public dialogRef: MatDialogRef<SpinnerDialogComponent>) {}
-
 
     ngOnInit() {
         setTimeout(() => {
