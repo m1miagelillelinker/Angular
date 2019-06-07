@@ -76,48 +76,47 @@
         display: inline-flex;
         justify-content: space-around;
         height: 100%;
-
-        .item {
-            background-color: rgba(0, 0, 0, 0.2);
-            padding: 10px;
-            display: block;
-            width: calc(100% / 5);
-            max-width: 12%;
-            text-align: center;
-
-            .picto {
-                img {
-                    height: 15px;
-                }
-            }
-
-            .title2 {
-                margin-top: 5px;
-                font-size: 1em;
+            .item {
+                background-color: rgba(0, 0, 0, 0.2);
+                padding: 10px;
+                display: block;
+                width: calc(100% / 5);
+                max-width: 12%;
                 text-align: center;
-                overflow: hidden;
-                white-space: nowrap;
-                text-overflow: ellipsis;
-                color: #f4f4f4;
-            }
-
-            .image {
-                margin-top: auto;
-                margin-bottom: auto;
-
-                img {
-                    max-height: fit-content;
-                    width: 90%;
-                    cursor: pointer;
+    
+                .picto {
+                    img {
+                        height: 15px;
+                    }
                 }
-            }
-
-            &.add-product {
+    
+                .title2 {
+                    margin-top: 5px;
+                    font-size: 1em;
+                    text-align: center;
+                    overflow: hidden;
+                    white-space: nowrap;
+                    text-overflow: ellipsis;
+                    color: #f4f4f4;
+                }
+    
                 .image {
-                    margin-top: 33%;
+                    margin-top: auto;
+                    margin-bottom: auto;
+    
+                    img {
+                        max-height: fit-content;
+                        width: 90%;
+                        cursor: pointer;
+                    }
+                }
+    
+                &.add-product {
+                    .image {
+                        margin-top: 33%;
+                    }
                 }
             }
-        }
 
         .navigation-right,
         .navigation-left {

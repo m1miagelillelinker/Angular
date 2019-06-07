@@ -6,6 +6,6 @@
 	<app-products-top-recommandation [productsRelated]="productsRelated"></app-products-top-recommandation>
 </div>
 </div>
-<div *ngIf="mainProduct" >
+<div *ngIf="mainProduct && allProducts" >
 	<app-products-related [allProducts]="allProducts" (filters)="filterList($event)" [filteredProducts]="filteredProducts" [loggedUser]="user"></app-products-related>
 </div>

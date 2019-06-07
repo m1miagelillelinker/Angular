@@ -41,8 +41,8 @@ export class ProductsRelatedComponent implements OnInit, OnChanges {
 
     // TODO : be able to retrieve user from localstorage
 
-    /* fake datas to see if it work
-    loggedUser: User = {
+    /* fake datas to see if it work*/
+    loggedUsere: User = {
             id: 15
         };
 
@@ -83,9 +83,9 @@ export class ProductsRelatedComponent implements OnInit, OnChanges {
           comments: this.comments,
           votes: 50,
           userVote: {
-              idPair: this.asssoMeta.idPair, vote: -1, idUser: this.loggedUser.id
+              idPair: this.asssoMeta.idPair, vote: -1, idUser: this.loggedUsere.id
           }
-      };*/
+      };
 
 
     constructor(
@@ -129,6 +129,7 @@ export class ProductsRelatedComponent implements OnInit, OnChanges {
     }
 
     ngOnChanges() {
+        console.log(this.allProducts);
         this.changeDetectorRef.detectChanges();
     }
 
