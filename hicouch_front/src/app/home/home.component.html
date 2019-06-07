@@ -9,7 +9,7 @@
 </div>
 <!-- <button (click)="goToProducts()">see products</button> -->
 
-<div class="lastAssos">
+<div *ngIf="associations.length > 0" class="lastAssos">
 	<h2>Dernières associations</h2>
 
 	<div class="list">
@@ -25,5 +25,9 @@
 		</div>
 	</div>
 
+</div>
+
+<div *ngIf="associations.length == 0" class="lastAssos">
+	<h3>Aucune association pour le moment...</h3>
 </div>
 

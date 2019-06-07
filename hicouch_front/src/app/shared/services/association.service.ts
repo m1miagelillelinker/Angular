@@ -15,7 +15,7 @@ export class AssociationService {
     }
 
     fetchtAssociationByProduct(idProduct: number) {
-        return this.http.get(`https://hicjv3.azurewebsites.net/association/byProduct?idProduct=${idProduct}`);
+        return this.api.getAssociationByProduct('' + idProduct);
     }
 
     createAssociation(idProductA: string, typeProductA: string, idProductB: string, typeProductB: string) {
