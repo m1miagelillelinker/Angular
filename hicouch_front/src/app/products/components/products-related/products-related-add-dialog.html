@@ -12,18 +12,21 @@
     </mat-select>
   </mat-form-field>
 
-  <mat-form-field>
+  <app-search-product class="search-field" [productList]="products" 
+  (productSelected)="selectProduct($event)"
+  (searchValue)="toggleSearchPropositions($event)"></app-search-product>
+  <!-- <mat-form-field>
     <input #search matInput type="text"  placeholder="Rechercher"
            [formControl]="myControl" [matAutocomplete]="auto">
-           <!--   (keyup)="searchProducts(search.value)" -->
+              (keyup)="searchProducts(search.value)" 
     <mat-autocomplete #auto="matAutocomplete" (optionSelected)="setSelectedOption($event.option.value)" [displayWith]="displayFn">
-    	<!--  <mat-autocomplete #auto="matAutocomplete" (optionSelected)="setSelectedOption($event.option.value.id)" [displayWith]="displayFn"> -->
+    	
       <mat-option *ngFor="let product of listProductsFound | async" [value]="product.title">
-      <!-- <mat-option *ngFor="let product of listProductsFound | async" [value]="product">-->
+      
         {{product.title}}
       </mat-option>
     </mat-autocomplete>
-  </mat-form-field>
+  </mat-form-field> -->
 
   <mat-form-field >
     <textarea matInput placeholder="Pourquoi cette association ?"></textarea>

@@ -2,7 +2,7 @@ import { Component, OnInit, Input, OnChanges, Inject, ChangeDetectorRef, Output,
 import { ProductService } from '../../../shared/services/product.service';
 import { CommentService } from '../../../shared/services/comment.service';
 import { Router } from '@angular/router';
-import { FormControl } from '@angular/forms';
+import { FormControl, FormGroup } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA, MatSelectModule, MatAutocompleteModule } from '@angular/material';
@@ -290,6 +290,7 @@ export class ProductsRelatedComponent implements OnInit, OnChanges {
         this.showComments = !this.showComments;
         console.log(asso);
         console.log(this.showComments);
+        this.assoComment = asso;
         if (this.showComments) {
             this.assoComment = asso;
 
@@ -312,8 +313,11 @@ export class ProductsRelatedAddDialogComponent implements OnInit {
         { value: 'VIDEOGAMES', viewValue: 'Jeu-Vidéo' }
     ];
     selectedType: string;
+    products: any[];
     myControl = new FormControl();
+    isMovieSearched = new EventEmitter();
     selectedOption;
+    form: FormGroup;
     options = [
         { title: 'One' },
         { title: 'Two' },
@@ -328,6 +332,10 @@ export class ProductsRelatedAddDialogComponent implements OnInit {
 
     onNoClick(): void {
         this.dialogRef.close();
+    }
+
+    ngOnInit() {
+        this.form = new FormGroup();
     }
 
     /*searchProducts(value : string): void {
@@ -363,19 +371,15 @@ export class ProductsRelatedAddDialogComponent implements OnInit {
         console.log(value);
         if (this.selectedType === 'BOOK') {
             // this.options = this.productService.getBookByTitle(value);
-            console.log('Vous recherchez un livre');
         }
         if (this.selectedType === 'MOVIE') {
             // this.options = this.productService.getMovieByTitle(filterValue);
-            console.log('Vous recherchez un film');
         }
         if (this.selectedType === 'TVSHOW') {
             // this.options = this.productService.getTVShowByTitle(filterValue);
-            console.log('Vous recherchez une série');
         }
         if (this.selectedType === 'VIDEOGAMES') {
             // this.options = this.productService.getVideoGameByTitle(filterValue);
-            console.log('Vous recherchez un jeu vidéo');
         }
 
         return this.options.filter(option => option.title.toLowerCase().includes(filterValue));
@@ -396,5 +400,25 @@ export class ProductsRelatedAddDialogComponent implements OnInit {
         // return product ? product.title : undefined;
         return product ? product : undefined;
     }
+
+    toggleSearchPropositions(value) {
+        value = encodeURIComponent(value.trim());
+        this.productService.getMoviesByTitle(value).subscribe((movie) => {
+          this.products = movie;
+          this.isMovieSearched.emit(movie);
+        });
+      }
+
+      onType(value: string) {
+        value = encodeURIComponent(value.trim());
+        this.productService.getMoviesByTitle(value).subscribe((movie) => {
+          this.products = movie;
+          this.isMovieSearched.emit(movie);
+        });
+      }
+
+      selectProduct(event) {
+        this.selectedOption = event;
+      }
 
 }
