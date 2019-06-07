@@ -17,6 +17,7 @@ export class MainProductComponent implements OnInit, OnDestroy, OnChanges {
     filteredTags: Observable<string[]>;
     showInput = false;
   productSubscription: Subscription;
+  displayConfirmation = false;
 
 
   constructor(
@@ -25,12 +26,10 @@ export class MainProductComponent implements OnInit, OnDestroy, OnChanges {
   ) { }
 
   ngOnInit() {
-    console.log(this.mainProduct);
+    this.tagService.getTags(this.mainProduct.id).subscribe(res => console.log(res));
   }
 
   ngOnChanges(changes) {
-    console.log(this.mainProduct);
-    console.log(changes);
     this.changeRefDetecter.detectChanges();
   }
 
@@ -43,13 +42,14 @@ export class MainProductComponent implements OnInit, OnDestroy, OnChanges {
 }
 
 submit() {
-    console.log(this.tagControl.value);
     this.tagService.addTag(this.tagControl.value, this.mainProduct.id)
         .subscribe(() => this.tagService.getTags(this.mainProduct.id).subscribe((json: any) => this.tags = json));
     this.setInputFVisibility(false);
+    this.displayConfirmation = true;
 }
 
 setInputFVisibility(visible: boolean) {
     this.showInput = visible;
+    this.displayConfirmation = !visible;
 }
 }
