@@ -8,6 +8,7 @@ import {ProductService} from '../shared/services/product.service';
 import {UserService} from '../shared/services/user.service';
 import {AssociationService} from '../shared/services/association.service';
 import {Association} from '../shared/models/association';
+import {forEach} from '@angular/router/src/utils/collection';
 
 @Component({
   selector: 'app-home',
@@ -44,7 +45,32 @@ export class HomeComponent implements OnInit {
             lastName: user.lastName,
           };
         });
-    this.associations = this.associationService.getLastAssociations();
+    this.associations = this.getLastAssociations();
+  }
+
+  getLastAssociations() {
+    let assos: Association[];
+    this.associationService.getLastAssociations().subscribe(
+        (associations: Association[]) => {
+          assos = associations;
+        }
+    );
+    console.log(assos);
+    const list = [];
+    let i;
+    for (i in assos) {
+      if (list.length !== 0) {
+        let j;
+        for (j in list) {
+          if (j.association.idPair !== i.association.idPair) {
+            list.push(i);
+          }
+        }
+      } else {
+        list.push(i);
+      }
+    }
+    return list;
   }
 
   getProductImage(productId: string, fourn: string) {
