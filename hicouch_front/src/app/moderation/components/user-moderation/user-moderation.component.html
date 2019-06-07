@@ -2,7 +2,9 @@
     <h3>Modération des profils d'utilisateurs</h3>
     <div *ngFor="let signalement of signalements" class="box">
         <div class="content">
-            {{signalement.signaledUser.pseudo}}
+            <a class="link" (click)="goToUser(signalement.signaledUser.id)">{{signalement.signaledUser.pseudo}}</a>
+            <p><span>Score : {{signalement.signaledUser.score}}</span>.<span>Nom : {{signalement.signaledUser.lastName.<span>Prénom : {{signalement.signaledUser.firstName}}</span>}}</span></p>
+            <p class="causeSignalement">{{signalement.message}}</p>
         </div>
         <div>
             <button (click)="acceptSignalement(signalement.id)" class="button accept">Interdit</button>

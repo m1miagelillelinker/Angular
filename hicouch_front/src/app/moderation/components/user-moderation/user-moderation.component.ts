@@ -1,6 +1,7 @@
 import {ChangeDetectorRef, Component, Input, OnDestroy, OnInit} from '@angular/core';
 import {HicouchAPIService} from '../../../shared/services/hicouchAPI.service';
 import {Signalement} from '../../../shared/models/signalement';
+import {Router} from '@angular/router';
 
 @Component({
     selector: 'app-user-moderation',
@@ -12,7 +13,8 @@ export class UserModerationComponent implements OnInit, OnDestroy {
     signalements: Array<Signalement>;
 
     constructor(
-        private api: HicouchAPIService
+        private api: HicouchAPIService,
+        private router: Router
     ) { }
 
     ngOnInit() {
@@ -25,7 +27,18 @@ export class UserModerationComponent implements OnInit, OnDestroy {
     }
 
     loadUsers() {
-        this.api.listUsersToModerate().subscribe((json: Array<Signalement>) => this.signalements = json);
+        this.api.listUsersToModerate().subscribe(
+            (json: Array<Signalement>) => {
+                if (json == undefined) {
+                    this.signalements = [];
+                } else {
+                    this.signalements = json ;
+                }
+            });
+    }
+
+    goToUser(userId: number) {
+        this.router.navigate(['app/account', userId]);
     }
 
     acceptSignalement(idSignalement: number) {
