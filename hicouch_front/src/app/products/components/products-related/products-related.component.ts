@@ -1,151 +1,239 @@
 import { Component, OnInit, Input, OnChanges, Inject, ChangeDetectorRef } from '@angular/core';
 import { ProductService } from '../../../shared/services/product.service';
+import { CommentService } from '../../../shared/services/comment.service';
 import { Router } from '@angular/router';
 import {FormControl} from '@angular/forms';
 import {Observable} from 'rxjs';
 import {map, startWith} from 'rxjs/operators';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA, MatSelectModule, MatAutocompleteModule } from '@angular/material';
 import {Association} from '../../../shared/models/association';
+import {Comment} from '../../../shared/models/comment';
+import {User} from '../../../shared/models/user';
 
 export interface DialogData {
-  nomProduct: string;
+    nomProduct: string;
 }
 
 @Component({
-  selector: 'app-products-related',
-  templateUrl: './products-related.component.html',
-  styleUrls: ['./products-related.component.scss'],
+    selector: 'app-products-related',
+    templateUrl: './products-related.component.html',
+    styleUrls: ['./products-related.component.scss'],
 })
 export class ProductsRelatedComponent implements OnInit, OnChanges {
-  @Input() allProducts: Array<Association>;
-  movieSelected = true;
-  bookSelected = false;
-  currentIndex = 0;
-  totalPages = 1;
-  currentPage = 0;
-  displayTitle: string;
-  idProduct: number;
-  idAssociatedProduct: number;
+    @Input() allProducts: Array<Association>;
+    @Input() loggedUser: User;
+    movieSelected = true;
+    bookSelected = false;
+    currentIndex = 0;
+    totalPages = 1;
+    currentPage = 0;
+    displayTitle: string;
+    idProduct: number;
+    idAssociatedProduct: number;
 
-  constructor(
-      private router: Router,
-      public dialog: MatDialog,
-      private changeDetectorRef: ChangeDetectorRef,
-  ) { }
+    showComments: boolean;
+    assoComment: Association;
 
-  ngOnInit() {
+    // TODO : be able to retrieve user from localstorage
 
-  }
+    /* fake datas to see if it work
+    loggedUser: User = {
+            id: 15
+        };
 
-  fetchNavigation() {
-      this.totalPages = Math.ceil(this.allProducts.length / 5);
+      m = {
+          id: 1,
+          title: 'Avengers',
+          description: '',
+          country: 'usa',
+          director: 'Russo',
+          year: '2019',
+          genre: null,
+          image: '',
+          duration: '180',
+          type: 'movie'
+      };
 
-  }
+        comments: Comment[] = [
+            {id: 1, commentaire: 'Totalement d\'accord avec.', note: 0, iduser: 1, idpair: 1, status: 1,
+                createdat: new Date()}, // , updatedate: new Date()
+            {id: 3, commentaire: 'Hors sujet', note: 18, iduser: 15, idpair: 1, status: 0,
+                createdat: new Date(), updatedate: new Date()},
+            {id: 2, commentaire: 'Hors sujet', note: -1, iduser: 2, idpair: 1, status: 0,
+                createdat: new Date(), updatedate: new Date()}
+        ];
+      asssoMeta  = {
+          id: 1,
+          idProduitA: '1',
+          idfournA: '5',
+          idProduitB: '2',
+          idfournB: '6',
+          idPair: 10
+      };
 
-  ngOnChanges() {
+      asso =  {
+          association: this.asssoMeta,
+          product: this.m,
+          productDTO: this.m,
+          comments: this.comments,
+          votes: 50,
+          userVote: {
+              idPair: this.asssoMeta.idPair, vote: -1, idUser: this.loggedUser.id
+          }
+      };*/
+
+
+    constructor(
+        private router: Router,
+        public dialog: MatDialog,
+        private changeDetectorRef: ChangeDetectorRef,
+    ) { }
+
+    ngOnInit() {
+
+    }
+
+    fetchNavigation() {
+        this.totalPages = Math.ceil(this.allProducts.length / 5);
+
+    }
+
+
+    ngOnChanges() {
     this.changeDetectorRef.detectChanges();
-  }
+    }
 
-  fetchList(number): Association[] {
-    // this.allProducts.forEach(asso => {
-    //     asso.product.titleShort = this.fetchTitle(asso.product.title);
-    // });
+    fetchList(number): Association[] {
     if (this.allProducts) {
         this.allProducts.forEach(p => {
             if (!p.product.type) { p.product.type = 'movie'; }
         });
-    }
-      let tab = [];
-      this.fetchNavigation();
-      if (number >= 5) {
-        tab = this.allProducts.slice(number, number + 5);
-        console.log(tab);
-        return tab;
-      } else {
-        tab = this.allProducts.slice(0, 5);
-        console.log(tab);
-        return tab;
-      }
-  }
-
-  getPicto(type) {
-    if (type === 'movie') {
-        return '/assets/images/movie.png';
-    }
-    if (type === 'book') {
-        return '/assets/images/book-cover.png';
-    } else {
-        return '/assets/images/computer.png';
-    }
-  }
-
-  getTitle(product) {
-      return product.title;
-  }
-
-  fetchTitle(title: string) {
-      if (title) {
-        if (title.length > 17) {
-            this.displayTitle = title.substr(0, 17) + '...';
+        }
+        let tab = [];
+        this.fetchNavigation();
+        if (number >= 5) {
+            tab = this.allProducts.slice(number, number + 5);
+            console.log(tab);
+            return tab;
         } else {
-            this.displayTitle = title;
+            tab = this.allProducts.slice(0, 5);
+            console.log(tab);
+            return tab;
         }
-        return this.displayTitle;
-      }
+        // return [this.asso];
+    }
+    // fetchList(number): Association[] {
+    //     this.allProducts.forEach(asso => {
+    //         asso.product.title = this.fetchTitle(asso.product.title);
+    //     });
+    //     if (this.allProducts) {
+    //         this.allProducts.forEach(p => {
+    //             if (!p.productDTO.type) { p.productDTO.type = 'movie'; }
+    //         });
+    //     }
+    //     let tab = [];
+    //     this.fetchNavigation();
+    //     if (number >= 5) {
+    //         tab = this.allProducts.slice(number, number + 5);
+    //         console.log(tab);
+    //         return tab;
+    //     } else {
+    //         tab = this.allProducts.slice(0, 5);
+    //         console.log(tab);
+    //         return tab;
+    //     }
+    //     // return [this.asso];
+    // }
 
-  }
-
-  counter(i: number) {
-    return new Array(i);
-}
-
-  fetchIndex(direction) {
-    if (direction === 'right') {
-        this.currentPage += 1;
-        this.currentIndex += 5;
-        if (this.currentIndex >= this.allProducts.length) {
-            this.currentIndex = this.allProducts.length;
+    getPicto(type) {
+        if (type === 'movie') {
+            return '/assets/images/movie.png';
         }
+        if (type === 'book') {
+            return '/assets/images/book-cover.png';
+        } else {
+            return '/assets/images/computer.png';
+        }
+    }
 
+    getTitle(product) {
+        return product.title;
+    }
+
+    fetchTitle(title: string) {
+        if (title) {
+            if (title.length > 17) {
+                this.displayTitle = title.substr(0, 17) + '...';
+            } else {
+                this.displayTitle = title;
+            }
+            return this.displayTitle;
+        }
 
     }
-    if (direction === 'left') {
-        this.currentPage -= 1;
-        this.currentIndex -= 5;
-        if (this.currentIndex - 5 <= 0) {
-            this.currentIndex = 0;
-        }
 
+    counter(i: number) {
+        return new Array(i);
     }
-    this.fetchList(this.currentIndex);
-  }
 
-  addAssociation() {
-      this.openDialog();
-  }
-
-  openDialog(): void {
-      const dialogRef = this.dialog.open(ProductsRelatedAddDialogComponent, {
-          width: '50%',
-          data: { nomProduct: this.idProduct, id2: null }
-      });
-
-      dialogRef.afterClosed().subscribe(result => {
-          console.log('The dialog was closed');
-          this.idAssociatedProduct = result;
-      });
-  }
+    fetchIndex(direction) {
+        if (direction === 'right') {
+            this.currentPage += 1;
+            this.currentIndex += 5;
+            if (this.currentIndex >= this.allProducts.length) {
+                this.currentIndex = this.allProducts.length;
+            }
 
 
-  goTo(productId) {
-      this.router.navigate(['app/products', productId]);
-  }
+        }
+        if (direction === 'left') {
+            this.currentPage -= 1;
+            this.currentIndex -= 5;
+            if (this.currentIndex - 5 <= 0) {
+                this.currentIndex = 0;
+            }
+
+        }
+        console.log(this.currentIndex);
+        this.fetchList(this.currentIndex);
+    }
+
+    addAssociation() {
+        this.openDialog();
+    }
+
+    openDialog(): void {
+        const dialogRef = this.dialog.open(ProductsRelatedAddDialogComponent, {
+            width: '50%',
+            data: { nomProduct: this.idProduct, id2: null }
+        });
+
+        dialogRef.afterClosed().subscribe(result => {
+            console.log('The dialog was closed');
+            this.idAssociatedProduct = result;
+        });
+    }
+
+
+    goTo(productId) {
+        console.log('go to this product');
+        this.router.navigate(['app/products', productId]);
+    }
+
+    showPopover(asso: Association) {
+        this.showComments = !this.showComments;
+        if (this.showComments) {
+            this.assoComment = asso;
+
+            // TODO : be able to scroll to comments
+        }
+    }
 
 }
 
 @Component({
-  selector: 'app-products-related-add-dialog',
-  templateUrl: 'products-related-add-dialog.html',
+    selector: 'app-products-related-add-dialog',
+    templateUrl: 'products-related-add-dialog.html',
     styleUrls: ['./products-related.component.scss'],
 })
 export class ProductsRelatedAddDialogComponent implements OnInit {
@@ -162,37 +250,36 @@ export class ProductsRelatedAddDialogComponent implements OnInit {
         {title: 'One'},
         {title: 'Two'},
         {title: 'Three'}
-        // 'One', 'Two', 'Three'
-        ];
+    ];
     listProductsFound: Observable<string[]>;
 
-  constructor(
-    public dialogRef: MatDialogRef<ProductsRelatedAddDialogComponent>,
-    private productService: ProductService,
-      @Inject(MAT_DIALOG_DATA) public data: DialogData) {}
+    constructor(
+        public dialogRef: MatDialogRef<ProductsRelatedAddDialogComponent>,
+        private productService: ProductService,
+        @Inject(MAT_DIALOG_DATA) public data: DialogData) {}
 
-  onNoClick(): void {
-    this.dialogRef.close();
-  }
+    onNoClick(): void {
+        this.dialogRef.close();
+    }
 
-  /*searchProducts(value : string): void {
-      if(value.length > 2){
-          console.log(value);
-          if(this.selectedType == 'BOOK'){
-              // this.options = this.productService.getMovieByTitle(value);
-              console.log('Vous recherchez un livre');
-          }
-          if(this.selectedType == 'MOVIE'){
-              console.log('Vous recherchez un film');
-          }
-          if(this.selectedType == 'TVSHOW'){
-              console.log('Vous recherchez une série');
-          }
-          if(this.selectedType == 'VIDEOGAMES'){
-              console.log('Vous recherchez un jeu vidéo');
-          }
-      }
-  }*/
+    /*searchProducts(value : string): void {
+        if(value.length > 2){
+            console.log(value);
+            if(this.selectedType == 'BOOK'){
+                // this.options = this.productService.getMovieByTitle(value);
+                console.log('Vous recherchez un livre');
+            }
+            if(this.selectedType == 'MOVIE'){
+                console.log('Vous recherchez un film');
+            }
+            if(this.selectedType == 'TVSHOW'){
+                console.log('Vous recherchez une série');
+            }
+            if(this.selectedType == 'VIDEOGAMES'){
+                console.log('Vous recherchez un jeu vidéo');
+            }
+        }
+    }*/
 
     ngOnInit() {
         this.listProductsFound = this.myControl.valueChanges

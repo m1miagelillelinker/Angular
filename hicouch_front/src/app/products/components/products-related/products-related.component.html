@@ -1,15 +1,13 @@
 <div class="banner">
-        <div class="title">
-                Related Products :
-        </div>
-                        <div class="navigation" *ngIf="totalPages">
-                                <div *ngFor="let in of counter(totalPages) ;let i = index">
-                                        <div id="cercle" *ngIf="i !== this.currentPage"></div>
-                                        <div id="cercle2" *ngIf="i === this.currentPage"></div>
-                                </div>
-                        </div>
+	<div class="title">Related Products :</div>
+	<div class="navigation" *ngIf="totalPages">
+		<div *ngFor="let in of counter(totalPages) ;let i = index">
+			<div id="cercle" *ngIf="i !== this.currentPage"></div>
+			<div id="cercle2" *ngIf="i === this.currentPage"></div>
+		</div>
+	</div>
 
-        <br />
+	<br />
 
         <div class="list" >
                 <div class="navigation-left">
@@ -40,4 +38,4 @@
                 </div>
         </div>
 
-</div>
+<app-product-related-comments #popover *ngIf="showComments" [asso]="assoComment" [loggedUser]="loggedUser"></app-product-related-comments>

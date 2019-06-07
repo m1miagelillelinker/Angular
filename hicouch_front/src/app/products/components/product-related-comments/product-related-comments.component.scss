@@ -1,0 +1,41 @@
+
+#popover {
+    padding: 50px;
+    /*background-color: white;*/
+    margin: 0 auto;
+    width: 60%;
+    border: solid #7c0000;
+    margin-top: 10px;
+    border-radius: 10px;
+}
+
+.username {
+    color: maroon;
+}
+
+.date {
+    color: gray;
+    font-size: 10px;
+}
+
+.note {
+    text-align: left;
+}
+
+.popoverTitle {
+    font-size: 35px;
+}
+
+.url {
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.signalement-container, .update-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.signalement-container > *, .update-container > *, .addComment > * {
+    width: 100%;
+}

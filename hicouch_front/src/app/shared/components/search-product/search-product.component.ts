@@ -48,6 +48,7 @@ export class SearchProductComponent {
     if (value.length >= 3) {
       this.searchValue.emit(value);
       this.searchInput.nativeElement.value = '';
+      this.productList = null;
     }
   }
 
