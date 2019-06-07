@@ -1,14 +1,10 @@
 <div class="displayBadges">
-<h2>{{title}}</h2>
+<h1>{{title}}</h1>
   <ul>
     <li *ngFor="let badge of badges">
-    <img class="imageBadge" height="100px" width="50px" [src]="badge.image">
-    <p>{{badge.intitule}}</p>
+    <img height="100px" width="50px" [src]="badge.image">
+    <p class="intitule">{{badge.intitule}}</p>
     <p class="libelle">{{badge.libelle}}</p>
-    <div class="profile-progress">
-        <div class="progress-bar" [ngStyle]="{'width': profileProgress.fullProgress}"></div>
-        <div class="progress" [ngStyle]="{'width.px': badge.score}"></div>
-    </div>
     </li>
   </ul>
 </div>

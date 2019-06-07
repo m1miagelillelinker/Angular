@@ -33,23 +33,21 @@ export class AccountPageComponent implements OnInit {
     {lastname:"DJ",firstname:"Robert",image:"../../assets/images/robert_DJ.jpg"}
   ];
 
-  badgesCommentaire = [
-    {intitule:"Youngling",libelle:"Vous avez fait 10 commentaires !!",image:"../../assets/images/youngling.png",score:"80"},
-    {intitule:"Padawab",libelle:"Vous avez fait 100 commentaires !!",image:"../../assets/images/padawan.png",score:"0"},
-    {intitule:"Knight",libelle:"Vous avez fait 1000 commentaires !!",image:"../../assets/images/knight.png",score:"0"},
-    {intitule:"Master",libelle:"Vous avez fait 3000 commentaires !!",image:"../../assets/images/master.png",score:"0"},
-    {intitule:"Grand Master",libelle:"Vous avez fait plus de 5000 commentaires !!",image:"../../assets/images/grandmaster.jpg",score:"0"}
+  badges = [
+    {intitule:"Youngling",libelle:"Vous avez fait 10 commentaires !!",image:"../../assets/images/youngling.png",score:"80",enabaled:4},
+    {intitule:"Padawan",libelle:"Vous avez fait 100 commentaires !!",image:"../../assets/images/padawan.png",score:"0",enabled:2},
+    {intitule:"Knight",libelle:"Vous avez fait 500 commentaires !!",image:"../../assets/images/knight.png",score:"0",enabled:2},
+    {intitule:"Master",libelle:"Vous avez fait 1000 commentaires !!",image:"../../assets/images/master.png",score:"0",enabled:2},
+    {intitule:"Grand Master",libelle:"Vous avez fait plus de 1000 commentaires !!",image:"../../assets/images/grandmaster.jpg",score:"0",enabled:2},
+    {intitule:"Youngling",libelle:"Vous avez fait 10 Associations !!",image:"../../assets/images/cup.jpg",score:"150",enabled:2},
+    {intitule:"Padawan",libelle:"Vous avez fait 100 Associations !!",image:"../../assets/images/cup.jpg",score:"100",enabled:2},
+    {intitule:"Knight",libelle:"Vous avez fait 500 Associations !!",image:"../../assets/images/cup.jpg",score:"0",enabled:2},
+    {intitule:"Master",libelle:"Vous avez fait 1000 Associations !!",image:"../../assets/images/cup.jpg",score:"0",enabled:2},
+    {intitule:"Grand Master",libelle:"Vous avez fait plus de 1000 Associations !!",image:"../../assets/images/cup.jpg",score:"0",enabled:2}
   ];
+  //2 ok
+  //4 hidden
 
-  badgesAssociation = [
-    {intitule:"Youngling",libelle:"Vous avez fait 10 Associations !!",image:"../../assets/images/cup.jpg",score:"150"},
-    {intitule:"Padawab",libelle:"Vous avez fait 100 Associations !!",image:"../../assets/images/cup.jpg",score:"100"},
-    {intitule:"Knight",libelle:"Vous avez fait 1000 Associations !!",image:"../../assets/images/cup.jpg",score:"0"},
-    {intitule:"Master",libelle:"Vous avez fait 3000 Associations !!",image:"../../assets/images/cup.jpg",score:"0"},
-    {intitule:"Grand Master",libelle:"Vous avez fait plus de 5000 Associations !!",image:"../../assets/images/cup.jpg",score:"0"}
-  ];
-   
-  
 
   constructor(
     private userService: UserService,
