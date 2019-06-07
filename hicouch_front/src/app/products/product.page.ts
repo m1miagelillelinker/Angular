@@ -71,6 +71,7 @@ export class ProductPageComponent implements OnInit, OnDestroy, OnChanges {
         this.allProducts = json;
         console.log(json);
         if (this.allProducts && this.allProducts.length > 0) {
+          this.productsRelated = [];
           this.productsRelated.push(json[0]);
         }
         if (json.length === 0) {

@@ -157,7 +157,7 @@ export class ProductsRelatedComponent implements OnInit, OnChanges {
         if (type === 'book') {
             return '/assets/images/book-cover.png';
         }
-        if (type === 'serie') {
+        if (type === 'series') {
             return '/assets/images/computer.png';
         } else {
             return '/assets/images/gamepad.png';
@@ -283,11 +283,13 @@ export class ProductsRelatedComponent implements OnInit, OnChanges {
 
     goTo(productId) {
         console.log('go to this product');
-        this.router.navigate(['app/products', productId]);
+       // this.router.navigate(['app/products', productId]);
     }
 
     showPopover(asso: Association) {
         this.showComments = !this.showComments;
+        console.log(asso);
+        console.log(this.showComments);
         if (this.showComments) {
             this.assoComment = asso;
 
