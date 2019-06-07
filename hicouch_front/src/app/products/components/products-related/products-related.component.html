@@ -11,33 +11,24 @@
 
         <br />
 
-        <div class="list" *ngIf="allProducts">
+        <div class="list" >
                 <div class="navigation-left">
                         <img *ngIf="currentIndex > 0" (click)="fetchIndex('left')"
                                 src="assets/images/white-arrow-right.png">
                 </div>
-                <div class="item" *ngFor="let asso of fetchList(currentIndex)" (click)="goTo(asso.product.id)">
-                        <div class="picto">
-                                <img src="{{getPicto(asso.product.type)}}">
-                        </div>
-                        <div class="image">
-                                <img src="{{asso.product.image}}">
-                        </div>
-                        <div class="title2" (mouseover)="getTitle(asso.product)">
-                                {{asso.product.title}}
+                <div *ngIf="allProducts">
+                        <div class="item" *ngFor="let asso of fetchList(currentIndex)" (click)="goTo(asso.product.id)">
+                                <div class="picto">
+                                        <img src="{{getPicto(asso.product.type)}}">
+                                </div>
+                                <div class="image">
+                                        <img src="{{asso.product.image}}">
+                                </div>
+                                <div class="title2" (mouseover)="getTitle(asso.product)">
+                                        {{asso.product.title}}
+                                </div>
                         </div>
                 </div>
-                <!-- <div class="item" *ngFor="let product of fetchList(currentIndex)" (click)="goTo(product.id)">
-                        <div class="picto">
-                                <img src="{{getPicto(product.type)}}">
-                        </div>
-                        <div class="image">
-                                <img src="{{product.image}}">
-                        </div>
-                        <div class="title2" (mouseover)="getTitle(product)">
-                                {{product.title}}
-                        </div>
-                </div> -->
                 <div class="item add-product">
                         <div class="image" (click)="addAssociation()">
                                 <img src="/assets/images/plus.png">

@@ -42,7 +42,7 @@ export class ProductPageComponent implements OnInit, OnDestroy, OnChanges {
     this.route.params.subscribe(params => {
       this.productId = params['productId'];
       // TODO remove line below when Associations availables
-      this.idRelated = (this.productId === 'tt1201607') ? 'tt0120737' : 'tt1201607';
+      // this.idRelated = (this.productId === 'tt1201607') ? 'tt0120737' : 'tt1201607';
       this.fetchProducts();
     });
   }
@@ -52,16 +52,9 @@ export class ProductPageComponent implements OnInit, OnDestroy, OnChanges {
       this.mainProduct = movie;
       this.associationService.fetchtAssociationByProduct(this.mainProduct.id).subscribe((json: any) => {
         this.allProducts = json;
-        this.productsRelated.push(json[0]);
-        this.productService.getBookById('9782070541270').subscribe((book: any) => {
-          book.type = 'book';
-          const asso = {
-            association: null,
-            product: book,
-          };
-          this.productsRelated.push(asso);
-          this.allProducts.push(asso);
-        });
+        if (this.allProducts && this.allProducts.length > 0) {
+          this.productsRelated.push(json[0]);
+        }
         if (json.length === 0) {
           console.log('ah');
         }
