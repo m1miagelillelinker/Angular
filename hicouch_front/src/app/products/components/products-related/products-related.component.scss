@@ -1,65 +1,98 @@
-
 .banner {
-    max-height: 60vh;
     background-color: #7c0000;
     // width:100%;
-    margin:0;
+    margin: 0;
     padding: 10px;
-    .title{
+
+    .title {
         color: #f4f4f4;
+
         margin-top: 8px;
         font-size: 1.5em;
         width: 100%;
-        display:block;
-       
+        display: flex;
+
+        p {
+            margin: initial;
+            float: left;
         }
-        .navigation {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            width:100%;
-            div {
-                margin:5px;
-                &#cercle {
-                    width: 10px;
-                    height: 10px;
-                    border-radius: 10px;
-                    background: #969696;
-                    &.selected {
-                        background: white;
-                    }
-                }
-               &#cercle2 {
-                    width: 10px;
-                    height: 10px;
-                    border-radius: 10px;
+
+    }
+
+    .filter {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        .filter-picto {
+            margin: 10px;
+            padding:10px;
+            &.selected {
+                background-color: rgba(0, 0, 0, 0.2);
+            }
+            img {
+                height: 30px;
+                cursor: pointer;
+            }
+    
+        }
+
+    }
+
+    .navigation {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+
+        div {
+            margin: 5px;
+
+            &#cercle {
+                width: 10px;
+                height: 10px;
+                border-radius: 10px;
+                background: #969696;
+
+                &.selected {
                     background: white;
-                    &.selected {
-                        background: white;
-                    }
+                }
+            }
+
+            &#cercle2 {
+                width: 10px;
+                height: 10px;
+                border-radius: 10px;
+                background: white;
+
+                &.selected {
+                    background: white;
                 }
             }
         }
-            
+    }
+
     .list {
-        width:100%;
-        display:inline-flex;
+        width: 100%;
+        display: inline-flex;
         justify-content: space-around;
-        height:100%;
-        .item{
-            background-color:rgba(0,0,0,0.2);
+        height: 100%;
+
+        .item {
+            background-color: rgba(0, 0, 0, 0.2);
             padding: 10px;
             display: block;
             width: calc(100% / 5);
             max-width: 12%;
-            text-align:center;
+            text-align: center;
+
             .picto {
                 img {
                     height: 15px;
                 }
             }
+
             .title2 {
-                margin-top:5px;
+                margin-top: 5px;
                 font-size: 1em;
                 text-align: center;
                 overflow: hidden;
@@ -67,29 +100,36 @@
                 text-overflow: ellipsis;
                 color: #f4f4f4;
             }
+
             .image {
-                margin-top:auto;
-                margin-bottom:auto;
+                margin-top: auto;
+                margin-bottom: auto;
+
                 img {
-                    max-height:fit-content;
-                    width:90%;
+                    max-height: fit-content;
+                    width: 90%;
                     cursor: pointer;
                 }
             }
+
             &.add-product {
                 .image {
-                    margin-top:33%;
+                    margin-top: 33%;
                 }
             }
         }
-        .navigation-right, .navigation-left{
-            margin-top:auto;
-            margin-bottom:auto;
+
+        .navigation-right,
+        .navigation-left {
+            margin-top: auto;
+            margin-bottom: auto;
             cursor: pointer;
+
             img {
                 height: 30px;
             }
         }
+
         .navigation-left {
             img {
                 transform: rotate(180deg);
@@ -97,7 +137,7 @@
         }
 
     }
-    
+
 }
 
 .title {
@@ -109,10 +149,6 @@
     flex-direction: column;
 }
 
-.association-container > * {
+.association-container>* {
     width: 100%;
-}
-
-.association {
-    //background-color: bisque;
 }

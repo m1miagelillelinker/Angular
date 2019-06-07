@@ -99,7 +99,7 @@ export class HicouchAPIService {
 
     // associations
 
-    getAssociationByProduct(idProduct: string): any {
+    getAssociationByProduct(idProduct: number): any {
         return this.get(this.associationController + '/byProduct', [{key: 'idProduct', value: idProduct}]);
     }
 

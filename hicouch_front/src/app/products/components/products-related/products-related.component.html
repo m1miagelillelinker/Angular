@@ -1,13 +1,34 @@
 <div class="banner">
-	<div class="title">Related Products :</div>
-	<div class="navigation" *ngIf="totalPages">
-		<div *ngFor="let in of counter(totalPages) ;let i = index">
-			<div id="cercle" *ngIf="i !== this.currentPage"></div>
-			<div id="cercle2" *ngIf="i === this.currentPage"></div>
-		</div>
-	</div>
+        <div class="title">
+                <p>Related Products :</p>
 
-	<br />
+        </div>
+        <div class="filter">
+                <div class="filter-picto" [ngClass]="{'selected': movieSelected}">
+                        <img src="/assets/images/movie.png" (click)="selectType('movie')">
+
+                </div>
+                <div class="filter-picto" [ngClass]="{'selected': tvSelected}">
+                        <img src="/assets/images/computer.png" (click)="selectType('tvshow')">
+
+                </div>
+                <div class="filter-picto" [ngClass]="{'selected': bookSelected}">
+                        <img src="/assets/images/book-cover.png" (click)="selectType('book')">
+
+                </div>
+                <div class="filter-picto" [ngClass]="{'selected': gameSelected}">
+                        <img src="/assets/images/gamepad.png" (click)="selectType('game')">
+
+                </div>
+        </div>
+        <div class="navigation" *ngIf="totalPages">
+                <div *ngFor="let in of counter(totalPages) ;let i = index">
+                        <div id="cercle" *ngIf="i !== this.currentPage"></div>
+                        <div id="cercle2" *ngIf="i === this.currentPage"></div>
+                </div>
+        </div>
+
+        <br />
 
         <div class="list" >
                 <div class="navigation-left">

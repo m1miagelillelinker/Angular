@@ -1,14 +1,14 @@
-import { Component, OnInit, Input, OnChanges, Inject, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, Input, OnChanges, Inject, ChangeDetectorRef, Output, EventEmitter } from '@angular/core';
 import { ProductService } from '../../../shared/services/product.service';
 import { CommentService } from '../../../shared/services/comment.service';
 import { Router } from '@angular/router';
-import {FormControl} from '@angular/forms';
-import {Observable} from 'rxjs';
-import {map, startWith} from 'rxjs/operators';
-import {MatDialog, MatDialogRef, MAT_DIALOG_DATA, MatSelectModule, MatAutocompleteModule } from '@angular/material';
-import {Association} from '../../../shared/models/association';
-import {Comment} from '../../../shared/models/comment';
-import {User} from '../../../shared/models/user';
+import { FormControl } from '@angular/forms';
+import { Observable } from 'rxjs';
+import { map, startWith } from 'rxjs/operators';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA, MatSelectModule, MatAutocompleteModule } from '@angular/material';
+import { Association } from '../../../shared/models/association';
+import { Comment } from '../../../shared/models/comment';
+import { User } from '../../../shared/models/user';
 
 export interface DialogData {
     nomProduct: string;
@@ -22,8 +22,13 @@ export interface DialogData {
 export class ProductsRelatedComponent implements OnInit, OnChanges {
     @Input() allProducts: Array<Association>;
     @Input() loggedUser: User;
+    @Input() filteredProducts: Array<Association>;
+    @Output() filters: EventEmitter<any> = new EventEmitter();
     movieSelected = true;
-    bookSelected = false;
+    bookSelected = true;
+    tvSelected = true;
+    gameSelected = true;
+    filtersList = [];
     currentIndex = 0;
     totalPages = 1;
     currentPage = 0;
@@ -90,37 +95,10 @@ export class ProductsRelatedComponent implements OnInit, OnChanges {
     ) { }
 
     ngOnInit() {
-
-    }
-
-    fetchNavigation() {
-        this.totalPages = Math.ceil(this.allProducts.length / 5);
-
-    }
-
-
-    ngOnChanges() {
-    this.changeDetectorRef.detectChanges();
-    }
-
-    fetchList(number): Association[] {
-    if (this.allProducts) {
-        this.allProducts.forEach(p => {
-            if (!p.product.type) { p.product.type = 'movie'; }
-        });
-        }
-        let tab = [];
-        this.fetchNavigation();
-        if (number >= 5) {
-            tab = this.allProducts.slice(number, number + 5);
-            console.log(tab);
-            return tab;
-        } else {
-            tab = this.allProducts.slice(0, 5);
-            console.log(tab);
-            return tab;
-        }
-        // return [this.asso];
+        this.filtersList.push('m');
+        this.filtersList.push('t');
+        this.filtersList.push('b');
+        this.filtersList.push('g');
     }
     // fetchList(number): Association[] {
     //     this.allProducts.forEach(asso => {
@@ -145,14 +123,43 @@ export class ProductsRelatedComponent implements OnInit, OnChanges {
     //     // return [this.asso];
     // }
 
+    fetchNavigation() {
+        this.totalPages = Math.ceil(this.filteredProducts.length / 5);
+
+    }
+
+    ngOnChanges() {
+        this.changeDetectorRef.detectChanges();
+    }
+
+    fetchList(number: number): Association[] {
+        if (this.allProducts) {
+            this.allProducts.forEach(p => {
+                if (!p.product.type) { p.product.type = 'movie'; }
+            });
+        }
+        let tab = [];
+        this.fetchNavigation();
+        if (number >= 5) {
+            tab = this.filteredProducts.slice(number, number + 5);
+            return tab;
+        } else {
+            tab = this.filteredProducts.slice(0, 5);
+            return tab;
+        }
+    }
+
     getPicto(type) {
         if (type === 'movie') {
             return '/assets/images/movie.png';
         }
         if (type === 'book') {
             return '/assets/images/book-cover.png';
-        } else {
+        }
+        if (type === 'serie') {
             return '/assets/images/computer.png';
+        } else {
+            return '/assets/images/gamepad.png';
         }
     }
 
@@ -194,6 +201,64 @@ export class ProductsRelatedComponent implements OnInit, OnChanges {
             }
 
         }
+        this.fetchList(this.currentIndex);
+    }
+
+    selectType(type: string) {
+        switch (type) {
+            case 'movie':
+                this.movieSelected = !this.movieSelected;
+                // if (this.movieSelected && this.filtersList.find(l => l === 'm') == null) {
+                //     this.filtersList.push('m');
+                // } else {
+                //     idx = this.filtersList.findIndex(l => l === 'm');
+                //     this.filtersList.splice(idx, 1);
+                // }
+                break;
+            case 'tvshow':
+                this.tvSelected = !this.tvSelected;
+                // if (this.tvSelected && this.filtersList.find(l => l === 't') == null) {
+                //     this.filtersList.push('t');
+                // } else {
+                //     idx = this.filtersList.findIndex(l => l === 't');
+                //     this.filtersList.splice(idx, 1);
+                // }
+                break;
+            case 'book':
+                this.bookSelected = !this.bookSelected;
+                // if (this.bookSelected && this.filtersList.find(l => l === 'b') == null) {
+                //     this.filtersList.push('b');
+                // } else {
+                //     idx = this.filtersList.findIndex(l => l === 'b');
+                //     this.filtersList.splice(idx, 1);
+                // }
+                break;
+            case 'game':
+                this.gameSelected = !this.gameSelected;
+                // if (this.gameSelected && this.filtersList.find(l => l === 'g') == null) {
+                //     this.filtersList.push('g');
+                // } else {
+                //     idx = this.filtersList.findIndex(l => l === 'g');
+                //     this.filtersList.splice(idx, 1);
+                // }
+                break;
+        }
+        this.filters.emit('');
+        const pute = [];
+        if (this.movieSelected) {
+            pute.push('movie');
+        }
+        if (this.bookSelected) {
+            pute.push('book');
+        }
+        if (this.tvSelected) {
+            pute.push('series');
+        }
+        if (this.gameSelected) {
+            pute.push('game');
+        }
+        this.filters.emit(pute);
+        // this.fetchList(this.currentIndex);
         console.log(this.currentIndex);
         this.fetchList(this.currentIndex);
     }
@@ -238,25 +303,25 @@ export class ProductsRelatedComponent implements OnInit, OnChanges {
 })
 export class ProductsRelatedAddDialogComponent implements OnInit {
     Productstype = [
-        {value: 'BOOK', viewValue: 'Livre'},
-        {value: 'MOVIE', viewValue: 'Film'},
-        {value: 'TVSHOW', viewValue: 'Série'},
-        {value: 'VIDEOGAMES', viewValue: 'Jeu-Vidéo'}
+        { value: 'BOOK', viewValue: 'Livre' },
+        { value: 'MOVIE', viewValue: 'Film' },
+        { value: 'TVSHOW', viewValue: 'Série' },
+        { value: 'VIDEOGAMES', viewValue: 'Jeu-Vidéo' }
     ];
     selectedType: string;
     myControl = new FormControl();
     selectedOption;
     options = [
-        {title: 'One'},
-        {title: 'Two'},
-        {title: 'Three'}
+        { title: 'One' },
+        { title: 'Two' },
+        { title: 'Three' }
     ];
     listProductsFound: Observable<string[]>;
 
     constructor(
         public dialogRef: MatDialogRef<ProductsRelatedAddDialogComponent>,
         private productService: ProductService,
-        @Inject(MAT_DIALOG_DATA) public data: DialogData) {}
+        @Inject(MAT_DIALOG_DATA) public data: DialogData) { }
 
     onNoClick(): void {
         this.dialogRef.close();
