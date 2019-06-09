@@ -2,6 +2,7 @@ import { Component, OnInit, EventEmitter, Input } from '@angular/core';
 import { UserService } from '../../services/user.service';
 import { User } from '../../models/user';
 import { Router } from '@angular/router';
+import {AuthenticationService} from '../../services/authentification.service';
 
 @Component({
   selector: 'app-header',
@@ -15,6 +16,7 @@ export class HeaderComponent implements OnInit {
   constructor(
     private userService: UserService,
     private router: Router,
+    private auth: AuthenticationService
   ) { }
 
   ngOnInit() {

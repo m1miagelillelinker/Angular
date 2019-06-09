@@ -14,7 +14,7 @@ import { AuthenticationService } from '../shared/services/authentification.servi
 @Injectable()
 export class HomeComponent implements OnInit {
     //@Input() user: User;
-    private loggedUser : User;
+    private loggedUser: User;
 
     constructor(
         private userService: UserService,
@@ -24,7 +24,7 @@ export class HomeComponent implements OnInit {
 
     ngOnInit() {
         if (this.auth.isAuthenticated()) {
-          this.loggedUser = this.auth.loggedUser; 
+          this.loggedUser = this.auth.loggedUser;
         }
     }
 

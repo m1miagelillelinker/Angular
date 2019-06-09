@@ -15,7 +15,7 @@ export class AppComponent implements OnInit {
     constructor(
         injector: Injector,
         public router: Router,
-        private authService: AuthenticationService,
+        private auth: AuthenticationService,
         private userService: UserService,
     ) {
         // tslint:disable-next-line:no-unused-expression

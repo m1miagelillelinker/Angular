@@ -10,7 +10,7 @@ import {
 } from '@angular/material';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
-import { HttpClientModule } from '@angular/common/http';
+import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 
 import { AppComponent } from './app.component';
@@ -27,6 +27,7 @@ import {
 import { ProductsRelatedComponent } from './products/components/products-related/products-related.component';
 import { AccountPageComponent } from './account/account.page';
 import { AuthenticationService } from './shared/services/authentification.service';
+import {TokenInterceptor} from './shared/services/TokenInterceptor';
 
 @NgModule({
   declarations: [
@@ -58,7 +59,12 @@ import { AuthenticationService } from './shared/services/authentification.servic
     AuthenticationService,
     ProductService,
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: TokenInterceptor,
+      multi: true
+    }
   ],
   bootstrap: [AppComponent]
 })
