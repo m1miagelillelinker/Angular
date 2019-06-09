@@ -2,20 +2,21 @@
 
 import { TestBed, async, inject } from '@angular/core/testing';
 import { Router } from '@angular/router';
-import { AuthService } from './auth.service';
+import { AuthenticationService } from '~/app/shared/services/authentification.service';
+
 
 describe('AuthService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       providers: [
-        AuthService,
+        AuthenticationService,
         {
           provide: Router, useValue: { navigate: () => {} }
         }]
     });
   });
 
-  it('should ...', inject([AuthService], (service: AuthService) => {
+  it('should ...', inject([AuthenticationService], (service: AuthenticationService) => {
     expect(service).toBeTruthy();
   }));
 });

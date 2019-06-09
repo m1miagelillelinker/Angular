@@ -49,26 +49,33 @@ export class AuthenticationService {
     public handleAuthentication(): void {
         this.auth0.parseHash((err, authResult) => {
             if (authResult && authResult.accessToken && authResult.idToken) {
+                window.location.hash = '';
                 this.localLogin(authResult);
                 this.router.navigate(['/home']);
             } else if (err) {
-                this.router.navigate(['/home']);
+                this.router.navigate(['/login']);
                 console.log(err);
-                alert(`Error: ${err.error}. Check the console for further details.`);
             }
         });
     }
 
     private localLogin(authResult): void {
-        // Set the time that the access token will expire at
+        // Set the time that the Access Token will expire at
         const expiresAt = (authResult.expiresIn * 1000) + Date.now();
         this._accessToken = authResult.accessToken;
         this._idToken = authResult.idToken;
         this._expiresAt = expiresAt;
-        console.debug(this._accessToken);
-        console.debug(this._idToken );
-        
-        this._loggedUser = {id: null, lastName: null, firstName: null, accessToken: this._accessToken, idToken: this._idToken, expiresAt: this._expiresAt }
+        console.log(this._accessToken);
+        console.log(this._idToken );
+
+        this._loggedUser = new class implements User {
+            accessToken: string;
+            expiresAt: number;
+            firstName: string;
+            id: number;
+            idToken: string;
+            lastName: string;
+        };
     }
 
     public renewTokens(): void {
@@ -89,8 +96,10 @@ export class AuthenticationService {
         this._expiresAt = 0;
 
         this.auth0.logout({
-            return_to: window.location.origin
+            return_to: this.router.navigate(['/login'])
         });
+
+
     }
 
     public isAuthenticated(): boolean {

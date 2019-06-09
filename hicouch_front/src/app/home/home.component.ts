@@ -46,7 +46,7 @@ export class HomeComponent implements OnInit {
 
     ngOnInit() {
         if (this.auth.isAuthenticated()) {
-          this.loggedUser = this.auth.loggedUser; 
+          this.loggedUser = this.auth.loggedUser;
         }
     }
 

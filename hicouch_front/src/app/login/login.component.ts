@@ -25,61 +25,13 @@ export class LoginComponent implements OnInit {
           this.auth.renewTokens();
         }
     }
-    
+
     logIn() {
-        if(!this.auth.isAuthenticated()){
+        if (!this.auth.isAuthenticated()) {
             this.auth.login();
-        }
-        else{
+        } else {
             this.router.navigate(['app/home']);
         }
     }
-
-    /*
-        submitted = false;
-    success = false;
-
-    user: User;
-    form: FormGroup;
-
-    closeSubscribe() {
-        document.getElementById('subscribe').style.display='none';
-    }
-
-    displaySubscribe(){
-        document.getElementById('subscribe').style.display='inline';
-    }
-
-    ngOnInit() {
-        this.form = this.formBuilder.group({
-            name: ['', Validators.required],
-            message: ['', Validators.required]
-        });
-    }
-
-    loadUser(event: User) {
-        this.user = event;
-    }
-
-
-    signIn() {
-        this.submitted = true;
-
-        if (this.form.invalid) {
-            return;
-        }
-
-        this.success = true;
-    }
-
-    signUp() {
-        this.submitted = true;
-
-        if (this.form.invalid) {
-            return;
-        }
-
-        this.success = true;
-    }*/
 
 }

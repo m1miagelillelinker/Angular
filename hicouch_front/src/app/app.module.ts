@@ -14,7 +14,7 @@ import {
 } from '@angular/material';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
-import { HttpClientModule } from '@angular/common/http';
+import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 
 import { AppComponent } from './app.component';
@@ -38,6 +38,7 @@ import { SubscribeBtnComponent } from './account/components/subscribe-btn/subscr
 import { MainProductComponent } from './products/components/main-product/main-product.component';
 import { SearchProductComponent } from './shared/components/search-product/search-product.component';
 import { TagService } from './shared/services/tag.service';
+import {TokenInterceptor} from './shared/services/TokenInterceptor';
 
 @NgModule({
   declarations: [
@@ -79,8 +80,13 @@ import { TagService } from './shared/services/tag.service';
     AuthenticationService,
     ProductService,
     ReactiveFormsModule,
-    FormsModule,
     TagService
+    FormsModule,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: TokenInterceptor,
+      multi: true
+    }
   ],
   entryComponents: [
       ProductsRelatedAddDialogComponent,
