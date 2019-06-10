@@ -34,16 +34,16 @@ export class AccountPageComponent implements OnInit {
   ];
 
   badges = [
-    {intitule:"Youngling",libelle:"Vous avez fait 10 commentaires !!",image:"../../assets/images/youngling.png",score:"80",enabaled:4},
-    {intitule:"Padawan",libelle:"Vous avez fait 100 commentaires !!",image:"../../assets/images/padawan.png",score:"0",enabled:2},
-    {intitule:"Knight",libelle:"Vous avez fait 500 commentaires !!",image:"../../assets/images/knight.png",score:"0",enabled:2},
-    {intitule:"Master",libelle:"Vous avez fait 1000 commentaires !!",image:"../../assets/images/master.png",score:"0",enabled:2},
-    {intitule:"Grand Master",libelle:"Vous avez fait plus de 1000 commentaires !!",image:"../../assets/images/grandmaster.jpg",score:"0",enabled:2},
-    {intitule:"Youngling",libelle:"Vous avez fait 10 Associations !!",image:"../../assets/images/cup.jpg",score:"150",enabled:2},
-    {intitule:"Padawan",libelle:"Vous avez fait 100 Associations !!",image:"../../assets/images/cup.jpg",score:"100",enabled:2},
-    {intitule:"Knight",libelle:"Vous avez fait 500 Associations !!",image:"../../assets/images/cup.jpg",score:"0",enabled:2},
-    {intitule:"Master",libelle:"Vous avez fait 1000 Associations !!",image:"../../assets/images/cup.jpg",score:"0",enabled:2},
-    {intitule:"Grand Master",libelle:"Vous avez fait plus de 1000 Associations !!",image:"../../assets/images/cup.jpg",score:"0",enabled:2}
+    {intitule:"Youngling",libelle:"Vous avez fait 10 commentaires !!",image:"../../assets/images/youngling.png",score:"80",enabled:2},
+    {intitule:"Padawan",libelle:"Vous avez fait 100 commentaires !!",image:"../../assets/images/padawan.png",score:"0",enabled:4},
+    {intitule:"Knight",libelle:"Vous avez fait 500 commentaires !!",image:"../../assets/images/knight.png",score:"0",enabled:4},
+    {intitule:"Master",libelle:"Vous avez fait 1000 commentaires !!",image:"../../assets/images/master.png",score:"0",enabled:4},
+    {intitule:"Grand Master",libelle:"Vous avez fait plus de 1000 commentaires !!",image:"../../assets/images/grandmaster.jpg",score:"0",enabled:4},
+    {intitule:"Youngling",libelle:"Vous avez fait 10 Associations !!",image:"../../assets/images/cup.jpg",score:"150",enabled:4},
+    {intitule:"Padawan",libelle:"Vous avez fait 100 Associations !!",image:"../../assets/images/cup.jpg",score:"100",enabled:4},
+    {intitule:"Knight",libelle:"Vous avez fait 500 Associations !!",image:"../../assets/images/cup.jpg",score:"0",enabled:4},
+    {intitule:"Master",libelle:"Vous avez fait 1000 Associations !!",image:"../../assets/images/cup.jpg",score:"0",enabled:4},
+    {intitule:"Grand Master",libelle:"Vous avez fait plus de 1000 Associations !!",image:"../../assets/images/cup.jpg",score:"0",enabled:4}
   ];
   //2 ok
   //4 hidden

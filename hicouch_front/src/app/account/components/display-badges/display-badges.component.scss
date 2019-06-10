@@ -13,6 +13,12 @@
       margin-bottom: 4px;
       display: flex;
       grid-template-columns: 70px auto ;
+
+      &.disabled{
+        opacity: 0.8;
+        filter: blur(2px);
+        background: rgba(172, 156, 152, 0.671);
+    }
   
       .intitule {
           font-weight: bold;
@@ -54,4 +60,6 @@
       }
     } 
   }
+
+  
  }
