@@ -4,6 +4,7 @@ import { User } from '../../models/user';
 import { Router } from '@angular/router';
 import { ProductService } from '../../services/product.service';
 import {AuthenticationService} from '../../services/authentification.service';
+import {ProductService} from '../../services/product.service';
 
 @Component({
   selector: 'app-header',
@@ -19,21 +20,31 @@ export class HeaderComponent implements OnInit {
 
   constructor(
     private userService: UserService,
+    private productService: ProductService,
     private router: Router,
     private productService: ProductService,
     private auth: AuthenticationService
   ) { }
 
   ngOnInit() {
+    if (this.auth.isAuthenticated()) {
+      this.user = this.auth.loggedUser;
+    }
+    /*
     this.userService.getUser(1).subscribe(
       (user: User) => {
         this.user = {
           id: user.id,
+          pseudo: user.pseudo,
+          score: user.score,
           firstName: user.firstName,
           lastName: user.lastName,
+          idToken: '',
+          accessToken: '',
+          expiresAt: 0,
         };
         this.userSelected.emit(this.user);
-      });
+      });*/
   }
 
   goToUser() {

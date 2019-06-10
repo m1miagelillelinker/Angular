@@ -10,13 +10,14 @@ import { MatAutocompleteModule, MatIconModule } from '@angular/material';
 import {FormControl} from '@angular/forms';
 import {map, startWith} from 'rxjs/operators';
 import {Tag} from '../shared/models/tag';
+import {ActivatedRoute, Router} from '@angular/router';
 
 @Component({
   selector: 'app-product-page',
   templateUrl: './product.page.html',
   styleUrls: ['./product.page.scss'],
 })
-export class ProductPageComponent implements OnInit, OnDestroy, OnChanges {
+export class ProductPageComponent implements OnInit, OnChanges, OnDestroy {
   mainProduct: Product;
   productsRelated: any[] = [];
   allProducts: any[] = [];
@@ -86,17 +87,18 @@ export class ProductPageComponent implements OnInit, OnDestroy, OnChanges {
         }
       });
       this.tagService.getTags('tt0120737').subscribe((json: any) => this.tags = json);
+    });
   }
 
   ngOnDestroy() {
     if (this.productSubscription) { this.productSubscription.unsubscribe(); }
   }
-
+/*
   private _filter(value: string): string[] {
       const filterValue = value.toLowerCase();
       return this.tags.filter(tag => tag.toLowerCase().includes(filterValue));
   }
-
+*/
   submit() {
       console.log(this.tagControl.value);
       this.tagService.addTag(this.tagControl.value, 'tt0120737')

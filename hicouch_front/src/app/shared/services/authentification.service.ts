@@ -51,7 +51,7 @@ export class AuthenticationService {
             if (authResult && authResult.accessToken && authResult.idToken) {
                 window.location.hash = '';
                 this.localLogin(authResult);
-                this.router.navigate(['/home']);
+                this.router.navigate(['/app/home']);
             } else if (err) {
                 this.router.navigate(['/login']);
                 console.log(err);
@@ -65,8 +65,6 @@ export class AuthenticationService {
         this._accessToken = authResult.accessToken;
         this._idToken = authResult.idToken;
         this._expiresAt = expiresAt;
-        console.log(this._accessToken);
-        console.log(this._idToken );
 
         this._loggedUser = new class implements User {
             accessToken: string;
@@ -108,7 +106,4 @@ export class AuthenticationService {
         return this._accessToken && Date.now() < this._expiresAt;
     }
 
-    log() {
-        //
-    }
 }

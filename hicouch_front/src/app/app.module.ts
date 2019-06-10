@@ -9,8 +9,8 @@ import {
   MatTabsModule,
   MatCardModule,
   MatSelectModule,
-  MatAutocompleteModule
-  MatIconModule
+  MatAutocompleteModule,
+  MatIconModule,
 } from '@angular/material';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
@@ -38,7 +38,8 @@ import { SubscribeBtnComponent } from './account/components/subscribe-btn/subscr
 import { MainProductComponent } from './products/components/main-product/main-product.component';
 import { SearchProductComponent } from './shared/components/search-product/search-product.component';
 import { TagService } from './shared/services/tag.service';
-import {TokenInterceptor} from './shared/services/TokenInterceptor';
+import {TokenInjector} from './shared/services/tokenInjector';
+import {CanActivateGuardService} from './shared/services/canActivateGuard.service';
 
 @NgModule({
   declarations: [
@@ -80,13 +81,14 @@ import {TokenInterceptor} from './shared/services/TokenInterceptor';
     AuthenticationService,
     ProductService,
     ReactiveFormsModule,
-    TagService
+    TagService,
     FormsModule,
     {
       provide: HTTP_INTERCEPTORS,
-      useClass: TokenInterceptor,
+      useClass: TokenInjector,
       multi: true
-    }
+    },
+    CanActivateGuardService,
   ],
   entryComponents: [
       ProductsRelatedAddDialogComponent,
