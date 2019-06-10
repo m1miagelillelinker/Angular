@@ -2,7 +2,6 @@ import { Component, OnInit, EventEmitter, Input, Output } from '@angular/core';
 import { UserService } from '../../services/user.service';
 import { User } from '../../models/user';
 import { Router } from '@angular/router';
-import { ProductService } from '../../services/product.service';
 import {AuthenticationService} from '../../services/authentification.service';
 import {ProductService} from '../../services/product.service';
 
@@ -22,14 +21,14 @@ export class HeaderComponent implements OnInit {
     private userService: UserService,
     private productService: ProductService,
     private router: Router,
-    private productService: ProductService,
     private auth: AuthenticationService
   ) { }
 
   ngOnInit() {
     if (this.auth.isAuthenticated()) {
-      this.user = this.auth.loggedUser;
+      this.userService.getCurrentUser().subscribe((u: User) => this.user = u);
     }
+
     /*
     this.userService.getUser(1).subscribe(
       (user: User) => {
