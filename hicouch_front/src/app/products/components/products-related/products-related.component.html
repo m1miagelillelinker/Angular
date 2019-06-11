@@ -35,7 +35,7 @@
                         <img *ngIf="currentIndex > 0" (click)="fetchIndex('left')"
                                 src="assets/images/white-arrow-right.png">
                 </div>
-                        <div class="item" *ngFor="let asso of fetchList(currentIndex)" (click)="goTo(asso.product.id)">
+                        <div class="item" *ngFor="let asso of fetchList(currentIndex)" (click)="showPopover()">
                                 <div class="picto">
                                         <img src="{{getPicto(asso.product.type)}}">
                                 </div>

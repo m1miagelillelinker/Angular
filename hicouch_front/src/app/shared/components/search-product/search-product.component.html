@@ -12,7 +12,7 @@
 
   </div>
 </div>
-<div *ngIf="productList" id="search-autocomplete">
+<div *ngIf="productList && productList.length > 0" id="search-autocomplete">
   <div *ngFor="let product of productList" class="prod-infos" (click)="selectProduct(product)">
     <div class="picture">
       <img src="{{product.image}}">

@@ -26,7 +26,7 @@ export class ProductRelatedCommentsComponent implements OnInit {
     @Input() asso: Association;
     @Input() loggedUser: User;
     commentContentAdd = new FormControl('', [
-        Validators.maxLength(250)
+        Validators.maxLength(500)
     ]);
 
     canVote: boolean;
@@ -85,7 +85,7 @@ export class ProductRelatedCommentsComponent implements OnInit {
             idpair: this.asso.association.idPair, status: this.checked ? 0 : null
         };
         console.log(comment);
-        this.commentService.putComment(comment, comment.idpair);
+        this.commentService.putComment(comment, comment.idpair).subscribe();
         this.animationLoad();
     }
 
@@ -99,19 +99,18 @@ export class ProductRelatedCommentsComponent implements OnInit {
     // TODO : display name of user for each comment
     getUserSpeudo(userId: number) {
         let user;
-        this.userService.getUser(
-            userId.toString()).subscribe(
+        this.userService.getUser(userId).subscribe(
             value => {user = value; }
         );
         return user.pseudo;
     }
 
     canEdit(comment: Comment) {
-        return comment.iduser == this.loggedUser.id;
+        return comment.iduser === this.loggedUser.id;
     }
 
     canSignal( comment: Comment) {
-        return comment.iduser != this.loggedUser.id;
+        return comment.iduser !== this.loggedUser.id;
     }
 
     showPopoverToSignal(comment: Comment) {
@@ -168,7 +167,7 @@ export class ProductsRelatedCommentUpdateDialogComponent implements OnInit {
     commentContentUpdate = new FormControl('', [
         Validators.maxLength(250)
     ]);
-    checked = this.data.comment.status == 0 ? true : false;
+    checked = this.data.comment.status === 0 ? true : false;
 
     constructor(
         public dialogRef: MatDialogRef<ProductsRelatedCommentUpdateDialogComponent>,

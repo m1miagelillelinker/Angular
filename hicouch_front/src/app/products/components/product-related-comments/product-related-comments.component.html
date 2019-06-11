@@ -24,7 +24,7 @@
                 cdkAutosizeMaxRows="5"></textarea>
     </mat-form-field>
     <mat-error *ngIf="commentContentAdd.hasError('maxlength')">
-      250 lettres maximum.
+      500 characters max
     </mat-error>
     <mat-checkbox [checked]="checked">Cacher le commentaire</mat-checkbox>
     <button mat-raised-button [disabled]="commentContentAdd.value == ''" (click)="addComment()">Soumettre</button>
@@ -33,7 +33,7 @@
     </app-progress-spinner>
         </mat-spinner></span>-->
   </form>
-  <div class="comments">
+  <div class="comments" *ngIf="asso && asso.comments">
     <mat-list>
       <mat-list-item class="comment" *ngFor="let comment of asso.comments">
         <!-- <img matListAvatar src="..." alt="...">-->
@@ -44,7 +44,7 @@
           <!--          {{getUserSpeudo(comment.iduser)}}</span>&nbsp;&nbsp;-->
           <span class="date">{{(comment.updatedate) ? comment.updatedate : comment.createdat}}</span>
           &nbsp;&nbsp;
-          <span class="date">{{(comment.updatedate) ? 'modifié' : null}}</span>
+          <span class="date">{{(comment.updatedate) ? 'Modified' : null}}</span>
         </h3>
         <br>
         <p class="content" matLine *ngIf="showComment(comment)"> {{comment.commentaire}} </p>
