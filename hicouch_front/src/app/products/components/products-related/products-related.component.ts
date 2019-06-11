@@ -9,10 +9,8 @@ import { MatDialog, MatDialogRef, MAT_DIALOG_DATA, MatSelectModule, MatAutocompl
 import { Association } from '../../../shared/models/association';
 import { Comment } from '../../../shared/models/comment';
 import { User } from '../../../shared/models/user';
-
-export interface DialogData {
-    nomProduct: string;
-}
+import { AssociationService } from '../../../shared/services/association.service';
+import { Product } from '../../../shared/models/product';
 
 @Component({
     selector: 'app-products-related',
@@ -22,6 +20,7 @@ export interface DialogData {
 export class ProductsRelatedComponent implements OnInit, OnChanges {
     @Input() allProducts: Array<Association>;
     @Input() loggedUser: User;
+    @Input() currentProduct: Product;
     @Input() filteredProducts: Array<Association>;
     @Output() filters: EventEmitter<any> = new EventEmitter();
     movieSelected = true;
@@ -271,11 +270,10 @@ export class ProductsRelatedComponent implements OnInit, OnChanges {
     openDialog(): void {
         const dialogRef = this.dialog.open(ProductsRelatedAddDialogComponent, {
             width: '50%',
-            data: { nomProduct: this.idProduct, id2: null }
+            data: { nomProduct: this.idProduct, id2: null, currentProduct: this.currentProduct }
         });
 
         dialogRef.afterClosed().subscribe(result => {
-            console.log('The dialog was closed');
             this.idAssociatedProduct = result;
         });
     }
@@ -312,6 +310,7 @@ export class ProductsRelatedAddDialogComponent implements OnInit {
         { value: 'TVSHOW', viewValue: 'Série' },
         { value: 'VIDEOGAMES', viewValue: 'Jeu-Vidéo' }
     ];
+    currentProduct;
     selectedType: string;
     products: any[];
     myControl = new FormControl();
@@ -328,14 +327,22 @@ export class ProductsRelatedAddDialogComponent implements OnInit {
     constructor(
         public dialogRef: MatDialogRef<ProductsRelatedAddDialogComponent>,
         private productService: ProductService,
-        @Inject(MAT_DIALOG_DATA) public data: DialogData) { }
+        private associationService: AssociationService,
+        @Inject(MAT_DIALOG_DATA) public data: any) { }
 
     onNoClick(): void {
         this.dialogRef.close();
     }
 
     ngOnInit() {
-        this.form = new FormGroup();
+        this.listProductsFound = this.myControl.valueChanges
+        .pipe(
+            startWith(''),
+            map(value => this._filter(value))
+            // map(value => this._filter(value.title))
+        );
+        this.form = new FormGroup({});
+        this.currentProduct = this.data.currentProduct;
     }
 
     /*searchProducts(value : string): void {
@@ -356,16 +363,6 @@ export class ProductsRelatedAddDialogComponent implements OnInit {
             }
         }
     }*/
-
-    ngOnInit() {
-        this.listProductsFound = this.myControl.valueChanges
-            .pipe(
-                startWith(''),
-                map(value => this._filter(value))
-                // map(value => this._filter(value.title))
-            );
-    }
-
     private _filter(value: string): any[] {
         const filterValue = value.toLowerCase();
         console.log(value);
@@ -387,11 +384,15 @@ export class ProductsRelatedAddDialogComponent implements OnInit {
 
     addAssociation() {
         console.log('Associer');
+        this.associationService.createAssociation(this.currentProduct.id,
+            this.currentProduct.type,
+            this.selectedOption.id,
+            this.selectedOption.product).subscribe(res => console.log(res));
         // this.openDialog();
     }
 
-    setSelectedOption(value: string): void {
-        console.log('Option selected ' + value);
+    setSelectedOption(value): void {
+        console.log('Option selected ' + value.title);
         // Si on a pu avoir "[value]="product"", ce sera setSelectedOption(id: number) avec id du product
         // this.associationService.associate(id, this.product.id);   Service à créér
     }
@@ -419,6 +420,7 @@ export class ProductsRelatedAddDialogComponent implements OnInit {
 
       selectProduct(event) {
         this.selectedOption = event;
+        this.setSelectedOption(event);
       }
 
 }

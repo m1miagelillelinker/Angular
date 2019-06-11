@@ -1,7 +1,7 @@
 import { Component, ViewChild, ElementRef, Output, EventEmitter, Input } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { User } from '../../models/user';
-import { ProductResult } from '../../models/product';
+import { ProductResult, Product } from '../../models/product';
 
 @Component({
   selector: 'app-search-product',
@@ -16,6 +16,7 @@ export class SearchProductComponent {
   @Output() searchValue = new EventEmitter();
   @Output() productSelected = new EventEmitter();
   @Input() productList: any[];
+  @Input() selectedOption: Product;
   @ViewChild('searchInput') searchInput: ElementRef;
 
   selectProduct(product: any): void {
@@ -25,6 +26,8 @@ export class SearchProductComponent {
       image: product.image,
     };
     this.productSelected.emit(newUser);
+    this.searchInput.nativeElement.value = product.title;
+    this.productList = [];
   }
 
   onFocus(): void {

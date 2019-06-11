@@ -7,5 +7,5 @@
 </div>
 </div>
 <div *ngIf="mainProduct && allProducts" >
-	<app-products-related (isMovieSearched)="loadMoviePage($event)" [allProducts]="allProducts" (filters)="filterList($event)" [filteredProducts]="filteredProducts" [loggedUser]="user"></app-products-related>
+	<app-products-related (isMovieSearched)="loadMoviePage($event)" [currentProduct]="mainProduct"[allProducts]="allProducts" (filters)="filterList($event)" [filteredProducts]="filteredProducts" [loggedUser]="user"></app-products-related>
 </div>
