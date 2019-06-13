@@ -9,7 +9,7 @@ import {HicouchAPIService} from './hicouchAPI.service';
 })
 export class AssociationService {
 
-    constructor(private http: HttpClient, private api: HicouchAPIService) {
+    constructor(private api: HicouchAPIService) {
     }
 
     fetchtAssociationByProduct(idProduct: number) {

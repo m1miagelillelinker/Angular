@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Vote } from '../models/vote';
+import {HicouchAPIService} from './hicouchAPI.service';
 
 
 
@@ -10,19 +11,19 @@ import { Vote } from '../models/vote';
 })
 export class VoteService {
 
-    constructor(private http: HttpClient) {
+    constructor(private http: HttpClient, private api: HicouchAPIService) {
     }
 
-    getVoteByUserId(userid: string) {
-        return this.http.get<Vote>(`//localhost:8080/vote/userVote?userId=${userid}`);
+    getVoteByUserId(userid: number) {
+        return this.api.getVoteByUser(userid);
     }
 
     getVoteByAssoId(assoId: number) {
-        return this.http.get<Vote>(`//localhost:8080/vote/AssoVote?assoId=${assoId}`);
+        return this.api.getVoteByAsso(assoId);
     }
 
     vote(vote: Vote) {
-        return this.http.put<Vote>(  `//localhost:8080/vote/vote/`, vote);
+        return this.api.putVote(vote);
     }
 
     unvote(vote: Vote) {

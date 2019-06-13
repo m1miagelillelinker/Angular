@@ -5,7 +5,7 @@
 <div *ngIf="user" class="content">
 <div class="profile">
 	<div class="display">
-			<img src="/assets/images/user.png" />
+			<img src="{{user.picture}}" />
 			<div class="user-infos">
 				{{user.firstName}}
 				<br />
@@ -21,7 +21,7 @@
 
 <!-- Display the profile-infos -->
 <div class="profile-infos">
-<img height="150px" width="150px" src="../../assets/images/tmp-avatar.jpg" />
+<img height="150px" width="150px" src="{{user.picture}}" />
 <div class="username">
 	<span>Firstname</span>
 	<span>Lastname</span>
@@ -56,14 +56,14 @@
 <app-display-subscribers 
 	*ngIf="friendsSelected" 
 	title="Abonnées" 
-	[users]="subscribedUsers">
+	[users]="followersUsers">
 </app-display-subscribers>
 
 <!-- Display subscriptions -->
 <app-display-subscribers
 	*ngIf="friendsSelected"
 	[ngStyle]="{'margin-left': '100px'}" 
-	title="Abonnements" [users]="subscribedUsers">
+	title="Abonnements" [users]="followsUsers">
 </app-display-subscribers>
 
 <!-- Display the badges -->

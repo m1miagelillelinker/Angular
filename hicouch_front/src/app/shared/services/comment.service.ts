@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable } from 'rxjs';
 import { Comment } from '../models/comment';
+import {HicouchAPIService} from './hicouchAPI.service';
 
 
 
@@ -10,11 +9,11 @@ import { Comment } from '../models/comment';
 })
 export class CommentService {
 
-    constructor(private http: HttpClient) {
+    constructor(private api: HicouchAPIService) {
     }
 
     putComment(comment: Comment, idAsso: number ) {
-        return this.http.put(  `//localhost:8080/comment/comment/${idAsso}/`, comment);
+        return this.api.addCommentaire(comment.iduser, idAsso, comment.commentaire);
     }
 
 }

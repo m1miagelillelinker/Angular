@@ -215,11 +215,7 @@ export class ProductsRelatedCommentSignalDialogComponent implements OnInit {
     }
 
     signalComment() {
-        const signalement = {
-           typeSignalement: 'comment', SignaledUserId: null, SignaledCommentId: this.data.comment.id,
-            message: this.signalementContentAdd.value, idUser: this.data.user.id
-        };
-        this.signalementService.addSignalement(signalement);
+        this.signalementService.signalCommentaire(this.data.comment.id, this.data.user.id, this.signalementContentAdd.value);
     }
 }
 
