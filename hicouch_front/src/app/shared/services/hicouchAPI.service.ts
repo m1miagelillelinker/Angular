@@ -6,7 +6,7 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
 })
 export class HicouchAPIService {
 
-    private DOMAIN = 'https://hicjv3.azurewebsites.net';
+    private DOMAIN = 'https://hicjv4.azurewebsites.net';
 
     private tagController = '/tag';
     private abonnementController = '/abonnement';
@@ -105,11 +105,11 @@ export class HicouchAPIService {
         return this.get(this.signalementController + '/toModerate/user', []);
     }
 
-    confirmeSignalement(idSignalement: number){
+    confirmeSignalement(idSignalement: number) {
         return this.put(this.signalementController + '/confirmeSignalement', [{key: 'signalementId', value: idSignalement}], {});
     }
 
-    refuseSignalement(idSignalement: number){
+    refuseSignalement(idSignalement: number) {
         return this.put(this.signalementController + '/refuseSignalement', [{key: 'signalementId', value: idSignalement}], {});
     }
 

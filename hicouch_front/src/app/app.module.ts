@@ -9,7 +9,8 @@ import {
   MatTabsModule,
   MatCardModule,
   MatSelectModule,
-  MatAutocompleteModule
+  MatAutocompleteModule,
+  MatListModule
 } from '@angular/material';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
@@ -78,6 +79,7 @@ import {UserModerationComponent} from './moderation/components/user-moderation/u
     MatCardModule,
     MatSelectModule,
     MatAutocompleteModule,
+    MatListModule
   ],
   providers: [
     UserService,
@@ -87,7 +89,7 @@ import {UserModerationComponent} from './moderation/components/user-moderation/u
     FormsModule
   ],
   entryComponents: [
-      ProductsRelatedAddDialogComponent,
+    ProductsRelatedAddDialogComponent,
   ],
   bootstrap: [AppComponent],
 })

@@ -2,11 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="08a18e6e-f763-4305-a637-9a015029be9e" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/hicouch_front/src/app/app.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/hicouch_front/src/app/app.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hicouch_front/src/app/app.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/hicouch_front/src/app/app.module.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/hicouch_front/src/app/moderation/components/user-moderation/user-moderation.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/hicouch_front/src/app/moderation/components/user-moderation/user-moderation.component.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/hicouch_front/src/app/moderation/components/user-moderation/user-moderation.component.scss" beforeDir="false" afterPath="$PROJECT_DIR$/hicouch_front/src/app/moderation/components/user-moderation/user-moderation.component.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/hicouch_front/src/app/moderation/components/user-moderation/user-moderation.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/hicouch_front/src/app/moderation/components/user-moderation/user-moderation.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/hicouch_front/src/app/shared/services/association.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/hicouch_front/src/app/shared/services/association.service.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/hicouch_front/src/app/shared/services/hicouchAPI.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/hicouch_front/src/app/shared/services/hicouchAPI.service.ts" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/hicouch_front/node_modules/" />
@@ -24,8 +23,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/hicouch_front/src/app/moderation/components/user-moderation/user-moderation.component.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="85">
-              <caret line="5" column="170" selection-start-line="5" selection-start-column="170" selection-end-line="5" selection-end-column="170" />
+            <state relative-caret-position="136">
+              <caret line="8" column="61" selection-start-line="8" selection-start-column="61" selection-end-line="8" selection-end-column="61" />
             </state>
           </provider>
         </entry>
@@ -33,47 +32,11 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/hicouch_front/src/app/moderation/components/user-moderation/user-moderation.component.ts">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-136">
-              <caret line="14" column="16" lean-forward="true" selection-start-line="14" selection-start-column="16" selection-end-line="14" selection-end-column="16" />
+            <state relative-caret-position="51">
+              <caret line="3" column="39" selection-start-line="3" selection-start-column="39" selection-end-line="3" selection-end-column="39" />
               <folding>
                 <element signature="e#0#85#0" expanded="true" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/hicouch_front/src/app/moderation/components/user-moderation/user-moderation.component.scss">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="493">
-              <caret line="56" column="18" selection-start-line="56" selection-start-column="18" selection-end-line="56" selection-end-column="18" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/hicouch_front/src/app/shared/models/signalement.ts">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="85">
-              <caret line="6" column="20" selection-start-line="6" selection-start-column="20" selection-end-line="6" selection-end-column="20" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/hicouch_front/src/app/shared/models/user.ts">
-          <provider selected="true" editor-type-id="text-editor">
-            <state>
-              <caret column="17" selection-start-column="17" selection-end-column="17" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/hicouch_front/src/app/shared/services/hicouchAPI.service.ts">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="85">
-              <caret line="6" column="13" selection-start-line="6" selection-start-column="13" selection-end-line="6" selection-end-column="13" />
             </state>
           </provider>
         </entry>
@@ -111,8 +74,10 @@
         <option value="$PROJECT_DIR$/hicouch_front/src/app/moderation/components/tag-moderation/tag-moderation.component.ts" />
         <option value="$PROJECT_DIR$/hicouch_front/src/app/app.component.html" />
         <option value="$PROJECT_DIR$/hicouch_front/src/app/shared/services/hicouchAPI.service.ts" />
-        <option value="$PROJECT_DIR$/hicouch_front/src/app/moderation/components/user-moderation/user-moderation.component.ts" />
+        <option value="$PROJECT_DIR$/hicouch_front/src/app/app.module.ts" />
         <option value="$PROJECT_DIR$/hicouch_front/src/app/moderation/components/user-moderation/user-moderation.component.scss" />
+        <option value="$PROJECT_DIR$/hicouch_front/src/app/products/components/products-related/products-related.component.ts" />
+        <option value="$PROJECT_DIR$/hicouch_front/src/app/moderation/components/user-moderation/user-moderation.component.ts" />
         <option value="$PROJECT_DIR$/hicouch_front/src/app/moderation/components/user-moderation/user-moderation.component.html" />
       </list>
     </option>
@@ -272,15 +237,6 @@
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="app" type="462c0819:PsiDirectoryNode" />
               <item name="shared" type="462c0819:PsiDirectoryNode" />
-              <item name="models" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Angular" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Angular" type="462c0819:PsiDirectoryNode" />
-              <item name="hicouch_front" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="app" type="462c0819:PsiDirectoryNode" />
-              <item name="shared" type="462c0819:PsiDirectoryNode" />
               <item name="services" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -334,7 +290,7 @@
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="24c0be80-bb72-4a32-a7a8-4afe8e27af0b" name="Default Changelist" comment="" />
+      <changelist id="08a18e6e-f763-4305-a637-9a015029be9e" name="Default Changelist" comment="" />
       <created>1558988411322</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
@@ -344,11 +300,12 @@
       <workItem from="1559115402246" duration="1196000" />
       <workItem from="1559547699353" duration="853000" />
       <workItem from="1559820411876" duration="2247000" />
+      <workItem from="1560425931341" duration="1942000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="30020000" />
+    <option name="totallyTimeSpent" value="32561000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -403,15 +360,6 @@
     </option>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/hicouch_front/src/app/app.module.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <folding>
-            <element signature="e#0#58#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/hicouch_front/src/app/app.routes.ts">
       <provider selected="true" editor-type-id="text-editor">
         <state>
@@ -619,13 +567,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/hicouch_front/src/app/shared/services/hicouchAPI.service.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="85">
-          <caret line="6" column="13" selection-start-line="6" selection-start-column="13" selection-end-line="6" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/hicouch_front/src/app/shared/components/header/header.component.ts">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="170">
@@ -640,20 +581,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/hicouch_front/src/app/moderation/components/user-moderation/user-moderation.component.ts">
+    <entry file="file://$PROJECT_DIR$/hicouch_front/src/app/shared/services/hicouchAPI.service.ts">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-136">
-          <caret line="14" column="16" lean-forward="true" selection-start-line="14" selection-start-column="16" selection-end-line="14" selection-end-column="16" />
-          <folding>
-            <element signature="e#0#85#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/hicouch_front/src/app/moderation/components/user-moderation/user-moderation.component.scss">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="493">
-          <caret line="56" column="18" selection-start-line="56" selection-start-column="18" selection-end-line="56" selection-end-column="18" />
+        <state relative-caret-position="187">
+          <caret line="111" column="46" lean-forward="true" selection-start-line="111" selection-start-column="46" selection-end-line="111" selection-end-column="46" />
         </state>
       </provider>
     </entry>
@@ -671,10 +602,44 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/hicouch_front/src/app/moderation/components/user-moderation/user-moderation.component.scss">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="289">
+          <caret line="48" lean-forward="true" selection-start-line="48" selection-end-line="48" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/hicouch_front/src/app/products/components/products-related/products-related.component.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1921">
+          <caret line="6" column="31" selection-start-line="6" selection-start-column="31" selection-end-line="6" selection-end-column="89" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/hicouch_front/src/app/app.module.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="374">
+          <caret line="81" column="17" selection-start-line="81" selection-start-column="4" selection-end-line="81" selection-end-column="17" />
+          <folding>
+            <element signature="e#0#58#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/hicouch_front/src/app/moderation/components/user-moderation/user-moderation.component.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="51">
+          <caret line="3" column="39" selection-start-line="3" selection-start-column="39" selection-end-line="3" selection-end-column="39" />
+          <folding>
+            <element signature="e#0#85#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/hicouch_front/src/app/moderation/components/user-moderation/user-moderation.component.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="85">
-          <caret line="5" column="170" selection-start-line="5" selection-start-column="170" selection-end-line="5" selection-end-column="170" />
+        <state relative-caret-position="136">
+          <caret line="8" column="61" selection-start-line="8" selection-start-column="61" selection-end-line="8" selection-end-column="61" />
         </state>
       </provider>
     </entry>
