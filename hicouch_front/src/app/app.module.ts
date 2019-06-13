@@ -1,6 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import {MatCardModule} from '@angular/material/card';
 import {
     MatButtonModule,
     MatFormFieldModule,
@@ -38,7 +37,6 @@ import { AccountPageComponent } from './account/account.page';
 import { AuthenticationService } from './shared/services/authentification.service';
 import { AccountSideMenuComponent } from './account/components/account-side-menu/account-side-menu.component';
 import { ActivityFieldComponent } from './account/components/activity-field/activity-field.component';
-import { SubscribeBtnComponent } from './account/components/subscribe-btn/subscribe-btn.component';
 import { MainProductComponent } from './products/components/main-product/main-product.component';
 import { SearchProductComponent } from './shared/components/search-product/search-product.component';
 import {
@@ -68,11 +66,14 @@ import { DisplayActivitiesComponent } from './account/components/display-activit
         ProductsRelatedAddDialogComponent,
         AccountSideMenuComponent,
         ActivityFieldComponent,
-        SubscribeBtnComponent,
         SearchProductComponent,
         ProductRelatedCommentsComponent,
         ProductsRelatedCommentSignalDialogComponent,
         ProductsRelatedCommentUpdateDialogComponent,
+        ActivityFieldComponent,
+        DisplaySubscribersComponent,
+        DisplayBadgesComponent,
+        DisplayActivitiesComponent,
         SpinnerDialogComponent
     ],
     imports: [
@@ -120,10 +121,5 @@ import { DisplayActivitiesComponent } from './account/components/display-activit
 
     ],
     bootstrap: [AppComponent],
-
-    ActivityFieldComponent,
-    DisplaySubscribersComponent,
-    DisplayBadgesComponent,
-    DisplayActivitiesComponent,
 })
 export class AppModule { }

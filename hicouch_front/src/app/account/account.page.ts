@@ -93,9 +93,10 @@ export class AccountPageComponent implements OnInit {
     }
   }
 
-  doSthg() {
-    this.sub = !this.sub;
+  loadMoviePage() {
+    // TODO (elise) when search done
   }
+
 
   getActivities() {
     return [
