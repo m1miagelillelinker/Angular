@@ -99,7 +99,15 @@ import {CanActivateGuardService} from './shared/services/canActivateGuard.servic
         ReactiveFormsModule,
         FormsModule,
         CommentService,
-        SignalementService
+        SignalementService,
+        TagService,
+        FormsModule,
+        {
+          provide: HTTP_INTERCEPTORS,
+          useClass: TokenInjector,
+          multi: true
+        },
+        CanActivateGuardService,
     ],
     entryComponents: [
         ProductsRelatedAddDialogComponent,
@@ -109,13 +117,6 @@ import {CanActivateGuardService} from './shared/services/canActivateGuard.servic
 
     ],
     bootstrap: [AppComponent],
-    TagService,
-    FormsModule,
-    {
-      provide: HTTP_INTERCEPTORS,
-      useClass: TokenInjector,
-      multi: true
-    },
-    CanActivateGuardService,
+
 })
 export class AppModule { }
