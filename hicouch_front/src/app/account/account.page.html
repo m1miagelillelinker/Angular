@@ -18,11 +18,61 @@
 			Edit My Profile
 		</div>
 	</div>
+</div>
+<!-- Display the profile-information -->
 
+<!-- Display the profile-infos -->
+<div class="profile-infos">
+	<img height="150px" width="150px" src="../../assets/images/tmp-avatar.jpg" />
+	<div class="username">
+		<span>Firstname</span>
+		<span>Lastname</span>
+	</div>
+<!-- Display the profile-progess -->
+	<div class="profile-progress">
+		<div class="progress-bar" [ngStyle]="{'width': profileProgress.fullProgress}"></div>
+		<div class="progress" [ngStyle]="{'width': profileProgress.userProgress}"></div>
+	</div>
 </div>
-<div class="second-part">
-		<app-account-side-menu (tabHasBeenSelected)="toggleFeature($event)"></app-account-side-menu>
-		<div class="feature" *ngIf="activitySelected">
-				<app-activity-field></app-activity-field>
+
+<!-- Display the buttoms of Activities/Badges/Amis -->
+<div class="profile-actions">
+	<div class="actions-trigger">
+		<div class="activities">
+			<button (click)="showActivities()" [ngClass]="{'active': activitiesSelected}">Activités</button>
+			</div>
+		<div class="badges">
+			<button (click)="showBadges()" [ngClass]="{'active': badgesSelected}">Badges</button>
 		</div>
+		<div class="friends">
+			<button (click)="showFriends()" [ngClass]="{'active': friendsSelected}">Amis</button>
+		</div>
+	</div>
+	<!-- Display the table of Activities -->
+	<app-display-activities 
+		*ngIf="activitiesSelected"
+		[activities]="tableActivites">
+	</app-display-activities>
+	
+	<!-- Display subcribers -->
+	<app-display-subscribers 
+		*ngIf="friendsSelected" 
+		title="Abonnées" 
+		[users]="subscribedUsers">
+	</app-display-subscribers>
+
+	<!-- Display subscriptions -->
+	<app-display-subscribers
+		*ngIf="friendsSelected"
+		[ngStyle]="{'margin-left': '100px'}" 
+		title="Abonnements" [users]="subscribedUsers">
+	</app-display-subscribers>
+	
+	<!-- Display the badges -->
+	<app-display-badges
+		*ngIf="badgesSelected"
+		title="Badges"
+		[badges]="badges"
+		></app-display-badges>
 </div>
+

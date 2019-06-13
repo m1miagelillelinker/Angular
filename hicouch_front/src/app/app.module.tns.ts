@@ -6,6 +6,11 @@ import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 import { HeaderComponent } from './shared/components/header/header.component';
 import { SubscribeBtnComponent } from './account/components/subscribe-btn/subscribe-btn.component';
+import { TestService } from './shared/services/test.service';
+import { LoginComponent } from './login/login.component';
+import { DisplaySubscribersComponent } from './account/components/display-subscribers/display-subscribers.component';
+import { DisplayBadgesComponent } from './account/components/display-badges/display-badges.component';
+import { DisplayActivitiesComponent } from './account/components/display-activities/display-activities.component'; 
 
 
 

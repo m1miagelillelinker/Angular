@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import {MatCardModule} from '@angular/material/card';
 import {
     MatButtonModule,
     MatFormFieldModule,
@@ -49,6 +50,9 @@ import {SignalementService} from './shared/services/signalement.service';
 import { TagService } from './shared/services/tag.service';
 import {TokenInjector} from './shared/services/tokenInjector';
 import {CanActivateGuardService} from './shared/services/canActivateGuard.service';
+import { DisplaySubscribersComponent } from './account/components/display-subscribers/display-subscribers.component';
+import { DisplayBadgesComponent } from './account/components/display-badges/display-badges.component';
+import { DisplayActivitiesComponent } from './account/components/display-activities/display-activities.component';
 
 @NgModule({
     declarations: [
@@ -117,5 +121,9 @@ import {CanActivateGuardService} from './shared/services/canActivateGuard.servic
     ],
     bootstrap: [AppComponent],
 
+    ActivityFieldComponent,
+    DisplaySubscribersComponent,
+    DisplayBadgesComponent,
+    DisplayActivitiesComponent,
 })
 export class AppModule { }

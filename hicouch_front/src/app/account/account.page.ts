@@ -13,10 +13,42 @@ import { subscribeOn } from 'rxjs/operators';
 })
 export class AccountPageComponent implements OnInit {
   user: User;
-  activitySelected = true;
-  friendsSelected = false;
-  badgesSelected = false;
-  sub = true;
+  activitiesSelected:boolean = true;
+  friendsSelected:boolean = false;
+  badgesSelected:boolean = false;
+  
+  profileProgress = {
+    fullProgress: '150px', //'150px',
+    userProgress: '100px', // user.score * 150 / 100
+     
+  }
+
+  tableActivites = {
+    columns: ['Utilisateur', 'Activité', 'Détails de l\'activité', 'Date'],
+    rows: this.getActivities()
+  }
+
+  subscribedUsers = [
+    {lastname:"Avatar",firstname:"Avatar",image:"../../assets/images/profil.png"},
+    {lastname:"Bond",firstname:"James",image:"../../assets/images/james.jpg"},
+    {lastname:"DJ",firstname:"Robert",image:"../../assets/images/robert_DJ.jpg"}
+  ];
+
+  badges = [
+    {intitule:"Youngling",libelle:"Vous avez fait 10 commentaires !!",image:"../../assets/images/youngling.png",score:"80",enabled:2},
+    {intitule:"Padawan",libelle:"Vous avez fait 100 commentaires !!",image:"../../assets/images/padawan.png",score:"0",enabled:4},
+    {intitule:"Knight",libelle:"Vous avez fait 500 commentaires !!",image:"../../assets/images/knight.png",score:"0",enabled:4},
+    {intitule:"Master",libelle:"Vous avez fait 1000 commentaires !!",image:"../../assets/images/master.png",score:"0",enabled:4},
+    {intitule:"Grand Master",libelle:"Vous avez fait plus de 1000 commentaires !!",image:"../../assets/images/grandmaster.jpg",score:"0",enabled:4},
+    {intitule:"Youngling",libelle:"Vous avez fait 10 Associations !!",image:"../../assets/images/cup.jpg",score:"150",enabled:4},
+    {intitule:"Padawan",libelle:"Vous avez fait 100 Associations !!",image:"../../assets/images/cup.jpg",score:"100",enabled:4},
+    {intitule:"Knight",libelle:"Vous avez fait 500 Associations !!",image:"../../assets/images/cup.jpg",score:"0",enabled:4},
+    {intitule:"Master",libelle:"Vous avez fait 1000 Associations !!",image:"../../assets/images/cup.jpg",score:"0",enabled:4},
+    {intitule:"Grand Master",libelle:"Vous avez fait plus de 1000 Associations !!",image:"../../assets/images/cup.jpg",score:"0",enabled:4}
+  ];
+  //2 ok
+  //4 hidden
+
 
   constructor(
     private userService: UserService,
@@ -43,18 +75,18 @@ export class AccountPageComponent implements OnInit {
 
   toggleFeature(event: string) {
     switch (event) {
-      case 'activity':
-        this.activitySelected = true;
+      case 'activities':
+        this.activitiesSelected = true;
         this.friendsSelected = false;
         this.badgesSelected = false;
         break;
       case 'friends':
-        this.activitySelected = false;
+        this.activitiesSelected = false;
         this.friendsSelected = true;
         this.badgesSelected = false;
         break;
       case 'badges':
-        this.activitySelected = false;
+        this.activitiesSelected = false;
         this.friendsSelected = false;
         this.badgesSelected = true;
         break;
@@ -65,4 +97,25 @@ export class AccountPageComponent implements OnInit {
     this.sub = !this.sub;
   }
 
+  getActivities() {
+    return [
+      [ 'Elise', 'a créé une nouvelle association', 'a créé un tag personnageFéminin', '06/juin/2019'],
+      [ 'Mathieu', 'a créé une nouvelle association', 'a créé un tag BestMovies', '06/juillet/2019' ],
+      [ 'Anass', 'a modifié une nouvelle association', 'a créé un tag MarvelMovies', '06/juillet/2019' ],
+      [ 'Edouard', 'a créé une nouvelle association', 'a créé un tag DCMovies', '06/Août/2019' ]
+    ];
+  }
+
+  showBadges() {
+    this.toggleFeature('badges');
+  }
+
+  showActivities() {
+    this.toggleFeature('activities');
+    this.tableActivites.rows = this.getActivities();
+  }
+
+  showFriends() {
+    this.toggleFeature('friends');
+  }
 }
