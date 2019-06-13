@@ -4,6 +4,9 @@ export interface User {
     firstName?: string;
     pseudo?: string;
     score?: number;
+    idToken: string;
+    accessToken: string;
+    expiresAt: number;
 }
 
 /*export interface User {

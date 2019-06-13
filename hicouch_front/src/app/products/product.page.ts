@@ -1,18 +1,25 @@
 import { Component, OnInit, OnDestroy, ChangeDetectorRef, OnChanges } from '@angular/core';
 import { ProductService } from '../shared/services/product.service';
+import { TagService } from '../shared/services/tag.service';
 import { Product } from '../shared/models/product';
 import { Router, ActivatedRoute, Params, RoutesRecognized } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { AssociationService } from '../shared/services/association.service';
 import { Association } from '../shared/models/association';
 import { HicouchAPIService } from '../shared/services/hicouchAPI.service';
+import { Subscription, Observable } from 'rxjs';
+import { MatAutocompleteModule, MatIconModule } from '@angular/material';
+import {FormControl} from '@angular/forms';
+import {map, startWith} from 'rxjs/operators';
+import {Tag} from '../shared/models/tag';
+import {ActivatedRoute, Router} from '@angular/router';
 
 @Component({
   selector: 'app-product-page',
   templateUrl: './product.page.html',
   styleUrls: ['./product.page.scss'],
 })
-export class ProductPageComponent implements OnInit, OnDestroy, OnChanges {
+export class ProductPageComponent implements OnInit, OnChanges, OnDestroy {
   mainProduct: Product;
   productsRelated: any[] = [];
   allProducts: any[] = [];
@@ -21,9 +28,15 @@ export class ProductPageComponent implements OnInit, OnDestroy, OnChanges {
   idRelated: string;
   productSubscription: Subscription;
 
+    tagControl = new FormControl();
+    tags: Tag[];
+    filteredTags: Observable<string[]>;
+    showInput = false;
+
 
   constructor(
     private productService: ProductService,
+    private tagService: TagService,
     private associationService: AssociationService,
     private route: ActivatedRoute,
     private router: Router,
@@ -79,13 +92,29 @@ export class ProductPageComponent implements OnInit, OnDestroy, OnChanges {
           console.log('ah');
         }
       });
+      this.tagService.getTags('tt0120737').subscribe((json: any) => this.tags = json);
     });
   }
 
   ngOnDestroy() {
     if (this.productSubscription) { this.productSubscription.unsubscribe(); }
   }
+/*
+  private _filter(value: string): string[] {
+      const filterValue = value.toLowerCase();
+      return this.tags.filter(tag => tag.toLowerCase().includes(filterValue));
+  }
+*/
+  submit() {
+      console.log(this.tagControl.value);
+      this.tagService.addTag(this.tagControl.value, 'tt0120737')
+          .subscribe(() => this.tagService.getTags('tt0120737').subscribe((json: any) => this.tags = json));
+      this.setInputFVisibility(false);
+  }
 
+  setInputFVisibility(visible: boolean) {
+      this.showInput = visible;
+  }
   loadMoviePage(event) {
     event.id = event.id;
     console.log(event);

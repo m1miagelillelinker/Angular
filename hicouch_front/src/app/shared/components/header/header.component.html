@@ -6,6 +6,11 @@
 
     <div class="user-infos" (click)="goToUser()" *ngIf="user">
         <img src="/assets/images/user.png"/>
-        <p></p>
-         <p>{{user.firstName}} {{user.lastName}}</p> 
+        <p>{{user.firstName}} {{user.lastName}}</p>
+    </div>
+    <button
+            class="btn btn-primary btn-margin"
+            (click)="auth.logout()">
+        Log Out
+    </button>
 </div>

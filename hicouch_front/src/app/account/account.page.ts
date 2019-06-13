@@ -26,13 +26,16 @@ export class AccountPageComponent implements OnInit {
   ngOnInit() {
     // tt3896198
     const userId = this.route.snapshot.paramMap.get('userId');
-    this.userService.getUser(+userId).subscribe((user) => {
+    this.userService.getUser(0).subscribe((user) => {
       const myUser = {
         id: user.id,
         pseudo: user.pseudo,
         score: user.score,
         firstName: user.firstName,
         lastName: user.lastName,
+        idToken: '',
+        accessToken: '',
+        expiresAt: 0,
       };
       this.user = myUser;
     });

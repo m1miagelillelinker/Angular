@@ -17,7 +17,7 @@ import {
 } from '@angular/material';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
-import { HttpClientModule } from '@angular/common/http';
+import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 
 import { AppComponent } from './app.component';
@@ -46,6 +46,9 @@ import {
 } from './products/components/product-related-comments/product-related-comments.component';
 import {CommentService} from './shared/services/comment.service';
 import {SignalementService} from './shared/services/signalement.service';
+import { TagService } from './shared/services/tag.service';
+import {TokenInjector} from './shared/services/tokenInjector';
+import {CanActivateGuardService} from './shared/services/canActivateGuard.service';
 
 @NgModule({
     declarations: [
@@ -106,5 +109,13 @@ import {SignalementService} from './shared/services/signalement.service';
 
     ],
     bootstrap: [AppComponent],
+    TagService,
+    FormsModule,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: TokenInjector,
+      multi: true
+    },
+    CanActivateGuardService,
 })
 export class AppModule { }

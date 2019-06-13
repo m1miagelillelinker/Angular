@@ -6,7 +6,7 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
 })
 export class HicouchAPIService {
 
-    private DOMAIN = 'https://hicjv3.azurewebsites.net';
+    private DOMAIN = 'http://localhost:8080';
 
     private tagController = '/tag';
     private abonnementController = '/abonnement';
@@ -118,6 +118,10 @@ export class HicouchAPIService {
 
     getUser(userId: number): any {
         return this.get(this.userController + '/get', [{key: 'userId', value: userId}]);
+    }
+
+    getCurrentUser(): any {
+        return this.get(this.userController + '/current', []);
     }
 
     // vote
