@@ -14,19 +14,19 @@ export class VoteService {
     }
 
     getVoteByUserId(userid: string) {
-        return this.http.get<Vote>(`//hicjv4.azurewebsites.net/vote/userVote?userId=${userid}`);
+        return this.http.get<Vote>(`//localhost:8080/vote/userVote?userId=${userid}`);
     }
 
     getVoteByAssoId(assoId: number) {
-        return this.http.get<Vote>(`//hicjv4.azurewebsites.net/vote/AssoVote?assoId=${assoId}`);
+        return this.http.get<Vote>(`//localhost:8080/vote/AssoVote?assoId=${assoId}`);
     }
 
     vote(vote: Vote) {
-        return this.http.put<Vote>(  `//hicjv4.azurewebsites.net/vote/vote/`, vote);
+        return this.http.put<Vote>(  `//localhost:8080/vote/vote/`, vote);
     }
 
     unvote(vote: Vote) {
-        return this.http.put<Vote>(  `//hicjv4.azurewebsites.net/vote/unvote/`, vote);
+        return this.http.put<Vote>(  `//localhost:8080/vote/unvote/`, vote);
     }
 
 }

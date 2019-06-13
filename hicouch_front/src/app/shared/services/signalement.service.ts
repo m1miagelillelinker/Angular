@@ -15,15 +15,15 @@ export class SignalementService {
     }
 
     addSignalement(signalement: Signalement) {
-        return this.http.put(  `//hicjv4.azurewebsites.net/newSignalement`, signalement);
+        return this.http.put(  `//localhost:8080/newSignalement`, signalement);
     }
 
     getSignalementById(signalementId: number) {
-        return this.http.get<Signalement>(`//hicjv4.azurewebsites.net/get?signalementId=${signalementId}`);
+        return this.http.get<Signalement>(`//localhost:8080/get?signalementId=${signalementId}`);
     }
 
     getSignalementByStatus(statusId: number) {
-        return this.http.get<Signalement>(`//hicjv4.azurewebsites.net/list?status=${statusId}`);
+        return this.http.get<Signalement>(`//localhost:8080/list?status=${statusId}`);
     }
 
 }
