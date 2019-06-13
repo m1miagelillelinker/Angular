@@ -41,7 +41,7 @@ export class ProductsRelatedComponent implements OnInit, OnChanges {
     // TODO : be able to retrieve user from localstorage
 
     /* fake datas to see if it work*/
-    loggedUsere: User = {
+    loggedUsere: any = {
             id: 15
         };
 

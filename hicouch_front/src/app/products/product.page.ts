@@ -3,7 +3,6 @@ import { ProductService } from '../shared/services/product.service';
 import { TagService } from '../shared/services/tag.service';
 import { Product } from '../shared/models/product';
 import { Router, ActivatedRoute, Params, RoutesRecognized } from '@angular/router';
-import { Subscription } from 'rxjs';
 import { AssociationService } from '../shared/services/association.service';
 import { Association } from '../shared/models/association';
 import { HicouchAPIService } from '../shared/services/hicouchAPI.service';
@@ -12,7 +11,6 @@ import { MatAutocompleteModule, MatIconModule } from '@angular/material';
 import {FormControl} from '@angular/forms';
 import {map, startWith} from 'rxjs/operators';
 import {Tag} from '../shared/models/tag';
-import {ActivatedRoute, Router} from '@angular/router';
 
 @Component({
   selector: 'app-product-page',

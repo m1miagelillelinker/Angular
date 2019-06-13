@@ -101,7 +101,6 @@ import {CanActivateGuardService} from './shared/services/canActivateGuard.servic
         CommentService,
         SignalementService,
         TagService,
-        FormsModule,
         {
           provide: HTTP_INTERCEPTORS,
           useClass: TokenInjector,

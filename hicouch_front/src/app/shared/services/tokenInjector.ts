@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Inject, forwardRef } from '@angular/core';
 import {
     HttpRequest,
     HttpHandler,
@@ -11,7 +11,7 @@ import {Observable} from 'rxjs';
 @Injectable()
 export class TokenInjector implements HttpInterceptor {
 
-    constructor(public auth: AuthenticationService) {}
+    constructor(@Inject(forwardRef(() => AuthenticationService)) private auth: AuthenticationService) {}
 
     intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
 
