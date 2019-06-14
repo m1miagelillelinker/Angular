@@ -1,12 +1,12 @@
 import {Injectable} from '@angular/core';
-import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {HttpClient} from '@angular/common/http';
 
 @Injectable({
     providedIn: 'root',
 })
 export class HicouchAPIService {
 
-    private DOMAIN = 'http://localhost:8080';
+    private DOMAIN = 'http://hicjv5.azurewebsites.net';
 
     private tagController = '/tag';
     private abonnementController = '/abonnement';
@@ -166,12 +166,8 @@ export class HicouchAPIService {
 
     // comment
 
-    addCommentaire(idUser: number, idPair: number, commentaire: string){
-        return this.put(this.commentController + '/new', [], {
-            commentaire: commentaire,
-            idPair: idPair,
-            idUser: idUser,
-        });
+    addCommentaire(commentaire: any): any {
+        return this.put(this.commentController + '/new', [], commentaire);
     }
 
 }

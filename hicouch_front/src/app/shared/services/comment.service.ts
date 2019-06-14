@@ -1,7 +1,6 @@
-import { Injectable } from '@angular/core';
-import { Comment } from '../models/comment';
+import {Injectable} from '@angular/core';
+import {Comment} from '../models/comment';
 import {HicouchAPIService} from './hicouchAPI.service';
-
 
 
 @Injectable({
@@ -12,8 +11,13 @@ export class CommentService {
     constructor(private api: HicouchAPIService) {
     }
 
-    putComment(comment: Comment, idAsso: number ) {
-        return this.api.addCommentaire(comment.iduser, idAsso, comment.commentaire);
+    putComment(comment: string, idPair: number, idUser: number) {
+        const secureComment = {
+            commentaire: comment,
+            idPair: idPair,
+            idUser: idUser,
+        };
+        return this.api.addCommentaire(secureComment);
     }
 
 }
