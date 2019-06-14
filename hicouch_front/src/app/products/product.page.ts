@@ -42,40 +42,16 @@ export class ProductPageComponent implements OnInit, OnChanges, OnDestroy {
   ) { }
 
   ngOnInit() {
-    this.router.events.subscribe(val => {
-
-      if (val instanceof RoutesRecognized) {
-
-          const param = val.state.root.firstChild.params;
-            this.productId = param['productId'];
-            console.log(this.productId);
-            this.fetchProducts();
-      }
-  });
-
+    this.productId = this.route.snapshot.paramMap.get('productId');
+    this.fetchProducts();
   }
 
   ngOnChanges() {
-    this.router.events.subscribe(val => {
-
-      if (val instanceof RoutesRecognized) {
-
-          const param = val.state.root.firstChild.params;
-            this.productId = param['productId'];
-            console.log(this.productId);
-            this.fetchProducts();
-      }
-  });
+    this.productId = this.route.snapshot.paramMap.get('productId');
+    this.fetchProducts();
   }
+
   fetchProducts() {
-    let productId;
-    this.router.events.subscribe(val => {
-      if (val instanceof RoutesRecognized) {
-          const param = val.state.root.firstChild.params;
-            productId = param['productId'];
-            console.log(productId);
-      }
-  });
     this.productSubscription = this.productService.getMovieById(this.productId).subscribe((movie: any) => {
       this.mainProduct = movie;
       this.associationService.fetchtAssociationByProduct(this.mainProduct.id).subscribe((json: any) => {
@@ -114,8 +90,6 @@ export class ProductPageComponent implements OnInit, OnChanges, OnDestroy {
       this.showInput = visible;
   }
   loadMoviePage(event) {
-    event.id = event.id;
-    console.log(event);
     this.router.navigate(['app/products/', event.id]);
     this.fetchProducts();
   }
@@ -138,11 +112,6 @@ export class ProductPageComponent implements OnInit, OnChanges, OnDestroy {
         this.filteredProducts = [];
        }
     }
-
-      console.log(this.filteredProducts);
-      // console.log(event);
-      // this.allProducts.filter(p => console.log(p));
-
   }
 
 }
