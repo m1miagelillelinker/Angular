@@ -15,6 +15,19 @@ export class ProductService {
   constructor(private api: HicouchAPIService) {
   }
 
+  getProductByTypeAndId(idProduct: string, typeProduct: string): any {
+    switch (typeProduct) {
+      case 'film':
+        return this.getMovieById(idProduct);
+      case 'book':
+        return this.getBookById(idProduct);
+      case 'game':
+        return this.getGameById(idProduct);
+      default:
+        return this.getMovieById(idProduct);
+    }
+  }
+
   getMovieById(idMovie: string) {
     return this.api.getFilmByID(idMovie);
   }

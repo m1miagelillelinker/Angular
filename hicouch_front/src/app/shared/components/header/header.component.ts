@@ -73,7 +73,7 @@ export class HeaderComponent implements OnInit {
   goToProduct(event) {
     console.log(event);
     this.isMovieSearched.emit(event);
-    this.router.navigate(['app/products', event.id]);
+    this.router.navigate(['app/products', event.type, event.id]);
   }
 
 }

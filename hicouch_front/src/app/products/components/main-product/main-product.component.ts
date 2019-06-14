@@ -4,6 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Subscription, Observable } from 'rxjs';
 import { FormControl } from '@angular/forms';
 import { TagService } from '../../../shared/services/tag.service';
+import {Product} from '../../../shared/models/product';
 
 @Component({
   selector: 'app-main-product',
@@ -11,7 +12,7 @@ import { TagService } from '../../../shared/services/tag.service';
   styleUrls: ['./main-product.component.scss'],
 })
 export class MainProductComponent implements OnInit, OnDestroy, OnChanges {
-  @Input() mainProduct: any;
+  @Input() mainProduct: Product;
   tagControl = new FormControl();
     @Input() tags: any[];
     filteredTags: Observable<string[]>;

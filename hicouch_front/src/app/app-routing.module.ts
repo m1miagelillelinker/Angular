@@ -24,9 +24,9 @@ export const routes: Routes = [
       canActivate: [CanActivateGuardService]
   },
   {
-    path: 'app/products/:productId',
+    path: 'app/products/:productType/:productId',
     component: ProductPageComponent,
-    canActivate: [CanActivateGuardService]
+    // canActivate: [CanActivateGuardService]
   },
   {
     path: 'app/account/:userId',

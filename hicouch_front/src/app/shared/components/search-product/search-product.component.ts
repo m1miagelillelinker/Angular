@@ -19,9 +19,10 @@ export class SearchProductComponent {
   @Input() selectedOption: Product;
   @ViewChild('searchInput') searchInput: ElementRef;
 
-  selectProduct(product: any): void {
+  selectProduct(product: Product): void {
     const newUser = {
       id: product.id,
+      type: product.type,
       title: product.title,
       image: product.image,
     };
