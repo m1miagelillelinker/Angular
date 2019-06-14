@@ -40,6 +40,6 @@ export class ProductService {
       type: 'book',
     };
     return book;
-    // return this.http.get<User>(`//localhost:8080/user/get?userId=${prod}`);
+    // return this.http.get<User>(`//hicjv5.azurewebsites.net/user/get?userId=${prod}`);
   }
 }

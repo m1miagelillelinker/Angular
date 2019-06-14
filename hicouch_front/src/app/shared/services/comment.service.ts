@@ -14,7 +14,7 @@ export class CommentService {
     }
 
     putComment(comment: Comment, idAsso: number ) {
-        return this.http.put(  `//localhost:8080/comment/comment/${idAsso}/`, comment);
+        return this.http.put(  `//hicjv5.azurewebsites.net/comment/comment/${idAsso}/`, comment);
     }
 
 }

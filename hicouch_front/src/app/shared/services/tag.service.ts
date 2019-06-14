@@ -12,12 +12,12 @@ export class TagService {
     }
 
     getTags(idProduit: string) {
-        return this.http.get(`https://localhost:8080/tag/byProduct?idProduit=${idProduit}`);
+        return this.http.get(`https://hicjv5.azurewebsites.net/tag/byProduct?idProduit=${idProduit}`);
     }
 
     addTag(tag: string, idProduit: string) {
         const headers = new HttpHeaders();
         headers.append('Content-Type', 'application/json');
-        return this.http.put(`https://localhost:8080/tag/tagOnProduct?idProduit=${idProduit}&tag=${tag}`, {});
+        return this.http.put(`https://hicjv5.azurewebsites.net/tag/tagOnProduct?idProduit=${idProduit}&tag=${tag}`, {});
     }
 }

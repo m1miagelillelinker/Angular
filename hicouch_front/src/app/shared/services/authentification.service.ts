@@ -53,7 +53,7 @@ export class AuthenticationService {
                 this.localLogin(authResult);
                 this.router.navigate(['/app/home']);
             } else if (err) {
-                this.router.navigate(['/login']);
+                this.router.navigate(['app/login']);
                 console.log(err);
             }
         });
@@ -94,7 +94,7 @@ export class AuthenticationService {
         this._expiresAt = 0;
 
         this.auth0.logout({
-            return_to: this.router.navigate(['/login'])
+            return_to: this.router.navigate(['app/login'])
         });
 
 

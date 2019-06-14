@@ -16,7 +16,7 @@ export class UserService {
 
 
   // getTest() {
-  //   return this.http.get('//localhost:8080/test');
+  //   return this.http.get('//hicjv5.azurewebsites.net/test');
   // }
 
   getUser(userId: number): Observable<User> {

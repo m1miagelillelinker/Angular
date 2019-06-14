@@ -58,7 +58,7 @@ export class HeaderComponent implements OnInit {
     value = encodeURIComponent(value.trim());
     this.productService.getMoviesByTitle(value).subscribe((movie) => {
       this.products = movie;
-      this.isMovieSearched.emit(movie);
+      // this.isMovieSearched.emit(movie);
     });
   }
 
@@ -66,11 +66,13 @@ export class HeaderComponent implements OnInit {
     value = encodeURIComponent(value.trim());
     this.productService.getMoviesByTitle(value).subscribe((movie) => {
       this.products = movie;
-      this.isMovieSearched.emit(movie);
+      // this.isMovieSearched.emit(movie);
     });
   }
 
   goToProduct(event) {
+    console.log(event);
+    this.isMovieSearched.emit(event);
     this.router.navigate(['app/products', event.id]);
   }
 
