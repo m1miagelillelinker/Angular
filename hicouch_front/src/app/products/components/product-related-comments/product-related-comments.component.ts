@@ -71,7 +71,7 @@ export class ProductRelatedCommentsComponent implements OnInit {
 
     riseNoteComment(comment: Comment) {
         comment.note = comment.note + 1;
-        this.commentService.putComment(comment, comment.idpair);
+        // this.commentService.putComment(comment, comment.idpair);
     }
 
     goToUserProfile(userId) {
@@ -80,12 +80,7 @@ export class ProductRelatedCommentsComponent implements OnInit {
     }
 
     addComment() {
-        const comment = {
-            commentaire: this.commentContentAdd.value, iduser: this.loggedUser.id,
-            idpair: this.asso.association.idPair, status: this.checked ? 0 : null
-        };
-        console.log(comment);
-        this.commentService.putComment(comment, comment.idpair).subscribe();
+        this.commentService.putComment(this.commentContentAdd.value, this.asso.association.idPair, this.loggedUser.id).subscribe();
         this.animationLoad();
     }
 
@@ -187,7 +182,7 @@ export class ProductsRelatedCommentUpdateDialogComponent implements OnInit {
     editComment() {
         this.data.comment.commentaire = this.commentContentUpdate.value;
         this.data.comment.status = (this.checked) ? 0 : null;
-        this.commentService.putComment(this.data.comment, this.data.comment.idpair);
+        // this.commentService.putComment(this.data.comment, this.data.comment.idpair);
     }
 }
 
@@ -215,11 +210,7 @@ export class ProductsRelatedCommentSignalDialogComponent implements OnInit {
     }
 
     signalComment() {
-        const signalement = {
-           typeSignalement: 'comment', SignaledUserId: null, SignaledCommentId: this.data.comment.id,
-            message: this.signalementContentAdd.value, idUser: this.data.user.id
-        };
-        this.signalementService.addSignalement(signalement);
+        this.signalementService.signalCommentaire(this.data.comment.id, this.data.user.id, this.signalementContentAdd.value);
     }
 }
 

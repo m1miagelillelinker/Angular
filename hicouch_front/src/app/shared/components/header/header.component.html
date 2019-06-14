@@ -5,8 +5,8 @@
         (searchValue)="toggleSearchPropositions($event)"></app-search-product>
 
     <div class="user-infos" (click)="goToUser()" *ngIf="user">
-        <img src="/assets/images/user.png"/>
-        <p>{{user.firstName}} {{user.lastName}}</p>
+        <img src="{{user.picture}}"/>
+        <p>{{user.pseudo}}</p>
     </div>
     <button
             class="btn btn-primary btn-margin"
