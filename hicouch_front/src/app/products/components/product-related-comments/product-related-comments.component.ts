@@ -1,4 +1,4 @@
-import {Component, Inject, Input, OnInit} from '@angular/core';
+import {Component, Inject, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';
 import {Association} from '../../../shared/models/association';
 import {Router} from '@angular/router';
 import {Comment} from '../../../shared/models/comment';
@@ -22,7 +22,7 @@ export interface DialogDataComment {
     templateUrl: './product-related-comments.component.html',
     styleUrls: ['./product-related-comments.component.scss']
 })
-export class ProductRelatedCommentsComponent implements OnInit {
+export class ProductRelatedCommentsComponent implements OnInit, OnChanges {
     @Input() asso: Association;
     @Input() loggedUser: User;
     commentaires: Comment[];
@@ -44,7 +44,13 @@ export class ProductRelatedCommentsComponent implements OnInit {
     ngOnInit() {
         this.commentService.getCommentByIdPair(this.asso.association.idPair).subscribe((comments: any) => {
             this.commentaires = comments;
-            console.log('comments :' , this.commentaires);
+        });
+        this.canVoteF();
+    }
+
+    ngOnChanges(changes: SimpleChanges): void {
+        this.commentService.getCommentByIdPair(this.asso.association.idPair).subscribe((comments: any) => {
+            this.commentaires = comments;
         });
         this.canVoteF();
     }
@@ -85,7 +91,7 @@ export class ProductRelatedCommentsComponent implements OnInit {
     }
 
     addComment() {
-        this.commentService.putComment(this.commentContentAdd.value, this.asso.association.idPair).subscribe(() => {});
+        this.commentService.putComment(this.commentContentAdd.value, this.asso.association.idPair);
         // this.animationLoad();
     }
 

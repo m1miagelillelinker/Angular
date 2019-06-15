@@ -28,7 +28,7 @@ export class HicouchAPIService {
     private getBuiltUrl(endPoint: string, params: {key: any, value: any}[]): any {
         let paramString = '?';
         // add each param to paramString, and '&' between params (not after the last one)
-        params.map((p: any) => paramString += (p.key + '=' + p.value + (params.indexOf(p) === params.length ? '&' : '')));
+        paramString += params.map((kv) => kv.key + '=' + kv.value).join('&');
         // build complete URL with domain, controller and '?' + params if present
         return this.DOMAIN + endPoint + (paramString !== '?' ? paramString : '');
     }
