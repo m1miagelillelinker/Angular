@@ -340,7 +340,8 @@ export class ProductsRelatedAddDialogComponent implements OnInit {
         this.associationService.createAssociation(this.currentProduct.id,
             this.currentProduct.type,
             this.selectedOption.id,
-            this.selectedOption.product).subscribe(res => console.log(res));
+            this.selectedOption.type)
+            .subscribe(res => console.log(res));
         // this.openDialog();
     }
 

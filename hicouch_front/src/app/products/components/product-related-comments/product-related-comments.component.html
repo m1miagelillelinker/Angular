@@ -50,7 +50,7 @@
         <p class="content" matLine *ngIf="showComment(comment)"> {{comment.commentaire.commentaire}} </p>
         <br>
         <span matLine *ngIf="showComment(comment)">
-            <span class="note" *ngIf="false"><mat-icon class="url"(click)="riseNoteComment(comment)">thumb_up_alt</mat-icon>{{comment.note}}</span>
+            <span class="note" *ngIf="true"><mat-icon class="url"(click)="riseNoteComment(comment)">thumb_up_alt</mat-icon>{{comment.note}}</span>
             <span class="url"(click)="showPopoverToEdit(comment)" *ngIf="canEdit(comment)">Modifier</span>
             <span class="url" (click)="showPopoverToSignal(comment)" *ngIf="canSignal(comment)">Signaler</span>
           </span>

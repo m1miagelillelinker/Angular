@@ -26,7 +26,7 @@ export const routes: Routes = [
   {
     path: 'app/products/:productType/:productId',
     component: ProductPageComponent,
-    // canActivate: [CanActivateGuardService]
+    canActivate: [CanActivateGuardService]
   },
   {
     path: 'app/account/:userId',

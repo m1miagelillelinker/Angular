@@ -5,6 +5,7 @@ import { Subscription, Observable } from 'rxjs';
 import { FormControl } from '@angular/forms';
 import { TagService } from '../../../shared/services/tag.service';
 import {Product} from '../../../shared/models/product';
+import {Tag} from '../../../shared/models/tag';
 
 @Component({
   selector: 'app-main-product',
@@ -14,8 +15,8 @@ import {Product} from '../../../shared/models/product';
 export class MainProductComponent implements OnInit, OnDestroy, OnChanges {
   @Input() mainProduct: Product;
   tagControl = new FormControl();
-    @Input() tags: any[];
-    filteredTags: Observable<string[]>;
+    @Input() tags: Tag[];
+    filteredTags: Observable<Tag[]>;
     showInput = false;
   productSubscription: Subscription;
   displayConfirmation = false;
@@ -27,7 +28,10 @@ export class MainProductComponent implements OnInit, OnDestroy, OnChanges {
   ) { }
 
   ngOnInit() {
-    this.tagService.getTags(this.mainProduct.id).subscribe(res => console.log(res));
+    this.tagService.getTags(this.mainProduct.id).subscribe(res => {
+      this.tags = res;
+      this.filteredTags = res;
+    });
   }
 
   ngOnChanges(changes) {
@@ -37,10 +41,6 @@ export class MainProductComponent implements OnInit, OnDestroy, OnChanges {
 
   ngOnDestroy() {
   }
-  private _filter(value: string): string[] {
-    const filterValue = value.toLowerCase();
-    return this.tags.filter(tag => tag.toLowerCase().includes(filterValue));
-}
 
 submit() {
     this.tagService.addTag(this.tagControl.value, this.mainProduct.id)
