@@ -170,4 +170,8 @@ export class HicouchAPIService {
         return this.put(this.commentController + '/new', [], commentaire);
     }
 
+    getCommentaireByPair(idPair: number): any {
+        return this.get(this.commentController + '/ByAssoPairId', [{key: 'pairId', value: idPair}]);
+    }
+
 }

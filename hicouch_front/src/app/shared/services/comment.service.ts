@@ -19,4 +19,8 @@ export class CommentService {
         return this.api.addCommentaire(secureComment);
     }
 
+    getCommentByIdPair(idPair: number) {
+        return this.api.getCommentaireByPair(idPair);
+    }
+
 }

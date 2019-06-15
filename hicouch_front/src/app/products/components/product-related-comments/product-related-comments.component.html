@@ -33,21 +33,21 @@
     </app-progress-spinner>
         </mat-spinner></span>-->
   </form>
-  <div class="comments" *ngIf="asso && asso.comments">
+  <div class="comments" *ngIf="asso">
     <mat-list>
-      <mat-list-item class="comment" *ngFor="let comment of asso.comments">
+      <mat-list-item class="comment" *ngFor="let comment of commentaires">
         <!-- <img matListAvatar src="..." alt="...">-->
         <h3 matLine *ngIf="showComment(comment)">
-            <span class="username url" (click)="goToUserProfile(comment.iduser)">
-              {{comment.iduser}}
+            <span class="username url" (click)="goToUserProfile(comment.auteur.id)">
+              {{comment.auteur.pseudo}}
             </span>&nbsp;&nbsp;
           <!--          {{getUserSpeudo(comment.iduser)}}</span>&nbsp;&nbsp;-->
-          <span class="date">{{(comment.updatedate) ? comment.updatedate : comment.createdat}}</span>
+          <span class="date">{{(comment.commentaire.updatedAt) ? comment.commentaire.updatedAt : comment.commentaire.createdAt}}</span>
           &nbsp;&nbsp;
-          <span class="date">{{(comment.updatedate) ? 'Modified' : null}}</span>
+          <span class="date">{{(comment.commentaire.updatedAt) ? 'Modified' : null}}</span>
         </h3>
         <br>
-        <p class="content" matLine *ngIf="showComment(comment)"> {{comment.commentaire}} </p>
+        <p class="content" matLine *ngIf="showComment(comment)"> {{comment.commentaire.commentaire}} </p>
         <br>
         <span matLine *ngIf="showComment(comment)">
             <span class="note" *ngIf="false"><mat-icon class="url"(click)="riseNoteComment(comment)">thumb_up_alt</mat-icon>{{comment.note}}</span>
