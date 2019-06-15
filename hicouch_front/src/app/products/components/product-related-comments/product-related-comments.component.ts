@@ -122,7 +122,7 @@ export class ProductRelatedCommentsComponent implements OnInit {
         dialogRef.afterClosed().subscribe(result => {
             console.log('The dialog for signalement was closed');
             if (result) {
-                this.animationLoad();
+                // this.animationLoad();
             }
         });
 
@@ -137,7 +137,7 @@ export class ProductRelatedCommentsComponent implements OnInit {
         dialogRef.afterClosed().subscribe(result => {
             console.log('The dialog to edit comment was closed');
             if (result) {
-                this.animationLoad();
+                // this.animationLoad();
             }
         });
     }
@@ -167,7 +167,7 @@ export class ProductsRelatedCommentUpdateDialogComponent implements OnInit {
     commentContentUpdate = new FormControl('', [
         Validators.maxLength(250)
     ]);
-    checked = this.data.comment.commentaire.status === 0 ? true : false;
+    checked = this.data.comment.commentaire.status === 0;
 
     constructor(
         public dialogRef: MatDialogRef<ProductsRelatedCommentUpdateDialogComponent>,
@@ -181,13 +181,13 @@ export class ProductsRelatedCommentUpdateDialogComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.commentContentUpdate.setValue(this.data.comment.commentaire);
+        this.commentContentUpdate.setValue(this.data.comment.commentaire.commentaire);
     }
 
     editComment() {
-        this.data.comment.commentaire = this.commentContentUpdate.value;
+        this.data.comment.commentaire.commentaire = this.commentContentUpdate.value;
         this.data.comment.commentaire.status = (this.checked) ? 0 : null;
-        // this.commentService.putComment(this.data.comment, this.data.comment.idpair);
+        this.commentService.update(this.data.comment.commentaire.commentaire, this.data.comment.commentaire.id);
     }
 }
 

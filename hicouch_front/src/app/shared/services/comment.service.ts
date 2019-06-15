@@ -16,7 +16,15 @@ export class CommentService {
             commentaire: comment,
             idPair: idPair,
         };
-        return this.api.addCommentaire(secureComment);
+        return this.api.addCommentaire(secureComment).subscribe(() => {});
+    }
+
+    update(comment: string, idCommentaire: number) {
+        const secureComment = {
+            commentaire: comment,
+            id: idCommentaire,
+        };
+        return this.api.updateCommentaire(secureComment).subscribe(() => {});
     }
 
     getCommentByIdPair(idPair: number) {

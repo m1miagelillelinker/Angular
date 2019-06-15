@@ -10,6 +10,6 @@
     <div mat-dialog-actions>
         <mat-checkbox [checked]="checked">Cacher le commentaire</mat-checkbox>
         <button mat-button (click)="onNoClick()">Annuler</button>
-        <button mat-button [mat-dialog-close]="true" (click)="editComment()" [disabled]="commentContentUpdate.value == ''" cdkFocusInitial>Soumettre</button>
+        <button mat-button [mat-dialog-close]="true" (click)="editComment()" [disabled]="commentContentUpdate.value == ''">Soumettre</button>
     </div>
 </div>
