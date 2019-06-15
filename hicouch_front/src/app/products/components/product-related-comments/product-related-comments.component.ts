@@ -50,7 +50,7 @@ export class ProductRelatedCommentsComponent implements OnInit {
     }
 
     canVoteF() {
-        (this.asso.userVote == null) ? this.canVote = true : this.canVote = false;
+        (this.asso.vote == null) ? this.canVote = true : this.canVote = false;
     }
 
     riseNoteAsso() {

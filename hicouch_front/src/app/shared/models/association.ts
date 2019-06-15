@@ -4,10 +4,10 @@ import {Vote} from './vote';
 
 export interface Association {
     association: AssociationMeta;
-    product?: Product;
-    userVote?: Vote;
-    votes: number;
-    comments: Array<Comment>;
+    productA?: Product;
+    productB?: Product;
+    vote?: Vote;
+    note?: number;
 }
 
 export interface AssociationMeta {

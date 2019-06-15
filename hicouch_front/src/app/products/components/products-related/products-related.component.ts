@@ -98,6 +98,8 @@ export class ProductsRelatedComponent implements OnInit, OnChanges {
         this.filtersList.push('t');
         this.filtersList.push('b');
         this.filtersList.push('g');
+        console.log('products : ')
+        console.log(this.allProducts);
     }
     // fetchList(number): Association[] {
     //     this.allProducts.forEach(asso => {
@@ -135,7 +137,7 @@ export class ProductsRelatedComponent implements OnInit, OnChanges {
     fetchList(number: number): Association[] {
         if (this.allProducts) {
             this.allProducts.forEach(p => {
-                if (!p.product.type) { p.product.type = 'movie'; }
+                if (!p.productB.type) { p.productB.type = 'movie'; }
             });
         }
         let tab = [];

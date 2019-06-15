@@ -19,7 +19,7 @@ import {Tag} from '../shared/models/tag';
 })
 export class ProductPageComponent implements OnInit, OnChanges, OnDestroy {
   mainProduct: Product;
-  productsRelated: any[] = [];
+  productsRelated: Association[] = [];
   allProducts: any[] = [];
   filteredProducts: any[] = [];
   productId: string;

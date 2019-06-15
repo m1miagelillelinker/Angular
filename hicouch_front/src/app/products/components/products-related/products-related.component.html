@@ -35,15 +35,15 @@
                         <img *ngIf="currentIndex > 0" (click)="fetchIndex('left')"
                                 src="assets/images/white-arrow-right.png">
                 </div>
-                        <div class="item" *ngFor="let asso of fetchList(currentIndex)" (click)="showPopover()">
+                        <div class="item" *ngFor="let asso of fetchList(currentIndex)" (click)="showPopover(asso)">
                                 <div class="picto">
-                                        <img src="{{getPicto(asso.product.type)}}">
+                                        <img src="{{getPicto(asso.productB.type)}}">
                                 </div>
                                 <div class="image">
-                                        <img src="{{asso.product.image}}">
+                                        <img src="{{asso.productB.image}}">
                                 </div>
-                                <div class="title2" (mouseover)="getTitle(asso.product)">
-                                        {{asso.product.title}}
+                                <div class="title2" (mouseover)="getTitle(asso.productB)">
+                                        {{asso.productB.title}}
                                 </div>
                         </div>
                 <div class="item add-product">
