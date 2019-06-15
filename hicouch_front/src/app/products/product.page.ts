@@ -92,6 +92,7 @@ export class ProductPageComponent implements OnInit, OnChanges, OnDestroy {
             this.mainProduct = p;
             this.associationService.fetchtAssociationByProduct(this.mainProduct.id).subscribe((json: any) => {
                 this.allProducts = json;
+                this.filteredProducts = this.allProducts;
                 console.log(json);
                 if (this.allProducts && this.allProducts.length > 0) {
                     this.tagService.getTags(this.productId).subscribe((tjson: any) => this.tags = tjson);

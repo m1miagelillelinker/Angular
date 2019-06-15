@@ -11,11 +11,10 @@ export class CommentService {
     constructor(private api: HicouchAPIService) {
     }
 
-    putComment(comment: string, idPair: number, idUser: number) {
+    putComment(comment: string, idPair: number) {
         const secureComment = {
             commentaire: comment,
             idPair: idPair,
-            idUser: idUser,
         };
         return this.api.addCommentaire(secureComment);
     }

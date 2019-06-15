@@ -80,8 +80,8 @@ export class ProductRelatedCommentsComponent implements OnInit {
     }
 
     addComment() {
-        this.commentService.putComment(this.commentContentAdd.value, this.asso.association.idPair, this.loggedUser.id).subscribe();
-        this.animationLoad();
+        this.commentService.putComment(this.commentContentAdd.value, this.asso.association.idPair).subscribe(() => {});
+        //this.animationLoad();
     }
 
     animationLoad() {

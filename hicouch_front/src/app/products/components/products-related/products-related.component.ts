@@ -287,7 +287,7 @@ export class ProductsRelatedComponent implements OnInit, OnChanges {
     }
 
     showPopover(asso: Association) {
-        this.showComments = !this.showComments;
+        this.showComments = true;
         console.log(asso);
         console.log(this.showComments);
         this.assoComment = asso;

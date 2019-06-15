@@ -14,7 +14,7 @@ export class HicouchAPIService {
     private associationController = '/association';
     private userController = '/user';
     private productController = '/product';
-    private commentController = '/comment';
+    private commentController = '/commentaire';
     private voteController = '/vote';
 
     constructor(private http: HttpClient) {
