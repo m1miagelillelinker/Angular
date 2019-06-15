@@ -13,14 +13,13 @@ import { subscribeOn } from 'rxjs/operators';
 })
 export class AccountPageComponent implements OnInit {
   user: User;
-  activitiesSelected:boolean = true;
-  friendsSelected:boolean = false;
-  badgesSelected:boolean = false;
-  
+  activitiesSelected: boolean = true;
+  friendsSelected: boolean = false;
+  badgesSelected: boolean = false;
+
   profileProgress = {
     fullProgress: '150px', //'150px',
     userProgress: '100px', // user.score * 150 / 100
-     
   }
 
   tableActivites = {
@@ -28,23 +27,20 @@ export class AccountPageComponent implements OnInit {
     rows: this.getActivities()
   }
 
-  subscribedUsers = [
-    {lastname:"Avatar",firstname:"Avatar",image:"../../assets/images/profil.png"},
-    {lastname:"Bond",firstname:"James",image:"../../assets/images/james.jpg"},
-    {lastname:"DJ",firstname:"Robert",image:"../../assets/images/robert_DJ.jpg"}
-  ];
+  followersUsers: User[];
+  followsUsers: User[];
 
   badges = [
-    {intitule:"Youngling",libelle:"Vous avez fait 10 commentaires !!",image:"../../assets/images/youngling.png",score:"80",enabled:2},
-    {intitule:"Padawan",libelle:"Vous avez fait 100 commentaires !!",image:"../../assets/images/padawan.png",score:"0",enabled:4},
-    {intitule:"Knight",libelle:"Vous avez fait 500 commentaires !!",image:"../../assets/images/knight.png",score:"0",enabled:4},
-    {intitule:"Master",libelle:"Vous avez fait 1000 commentaires !!",image:"../../assets/images/master.png",score:"0",enabled:4},
-    {intitule:"Grand Master",libelle:"Vous avez fait plus de 1000 commentaires !!",image:"../../assets/images/grandmaster.jpg",score:"0",enabled:4},
-    {intitule:"Youngling",libelle:"Vous avez fait 10 Associations !!",image:"../../assets/images/cup.jpg",score:"150",enabled:4},
-    {intitule:"Padawan",libelle:"Vous avez fait 100 Associations !!",image:"../../assets/images/cup.jpg",score:"100",enabled:4},
-    {intitule:"Knight",libelle:"Vous avez fait 500 Associations !!",image:"../../assets/images/cup.jpg",score:"0",enabled:4},
-    {intitule:"Master",libelle:"Vous avez fait 1000 Associations !!",image:"../../assets/images/cup.jpg",score:"0",enabled:4},
-    {intitule:"Grand Master",libelle:"Vous avez fait plus de 1000 Associations !!",image:"../../assets/images/cup.jpg",score:"0",enabled:4}
+    {intitule:"Youngling",libelle:"Vous avez fait 10 commentaires !",image:"../../assets/images/youngling.png",score:"80",enabled:2},
+    {intitule:"Padawan",libelle:"Vous avez fait 100 commentaires !",image:"../../assets/images/padawan.png",score:"0",enabled:4},
+    {intitule:"Knight",libelle:"Vous avez fait 500 commentaires !",image:"../../assets/images/knight.png",score:"0",enabled:4},
+    {intitule:"Master",libelle:"Vous avez fait 1000 commentaires !",image:"../../assets/images/master.png",score:"0",enabled:4},
+    {intitule:"Grand Master",libelle:"Vous avez fait plus de 1000 commentaires !",image:"../../assets/images/grandmaster.jpg",score:"0",enabled:4},
+    {intitule:"Youngling",libelle:"Vous avez fait 10 Associations !",image:"../../assets/images/cup.jpg",score:"150",enabled:4},
+    {intitule:"Padawan",libelle:"Vous avez fait 100 Associations !",image:"../../assets/images/cup.jpg",score:"100",enabled:4},
+    {intitule:"Knight",libelle:"Vous avez fait 500 Associations !",image:"../../assets/images/cup.jpg",score:"0",enabled:4},
+    {intitule:"Master",libelle:"Vous avez fait 1000 Associations !",image:"../../assets/images/cup.jpg",score:"0",enabled:4},
+    {intitule:"Grand Master",libelle:"Vous avez fait plus de 1000 Associations !",image:"../../assets/images/cup.jpg",score:"0",enabled:4}
   ];
   //2 ok
   //4 hidden
@@ -58,19 +54,23 @@ export class AccountPageComponent implements OnInit {
   ngOnInit() {
     // tt3896198
     const userId = this.route.snapshot.paramMap.get('userId');
-    this.userService.getUser(0).subscribe((user) => {
+    const parsedUserId = parseInt(userId, 10);
+    this.userService.getUser(parsedUserId).subscribe((user) => {
       const myUser = {
         id: user.id,
         pseudo: user.pseudo,
         score: user.score,
         firstName: user.firstName,
         lastName: user.lastName,
+        picture: user.picture,
         idToken: '',
         accessToken: '',
         expiresAt: 0,
       };
       this.user = myUser;
     });
+    this.userService.getFollowers(parsedUserId).subscribe((json: User[]) => this.followersUsers = json);
+    this.userService.getFollows(parsedUserId).subscribe((json: User[]) => this.followsUsers = json);
   }
 
   toggleFeature(event: string) {

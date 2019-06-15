@@ -4,6 +4,7 @@ export interface User {
     firstName?: string;
     pseudo?: string;
     score?: number;
+    picture?: string;
     idToken: string;
     accessToken: string;
     expiresAt: number;

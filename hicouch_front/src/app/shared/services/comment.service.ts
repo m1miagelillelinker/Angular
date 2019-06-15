@@ -1,8 +1,6 @@
-import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable } from 'rxjs';
-import { Comment } from '../models/comment';
-
+import {Injectable} from '@angular/core';
+import {Comment} from '../models/comment';
+import {HicouchAPIService} from './hicouchAPI.service';
 
 
 @Injectable({
@@ -10,11 +8,16 @@ import { Comment } from '../models/comment';
 })
 export class CommentService {
 
-    constructor(private http: HttpClient) {
+    constructor(private api: HicouchAPIService) {
     }
 
-    putComment(comment: Comment, idAsso: number ) {
-        return this.http.put(  `//hicjv5.azurewebsites.net/comment/comment/${idAsso}/`, comment);
+    putComment(comment: string, idPair: number, idUser: number) {
+        const secureComment = {
+            commentaire: comment,
+            idPair: idPair,
+            idUser: idUser,
+        };
+        return this.api.addCommentaire(secureComment);
     }
 
 }

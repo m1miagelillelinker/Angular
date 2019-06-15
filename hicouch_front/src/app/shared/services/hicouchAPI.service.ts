@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {HttpClient} from '@angular/common/http';
 
 @Injectable({
     providedIn: 'root',
@@ -75,17 +75,17 @@ export class HicouchAPIService {
             [{key: 'follower', value: idFollower}, {key: 'follows', value: 'follows'}], {});
     }
 
-    getFollows(idUser: string): any {
+    getFollows(idUser: number): any {
         return this.get(this.abonnementController + '/follows', [{key: 'userId', value: idUser}]);
     }
 
-    getFollowers(idUser: string): any {
+    getFollowers(idUser: number): any {
         return this.get(this.abonnementController + '/followers', [{key: 'userId', value: idUser}]);
     }
 
     // signalements
 
-    getSignalements(idSignalement: string): any {
+    getSignalements(idSignalement: number): any {
         return this.get(this.signalementController + '/get', [{key: 'signalementId', value: idSignalement}]);
     }
 
@@ -144,14 +144,30 @@ export class HicouchAPIService {
         return this.get(this.productController + '/getFilmByIdFromReferentiel', [{key: 'filmId', value: idProduct}]);
     }
 
-    getBookyID(idProduct: string): any {
+    getBookByID(idProduct: string): any {
         return this.get(this.productController + '/getBookByIdFromReferentiel', [{key: 'bookId', value: idProduct}]);
+    }
+
+    getGameByID(idProduct: string): any {
+        return this.get(this.productController + '/getGameByIdFromReferentiel', [{key: 'gameId', value: idProduct}]);
     }
 
     searchFilm(searchTerms: string): any {
         return this.get(this.productController + '/getFilmsByTitleFromReferentiel', [{key: 'research', value: searchTerms}]);
     }
 
+    searchBook(searchTerms: string): any {
+        return this.get(this.productController + '/getBooksFromReferentiel', [{key: 'keyword', value: searchTerms}]);
+    }
+
+    searchGame(searchTerms: string): any {
+        return this.get(this.productController + '/getGamesByReferentiel', [{key: 'keyword', value: searchTerms}]);
+    }
+
     // comment
+
+    addCommentaire(commentaire: any): any {
+        return this.put(this.commentController + '/new', [], commentaire);
+    }
 
 }

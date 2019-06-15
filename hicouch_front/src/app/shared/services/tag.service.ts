@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {HicouchAPIService} from './hicouchAPI.service';
 
 
 
@@ -8,16 +9,14 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
 })
 export class TagService {
 
-    constructor(private http: HttpClient) {
+    constructor(private api: HicouchAPIService) {
     }
 
     getTags(idProduit: string) {
-        return this.http.get(`https://hicjv5.azurewebsites.net/tag/byProduct?idProduit=${idProduit}`);
+        return this.api.getTagsByProduct(idProduit);
     }
 
     addTag(tag: string, idProduit: string) {
-        const headers = new HttpHeaders();
-        headers.append('Content-Type', 'application/json');
-        return this.http.put(`https://hicjv5.azurewebsites.net/tag/tagOnProduct?idProduit=${idProduit}&tag=${tag}`, {});
+        return this.api.putTagOnProduct(idProduit, tag);
     }
 }
