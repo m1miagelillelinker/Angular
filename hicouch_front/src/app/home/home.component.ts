@@ -89,12 +89,15 @@ export class HomeComponent implements OnInit {
           (prod: Product) => {
             product = prod;
           });
-      // return this.productService.getMovieById(productId);
       return product;
     }
 
     if (fourn == 'livre') {
-      return this.productService.getBookById(productId);
+      this.productService.getBookById(productId).subscribe(
+          (prod: Product) => {
+            product = prod;
+          });
+      return product;
     }
   }
 
