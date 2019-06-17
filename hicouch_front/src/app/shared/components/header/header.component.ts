@@ -76,4 +76,8 @@ export class HeaderComponent implements OnInit {
     this.router.navigate(['app/products', event.type, event.id]);
   }
 
+  disconnect() {
+    this.auth.logout();
+  }
+
 }

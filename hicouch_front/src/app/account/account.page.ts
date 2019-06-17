@@ -1,7 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { ProductService } from '../shared/services/product.service';
 import { Movie, Book } from '../shared/models/product';
-import { ActivatedRoute } from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import { User } from '../shared/models/user';
 import { UserService } from '../shared/services/user.service';
 import { subscribeOn } from 'rxjs/operators';
@@ -49,6 +49,7 @@ export class AccountPageComponent implements OnInit {
   constructor(
     private userService: UserService,
     private route: ActivatedRoute,
+    private router: Router,
   ) { }
 
   ngOnInit() {
@@ -93,11 +94,6 @@ export class AccountPageComponent implements OnInit {
     }
   }
 
-  loadMoviePage() {
-    // TODO (elise) when search done
-  }
-
-
   getActivities() {
     return [
       [ 'Elise', 'a créé une nouvelle association', 'a créé un tag personnageFéminin', '06/juin/2019'],
@@ -118,5 +114,12 @@ export class AccountPageComponent implements OnInit {
 
   showFriends() {
     this.toggleFeature('friends');
+  }
+
+  loadMoviePage(event) {
+    console.log(event);
+    // this.changeDetectorRef.detectChanges();
+    event.id = event.id;
+    this.router.navigate(['app/products/', event.id]);
   }
 }

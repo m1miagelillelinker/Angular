@@ -8,7 +8,7 @@
         <span class="note" >
           <mat-icon *ngIf="!canVote" (click)="riseNoteAsso()">star</mat-icon>
           <mat-icon *ngIf="canVote" (click)="decreaseNoteAsso()">star_border</mat-icon>
-          {{asso.votes}}
+          {{asso.vote}}
         </span>
       </span>
     </mat-list-item>

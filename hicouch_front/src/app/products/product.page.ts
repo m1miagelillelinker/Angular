@@ -11,6 +11,7 @@ import {MatAutocompleteModule, MatIconModule} from '@angular/material';
 import {FormControl} from '@angular/forms';
 import {map, startWith} from 'rxjs/operators';
 import {Tag} from '../shared/models/tag';
+import {User} from '../shared/models/user';
 
 @Component({
   selector: 'app-product-page',
@@ -26,6 +27,7 @@ export class ProductPageComponent implements OnInit, OnChanges, OnDestroy {
   productType: string;
   idRelated: string;
   productSubscription: Subscription;
+  user: User;
 
     tagControl = new FormControl();
     tags: Tag[];
