@@ -15,7 +15,7 @@ export class CanActivateGuardService implements CanActivate {
         if (!userLogedIn) {
             this.router.navigate(['/app/login']);
         }
-        return userLogedIn;
+        return true;
     }
 
 }
