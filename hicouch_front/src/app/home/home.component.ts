@@ -45,16 +45,15 @@ export class HomeComponent implements OnInit {
             lastName: user.lastName,
           };
         });
-    this.associations = this.getLastAssociations();
-  }
-
-  getLastAssociations() {
-    let assos: Association[];
     this.associationService.getLastAssociations().subscribe(
         (associations: Association[]) => {
-          assos = associations;
-        }
-    );
+          this.associations = associations;
+          console.log(this.associations[0]);
+        });
+    this.getLastAssociations(this.associations);
+  }
+
+  getLastAssociations(assos: Association[]) {
     console.log(assos);
     const list = [];
     let i;
@@ -70,7 +69,7 @@ export class HomeComponent implements OnInit {
         list.push(i);
       }
     }
-    return list;
+    assos = list;
   }
 
   getProductImage(productId: string, fourn: string) {
@@ -84,11 +83,17 @@ export class HomeComponent implements OnInit {
   }
 
   getProduct(productId: string, fourn: string): Product {
-    if (fourn = 'movie') {
-      return this.productService.getMovieById(productId);
+    let product: Product;
+    if (fourn == 'film') {
+      this.productService.getMovieById(productId).subscribe(
+          (prod: Product) => {
+            product = prod;
+          });
+      // return this.productService.getMovieById(productId);
+      return product;
     }
 
-    if (fourn = 'book') {
+    if (fourn == 'livre') {
       return this.productService.getBookById(productId);
     }
   }

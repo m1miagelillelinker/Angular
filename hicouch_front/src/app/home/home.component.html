@@ -9,19 +9,21 @@
 </div>
 <!-- <button (click)="goToProducts()">see products</button> -->
 
-<div *ngIf="associations.length > 0" class="lastAssos">
+<div *ngIf="associations && associations. length > 0" class="lastAssos">
 	<h2>Dernières associations</h2>
 
 	<div class="list">
 		<div class="item inline" *ngFor="let asso of associations" >
-			<div class="images block">
+<!--			TODO
+<div class="images block">
 				<img src="{{getProductImage(asso.association.idProduitA, asso.association.idfournA)}}">
 				<img src="{{getProductImage(asso.association.idProduitB, asso.association.idfournB)}}">
 			</div>
 			<div class="titles block">
 				<span (click)="goTo(asso.association.idProduitA)">{{getProductName(asso.association.idProduitA, asso.association.idfournA)}}</span> et
 				<span (click)="goTo(asso.association.idProduitB)">{{getProductName(asso.association.idProduitB, asso.association.idfournB)}}</span>
-			</div>
+			</div>-->
+			{{asso.association.idProduitA}} <!-- + {{getProductName(asso.association.idProduitA, asso.association.idfournA)}}-->
 		</div>
 	</div>
 
