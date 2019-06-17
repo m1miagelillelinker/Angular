@@ -1,10 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { ProductService } from '../shared/services/product.service';
-import { Movie, Book } from '../shared/models/product';
 import {ActivatedRoute, Router} from '@angular/router';
 import { User } from '../shared/models/user';
 import { UserService } from '../shared/services/user.service';
-import { subscribeOn } from 'rxjs/operators';
 
 @Component({
   selector: 'app-account-page',
@@ -13,37 +10,55 @@ import { subscribeOn } from 'rxjs/operators';
 })
 export class AccountPageComponent implements OnInit {
   user: User;
-  activitiesSelected: boolean = true;
-  friendsSelected: boolean = false;
-  badgesSelected: boolean = false;
+  activitiesSelected = true;
+  friendsSelected = false;
+  badgesSelected = false;
 
   profileProgress = {
-    fullProgress: '150px', //'150px',
+    fullProgress: '150px', // '150px',
     userProgress: '100px', // user.score * 150 / 100
-  }
+  };
 
   tableActivites = {
     columns: ['Utilisateur', 'Activité', 'Détails de l\'activité', 'Date'],
     rows: this.getActivities()
-  }
+  };
 
   followersUsers: User[];
   followsUsers: User[];
 
   badges = [
-    {intitule:"Youngling",libelle:"Vous avez fait 10 commentaires !",image:"../../assets/images/youngling.png",score:"80",enabled:2},
-    {intitule:"Padawan",libelle:"Vous avez fait 100 commentaires !",image:"../../assets/images/padawan.png",score:"0",enabled:4},
-    {intitule:"Knight",libelle:"Vous avez fait 500 commentaires !",image:"../../assets/images/knight.png",score:"0",enabled:4},
-    {intitule:"Master",libelle:"Vous avez fait 1000 commentaires !",image:"../../assets/images/master.png",score:"0",enabled:4},
-    {intitule:"Grand Master",libelle:"Vous avez fait plus de 1000 commentaires !",image:"../../assets/images/grandmaster.jpg",score:"0",enabled:4},
-    {intitule:"Youngling",libelle:"Vous avez fait 10 Associations !",image:"../../assets/images/cup.jpg",score:"150",enabled:4},
-    {intitule:"Padawan",libelle:"Vous avez fait 100 Associations !",image:"../../assets/images/cup.jpg",score:"100",enabled:4},
-    {intitule:"Knight",libelle:"Vous avez fait 500 Associations !",image:"../../assets/images/cup.jpg",score:"0",enabled:4},
-    {intitule:"Master",libelle:"Vous avez fait 1000 Associations !",image:"../../assets/images/cup.jpg",score:"0",enabled:4},
-    {intitule:"Grand Master",libelle:"Vous avez fait plus de 1000 Associations !",image:"../../assets/images/cup.jpg",score:"0",enabled:4}
+    {
+      intitule: 'Youngling',
+      libelle: 'Vous avez fait 10 commentaires !',
+      image: '../../assets/images/youngling.png',
+      score: '80',
+      enabled: 2
+    },
+    {intitule: 'Padawan', libelle: 'Vous avez fait 100 commentaires !', image: '../../assets/images/padawan.png', score: '0', enabled: 4},
+    {intitule: 'Knight', libelle: 'Vous avez fait 500 commentaires !', image: '../../assets/images/knight.png', score: '0', enabled: 4},
+    {intitule: 'Master', libelle: 'Vous avez fait 1000 commentaires !', image: '../../assets/images/master.png', score: '0', enabled: 4},
+    {
+      intitule: 'Grand Master',
+      libelle: 'Vous avez fait plus de 1000 commentaires !',
+      image: '../../assets/images/grandmaster.jpg',
+      score: '0',
+      enabled: 4
+    },
+    {intitule: 'Youngling', libelle: 'Vous avez fait 10 Associations !', image: '../../assets/images/cup.jpg', score: '150', enabled: 4},
+    {intitule: 'Padawan', libelle: 'Vous avez fait 100 Associations !', image: '../../assets/images/cup.jpg', score: '100', enabled: 4},
+    {intitule: 'Knight', libelle: 'Vous avez fait 500 Associations !', image: '../../assets/images/cup.jpg', score: '0', enabled: 4},
+    {intitule: 'Master', libelle: 'Vous avez fait 1000 Associations !', image: '../../assets/images/cup.jpg', score: '0', enabled: 4},
+    {
+      intitule: 'Grand Master',
+      libelle: 'Vous avez fait plus de 1000 Associations !',
+      image: '../../assets/images/cup.jpg',
+      score: '0',
+      enabled: 4
+    }
   ];
-  //2 ok
-  //4 hidden
+  // 2 ok
+  // 4 hidden
 
 
   constructor(
@@ -116,10 +131,4 @@ export class AccountPageComponent implements OnInit {
     this.toggleFeature('friends');
   }
 
-  loadMoviePage(event) {
-    console.log(event);
-    // this.changeDetectorRef.detectChanges();
-    event.id = event.id;
-    this.router.navigate(['app/products/', event.id]);
-  }
 }

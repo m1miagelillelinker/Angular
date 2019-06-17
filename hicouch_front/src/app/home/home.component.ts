@@ -30,14 +30,4 @@ export class HomeComponent implements OnInit {
         }
     }
 
-  loadMoviePage(event) {
-    console.log(event);
-    // this.changeDetectorRef.detectChanges();
-    event.id = event.id;
-    this.router.navigate(['app/products/', event.id]);
-}
-    goToProducts() {
-        this.router.navigate(['app/products']);
-    }
-
 }
