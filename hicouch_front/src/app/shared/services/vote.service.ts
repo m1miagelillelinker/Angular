@@ -27,7 +27,7 @@ export class VoteService {
     }
 
     unvote(vote: Vote) {
-        return this.http.put<Vote>(  `//hicjv5.azurewebsites.net/vote/unvote/`, vote);
+        return this.http.put<Vote>(  `//hicjv7.azurewebsites.net/vote/unvote/`, vote);
     }
 
 }
