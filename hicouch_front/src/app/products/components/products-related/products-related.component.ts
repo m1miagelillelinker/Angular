@@ -38,55 +38,6 @@ export class ProductsRelatedComponent implements OnInit, OnChanges {
     showComments: boolean;
     assoComment: Association;
 
-    // TODO : be able to retrieve user from localstorage
-
-    /* fake datas to see if it work*/
-    loggedUsere: any = {
-            id: 15
-        };
-
-      m = {
-          id: 1,
-          title: 'Avengers',
-          description: '',
-          country: 'usa',
-          director: 'Russo',
-          year: '2019',
-          genre: null,
-          image: '',
-          duration: '180',
-          type: 'movie'
-      };
-
-        comments: Comment[] = [
-            {id: 1, commentaire: 'Totalement d\'accord avec.', note: 0, iduser: 1, idpair: 1, status: 1,
-                createdat: new Date()}, // , updatedate: new Date()
-            {id: 3, commentaire: 'Hors sujet', note: 18, iduser: 15, idpair: 1, status: 0,
-                createdat: new Date(), updatedate: new Date()},
-            {id: 2, commentaire: 'Hors sujet', note: -1, iduser: 2, idpair: 1, status: 0,
-                createdat: new Date(), updatedate: new Date()}
-        ];
-      asssoMeta  = {
-          id: 1,
-          idProduitA: '1',
-          idfournA: '5',
-          idProduitB: '2',
-          idfournB: '6',
-          idPair: 10
-      };
-
-      asso =  {
-          association: this.asssoMeta,
-          product: this.m,
-          productDTO: this.m,
-          comments: this.comments,
-          votes: 50,
-          userVote: {
-              idPair: this.asssoMeta.idPair, vote: -1, idUser: this.loggedUsere.id
-          }
-      };
-
-
     constructor(
         private router: Router,
         public dialog: MatDialog,
@@ -98,6 +49,8 @@ export class ProductsRelatedComponent implements OnInit, OnChanges {
         this.filtersList.push('t');
         this.filtersList.push('b');
         this.filtersList.push('g');
+        console.log('products : ');
+        console.log(this.allProducts);
     }
     // fetchList(number): Association[] {
     //     this.allProducts.forEach(asso => {
@@ -135,7 +88,7 @@ export class ProductsRelatedComponent implements OnInit, OnChanges {
     fetchList(number: number): Association[] {
         if (this.allProducts) {
             this.allProducts.forEach(p => {
-                if (!p.product.type) { p.product.type = 'movie'; }
+                if (!p.productB.type) { p.productB.type = 'movie'; }
             });
         }
         let tab = [];
@@ -285,7 +238,7 @@ export class ProductsRelatedComponent implements OnInit, OnChanges {
     }
 
     showPopover(asso: Association) {
-        this.showComments = !this.showComments;
+        this.showComments = true;
         console.log(asso);
         console.log(this.showComments);
         this.assoComment = asso;
@@ -387,7 +340,8 @@ export class ProductsRelatedAddDialogComponent implements OnInit {
         this.associationService.createAssociation(this.currentProduct.id,
             this.currentProduct.type,
             this.selectedOption.id,
-            this.selectedOption.product).subscribe(res => console.log(res));
+            this.selectedOption.type)
+            .subscribe(res => console.log(res));
         // this.openDialog();
     }
 

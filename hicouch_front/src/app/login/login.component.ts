@@ -23,6 +23,7 @@ export class LoginComponent implements OnInit {
     ngOnInit() {
         if (this.auth.isAuthenticated()) {
           this.auth.renewTokens();
+          this.router.navigate(['app/home']);
         }
     }
 

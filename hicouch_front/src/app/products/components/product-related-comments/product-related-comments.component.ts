@@ -1,4 +1,4 @@
-import {Component, Inject, Input, OnInit} from '@angular/core';
+import {Component, Inject, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';
 import {Association} from '../../../shared/models/association';
 import {Router} from '@angular/router';
 import {Comment} from '../../../shared/models/comment';
@@ -22,9 +22,10 @@ export interface DialogDataComment {
     templateUrl: './product-related-comments.component.html',
     styleUrls: ['./product-related-comments.component.scss']
 })
-export class ProductRelatedCommentsComponent implements OnInit {
+export class ProductRelatedCommentsComponent implements OnInit, OnChanges {
     @Input() asso: Association;
     @Input() loggedUser: User;
+    commentaires: Comment[];
     commentContentAdd = new FormControl('', [
         Validators.maxLength(500)
     ]);
@@ -41,6 +42,16 @@ export class ProductRelatedCommentsComponent implements OnInit {
     ) { }
 
     ngOnInit() {
+        this.commentService.getCommentByIdPair(this.asso.association.idPair).subscribe((comments: any) => {
+            this.commentaires = comments;
+        });
+        this.canVoteF();
+    }
+
+    ngOnChanges(changes: SimpleChanges): void {
+        this.commentService.getCommentByIdPair(this.asso.association.idPair).subscribe((comments: any) => {
+            this.commentaires = comments;
+        });
         this.canVoteF();
     }
 
@@ -50,7 +61,7 @@ export class ProductRelatedCommentsComponent implements OnInit {
     }
 
     canVoteF() {
-        (this.asso.userVote == null) ? this.canVote = true : this.canVote = false;
+        (this.asso.vote == null) ? this.canVote = true : this.canVote = false;
     }
 
     riseNoteAsso() {
@@ -70,7 +81,7 @@ export class ProductRelatedCommentsComponent implements OnInit {
     }
 
     riseNoteComment(comment: Comment) {
-        comment.note = comment.note + 1;
+        // comment.note = comment.note + 1;
         // this.commentService.putComment(comment, comment.idpair);
     }
 
@@ -80,8 +91,8 @@ export class ProductRelatedCommentsComponent implements OnInit {
     }
 
     addComment() {
-        this.commentService.putComment(this.commentContentAdd.value, this.asso.association.idPair, this.loggedUser.id).subscribe();
-        this.animationLoad();
+        this.commentService.putComment(this.commentContentAdd.value, this.asso.association.idPair);
+        // this.animationLoad();
     }
 
     animationLoad() {
@@ -101,11 +112,11 @@ export class ProductRelatedCommentsComponent implements OnInit {
     }
 
     canEdit(comment: Comment) {
-        return comment.iduser === this.loggedUser.id;
+        return comment.owned;
     }
 
     canSignal( comment: Comment) {
-        return comment.iduser !== this.loggedUser.id;
+        return !comment.owned;
     }
 
     showPopoverToSignal(comment: Comment) {
@@ -117,7 +128,7 @@ export class ProductRelatedCommentsComponent implements OnInit {
         dialogRef.afterClosed().subscribe(result => {
             console.log('The dialog for signalement was closed');
             if (result) {
-                this.animationLoad();
+                // this.animationLoad();
             }
         });
 
@@ -132,19 +143,19 @@ export class ProductRelatedCommentsComponent implements OnInit {
         dialogRef.afterClosed().subscribe(result => {
             console.log('The dialog to edit comment was closed');
             if (result) {
-                this.animationLoad();
+                // this.animationLoad();
             }
         });
     }
 
     showComment(comment: Comment) {
-        if (comment.status === 0 && comment.iduser === this.loggedUser.id) {
+        if (comment.commentaire.status === 0 && comment.owned) {
             return true;
         }
-        if (comment.status === 0 && comment.iduser !== this.loggedUser.id) {
+        if (comment.commentaire.status === 0 && !comment.owned) {
             return false;
         }
-        if (comment.status !== 0) {
+        if (comment.commentaire.status !== 0) {
             return true;
         }
     }
@@ -162,7 +173,7 @@ export class ProductsRelatedCommentUpdateDialogComponent implements OnInit {
     commentContentUpdate = new FormControl('', [
         Validators.maxLength(250)
     ]);
-    checked = this.data.comment.status === 0 ? true : false;
+    checked = this.data.comment.commentaire.status === 0;
 
     constructor(
         public dialogRef: MatDialogRef<ProductsRelatedCommentUpdateDialogComponent>,
@@ -176,13 +187,13 @@ export class ProductsRelatedCommentUpdateDialogComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.commentContentUpdate.setValue(this.data.comment.commentaire);
+        this.commentContentUpdate.setValue(this.data.comment.commentaire.commentaire);
     }
 
     editComment() {
-        this.data.comment.commentaire = this.commentContentUpdate.value;
-        this.data.comment.status = (this.checked) ? 0 : null;
-        // this.commentService.putComment(this.data.comment, this.data.comment.idpair);
+        this.data.comment.commentaire.commentaire = this.commentContentUpdate.value;
+        this.data.comment.commentaire.status = (this.checked) ? 0 : null;
+        this.commentService.update(this.data.comment.commentaire.commentaire, this.data.comment.commentaire.id);
     }
 }
 
@@ -210,7 +221,7 @@ export class ProductsRelatedCommentSignalDialogComponent implements OnInit {
     }
 
     signalComment() {
-        this.signalementService.signalCommentaire(this.data.comment.id, this.data.user.id, this.signalementContentAdd.value);
+        this.signalementService.signalCommentaire(this.data.comment.commentaire.id, this.data.user.id, this.signalementContentAdd.value);
     }
 }
 

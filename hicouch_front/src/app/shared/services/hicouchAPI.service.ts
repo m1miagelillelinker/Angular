@@ -14,7 +14,7 @@ export class HicouchAPIService {
     private associationController = '/association';
     private userController = '/user';
     private productController = '/product';
-    private commentController = '/comment';
+    private commentController = '/commentaire';
     private voteController = '/vote';
 
     constructor(private http: HttpClient) {
@@ -28,7 +28,7 @@ export class HicouchAPIService {
     private getBuiltUrl(endPoint: string, params: {key: any, value: any}[]): any {
         let paramString = '?';
         // add each param to paramString, and '&' between params (not after the last one)
-        params.map((p: any) => paramString += (p.key + '=' + p.value + (params.indexOf(p) === params.length ? '&' : '')));
+        paramString += params.map((kv) => kv.key + '=' + kv.value).join('&');
         // build complete URL with domain, controller and '?' + params if present
         return this.DOMAIN + endPoint + (paramString !== '?' ? paramString : '');
     }
@@ -99,7 +99,7 @@ export class HicouchAPIService {
 
     // associations
 
-    getAssociationByProduct(idProduct: number): any {
+    getAssociationByProduct(idProduct: string): any {
         return this.get(this.associationController + '/byProduct', [{key: 'idProduct', value: idProduct}]);
     }
 
@@ -168,6 +168,14 @@ export class HicouchAPIService {
 
     addCommentaire(commentaire: any): any {
         return this.put(this.commentController + '/new', [], commentaire);
+    }
+
+    updateCommentaire(commentaire: any): any {
+        return this.put(this.commentController + '/update', [], commentaire);
+    }
+
+    getCommentaireByPair(idPair: number): any {
+        return this.get(this.commentController + '/ByAssoPairId', [{key: 'pairId', value: idPair}]);
     }
 
 }

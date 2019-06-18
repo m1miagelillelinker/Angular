@@ -11,13 +11,24 @@ export class CommentService {
     constructor(private api: HicouchAPIService) {
     }
 
-    putComment(comment: string, idPair: number, idUser: number) {
+    putComment(comment: string, idPair: number) {
         const secureComment = {
             commentaire: comment,
             idPair: idPair,
-            idUser: idUser,
         };
-        return this.api.addCommentaire(secureComment);
+        return this.api.addCommentaire(secureComment).subscribe(() => {});
+    }
+
+    update(comment: string, idCommentaire: number) {
+        const secureComment = {
+            commentaire: comment,
+            id: idCommentaire,
+        };
+        return this.api.updateCommentaire(secureComment).subscribe(() => {});
+    }
+
+    getCommentByIdPair(idPair: number) {
+        return this.api.getCommentaireByPair(idPair);
     }
 
 }

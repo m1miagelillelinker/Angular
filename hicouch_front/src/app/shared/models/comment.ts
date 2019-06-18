@@ -1,10 +1,19 @@
+import {Association} from './association';
+import {User} from './user';
+
 export interface Comment {
-    id?: number;
+    association: Association;
+    auteur: User;
+    commentaire: CommentaireMeta;
+    owned: boolean;
+}
+
+export interface CommentaireMeta {
+    id: number;
     commentaire: string;
-    note?: number;
-    iduser: number;
-    idpair: number;
-    status?: number;
-    createdat?: Date;
-    updatedate?: Date;
+    idUser: number;
+    idPair: number;
+    status: number;
+    createdAt: Date;
+    updatedAt: Date;
 }

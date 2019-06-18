@@ -1,5 +1,7 @@
+import {Tag} from './tag';
+
 export interface Product {
-    id: number;
+    id: string;
     title: string;
     description: string ;
     country: string ;
@@ -22,10 +24,6 @@ export interface ProductResult {
     image: string;
     duration?: string;
     type: string;
-}
-
-export interface Tag {
-    truc?: string;
 }
 
 export interface Movie {

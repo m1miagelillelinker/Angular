@@ -12,7 +12,7 @@ export class AssociationService {
     constructor(private api: HicouchAPIService) {
     }
 
-    fetchtAssociationByProduct(idProduct: number) {
+    fetchtAssociationByProduct(idProduct: string) {
         return this.api.getAssociationByProduct(idProduct);
     }
 
