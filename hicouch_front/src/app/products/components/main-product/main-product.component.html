@@ -22,7 +22,7 @@
     </div>
     <div class="tag" *ngIf="tags && tags.length > 0">
             <mat-form-field class="tag-content"> 
-                <input type="text" placeholder="Ajouter un tag" matInput
+                <input type="text" placeholder="Ajouter un tag" matInput #tagInput
                 [formControl]="myControl" [matAutocomplete]="auto"> <mat-icon (click)="submit()">Confirm</mat-icon>
                 <mat-autocomplete #auto="matAutocomplete"> 
                     <mat-option *ngFor="let tag of filteredTags | async" [value]="tag">

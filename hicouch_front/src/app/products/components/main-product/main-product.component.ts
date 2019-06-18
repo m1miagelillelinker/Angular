@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, OnChanges, Input, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, OnDestroy, OnChanges, Input, ChangeDetectorRef, ViewChild, ElementRef } from '@angular/core';
 
 import { ActivatedRoute } from '@angular/router';
 import { Subscription, Observable } from 'rxjs';
@@ -16,6 +16,7 @@ export class MainProductComponent implements OnInit, OnDestroy, OnChanges {
   @Input() mainProduct: Product;
   tagControl = new FormControl();
     @Input() tags: Tag[];
+    @ViewChild('tagInput') tagInput: ElementRef;
     filteredTags: Observable<Tag[]>;
     showInput = false;
   productSubscription: Subscription;
@@ -43,7 +44,8 @@ export class MainProductComponent implements OnInit, OnDestroy, OnChanges {
   }
 
 submit() {
-    this.tagService.addTag(this.tagControl.value, this.mainProduct.id)
+  const t = this.tagInput.nativeElement;
+    this.tagService.addTag(t.value, this.mainProduct.id)
         .subscribe(() => this.tagService.getTags(this.mainProduct.id).subscribe((json: any) => this.tags = json));
     this.setInputFVisibility(false);
     this.displayConfirmation = true;
