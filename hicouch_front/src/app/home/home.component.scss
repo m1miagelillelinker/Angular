@@ -1,5 +1,5 @@
 #login {
-    margin: 0 auto;
+  margin: 0 auto;
   width: 100px;
   height: 100px;
   background-color: #ccc;
@@ -12,11 +12,11 @@
   width: 80vw;
   margin-left: auto;
   margin-right: auto;
+  background-color: #7c0000;
+  color: white;
+  border-radius: 10px;
 }
 
-.block {
-  display: block;
-}
 
 .inline {
   display: inline-block;
@@ -25,7 +25,24 @@
 }
 
 .lastAssos {
+  text-align: center;
+  padding: 20px;
   margin: 0 auto;
-  width: 50%;
-  margin: 50px;
+}
+
+.image {
+  margin: 10px;
+  width: 30%;
+}
+
+.title {
+  text-decoration: underline;
+}
+
+.clickable {
+  cursor: pointer;
+}
+
+.titles {
+  text-align: center;
 }

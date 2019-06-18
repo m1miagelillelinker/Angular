@@ -52,7 +52,7 @@ export class ProductsRelatedComponent implements OnInit, OnChanges {
         // });
         if (this.allProducts) {
             this.allProducts.forEach(p => {
-                if (!p.product.type) { p.product.type = 'movie'; }
+                if (!p.productB.type) { p.productB.type = 'movie'; }
             });
         }
         let tab = [];
