@@ -61,10 +61,20 @@
   }
 
   .username {
-    span {
+    h3 {
         display: inline-block;
         padding-top: 10px;
         padding-right: 10px;
+    }
+  }
+  .editbutton{
+    margin-top: 5vh;
+    margin-left: 55px;
+    padding: 10px;
+    background-color: #ececec;
+    &.selected {
+        background-color:#7c0000;
+        color: white;
     }
   }
 
@@ -84,11 +94,13 @@
 
     .progress-bar {
       border-radius: 2px;
+      height: 13px;
       background-color: lightgray;
     }
 
     .progress {
       border-radius: 2px;
+      height: 13px;
       background: #7c0000;
     }
   }

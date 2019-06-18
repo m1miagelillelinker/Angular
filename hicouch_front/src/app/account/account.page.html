@@ -5,15 +5,7 @@
 <div *ngIf="user" class="content">
 <div class="profile">
 	<div class="display">
-			<img src="{{user.picture}}" />
-			<div class="user-infos">
-				{{user.firstName}}
-				<br />
-				{{user.lastName}}
-			</div>
-	</div>
-	<div class="action" (click)="goToEdition()">
-		Edit My Profile
+		
 	</div>
 </div>
 </div>
@@ -23,10 +15,11 @@
 <div class="profile-infos">
 <img height="150px" width="150px" src="{{user.picture}}" />
 <div class="username">
-	<span>Firstname</span>
-	<span>Lastname</span>
+	<h3>{{user.pseudo}}</h3>
+	<button class="editbutton">Edit Profil</button>
 </div>
 <!-- Display the profile-progess -->
+<span>Score</span>
 <div class="profile-progress">
 	<div class="progress-bar" [ngStyle]="{'width': profileProgress.fullProgress}"></div>
 	<div class="progress" [ngStyle]="{'width': profileProgress.userProgress}"></div>
@@ -70,7 +63,7 @@
 <app-display-badges
 	*ngIf="badgesSelected"
 	title="Badges"
-	[badges]="badges"
+	[badges]="user.badges"
 	></app-display-badges>
 </div>
 

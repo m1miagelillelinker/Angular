@@ -22,6 +22,21 @@
       padding: 15px;
       width: 100%;
     }
+    .searchButton{
+      float: left;
+      width: 20%;
+      padding: 10px;
+      background: rgb(143, 18, 18);
+      color: white;
+      font-size: 17px;
+      border: 1px solid grey;
+      border-left: none;
+      cursor: pointer;
+    }
+    .searchButton:hover{
+      background:rgb(214, 31, 31);
+    }
+    
 
     .mat-select {
       // display: inline-block;

@@ -8,6 +8,17 @@ export interface User {
     idToken: string;
     accessToken: string;
     expiresAt: number;
+    badges:[
+        {
+        id: number,
+        description: string,
+        imgUrl: number,
+        seuil:number,
+        createdAt:string,
+        updatedAt:string,
+        applyOn:string,
+        }
+    ]
 }
 
 /*export interface User {

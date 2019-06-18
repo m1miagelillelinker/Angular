@@ -4,7 +4,10 @@ import { Movie, Book } from '../shared/models/product';
 import { ActivatedRoute } from '@angular/router';
 import { User } from '../shared/models/user';
 import { UserService } from '../shared/services/user.service';
-import { subscribeOn } from 'rxjs/operators';
+import { BadgesService } from '../shared/services/badges.service';
+
+
+
 
 @Component({
   selector: 'app-account-page',
@@ -18,8 +21,8 @@ export class AccountPageComponent implements OnInit {
   badgesSelected: boolean = false;
 
   profileProgress = {
-    fullProgress: '150px', //'150px',
-    userProgress: '100px', // user.score * 150 / 100
+    fullProgress: '180px', //'150px',
+    userProgress: '100px', // user.score * 170 / 100
   }
 
   tableActivites = {
@@ -30,25 +33,11 @@ export class AccountPageComponent implements OnInit {
   followersUsers: User[];
   followsUsers: User[];
 
-  badges = [
-    {intitule:"Youngling",libelle:"Vous avez fait 10 commentaires !",image:"../../assets/images/youngling.png",score:"80",enabled:2},
-    {intitule:"Padawan",libelle:"Vous avez fait 100 commentaires !",image:"../../assets/images/padawan.png",score:"0",enabled:4},
-    {intitule:"Knight",libelle:"Vous avez fait 500 commentaires !",image:"../../assets/images/knight.png",score:"0",enabled:4},
-    {intitule:"Master",libelle:"Vous avez fait 1000 commentaires !",image:"../../assets/images/master.png",score:"0",enabled:4},
-    {intitule:"Grand Master",libelle:"Vous avez fait plus de 1000 commentaires !",image:"../../assets/images/grandmaster.jpg",score:"0",enabled:4},
-    {intitule:"Youngling",libelle:"Vous avez fait 10 Associations !",image:"../../assets/images/cup.jpg",score:"150",enabled:4},
-    {intitule:"Padawan",libelle:"Vous avez fait 100 Associations !",image:"../../assets/images/cup.jpg",score:"100",enabled:4},
-    {intitule:"Knight",libelle:"Vous avez fait 500 Associations !",image:"../../assets/images/cup.jpg",score:"0",enabled:4},
-    {intitule:"Master",libelle:"Vous avez fait 1000 Associations !",image:"../../assets/images/cup.jpg",score:"0",enabled:4},
-    {intitule:"Grand Master",libelle:"Vous avez fait plus de 1000 Associations !",image:"../../assets/images/cup.jpg",score:"0",enabled:4}
-  ];
-  //2 ok
-  //4 hidden
-
 
   constructor(
     private userService: UserService,
     private route: ActivatedRoute,
+    private BadgesService:BadgesService
   ) { }
 
   ngOnInit() {
@@ -56,7 +45,7 @@ export class AccountPageComponent implements OnInit {
     const userId = this.route.snapshot.paramMap.get('userId');
     const parsedUserId = parseInt(userId, 10);
     this.userService.getUser(parsedUserId).subscribe((user) => {
-      const myUser = {
+      this.user = {
         id: user.id,
         pseudo: user.pseudo,
         score: user.score,
@@ -66,8 +55,8 @@ export class AccountPageComponent implements OnInit {
         idToken: '',
         accessToken: '',
         expiresAt: 0,
+        badges:user.badges
       };
-      this.user = myUser;
     });
     this.userService.getFollowers(parsedUserId).subscribe((json: User[]) => this.followersUsers = json);
     this.userService.getFollows(parsedUserId).subscribe((json: User[]) => this.followsUsers = json);

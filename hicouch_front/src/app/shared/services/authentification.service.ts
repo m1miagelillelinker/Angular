@@ -74,6 +74,17 @@ export class AuthenticationService {
             id: number;
             idToken: string;
             lastName: string;
+            badges:[
+                {
+                id: number,
+                description: string,
+                imgUrl: number,
+                seuil:number,
+                createdAt:string,
+                updatedAt:string,
+                applyOn:string,
+                }
+            ]
         };
     }
 
