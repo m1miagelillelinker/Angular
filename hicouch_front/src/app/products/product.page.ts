@@ -88,32 +88,32 @@ export class ProductPageComponent implements OnInit, OnChanges, OnDestroy {
             }
         });*/
   }
-  fetchProducts() {
-    let productId;
-    this.router.events.subscribe(val => {
-      if (val instanceof RoutesRecognized) {
-          const param = val.state.root.firstChild.params;
-            productId = param['productId'];
-            console.log(productId);
-      }
-  });
-    this.productSubscription = this.productService.getMovieById(this.productId).subscribe((movie: any) => {
-      this.mainProduct = movie;
-      this.associationService.fetchtAssociationByProduct(this.mainProduct.id).subscribe((json: any) => {
-        this.allProducts = json;
-        console.log(json);
-        if (this.allProducts && this.allProducts.length > 0) {
-          this.productsRelated = [];
-          this.productsRelated.push(json[0]);
-        }
-        if (json.length === 0) {
-          this.allProducts = [];
-          console.log('ah');
-        }
-      });
-      this.tagService.getTags('tt0120737').subscribe((json: any) => this.tags = json);
-    });
-  }
+  // fetchProducts() {
+  //   let productId;
+  //   this.router.events.subscribe(val => {
+  //     if (val instanceof RoutesRecognized) {
+  //         const param = val.state.root.firstChild.params;
+  //           productId = param['productId'];
+  //           console.log(productId);
+  //     }
+  // });
+  //   this.productSubscription = this.productService.getMovieById(this.productId).subscribe((movie: any) => {
+  //     this.mainProduct = movie;
+  //     this.associationService.fetchtAssociationByProduct(this.mainProduct.id).subscribe((json: any) => {
+  //       this.allProducts = json;
+  //       console.log(json);
+  //       if (this.allProducts && this.allProducts.length > 0) {
+  //         this.productsRelated = [];
+  //         this.productsRelated.push(json[0]);
+  //       }
+  //       if (json.length === 0) {
+  //         this.allProducts = [];
+  //         console.log('ah');
+  //       }
+  //     });
+  //     this.tagService.getTags('tt0120737').subscribe((json: any) => this.tags = json);
+  //   });
+  // }
 
     fetchProducts() {
         this.productSubscription = this.productService.getProductByTypeAndId(this.productId, this.productType).subscribe((p: Product) => {
