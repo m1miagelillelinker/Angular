@@ -163,11 +163,13 @@ export class ProductPageComponent implements OnInit, OnChanges, OnDestroy {
       if (event.length > 0 && event != null && event !== []) {
         event.forEach(element => {
           this.allProducts.forEach(asso => {
-            if (asso.product.type === element) {
-              this.filteredProducts.push(asso.product);
+            if (asso.productB.type === element) {
+              this.filteredProducts.push(asso.productB);
             }
           });
         });
+        console.log(event);
+        console.log(this.filteredProducts);
       } else {
         this.filteredProducts = [];
        }

@@ -5,11 +5,11 @@
         </div>
         <div class="filter">
                 <div class="filter-picto" [ngClass]="{'selected': movieSelected}">
-                        <img src="/assets/images/movie.png" (click)="selectType('movie')">
+                        <img src="/assets/images/movie.png" (click)="selectType('film')">
 
                 </div>
                 <div class="filter-picto" [ngClass]="{'selected': tvSelected}">
-                        <img src="/assets/images/computer.png" (click)="selectType('tvshow')">
+                        <img src="/assets/images/computer.png" (click)="selectType('serie')">
 
                 </div>
                 <div class="filter-picto" [ngClass]="{'selected': bookSelected}">
@@ -21,7 +21,7 @@
 
                 </div>
         </div>
-        <div class="navigation" *ngIf="totalPages">
+        <div class="navigation" *ngIf="totalPages && totalPages > 0">
                 <div *ngFor="let in of counter(totalPages) ;let i = index">
                         <div id="cercle" *ngIf="i !== this.currentPage"></div>
                         <div id="cercle2" *ngIf="i === this.currentPage"></div>
@@ -36,7 +36,7 @@
                                 src="assets/images/white-arrow-right.png">
                 </div>
                         <div class="item" *ngFor="let asso of fetchList(currentIndex)" (click)="showPopover(asso)">
-                                <div class="picto">
+                                <div class="picto" *ngIf="asso.productB">
                                         <img src="{{getPicto(asso.productB.type)}}">
                                 </div>
                                 <div class="image">
