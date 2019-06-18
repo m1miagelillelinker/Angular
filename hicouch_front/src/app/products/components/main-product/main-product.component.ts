@@ -46,7 +46,9 @@ export class MainProductComponent implements OnInit, OnDestroy, OnChanges {
 submit() {
   const t = this.tagInput.nativeElement;
     this.tagService.addTag(t.value, this.mainProduct.id)
-        .subscribe(() => this.tagService.getTags(this.mainProduct.id).subscribe((json: any) => this.tags = json));
+        .subscribe();
+        this.tagService.getTags(this.mainProduct.id).subscribe((json: any) =>
+        this.tags = json);
     this.setInputFVisibility(false);
     this.displayConfirmation = true;
 }
