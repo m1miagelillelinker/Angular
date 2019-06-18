@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, OnChanges, Inject, ChangeDetectorRef, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, OnChanges, Inject, ChangeDetectorRef, Output, EventEmitter, ElementRef, ViewChild } from '@angular/core';
 import { ProductService } from '../../../shared/services/product.service';
 import { CommentService } from '../../../shared/services/comment.service';
 import { Router } from '@angular/router';
@@ -215,6 +215,7 @@ export class ProductsRelatedAddDialogComponent implements OnInit {
     isMovieSearched = new EventEmitter();
     selectedOption;
     form: FormGroup;
+    @ViewChild('commentInput') commentInput: ElementRef;
     options = [
         { title: 'One' },
         { title: 'Two' },
@@ -226,6 +227,7 @@ export class ProductsRelatedAddDialogComponent implements OnInit {
         public dialogRef: MatDialogRef<ProductsRelatedAddDialogComponent>,
         private productService: ProductService,
         private associationService: AssociationService,
+        private commentService: CommentService,
         @Inject(MAT_DIALOG_DATA) public data: any) { }
 
     onNoClick(): void {
@@ -281,13 +283,15 @@ export class ProductsRelatedAddDialogComponent implements OnInit {
     }
 
     addAssociation() {
-        console.log('Associer');
         this.associationService.createAssociation(this.currentProduct.id,
             this.currentProduct.type,
             this.selectedOption.id,
             this.selectedOption.type)
-            .subscribe(res => console.log(res));
-        // this.openDialog();
+            .subscribe(res => {
+                const idPair = res.idPair;
+                const comment = this.commentInput.nativeElement.value;
+                this.commentService.putComment(comment, idPair).subscribe();
+            });
     }
 
     setSelectedOption(value): void {
