@@ -2,7 +2,8 @@ import { Component, OnInit, EventEmitter, Input, Output } from '@angular/core';
 import { UserService } from '../../services/user.service';
 import { User } from '../../models/user';
 import { Router } from '@angular/router';
-import { ProductService } from '../../services/product.service';
+import {AuthenticationService} from '../../services/authentification.service';
+import {ProductService} from '../../services/product.service';
 
 @Component({
   selector: 'app-header',
@@ -15,23 +16,19 @@ export class HeaderComponent implements OnInit {
   userSelected = new EventEmitter();
   @Output() isMovieSearched = new EventEmitter();
   products: any;
+  type: any;
 
   constructor(
     private userService: UserService,
-    private router: Router,
     private productService: ProductService,
+    private router: Router,
+    private auth: AuthenticationService
   ) { }
 
   ngOnInit() {
-    this.userService.getUser(1).subscribe(
-      (user: User) => {
-        this.user = {
-          id: user.id,
-          firstName: user.firstName,
-          lastName: user.lastName,
-        };
-        this.userSelected.emit(this.user);
-      });
+    if (this.auth.isAuthenticated()) {
+      this.userService.getCurrentUser().subscribe((u: User) => this.user = u);
+    }
   }
 
   goToUser() {
@@ -46,20 +43,31 @@ export class HeaderComponent implements OnInit {
     value = encodeURIComponent(value.trim());
     this.productService.getMoviesByTitle(value).subscribe((movie) => {
       this.products = movie;
-      this.isMovieSearched.emit(movie);
+      // this.isMovieSearched.emit(movie);
     });
   }
 
   toggleSearchPropositions(value) {
     value = encodeURIComponent(value.trim());
-    this.productService.getMoviesByTitle(value).subscribe((movie) => {
+    this.productService.getProductByTypeAndTitle(value, this.type).subscribe((movie) => {
+      console.log(movie);
       this.products = movie;
-      this.isMovieSearched.emit(movie);
+      // this.isMovieSearched.emit(movie);
     });
   }
 
   goToProduct(event) {
-    this.router.navigate(['app/products', event.id]);
+    console.log(event);
+    this.isMovieSearched.emit(event);
+    this.router.navigate(['app/products', event.type, event.id]);
+  }
+
+  setFilter(event) {
+    this.type = event;
+  }
+
+  disconnect() {
+    this.auth.logout();
   }
 
 }

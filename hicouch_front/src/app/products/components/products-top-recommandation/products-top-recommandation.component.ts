@@ -1,4 +1,6 @@
 import { Component, OnInit, Input, ChangeDetectorRef, OnChanges } from '@angular/core';
+import { MatDialog } from '@angular/material';
+import { ProductsRelatedAddDialogComponent } from '../products-related/products-related.component';
 
 @Component({
   selector: 'app-products-top-recommandation',
@@ -7,22 +9,37 @@ import { Component, OnInit, Input, ChangeDetectorRef, OnChanges } from '@angular
 })
 export class ProductsTopRecommandationComponent implements OnInit, OnChanges {
   @Input() productsRelated: any;
+  @Input() mainProduct: any;
   movieSelected = true;
   bookSelected = false;
+  serieSelected = false;
+  gameSelected = false;
+  containsMovie = false;
+  containsSerie = false;
+  containsBook = false;
+  containsGame = false;
   displayTitle: string;
+  idAssociatedProduct: any;
 
   constructor(
     private changeDetectorRef: ChangeDetectorRef,
+    public dialog: MatDialog,
   ) { }
 
   ngOnInit() {
-    this.selectTab('movie');
-    console.log(this.productsRelated);
+    this.selectTab('film');
+    this.fetchContent();
   }
 
   ngOnChanges() {
     this.changeDetectorRef.detectChanges();
+    this.containsMovie = false;
+    this.containsSerie = false;
+    this.containsBook = false;
+    this.containsGame = false;
     this.selectTab('');
+    this.fetchContent();
+
   }
 
   fetchTitle(title: string) {
@@ -39,7 +56,7 @@ export class ProductsTopRecommandationComponent implements OnInit, OnChanges {
   fetchDesc(title: string) {
     if (title) {
       if (title.length > 140) {
-        this.displayTitle = title.substr(0, 140) + '...';
+        this.displayTitle = title.substr(0, 340) + '...';
       } else {
         this.displayTitle = title;
       }
@@ -48,21 +65,66 @@ export class ProductsTopRecommandationComponent implements OnInit, OnChanges {
 
   }
 
-  selectTab(tab: string) {
+  fetchContent() {
     this.productsRelated.forEach(p => {
-      p.product.titleShort = this.fetchTitle(p.product.title);
-      p.product.descShort = this.fetchDesc(p.product.description);
-      if (!p.product.type) {
-        p.product.type = 'movie';
+      console.log(p);
+      p.productB.titleShort = this.fetchTitle(p.productB.title);
+      p.productB.descShort = this.fetchDesc(p.productB.description);
+      if (!p.productB.type) {
+        p.productB.type = 'film';
+      }
+      if (p.productB.type === 'film') {
+        this.containsMovie = true;
+      }
+      if (p.productB.type === 'serie') {
+        this.containsSerie = true;
+      }
+      if (p.productB.type === 'book') {
+        this.containsBook = true;
+      }
+      if (p.productB.type === 'game') {
+        this.containsGame = true;
       }
     });
-    if (tab === 'movie') {
-      this.movieSelected = true;
-      this.bookSelected = false;
-    } else {
-      this.bookSelected = true;
-      this.movieSelected = false;
-    }
   }
 
+  selectTab(tab: string) {
+
+    switch (tab) {
+      case 'film':
+        this.movieSelected = true;
+        this.bookSelected = false;
+        this.serieSelected = false;
+        this.gameSelected = false;
+        break;
+      case 'serie':
+        this.movieSelected = false;
+        this.bookSelected = false;
+        this.serieSelected = true;
+        this.gameSelected = false;
+        break;
+      case 'book':
+        this.movieSelected = false;
+        this.bookSelected = true;
+        this.serieSelected = false;
+        this.gameSelected = false;
+        break;
+      case 'game':
+        this.movieSelected = false;
+        this.bookSelected = false;
+        this.serieSelected = false;
+        this.gameSelected = true;
+        break;
+    }
+  }
+  addProduct() {
+    const dialogRef = this.dialog.open(ProductsRelatedAddDialogComponent, {
+      width: '70%',
+      data: { nomProduct: '', id2: null, currentProduct: this.mainProduct }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+        this.idAssociatedProduct = result;
+    });
+  }
 }

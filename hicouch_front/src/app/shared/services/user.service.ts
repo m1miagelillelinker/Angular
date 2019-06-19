@@ -11,15 +11,22 @@ import {HicouchAPIService} from './hicouchAPI.service';
 })
 export class UserService {
 
-  constructor(private http: HttpClient, private api: HicouchAPIService) {
+  constructor(private api: HicouchAPIService) {
   }
-
-
-  // getTest() {
-  //   return this.http.get('//localhost:8080/test');
-  // }
 
   getUser(userId: number): Observable<User> {
     return this.api.getUser(userId);
+  }
+
+  getCurrentUser(): Observable<User> {
+    return this.api.getCurrentUser();
+  }
+
+  getFollowers(userId: number): Observable<User[]> {
+    return this.api.getFollowers(userId);
+  }
+
+  getFollows(userId: number): Observable<User[]> {
+    return this.api.getFollows(userId);
   }
 }

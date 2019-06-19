@@ -19,7 +19,7 @@ export class AppComponent implements OnInit, OnDestroy {
     constructor(
         injector: Injector,
         public router: Router,
-        private authService: AuthenticationService,
+        private auth: AuthenticationService,
         private userService: UserService,
     ) {
         // tslint:disable-next-line:no-unused-expression
@@ -33,7 +33,20 @@ export class AppComponent implements OnInit, OnDestroy {
     }
 
     ngOnInit(): void {
+        if (this.auth.isAuthenticated()) {
+            this.userService.getCurrentUser().subscribe((u: User) => this.user = u);
+        }
+    }
 
+    isConnected(): boolean {
+        return this.auth.isAuthenticated();
+    }
+
+    loadMoviePage(event) {
+        console.log(event);
+        // this.changeDetectorRef.detectChanges();
+        event.id = event.id;
+        this.router.navigate(['app/products/', event.id]);
     }
 
     ngOnDestroy(): void {

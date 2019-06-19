@@ -1,28 +1,43 @@
 import { Component, OnInit, OnDestroy, ChangeDetectorRef, OnChanges } from '@angular/core';
 import { ProductService } from '../shared/services/product.service';
+import { TagService } from '../shared/services/tag.service';
 import { Product } from '../shared/models/product';
-import { ActivatedRoute, Router } from '@angular/router';
-import { Subscription } from 'rxjs';
+import { Router, ActivatedRoute, Params, RoutesRecognized } from '@angular/router';
 import { AssociationService } from '../shared/services/association.service';
 import { Association } from '../shared/models/association';
 import { HicouchAPIService } from '../shared/services/hicouchAPI.service';
+import { Subscription, Observable } from 'rxjs';
+import { MatAutocompleteModule, MatIconModule } from '@angular/material';
+import { FormControl } from '@angular/forms';
+import { map, startWith } from 'rxjs/operators';
+import { Tag } from '../shared/models/tag';
+import { User } from '../shared/models/user';
 
 @Component({
   selector: 'app-product-page',
   templateUrl: './product.page.html',
   styleUrls: ['./product.page.scss'],
 })
-export class ProductPageComponent implements OnInit, OnDestroy, OnChanges {
+export class ProductPageComponent implements OnInit, OnChanges, OnDestroy {
   mainProduct: Product;
-  productsRelated: any[] = [];
-  allProducts: any[] = [];
+  productsRelated: Association[] = [];
+  allProducts: any[];
+  filteredProducts: any[] = [];
   productId: string;
+  productType: string;
   idRelated: string;
   productSubscription: Subscription;
+  user: User;
+
+  tagControl = new FormControl();
+  tags: Tag[];
+  filteredTags: Observable<string[]>;
+  showInput = false;
 
 
   constructor(
     private productService: ProductService,
+    private tagService: TagService,
     private associationService: AssociationService,
     private route: ActivatedRoute,
     private router: Router,
@@ -30,47 +45,45 @@ export class ProductPageComponent implements OnInit, OnDestroy, OnChanges {
   ) { }
 
   ngOnInit() {
-    this.route.params.subscribe(params => {
-      this.productId = params['productId'];
-      // TODO remove line below when Associations availables
-      this.idRelated = (this.productId === 'tt1201607') ? 'tt0120737' : 'tt1201607';
+    this.route.params.subscribe(param => {
+      this.productId = param['productId'];
+      this.productType = param['productType'];
       this.fetchProducts();
     });
+
   }
 
   ngOnChanges() {
-    this.route.params.subscribe(params => {
-      this.productId = params['productId'];
-      // TODO remove line below when Associations availables
-      this.idRelated = (this.productId === 'tt1201607') ? 'tt0120737' : 'tt1201607';
+    this.route.params.subscribe(param => {
+      this.productId = param['productId'];
+      this.productType = param['productType'];
       this.fetchProducts();
     });
+
   }
+
   fetchProducts() {
-    const productId = this.route.snapshot.paramMap.get('productId');
-    this.productSubscription = this.productService.getMovieById(productId).subscribe((movie: any) => {
-      this.mainProduct = movie;
+    this.productSubscription = this.productService.getProductByTypeAndId(this.productId, this.productType).subscribe((p: Product) => {
+      this.mainProduct = p;
       this.associationService.fetchtAssociationByProduct(this.mainProduct.id).subscribe((json: any) => {
         this.allProducts = json;
-        this.productsRelated.push(json[0]);
-        this.productService.getBookById('9782070541270').subscribe((book: any) => {
-          book.type = 'book';
-          const asso = {
-            association: null,
-            product: book,
-          };
-          this.productsRelated.push(asso);
-          this.allProducts.push(asso);
-        });
-        if (json.length === 0) {
-          console.log('ah');
-          // tslint:disable-next-line:no-shadowed-variable
-          this.productSubscription = this.productService.getMovieById('tt0120737').subscribe((movie: any) => {
-            movie.title = movie.title;
-            movie.type = movie.type;
-            movie.description = movie.description;
-            this.productsRelated.push(movie);
-          });
+        const topMovie = json.filter(prod => prod.productB.type === 'film')[0];
+        const topBook = json.filter(prod => prod.productB.type === 'book')[0];
+        const topGame = json.filter(prod => prod.productB.type === 'game')[0];
+        const topSerie = json.filter(prod => prod.productB.type === 'serie')[0];
+        this.productsRelated = [];
+        // tslint:disable-next-line:curly
+        if (topMovie != null) this.productsRelated.push(topMovie);
+        // tslint:disable-next-line:curly
+        if (topSerie != null) this.productsRelated.push(topSerie);
+        // tslint:disable-next-line:curly
+        if (topBook != null) this.productsRelated.push(topBook);
+        // tslint:disable-next-line:curly
+        if (topGame != null) this.productsRelated.push(topGame);
+
+        this.filteredProducts = this.allProducts;
+        if (this.allProducts && this.allProducts.length > 0) {
+          this.tagService.getTags(this.productId).subscribe((tjson: any) => this.tags = tjson);
         }
       });
     });
@@ -80,10 +93,39 @@ export class ProductPageComponent implements OnInit, OnDestroy, OnChanges {
     if (this.productSubscription) { this.productSubscription.unsubscribe(); }
   }
 
+  submit() {
+    this.tagService.addTag(this.tagControl.value, this.productId)
+      .subscribe(() => this.tagService.getTags(this.productId).subscribe((json: any) => this.tags = json));
+    this.setInputFVisibility(false);
+  }
+
+  setInputFVisibility(visible: boolean) {
+    this.showInput = visible;
+  }
   loadMoviePage(event) {
-    event.id = event.id;
     this.router.navigate(['app/products/', event.id]);
     this.fetchProducts();
+  }
+
+  filterList(event) {
+    // this.fetchProducts();
+    this.filteredProducts = [];
+    if (event.length === 4) {
+      this.fetchProducts();
+      Object.assign(this.filteredProducts, this.allProducts);
+    } else {
+      if (event.length > 0 && event != null && event !== []) {
+        event.forEach(element => {
+          this.allProducts.forEach(asso => {
+            if (asso.productB.type === element) {
+              this.filteredProducts.push(asso);
+            }
+          });
+        });
+      } else {
+        this.filteredProducts = [];
+      }
+    }
   }
 
 }

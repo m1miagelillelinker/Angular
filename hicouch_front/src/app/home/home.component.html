@@ -3,7 +3,6 @@
 <h1 class="title">{{title}}</h1>
 	Hello {{user.lastName}}
 </div> -->
-<app-header [user]="user" (isMovieSearched)="loadMoviePage($event)"></app-header>
 <div *ngIf="user" class="welcome">
 	Bienvenue {{user.firstName}} !
 </div>

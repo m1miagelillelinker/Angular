@@ -11,11 +11,11 @@ import {Observable} from 'rxjs';
 })
 export class AssociationService {
 
-    constructor(private http: HttpClient, private api: HicouchAPIService) {
+    constructor(private api: HicouchAPIService) {
     }
 
-    fetchtAssociationByProduct(idProduct: number) {
-        return this.api.getAssociationByProduct('' + idProduct);
+    fetchtAssociationByProduct(idProduct: string) {
+        return this.api.getAssociationByProduct(idProduct);
     }
 
     createAssociation(idProductA: string, typeProductA: string, idProductB: string, typeProductB: string) {

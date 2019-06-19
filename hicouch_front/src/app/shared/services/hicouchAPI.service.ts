@@ -1,12 +1,12 @@
 import {Injectable} from '@angular/core';
-import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {HttpClient} from '@angular/common/http';
 
 @Injectable({
     providedIn: 'root',
 })
 export class HicouchAPIService {
 
-    private DOMAIN = 'https://hicjv4.azurewebsites.net';
+    private DOMAIN = 'http://hicjv7.azurewebsites.net';
 
     private tagController = '/tag';
     private abonnementController = '/abonnement';
@@ -14,7 +14,7 @@ export class HicouchAPIService {
     private associationController = '/association';
     private userController = '/user';
     private productController = '/product';
-    private commentController = '/comment';
+    private commentController = '/commentaire';
     private voteController = '/vote';
 
     constructor(private http: HttpClient) {
@@ -28,7 +28,7 @@ export class HicouchAPIService {
     private getBuiltUrl(endPoint: string, params: {key: any, value: any}[]): any {
         let paramString = '?';
         // add each param to paramString, and '&' between params (not after the last one)
-        params.map((p: any) => paramString += (p.key + '=' + p.value + (params.indexOf(p) === params.length ? '&' : '')));
+        paramString += params.map((kv) => kv.key + '=' + kv.value).join('&');
         // build complete URL with domain, controller and '?' + params if present
         return this.DOMAIN + endPoint + (paramString !== '?' ? paramString : '');
     }
@@ -63,6 +63,10 @@ export class HicouchAPIService {
         return this.put(this.tagController + '/refuseTag', [{key: 'idTag', value: idTag}], {});
     }
 
+    getTagsToModerate(): any {
+        return this.get(this.tagController + '/toModerate', []);
+    }
+
     // abonnements
 
     follow(idFollower: number, idFollows: number): any {
@@ -75,17 +79,17 @@ export class HicouchAPIService {
             [{key: 'follower', value: idFollower}, {key: 'follows', value: 'follows'}], {});
     }
 
-    getFollows(idUser: string): any {
+    getFollows(idUser: number): any {
         return this.get(this.abonnementController + '/follows', [{key: 'userId', value: idUser}]);
     }
 
-    getFollowers(idUser: string): any {
+    getFollowers(idUser: number): any {
         return this.get(this.abonnementController + '/followers', [{key: 'userId', value: idUser}]);
     }
 
     // signalements
 
-    getSignalements(idSignalement: string): any {
+    getSignalements(idSignalement: number): any {
         return this.get(this.signalementController + '/get', [{key: 'signalementId', value: idSignalement}]);
     }
 
@@ -93,8 +97,20 @@ export class HicouchAPIService {
         return this.put(this.signalementController + '/newSignalement', [], signalement);
     }
 
-    listSignalements(status: string): any {
-        return this.get(this.signalementController + '/list', [{key: 'status', value: status}]);
+    listCommentsToModerate(): any {
+        return this.get(this.signalementController + '/toModerate/comment', []);
+    }
+
+    listUsersToModerate(): any {
+        return this.get(this.signalementController + '/toModerate/user', []);
+    }
+
+    confirmeSignalement(idSignalement: number) {
+        return this.put(this.signalementController + '/confirmeSignalement', [{key: 'signalementId', value: idSignalement}], {});
+    }
+
+    refuseSignalement(idSignalement: number) {
+        return this.put(this.signalementController + '/refuseSignalement', [{key: 'signalementId', value: idSignalement}], {});
     }
 
     // associations
@@ -124,6 +140,10 @@ export class HicouchAPIService {
         return this.get(this.userController + '/get', [{key: 'userId', value: userId}]);
     }
 
+    getCurrentUser(): any {
+        return this.get(this.userController + '/current', []);
+    }
+
     // vote
 
     putVote(vote: any): any {
@@ -144,14 +164,38 @@ export class HicouchAPIService {
         return this.get(this.productController + '/getFilmByIdFromReferentiel', [{key: 'filmId', value: idProduct}]);
     }
 
-    getBookyID(idProduct: string): any {
+    getBookByID(idProduct: string): any {
         return this.get(this.productController + '/getBookByIdFromReferentiel', [{key: 'bookId', value: idProduct}]);
+    }
+
+    getGameByID(idProduct: string): any {
+        return this.get(this.productController + '/getGameByIdFromReferentiel', [{key: 'gameId', value: idProduct}]);
     }
 
     searchFilm(searchTerms: string): any {
         return this.get(this.productController + '/getFilmsByTitleFromReferentiel', [{key: 'research', value: searchTerms}]);
     }
 
+    searchBook(searchTerms: string): any {
+        return this.get(this.productController + '/getBooksFromReferentiel', [{key: 'keyword', value: searchTerms}]);
+    }
+
+    searchGame(searchTerms: string): any {
+        return this.get(this.productController + '/getGamesByReferentiel', [{key: 'keyword', value: searchTerms}]);
+    }
+
     // comment
+
+    addCommentaire(commentaire: any): any {
+        return this.put(this.commentController + '/new', [], commentaire);
+    }
+
+    updateCommentaire(commentaire: any): any {
+        return this.put(this.commentController + '/update', [], commentaire);
+    }
+
+    getCommentaireByPair(idPair: number): any {
+        return this.get(this.commentController + '/ByAssoPairId', [{key: 'pairId', value: idPair}]);
+    }
 
 }

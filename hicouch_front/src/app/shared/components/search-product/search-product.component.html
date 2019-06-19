@@ -1,23 +1,28 @@
 <div id="search-bar">
-  <!-- <input class="search-input" id="search-input" type="text" #searchInput
-    (focus)="onFocus()" blur="onBlur()"
-    (keyup)="onType(searchInput.value)" (keyup.enter)="search(searchInput.value)" /> -->
-    <div class="search-bar">
-      <input #searchInput class="search-field" placeholder="Rechercher..." (keyup)="onType(searchInput.value)" (keyup.enter)="onType(searchInput.value)"/>
-      <button (click)="onType(searchInput.value)">Search</button>
-      
+  <div class="search-bar">
+    <input #searchInput class="search-field" placeholder="Rechercher..." (keyup)="onType(searchInput.value)"
+      (keyup.enter)="onType(searchInput.value)" />
+      <!--TODO-->
+      <select #filterInput placeholder="Filtres" (change)="chooseFilter($event)">
+        <option value="film">Movies</option>
+        <option value="serie">TV Shows</option>
+        <option value="book">Books</option>
+        <option value="game">Games</option>
+      </select>
+    <button (click)="onType(searchInput.value)">Search</button>
+
   </div>
 </div>
-<div *ngIf="productList" id="search-autocomplete">
-  <div *ngFor="let product of productList" class="user-infos" (click)="selectProduct(product)">
+<div *ngIf="productList && productList.length > 0" id="search-autocomplete">
+  <div *ngFor="let product of productList" class="prod-infos" (click)="selectProduct(product)">
     <div class="picture">
       <img src="{{product.image}}">
     </div>
     <div class="user-name">
       {{product.title}}
-      <!-- <div class="gid">
-        {{product.title}}
-      </div> -->
+      <div class="gid">
+        {{product.year}}
+      </div>
     </div>
   </div>
 </div>

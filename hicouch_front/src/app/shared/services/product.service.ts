@@ -12,7 +12,33 @@ import {HicouchAPIService} from './hicouchAPI.service';
 })
 export class ProductService {
 
-  constructor(private http: HttpClient, private api: HicouchAPIService) {
+  constructor(private api: HicouchAPIService) {
+  }
+
+  getProductByTypeAndId(idProduct: string, typeProduct: string): any {
+    switch (typeProduct) {
+      case 'film':
+        return this.getMovieById(idProduct);
+      case 'book':
+        return this.getBookById(idProduct);
+      case 'game':
+        return this.getGameById(idProduct);
+      default:
+        return this.getMovieById(idProduct);
+    }
+  }
+
+  getProductByTypeAndTitle(title: string, typeProduct: string): any {
+    switch (typeProduct) {
+      case 'film':
+        return this.getMoviesByTitle(title);
+      case 'book':
+        return this.getBooksByTitle(title);
+      case 'game':
+        return this.getGamesByTitle(title);
+      default:
+        return this.getMoviesByTitle(title);
+    }
   }
 
   getMovieById(idMovie: string) {
@@ -20,26 +46,24 @@ export class ProductService {
   }
 
   getBookById(idBook: string) {
-    return this.api.getBookyID(idBook);
+    return this.api.getBookByID(idBook);
+  }
+
+  getGameById(idGame: string) {
+    return this.api.getGameByID(idGame);
   }
 
   getMoviesByTitle(title: string): any {
     return this.api.searchFilm(title);
   }
 
-  getBook(): Product {
-    const book: Product = {
-      id: 1,
-      country: 'FR',
-      title: 'Harry Potter à l\'école des sorciers',
-      description: 'Harry est un sorcier',
-      director: 'J.K. Rowling',
-      year: '2003',
-      // tslint:disable-next-line:max-line-length
-      image: 'assets/images/Harry-Potter-a-l-ecole-des-sorciers.jpg',
-      type: 'book',
-    };
-    return book;
-    // return this.http.get<User>(`//localhost:8080/user/get?userId=${prod}`);
+  getBooksByTitle(title: string): any {
+    return this.api.searchBook(title);
   }
+
+  getGamesByTitle(title: string): any {
+    return this.api.searchGame(title);
+  }
+
+
 }

@@ -1,0 +1,9 @@
+<div class="displayFriends">
+  <h1>{{title}}</h1>
+  <ul>
+    <li *ngFor="let user of users">
+      <img height="100px" width="50px" [src]="user.picture">
+      <p>{{user.pseudo}}</p>
+    </li>
+  </ul>
+</div>

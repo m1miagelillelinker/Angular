@@ -1,7 +1,7 @@
 import { Component, ViewChild, ElementRef, Output, EventEmitter, Input } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { User } from '../../models/user';
-import { ProductResult } from '../../models/product';
+import { ProductResult, Product } from '../../models/product';
 
 @Component({
   selector: 'app-search-product',
@@ -15,16 +15,24 @@ export class SearchProductComponent {
   inputIsFocused = false;
   @Output() searchValue = new EventEmitter();
   @Output() productSelected = new EventEmitter();
+  @Output() filterSelected = new EventEmitter();
   @Input() productList: any[];
+  @Input() selectedOption: Product;
   @ViewChild('searchInput') searchInput: ElementRef;
+  @ViewChild('filterInput') filterInput: ElementRef;
+  productType: any;
 
-  selectProduct(product: any): void {
+
+  selectProduct(product: Product): void {
     const newUser = {
       id: product.id,
+      type: product.type,
       title: product.title,
       image: product.image,
     };
     this.productSelected.emit(newUser);
+    this.searchInput.nativeElement.value = product.title;
+    this.productList = [];
   }
 
   onFocus(): void {
@@ -48,7 +56,13 @@ export class SearchProductComponent {
     if (value.length >= 3) {
       this.searchValue.emit(value);
       this.searchInput.nativeElement.value = '';
+      this.productList = null;
     }
+  }
+
+  chooseFilter(event) {
+    this.productType = event.target.value;
+    this.filterSelected.emit(this.productType);
   }
 
 }

@@ -1,0 +1,60 @@
+
+<div id="popover" >
+  <mat-list>
+    <mat-list-item>
+      <span matLine>
+        <span (click)="goTo(asso.productB)" class="popoverTitle url">{{asso.productB.title}} </span>
+        &nbsp;&nbsp;
+        <span class="note" >
+          <mat-icon *ngIf="!canVote" (click)="riseNoteAsso()">star</mat-icon>
+          <mat-icon *ngIf="canVote" (click)="decreaseNoteAsso()">star_border</mat-icon>
+          {{asso.vote}}
+        </span>
+      </span>
+    </mat-list-item>
+  </mat-list>
+  <form class="addComment">
+    <mat-form-field>
+      <mat-label>Votre commentaire</mat-label>
+      <textarea matInput
+                [formControl]="commentContentAdd"
+                cdkTextareaAutosize
+                #autosize="cdkTextareaAutosize"
+                cdkAutosizeMinRows="2"
+                cdkAutosizeMaxRows="5"></textarea>
+    </mat-form-field>
+    <mat-error *ngIf="commentContentAdd.hasError('maxlength')">
+      500 characters max
+    </mat-error>
+    <!-- <mat-checkbox [checked]="checked">Cacher le commentaire</mat-checkbox> -->
+    <button mat-raised-button [disabled]="commentContentAdd.value == ''" (click)="addComment()">Soumettre</button>
+    <!--    <span *ngIf="load"><mat-spinner>
+        <app-progress-spinner class="example-margin" [backdropEnabled]="true" [positionGloballyCenter]="true">
+    </app-progress-spinner>
+        </mat-spinner></span>-->
+  </form>
+  <div class="comments" *ngIf="asso">
+    <mat-list>
+      <mat-list-item class="comment" *ngFor="let comment of commentaires">
+        <!-- <img matListAvatar src="..." alt="...">-->
+        <h3 matLine *ngIf="showComment(comment)">
+            <span class="username url" (click)="goToUserProfile(comment.auteur.id)">
+              {{comment.auteur.pseudo}}
+            </span>&nbsp;&nbsp;
+          <!--          {{getUserSpeudo(comment.iduser)}}</span>&nbsp;&nbsp;-->
+          <span class="date">{{(comment.commentaire.updatedAt) ? comment.commentaire.updatedAt : comment.commentaire.createdAt}}</span>
+          &nbsp;&nbsp;
+          <span class="date">{{(comment.commentaire.updatedAt) ? 'Modified' : null}}</span>
+        </h3>
+        <br>
+        <p class="content" matLine *ngIf="showComment(comment)"> {{comment.commentaire.commentaire}} </p>
+        <br>
+        <span matLine *ngIf="showComment(comment)">
+            <span class="note" *ngIf="true"><mat-icon class="url"(click)="riseNoteComment(comment)">thumb_up_alt</mat-icon>{{comment.note}}</span>
+            <span class="url"(click)="showPopoverToEdit(comment)" *ngIf="canEdit(comment)">Modifier</span>
+            <span class="url" (click)="showPopoverToSignal(comment)" *ngIf="canSignal(comment)">Signaler</span>
+          </span>
+      </mat-list-item>
+    </mat-list>
+  </div>
+</div>

@@ -1,0 +1,48 @@
+.tab-content {
+  padding: 25px;
+}
+
+.button {
+  border: none;
+  color: white;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  margin: 4px 2px;
+  cursor: pointer;
+  border-radius: 16px;
+}
+
+.accept {
+  background-color : darkseagreen;
+}
+
+.refuse {
+  background-color : red;
+}
+
+.accept:hover, .refuse:hover {
+  opacity: 0.6;
+}
+
+.content {
+  background-color : #dddddd;
+  border: none;
+  color: black;
+  padding: 5% 5%;
+  text-align: center;
+  text-decoration: none;
+  margin: 10px;
+}
+
+.box {
+  display: inline-block;
+  width: max-content;
+  height: 100px;
+  margin: 1em;
+}
+
+h3 {
+  text-decoration: underline;
+}

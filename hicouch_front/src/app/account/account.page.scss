@@ -20,7 +20,7 @@
 
   .profile {
     width: 30%;
-    .display {
+    .displayActivites {
       display: flex;
       .user-infos {
         display:block;
@@ -50,4 +50,76 @@
   // .feature {
   //   // TODO
   // }
+}
+
+.profile-infos {
+  margin: 30px 100px;
+  width: 98vw;
+
+  img {
+    border-radius: 100%;
+  }
+
+  .username {
+    span {
+        display: inline-block;
+        padding-top: 10px;
+        padding-right: 10px;
+    }
+  }
+
+  .profile-progress {
+    position: relative;
+    width: 0;
+    height: 0;
+    margin-top: 10px;
+    width: 150px;
+
+    > * {
+      position: absolute;
+      height: 10px;
+      left: 0;
+      top: 0;
+    }
+
+    .progress-bar {
+      border-radius: 2px;
+      background-color: lightgray;
+    }
+
+    .progress {
+      border-radius: 2px;
+      background: #7c0000;
+    }
+  }
+}
+
+.profile-actions {
+  display: flex;
+  margin: 50px 100px 0;
+  width: 98vw;
+
+  button {
+    cursor: pointer;
+    outline: 0;
+    height: 50px;
+    width: 180px;
+    margin-bottom: 10px;
+    background-color: #3e3e3e;
+    border: 1px solid #3e3e3e;
+    color: white;
+    border-radius: 2px;
+
+    &.active {
+        background-color: #7c0000;
+        border-color: #7c0000;
+    }
+    
+  }
+
+  .actions-trigger {
+    width: 20%;
+  }
+
+  
 }

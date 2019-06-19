@@ -1,0 +1,18 @@
+<div  class="tab-content">
+    <h3>Modération des profils d'utilisateurs</h3>
+    <div *ngFor="let signalement of signalements" class="box">
+        <div class="content">
+            <a class="link" (click)="goToUser(signalement.signaledUser.id)">{{signalement.signaledUser.pseudo}}</a>
+            <ul class="left">
+                <li *ngIf="signalement.signaledUser.score">Score : {{signalement.signaledUser.score}}</li>
+                <li *ngIf="signalement.signaledUser.lastName">Nom : {{signalement.signaledUser.lastName}}</li>
+                <li *ngIf="signalement.signaledUser.firstName">Prénom : {{signalement.signaledUser.firstName}}</li>
+                <li><span class="causeSignalement">Pourquoi ? : {{signalement.message}}</span></li>
+            </ul>
+        </div>
+        <div>
+            <button (click)="acceptSignalement(signalement.id)" class="button accept">Interdit</button>
+            <button (click)="refuseSignalement(signalement.id)" class="button refuse">Autorisé</button>
+        </div>
+    </div>
+</div>
