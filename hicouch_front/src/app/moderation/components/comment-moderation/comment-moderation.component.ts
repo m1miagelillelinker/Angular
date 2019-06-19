@@ -3,6 +3,7 @@ import {Tag} from '../../../shared/models/tag';
 import {HicouchAPIService} from '../../../shared/services/hicouchAPI.service';
 import {Commentaire} from '../../../shared/models/commentaire';
 import {Signalement} from '../../../shared/models/signalement';
+import {SignalementService} from '../../../shared/services/signalement.service';
 
 @Component({
     selector: 'app-comment-moderation',
@@ -14,7 +15,7 @@ export class CommentModerationComponent implements OnInit, OnDestroy {
     signalements: Array<Signalement>;
 
     constructor(
-        private api: HicouchAPIService
+        private signalementService: SignalementService
     ) { }
 
     ngOnInit() {
@@ -27,15 +28,15 @@ export class CommentModerationComponent implements OnInit, OnDestroy {
     }
 
     loadCommentaires() {
-        this.api.listCommentsToModerate()
+        this.signalementService.getCommentairesToModerate()
             .subscribe((json: Array<Signalement>) => this.signalements = json.filter(c => c.signaledComment !== undefined)); // double check
     }
 
     acceptSignalement(idSignalement: number) {
-        this.api.confirmeSignalement(idSignalement).subscribe(() => this.loadCommentaires());
+        this.signalementService.acceptSignalement(idSignalement).subscribe(() => this.loadCommentaires());
     }
 
     refuseSignalement(idSignalement: number) {
-        this.api.refuseSignalement(idSignalement).subscribe(() => this.loadCommentaires());
+        this.signalementService.refuseSignalement(idSignalement).subscribe(() => this.loadCommentaires());
     }
 }

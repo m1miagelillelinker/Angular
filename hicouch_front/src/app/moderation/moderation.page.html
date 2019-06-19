@@ -8,8 +8,6 @@
 <app-comment-moderation *ngIf="commentMode" ></app-comment-moderation>
 <app-user-moderation *ngIf="userMode"></app-user-moderation>
 -->
-
-<app-header [user]="user" (isMovieSearched)="loadMoviePage($event)"></app-header>
 <h1 class="title">Modération des Signalements et des Tags</h1>
 <mat-tab-group animationDuration="200ms" class="tab-group" mat-align-tabs="end">
     <mat-tab label="Tags">
