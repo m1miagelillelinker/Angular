@@ -15,7 +15,7 @@ export interface Product {
 }
 
 export interface ProductResult {
-    id: number;
+    id: string;
     title: string;
     description?: string ;
     country?: string ;

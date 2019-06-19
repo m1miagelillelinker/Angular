@@ -63,6 +63,10 @@ export class HicouchAPIService {
         return this.put(this.tagController + '/refuseTag', [{key: 'idTag', value: idTag}], {});
     }
 
+    getTagsToModerate(): any {
+        return this.get(this.tagController + '/toModerate', []);
+    }
+
     // abonnements
 
     follow(idFollower: number, idFollows: number): any {
@@ -93,8 +97,20 @@ export class HicouchAPIService {
         return this.put(this.signalementController + '/newSignalement', [], signalement);
     }
 
-    listSignalements(status: string): any {
-        return this.get(this.signalementController + '/list', [{key: 'status', value: status}]);
+    listCommentsToModerate(): any {
+        return this.get(this.signalementController + '/toModerate/comment', []);
+    }
+
+    listUsersToModerate(): any {
+        return this.get(this.signalementController + '/toModerate/user', []);
+    }
+
+    confirmeSignalement(idSignalement: number) {
+        return this.put(this.signalementController + '/confirmeSignalement', [{key: 'signalementId', value: idSignalement}], {});
+    }
+
+    refuseSignalement(idSignalement: number) {
+        return this.put(this.signalementController + '/refuseSignalement', [{key: 'signalementId', value: idSignalement}], {});
     }
 
     // associations

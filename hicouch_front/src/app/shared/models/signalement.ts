@@ -1,11 +1,15 @@
-export interface Signalement {
-    id?: number;
+import {Commentaire} from './commentaire';
+import {User} from './user';
+
+export class Signalement {
+    id: number;
     typeSignalement: string;
-    SignaledUserId: number;
-    SignaledCommentId: number;
+    signaledUser: User;
+    signaledComment: Commentaire;
+    auteur: User;
     message: string;
-    idUser: number;
-    status?: number;
-    createdat?: Date;
-    updatedat?: Date;
+    status: number;
+    moderator: User;
+    createdAt: Date;
+    updatedAt: Date;
 }

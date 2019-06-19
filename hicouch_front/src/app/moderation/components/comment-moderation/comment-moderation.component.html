@@ -1,0 +1,12 @@
+<div class="tab-content">
+    <h3>Modération des commentaires</h3>
+    <div *ngFor="let signalement of signalements" class="box">
+        <div class="content">
+            {{signalement.signaledComment.commentaire}}
+        </div>
+        <div>
+            <button (click)="acceptSignalement(signalement.id)" class="button accept">Interdit</button>
+            <button (click)="refuseSignalement(signalement.id)" class="button refuse">Autorisé</button>
+        </div>
+    </div>
+</div>

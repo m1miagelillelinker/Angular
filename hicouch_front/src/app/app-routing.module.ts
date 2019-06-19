@@ -6,6 +6,7 @@ import { LoginComponent } from './login/login.component';
 import { ProductPageComponent } from './products/product.page';
 import { AccountPageComponent } from './account/account.page';
 import {CanActivateGuardService} from './shared/services/canActivateGuard.service';
+import {ModerationPageComponent} from './moderation/moderation.page';
 
 export const routes: Routes = [
   {
@@ -33,6 +34,10 @@ export const routes: Routes = [
     component: AccountPageComponent,
     canActivate: [CanActivateGuardService]
   },
+  {
+    path: 'app/moderation',
+    component: ModerationPageComponent,
+    },
 ];
 
 @NgModule({

@@ -51,6 +51,10 @@ import {CanActivateGuardService} from './shared/services/canActivateGuard.servic
 import { DisplaySubscribersComponent } from './account/components/display-subscribers/display-subscribers.component';
 import { DisplayBadgesComponent } from './account/components/display-badges/display-badges.component';
 import { DisplayActivitiesComponent } from './account/components/display-activities/display-activities.component';
+import {ModerationPageComponent} from './moderation/moderation.page';
+import {TagModerationComponent} from './moderation/components/tag-moderation/tag-moderation.component';
+import {CommentModerationComponent} from './moderation/components/comment-moderation/comment-moderation.component';
+import {UserModerationComponent} from './moderation/components/user-moderation/user-moderation.component';
 
 @NgModule({
     declarations: [
@@ -121,5 +125,9 @@ import { DisplayActivitiesComponent } from './account/components/display-activit
 
     ],
     bootstrap: [AppComponent],
+    ModerationPageComponent,
+    TagModerationComponent,
+    CommentModerationComponent,
+    UserModerationComponent,
 })
 export class AppModule { }
