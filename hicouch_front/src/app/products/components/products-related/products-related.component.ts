@@ -18,10 +18,10 @@ import { Product } from '../../../shared/models/product';
     styleUrls: ['./products-related.component.scss'],
 })
 export class ProductsRelatedComponent implements OnInit, OnChanges {
-    @Input() allProducts: Array<Association>;
+    @Input() allProducts: Association[];
     @Input() loggedUser: User;
     @Input() currentProduct: Product;
-    @Input() filteredProducts: Array<Association>;
+    @Input() filteredProducts: Association[];
     @Output() filters: EventEmitter<any> = new EventEmitter();
     movieSelected = true;
     bookSelected = true;
@@ -37,6 +37,7 @@ export class ProductsRelatedComponent implements OnInit, OnChanges {
 
     showComments: boolean;
     assoComment: Association;
+    reloading = false;
 
     constructor(
         private router: Router,
@@ -56,23 +57,34 @@ export class ProductsRelatedComponent implements OnInit, OnChanges {
     }
 
     ngOnChanges() {
+        this.ngOnInit();
         this.fetchList(0);
+        this.currentIndex = 0;
         this.showComments = false;
     }
 
     fetchList(number: number): Association[] {
+        if (this.allProducts.length > this.filteredProducts.length) {
+            this.reloading = true;
+        }
         if (this.allProducts) {
             this.allProducts.forEach(p => {
                 if (!p.productB.type) { p.productB.type = 'film'; }
             });
         }
         let tab = [];
+        console.log(this.allProducts);
+        console.log(this.filteredProducts);
         this.fetchNavigation();
         if (number >= 5) {
             tab = this.filteredProducts.slice(number, number + 5);
+            this.reloading = false;
+            console.log(tab);
             return tab;
         } else {
             tab = this.filteredProducts.slice(0, 5);
+            this.reloading = false;
+            console.log(tab);
             return tab;
         }
     }
@@ -133,6 +145,7 @@ export class ProductsRelatedComponent implements OnInit, OnChanges {
     }
 
     selectType(type: string) {
+        this.reloading = true;
         switch (type) {
             case 'film':
                 this.movieSelected = !this.movieSelected;

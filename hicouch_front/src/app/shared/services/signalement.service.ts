@@ -13,7 +13,7 @@ export class SignalementService {
 
     constructor(private api: HicouchAPIService) {
     }
-    
+
     signalCommentaire(idCommentaire: number, idAuteur: number, message: string) {
         const signalement = {
             typeSignalement: 'comment',
