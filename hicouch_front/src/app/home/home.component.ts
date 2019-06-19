@@ -8,7 +8,6 @@ import {ProductService} from '../shared/services/product.service';
 import {UserService} from '../shared/services/user.service';
 import {AssociationService} from '../shared/services/association.service';
 import {Association} from '../shared/models/association';
-import {forEach} from '@angular/router/src/utils/collection';
 
 @Component({
     selector: 'app-home',
