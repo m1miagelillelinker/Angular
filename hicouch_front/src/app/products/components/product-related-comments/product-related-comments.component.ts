@@ -66,23 +66,18 @@ export class ProductRelatedCommentsComponent implements OnInit, OnChanges {
 
     riseNoteAsso() {
         const vote = {
-            idPair: this.asso.association.idPair, idUser: this.loggedUser.id
+            idPair: this.asso.association.idPair, vote: 1, idUser: this.loggedUser.id
         };
         this.canVote = false;
-        this.voteService.vote(vote);
+        this.voteService.vote(vote).subscribe(res => console.log(res));
     }
 
     decreaseNoteAsso() {
         const vote = {
-            idPair: this.asso.association.idPair, idUser: this.loggedUser.id
+            idPair: this.asso.association.idPair,  vote: -1, idUser: this.loggedUser.id
         };
-        this.canVote = true;
-        this.voteService.unvote(vote);
-    }
-
-    riseNoteComment(comment: Comment) {
-        // comment.note = comment.note + 1;
-        // this.commentService.putComment(comment, comment.idpair);
+        this.canVote = false;
+        this.voteService.vote(vote).subscribe(res => console.log(res));
     }
 
     goToUserProfile(userId) {
@@ -173,7 +168,6 @@ export class ProductsRelatedCommentUpdateDialogComponent implements OnInit {
         Validators.maxLength(250)
     ]);
     checked = this.data.comment.commentaire.status === 0;
-
     constructor(
         public dialogRef: MatDialogRef<ProductsRelatedCommentUpdateDialogComponent>,
         private commentService: CommentService,
@@ -194,6 +188,7 @@ export class ProductsRelatedCommentUpdateDialogComponent implements OnInit {
         this.data.comment.commentaire.status = (this.checked) ? 0 : null;
         this.commentService.update(this.data.comment.commentaire.commentaire, this.data.comment.commentaire.id);
     }
+
 }
 
 @Component({
@@ -222,6 +217,7 @@ export class ProductsRelatedCommentSignalDialogComponent implements OnInit {
     signalComment() {
         this.signalementService.signalCommentaire(this.data.comment.commentaire.id, this.data.user.id, this.signalementContentAdd.value);
     }
+
 }
 
 @Component({
@@ -241,5 +237,6 @@ export class SpinnerDialogComponent implements OnInit {
             window.location.reload();
         }, 700);
     }
+
 }
 
