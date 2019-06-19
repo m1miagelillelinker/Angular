@@ -65,7 +65,7 @@ export class AuthenticationService {
         this._accessToken = authResult.accessToken;
         this._idToken = authResult.idToken;
         this._expiresAt = expiresAt;
-        console.log(this._accessToken);
+        // console.log(this._accessToken);
 
         this._loggedUser = new class implements User {
             accessToken: string;

@@ -1,45 +1,88 @@
 <div class="header">
-    <div [ngClass]="{'selected': movieSelected}" (click)="selectTab('movie')">
+    <div [ngClass]="{'selected': movieSelected}" (click)="selectTab('film')">
         Movie
+    </div>
+    <div [ngClass]="{'selected': serieSelected}" (click)="selectTab('serie')">
+        TVShow
     </div>
     <div [ngClass]="{'selected': bookSelected}" (click)="selectTab('book')">
         Book
     </div>
-    <div (click)="selectTab('tv')">
-        TVShow
-    </div>
-    <div (click)="selectTab('game')">
+    <div [ngClass]="{'selected': gameSelected}" (click)="selectTab('game')">
         Game
     </div>
 </div>
 <div *ngFor="let asso of productsRelated">
-    <div class="content" *ngIf="movieSelected && asso.productB.type === 'movie'">
-        <div class="image">
-            <img src="{{asso.productB.image}}">
-        </div>
-        <div class="infos">
-            <div class="title">
-                {{asso.productB.titleShort}}
+    <div *ngIf="movieSelected && containsMovie">
+        <div class="content" *ngIf="asso.productB && asso.productB.type === 'film'">
+            <div class="image">
+                <img src="{{asso.productB.image}}">
             </div>
-            <p class="description">
-                {{asso.productB.descShort}}
-            </p>
+            <div class="infos">
+                <div class="title">
+                    {{asso.productB.titleShort}}
+                </div>
+                <p class="description">
+                    {{asso.productB.descShort}}
+                </p>
+            </div>
         </div>
     </div>
-
-    <div class="content" *ngIf="bookSelected && asso.productB.type === 'book'">
-        <div class="image">
-            <img src="{{asso.productB.image}}">
-        </div>
-        <div class="infos">
-            <div class="title">
-                {{asso.productB.titleShort}}
+    <div *ngIf="serieSelected && containsSerie">
+        <div class="content" *ngIf="asso.productB && asso.productB.type === 'serie'">
+            <div class="image">
+                <img src="{{asso.productB.image}}">
             </div>
-            <div class="description">
-                {{asso.productB.descShort}}
-
+            <div class="infos">
+                <div class="title">
+                    {{asso.productB.titleShort}}
+                </div>
+                <div class="description">
+                    {{asso.productB.descShort}}
+                </div>
             </div>
         </div>
-
     </div>
+    <div *ngIf="bookSelected && containsBook">
+        <div class="content" *ngIf="asso.productB && asso.productB.type === 'book'">
+            <div class="image">
+                <img src="{{asso.productB.image}}">
+            </div>
+            <div class="infos">
+                <div class="title">
+                    {{asso.productB.titleShort}}
+                </div>
+                <div class="description">
+                    {{asso.productB.descShort}}
+                </div>
+            </div>
+        </div>
+    </div>
+    <div *ngIf="gameSelected && containsGame">
+        <div class="content" *ngIf="asso.productB && asso.productB.type === 'game'">
+            <div class="image">
+                <img src="{{asso.productB.image}}">
+            </div>
+            <div class="infos">
+                <div class="title">
+                    {{asso.productB.titleShort}}
+                </div>
+                <div class="description">
+                    {{asso.productB.descShort}}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div *ngIf="!containsGame && gameSelected" class="content">
+    <button (click)="addProduct()">Ajouter un jeu</button>
+</div>
+<div *ngIf="!containsSerie && serieSelected" class="content">
+    <button (click)="addProduct()">Ajouter une série</button>
+</div>
+<div *ngIf="!containsMovie && movieSelected" class="content">
+    <button (click)="addProduct()">Ajouter un film</button>
+</div>
+<div *ngIf="!containsBook && bookSelected" class="content">
+    <button (click)="addProduct()">Ajouter un livre</button>
 </div>

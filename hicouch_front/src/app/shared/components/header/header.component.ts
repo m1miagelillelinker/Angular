@@ -16,6 +16,7 @@ export class HeaderComponent implements OnInit {
   userSelected = new EventEmitter();
   @Output() isMovieSearched = new EventEmitter();
   products: any;
+  type: any;
 
   constructor(
     private userService: UserService,
@@ -28,22 +29,6 @@ export class HeaderComponent implements OnInit {
     if (this.auth.isAuthenticated()) {
       this.userService.getCurrentUser().subscribe((u: User) => this.user = u);
     }
-
-    /*
-    this.userService.getUser(1).subscribe(
-      (user: User) => {
-        this.user = {
-          id: user.id,
-          pseudo: user.pseudo,
-          score: user.score,
-          firstName: user.firstName,
-          lastName: user.lastName,
-          idToken: '',
-          accessToken: '',
-          expiresAt: 0,
-        };
-        this.userSelected.emit(this.user);
-      });*/
   }
 
   goToUser() {
@@ -64,7 +49,8 @@ export class HeaderComponent implements OnInit {
 
   toggleSearchPropositions(value) {
     value = encodeURIComponent(value.trim());
-    this.productService.getMoviesByTitle(value).subscribe((movie) => {
+    this.productService.getProductByTypeAndTitle(value, this.type).subscribe((movie) => {
+      console.log(movie);
       this.products = movie;
       // this.isMovieSearched.emit(movie);
     });
@@ -74,6 +60,10 @@ export class HeaderComponent implements OnInit {
     console.log(event);
     this.isMovieSearched.emit(event);
     this.router.navigate(['app/products', event.type, event.id]);
+  }
+
+  setFilter(event) {
+    this.type = event;
   }
 
   disconnect() {

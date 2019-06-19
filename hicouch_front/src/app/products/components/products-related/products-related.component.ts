@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, OnChanges, Inject, ChangeDetectorRef, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, OnChanges, Inject, ChangeDetectorRef, Output, EventEmitter, ElementRef, ViewChild } from '@angular/core';
 import { ProductService } from '../../../shared/services/product.service';
 import { CommentService } from '../../../shared/services/comment.service';
 import { Router } from '@angular/router';
@@ -29,7 +29,7 @@ export class ProductsRelatedComponent implements OnInit, OnChanges {
     gameSelected = true;
     filtersList = [];
     currentIndex = 0;
-    totalPages = 1;
+    totalPages = null;
     currentPage = 0;
     displayTitle: string;
     idProduct: number;
@@ -45,35 +45,10 @@ export class ProductsRelatedComponent implements OnInit, OnChanges {
     ) { }
 
     ngOnInit() {
-        this.filtersList.push('m');
-        this.filtersList.push('t');
-        this.filtersList.push('b');
-        this.filtersList.push('g');
-        console.log('products : ');
-        console.log(this.allProducts);
+        this.fetchList(0);
+        this.showComments = false;
     }
-    // fetchList(number): Association[] {
-    //     this.allProducts.forEach(asso => {
-    //         asso.product.title = this.fetchTitle(asso.product.title);
-    //     });
-    //     if (this.allProducts) {
-    //         this.allProducts.forEach(p => {
-    //             if (!p.productDTO.type) { p.productDTO.type = 'movie'; }
-    //         });
-    //     }
-    //     let tab = [];
-    //     this.fetchNavigation();
-    //     if (number >= 5) {
-    //         tab = this.allProducts.slice(number, number + 5);
-    //         console.log(tab);
-    //         return tab;
-    //     } else {
-    //         tab = this.allProducts.slice(0, 5);
-    //         console.log(tab);
-    //         return tab;
-    //     }
-    //     // return [this.asso];
-    // }
+
 
     fetchNavigation() {
         this.totalPages = Math.ceil(this.filteredProducts.length / 5);
@@ -81,14 +56,14 @@ export class ProductsRelatedComponent implements OnInit, OnChanges {
     }
 
     ngOnChanges() {
-        console.log(this.allProducts);
-        this.changeDetectorRef.detectChanges();
+        this.fetchList(0);
+        this.showComments = false;
     }
 
     fetchList(number: number): Association[] {
         if (this.allProducts) {
             this.allProducts.forEach(p => {
-                if (!p.productB.type) { p.productB.type = 'movie'; }
+                if (!p.productB.type) { p.productB.type = 'film'; }
             });
         }
         let tab = [];
@@ -103,13 +78,13 @@ export class ProductsRelatedComponent implements OnInit, OnChanges {
     }
 
     getPicto(type) {
-        if (type === 'movie') {
+        if (type === 'film') {
             return '/assets/images/movie.png';
         }
         if (type === 'book') {
             return '/assets/images/book-cover.png';
         }
-        if (type === 'series') {
+        if (type === 'serie') {
             return '/assets/images/computer.png';
         } else {
             return '/assets/images/gamepad.png';
@@ -159,60 +134,34 @@ export class ProductsRelatedComponent implements OnInit, OnChanges {
 
     selectType(type: string) {
         switch (type) {
-            case 'movie':
+            case 'film':
                 this.movieSelected = !this.movieSelected;
-                // if (this.movieSelected && this.filtersList.find(l => l === 'm') == null) {
-                //     this.filtersList.push('m');
-                // } else {
-                //     idx = this.filtersList.findIndex(l => l === 'm');
-                //     this.filtersList.splice(idx, 1);
-                // }
                 break;
-            case 'tvshow':
+            case 'serie':
                 this.tvSelected = !this.tvSelected;
-                // if (this.tvSelected && this.filtersList.find(l => l === 't') == null) {
-                //     this.filtersList.push('t');
-                // } else {
-                //     idx = this.filtersList.findIndex(l => l === 't');
-                //     this.filtersList.splice(idx, 1);
-                // }
                 break;
             case 'book':
                 this.bookSelected = !this.bookSelected;
-                // if (this.bookSelected && this.filtersList.find(l => l === 'b') == null) {
-                //     this.filtersList.push('b');
-                // } else {
-                //     idx = this.filtersList.findIndex(l => l === 'b');
-                //     this.filtersList.splice(idx, 1);
-                // }
                 break;
             case 'game':
                 this.gameSelected = !this.gameSelected;
-                // if (this.gameSelected && this.filtersList.find(l => l === 'g') == null) {
-                //     this.filtersList.push('g');
-                // } else {
-                //     idx = this.filtersList.findIndex(l => l === 'g');
-                //     this.filtersList.splice(idx, 1);
-                // }
                 break;
         }
         this.filters.emit('');
-        const pute = [];
+        const filtersList = [];
         if (this.movieSelected) {
-            pute.push('movie');
+            filtersList.push('film');
         }
         if (this.bookSelected) {
-            pute.push('book');
+            filtersList.push('book');
         }
         if (this.tvSelected) {
-            pute.push('series');
+            filtersList.push('serie');
         }
         if (this.gameSelected) {
-            pute.push('game');
+            filtersList.push('game');
         }
-        this.filters.emit(pute);
-        // this.fetchList(this.currentIndex);
-        console.log(this.currentIndex);
+        this.filters.emit(filtersList);
         this.fetchList(this.currentIndex);
     }
 
@@ -222,7 +171,7 @@ export class ProductsRelatedComponent implements OnInit, OnChanges {
 
     openDialog(): void {
         const dialogRef = this.dialog.open(ProductsRelatedAddDialogComponent, {
-            width: '50%',
+            width: '70%',
             data: { nomProduct: this.idProduct, id2: null, currentProduct: this.currentProduct }
         });
 
@@ -239,8 +188,6 @@ export class ProductsRelatedComponent implements OnInit, OnChanges {
 
     showPopover(asso: Association) {
         this.showComments = true;
-        console.log(asso);
-        console.log(this.showComments);
         this.assoComment = asso;
         if (this.showComments) {
             this.assoComment = asso;
@@ -258,10 +205,10 @@ export class ProductsRelatedComponent implements OnInit, OnChanges {
 })
 export class ProductsRelatedAddDialogComponent implements OnInit {
     Productstype = [
-        { value: 'BOOK', viewValue: 'Livre' },
-        { value: 'MOVIE', viewValue: 'Film' },
-        { value: 'TVSHOW', viewValue: 'Série' },
-        { value: 'VIDEOGAMES', viewValue: 'Jeu-Vidéo' }
+        { value: 'book', viewValue: 'Livre' },
+        { value: 'film', viewValue: 'Film' },
+        { value: 'serie', viewValue: 'Série' },
+        { value: 'game', viewValue: 'Jeu-Vidéo' }
     ];
     currentProduct;
     selectedType: string;
@@ -270,6 +217,8 @@ export class ProductsRelatedAddDialogComponent implements OnInit {
     isMovieSearched = new EventEmitter();
     selectedOption;
     form: FormGroup;
+    type: any;
+    @ViewChild('commentInput') commentInput: ElementRef;
     options = [
         { title: 'One' },
         { title: 'Two' },
@@ -281,6 +230,7 @@ export class ProductsRelatedAddDialogComponent implements OnInit {
         public dialogRef: MatDialogRef<ProductsRelatedAddDialogComponent>,
         private productService: ProductService,
         private associationService: AssociationService,
+        private commentService: CommentService,
         @Inject(MAT_DIALOG_DATA) public data: any) { }
 
     onNoClick(): void {
@@ -298,37 +248,22 @@ export class ProductsRelatedAddDialogComponent implements OnInit {
         this.currentProduct = this.data.currentProduct;
     }
 
-    /*searchProducts(value : string): void {
-        if(value.length > 2){
-            console.log(value);
-            if(this.selectedType == 'BOOK'){
-                // this.options = this.productService.getMovieByTitle(value);
-                console.log('Vous recherchez un livre');
-            }
-            if(this.selectedType == 'MOVIE'){
-                console.log('Vous recherchez un film');
-            }
-            if(this.selectedType == 'TVSHOW'){
-                console.log('Vous recherchez une série');
-            }
-            if(this.selectedType == 'VIDEOGAMES'){
-                console.log('Vous recherchez un jeu vidéo');
-            }
-        }
-    }*/
+    setFilter(event) {
+        this.type = event;
+      }
     private _filter(value: string): any[] {
         const filterValue = value.toLowerCase();
         console.log(value);
-        if (this.selectedType === 'BOOK') {
+        if (this.selectedType === 'book') {
             // this.options = this.productService.getBookByTitle(value);
         }
-        if (this.selectedType === 'MOVIE') {
+        if (this.selectedType === 'film') {
             // this.options = this.productService.getMovieByTitle(filterValue);
         }
-        if (this.selectedType === 'TVSHOW') {
+        if (this.selectedType === 'serie') {
             // this.options = this.productService.getTVShowByTitle(filterValue);
         }
-        if (this.selectedType === 'VIDEOGAMES') {
+        if (this.selectedType === 'game') {
             // this.options = this.productService.getVideoGameByTitle(filterValue);
         }
 
@@ -336,13 +271,15 @@ export class ProductsRelatedAddDialogComponent implements OnInit {
     }
 
     addAssociation() {
-        console.log('Associer');
         this.associationService.createAssociation(this.currentProduct.id,
             this.currentProduct.type,
             this.selectedOption.id,
             this.selectedOption.type)
-            .subscribe(res => console.log(res));
-        // this.openDialog();
+            .subscribe(res => {
+                const idPair = res.idPair;
+                const comment = this.commentInput.nativeElement.value;
+                this.commentService.putComment(comment, idPair).subscribe();
+            });
     }
 
     setSelectedOption(value): void {
@@ -358,9 +295,10 @@ export class ProductsRelatedAddDialogComponent implements OnInit {
 
     toggleSearchPropositions(value) {
         value = encodeURIComponent(value.trim());
-        this.productService.getMoviesByTitle(value).subscribe((movie) => {
+        this.productService.getProductByTypeAndTitle(value, this.type).subscribe((movie) => {
+          console.log(movie);
           this.products = movie;
-          this.isMovieSearched.emit(movie);
+          // this.isMovieSearched.emit(movie);
         });
       }
 

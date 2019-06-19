@@ -4,6 +4,7 @@ export interface Product {
     id: string;
     title: string;
     description: string ;
+    descShort?: string;
     country: string ;
     director: string ;
     year: string;
@@ -36,7 +37,7 @@ export interface Movie {
     genre: string;
     image: string;
     duration: string;
-    type: 'movie';
+    type: 'film';
 }
 
 export interface TvShow {
@@ -50,6 +51,7 @@ export interface TvShow {
     image: string;
     duration: string;
     nbSeasons: number;
+    type: 'serie';
 }
 
 export interface Book {
@@ -74,5 +76,6 @@ export interface VideoGame {
     collection?: string;
     age: string;
     plateforms: string;
+    type: 'game';
 }
 

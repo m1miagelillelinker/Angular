@@ -11,10 +11,13 @@
 
     </mat-select>
   </mat-form-field> -->
+<div id="search-bar">
+    <app-search-product class="search-field" [selectedOption]="selectedOption" [productList]="products" 
+    (productSelected)="selectProduct($event)"
+    (searchValue)="toggleSearchPropositions($event)"
+    (filterSelected)="setFilter($event)"></app-search-product>
+</div>
 
-  <app-search-product class="search-field" [selectedOption]="selectedOption" [productList]="products" 
-  (productSelected)="selectProduct($event)"
-  (searchValue)="toggleSearchPropositions($event)"></app-search-product>
   <!-- <mat-form-field>
     <input #search matInput type="text"  placeholder="Rechercher"
            [formControl]="myControl" [matAutocomplete]="auto">
@@ -29,7 +32,7 @@
   </mat-form-field> -->
 
   <mat-form-field >
-    <textarea matInput placeholder="Pourquoi cette association ?"></textarea>
+    <textarea rows="4" cols="50" matInput #commentInput placeholder="Pourquoi cette association ?"></textarea>
   </mat-form-field>
 </div>
 <div mat-dialog-actions>

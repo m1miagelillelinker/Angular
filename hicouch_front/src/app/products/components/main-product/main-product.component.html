@@ -15,37 +15,42 @@
                 {{mainProduct.country}}
             </div>
             <div class="description">
-                {{ mainProduct.description }}
+                {{ mainProduct.descShort }}
             </div>
         </div>
-        
+
     </div>
-    <div class="tag" *ngIf="tags && tags.length > 0">
-            <mat-form-field class="tag-content"> 
-                <input type="text" placeholder="Ajouter un tag" matInput
-                [formControl]="myControl" [matAutocomplete]="auto"> <mat-icon (click)="submit()">Confirm</mat-icon>
-                <mat-autocomplete #auto="matAutocomplete"> 
+    <div class="tag">
+        <button (click)="setInputFVisibility(true)">Ajouter un tag</button>
+        <div *ngIf="showInput" class="tag-content">
+            <input type="text" placeholder="Ajouter un tag" #tagInput>
+            <div (click)="submit()">Confirm</div>
+            <!-- <mat-autocomplete #auto="matAutocomplete"> 
                     <mat-option *ngFor="let tag of filteredTags | async" [value]="tag">
                         {{tag}} 
                     </mat-option> 
-                </mat-autocomplete> 
-            </mat-form-field>
+                </mat-autocomplete>  -->
         </div>
-            <div class="tags" *ngIf="tags && tags.length > 0">
-            <span> Tags : </span>
-                <span *ngFor="let tag of tags">
-                    {{tag.value}}
-                </span>
-            </div>
-            <br>
-            <br>
-            <div class="tag" *ngIf="!tags || tags.length === 0">
-                <button mat-button  (click)="setInputFVisibility(true)" >Add a tag</button>
-                <mat-form-field *ngIf="showInput" >
-                    <input type="search" matInput
-                           [formControl]="tagControl">
-                    <button mat-button matSuffix [disabled]="!tagControl.value" (click)="submit()" > <mat-icon>Confirm</mat-icon> </button>
-                </mat-form-field>
+        <p *ngIf="displayConfirmation">Merci ! Votre demande a été prise en compte.</p>
+    </div>
+    <div class="tags" *ngIf="tags && tags.length > 0">
+        <span> Tags : </span>
+        <span *ngFor="let tag of tags" class="item">
+            {{tag.value}}
+        </span>
+    </div>
+    <br>
+    <br>
+    <!-- <div class="tag" *ngIf="!tags || tags.length === 0">
+                <button (click)="setInputFVisibility(true)" >Ajouter un tag</button>
+                <div *ngIf="showInput" class="tag-content"> 
+                    <input type="text" placeholder="Ajouter un tag" #tagInput> <div (click)="submit()">Confirm</div>
+                   <mat-autocomplete #auto="matAutocomplete"> 
+                        <mat-option *ngFor="let tag of filteredTags | async" [value]="tag">
+                            {{tag}} 
+                        </mat-option> 
+                    </mat-autocomplete>  
+                </div>
                 <p *ngIf="displayConfirmation">Your request is being processed</p>
-            </div>
+            </div> -->
 </div>

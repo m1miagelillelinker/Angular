@@ -35,13 +35,13 @@
       }
     }
   }
-  .tag{
-    > * {
-      width:50%;
-      display: block;
-      input {
-        background-color : white;
-      }
+  .tags {
+    margin-top: 10px;
+    .item {
+      border: 1px solid #7c0000;
+      background-color : white;
+      padding: 5px;
+      margin-right:5px;
     }
   }
 }
