@@ -4,8 +4,8 @@ import { ActivatedRoute } from '@angular/router';
 import { Subscription, Observable } from 'rxjs';
 import { FormControl } from '@angular/forms';
 import { TagService } from '../../../shared/services/tag.service';
-import {Product} from '../../../shared/models/product';
-import {Tag} from '../../../shared/models/tag';
+import { Product } from '../../../shared/models/product';
+import { Tag } from '../../../shared/models/tag';
 
 @Component({
   selector: 'app-main-product',
@@ -15,23 +15,26 @@ import {Tag} from '../../../shared/models/tag';
 export class MainProductComponent implements OnInit, OnDestroy, OnChanges {
   @Input() mainProduct: Product;
   tagControl = new FormControl();
-    @Input() tags: Tag[];
-    @ViewChild('tagInput') tagInput: ElementRef;
-    filteredTags: Observable<Tag[]>;
-    showInput = false;
+  @Input() tags: Tag[];
+  @ViewChild('tagInput') tagInput: ElementRef;
+  filteredTags: Observable<Tag[]>;
+  showInput = false;
   productSubscription: Subscription;
   displayConfirmation = false;
+  displayTitle: string;
+
 
 
   constructor(
-      private changeRefDetecter: ChangeDetectorRef,
-      private tagService: TagService,
+    private changeRefDetecter: ChangeDetectorRef,
+    private tagService: TagService,
   ) { }
 
   ngOnInit() {
     this.tagService.getTags(this.mainProduct.id).subscribe(res => {
       this.tags = res;
       this.filteredTags = res;
+      this.mainProduct.descShort = this.fetchDesc(this.mainProduct.description);
     });
   }
 
@@ -43,18 +46,29 @@ export class MainProductComponent implements OnInit, OnDestroy, OnChanges {
   ngOnDestroy() {
   }
 
-submit() {
-  const t = this.tagInput.nativeElement;
+  submit() {
+    const t = this.tagInput.nativeElement;
     this.tagService.addTag(t.value, this.mainProduct.id)
-        .subscribe();
-        this.tagService.getTags(this.mainProduct.id).subscribe((json: any) =>
-        this.tags = json);
+      .subscribe();
+    this.tagService.getTags(this.mainProduct.id).subscribe((json: any) =>
+      this.tags = json);
     this.setInputFVisibility(false);
     this.displayConfirmation = true;
-}
+  }
 
-setInputFVisibility(visible: boolean) {
+  setInputFVisibility(visible: boolean) {
     this.showInput = visible;
     this.displayConfirmation = !visible;
-}
+  }
+  fetchDesc(title: string) {
+    if (title) {
+      if (title.length > 140) {
+        this.displayTitle = title.substr(0, 400) + '...';
+      } else {
+        this.displayTitle = title;
+      }
+      return this.displayTitle;
+    }
+
+  }
 }

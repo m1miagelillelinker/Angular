@@ -13,7 +13,7 @@
     </div>
 </div>
 <div *ngFor="let asso of productsRelated">
-    <div *ngIf="movieSelected">
+    <div *ngIf="movieSelected && containsMovie">
         <div class="content" *ngIf="asso.productB && asso.productB.type === 'film'">
             <div class="image">
                 <img src="{{asso.productB.image}}">
@@ -28,7 +28,7 @@
             </div>
         </div>
     </div>
-    <div *ngIf="serieSelected">
+    <div *ngIf="serieSelected && containsSerie">
         <div class="content" *ngIf="asso.productB && asso.productB.type === 'serie'">
             <div class="image">
                 <img src="{{asso.productB.image}}">
@@ -42,11 +42,8 @@
                 </div>
             </div>
         </div>
-        <div *ngIf="!containsSerie">
-            ZUT
-        </div>
     </div>
-    <div *ngIf="bookSelected">
+    <div *ngIf="bookSelected && containsBook">
         <div class="content" *ngIf="asso.productB && asso.productB.type === 'book'">
             <div class="image">
                 <img src="{{asso.productB.image}}">
@@ -76,9 +73,16 @@
             </div>
         </div>
     </div>
-    <div *ngIf="!containsGame && gameSelected">
-            ZUTE
-        </div>
-
-
+</div>
+<div *ngIf="!containsGame && gameSelected" class="content">
+    <button (click)="addProduct()">Ajouter un jeu</button>
+</div>
+<div *ngIf="!containsSerie && serieSelected" class="content">
+    <button (click)="addProduct()">Ajouter une série</button>
+</div>
+<div *ngIf="!containsMovie && movieSelected" class="content">
+    <button (click)="addProduct()">Ajouter un film</button>
+</div>
+<div *ngIf="!containsBook && bookSelected" class="content">
+    <button (click)="addProduct()">Ajouter un livre</button>
 </div>

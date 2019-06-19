@@ -1,4 +1,6 @@
 import { Component, OnInit, Input, ChangeDetectorRef, OnChanges } from '@angular/core';
+import { MatDialog } from '@angular/material';
+import { ProductsRelatedAddDialogComponent } from '../products-related/products-related.component';
 
 @Component({
   selector: 'app-products-top-recommandation',
@@ -7,6 +9,7 @@ import { Component, OnInit, Input, ChangeDetectorRef, OnChanges } from '@angular
 })
 export class ProductsTopRecommandationComponent implements OnInit, OnChanges {
   @Input() productsRelated: any;
+  @Input() mainProduct: any;
   movieSelected = true;
   bookSelected = false;
   serieSelected = false;
@@ -16,9 +19,11 @@ export class ProductsTopRecommandationComponent implements OnInit, OnChanges {
   containsBook = false;
   containsGame = false;
   displayTitle: string;
+  idAssociatedProduct: any;
 
   constructor(
     private changeDetectorRef: ChangeDetectorRef,
+    public dialog: MatDialog,
   ) { }
 
   ngOnInit() {
@@ -112,5 +117,14 @@ export class ProductsTopRecommandationComponent implements OnInit, OnChanges {
         break;
     }
   }
+  addProduct() {
+    const dialogRef = this.dialog.open(ProductsRelatedAddDialogComponent, {
+      width: '70%',
+      data: { nomProduct: '', id2: null, currentProduct: this.mainProduct }
+    });
 
+    dialogRef.afterClosed().subscribe(result => {
+        this.idAssociatedProduct = result;
+    });
+  }
 }

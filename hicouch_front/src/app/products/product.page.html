@@ -2,7 +2,7 @@
 	<app-main-product [tags]="tags"[mainProduct]="mainProduct"></app-main-product>
 		
 <div class="related" *ngIf="productsRelated.length > 0 ">
-	<app-products-top-recommandation [productsRelated]="productsRelated"></app-products-top-recommandation>
+	<app-products-top-recommandation [mainProduct]="mainProduct" [productsRelated]="productsRelated"></app-products-top-recommandation>
 </div>
 </div>
 <div *ngIf="mainProduct && allProducts" >

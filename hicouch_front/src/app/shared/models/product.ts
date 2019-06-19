@@ -4,6 +4,7 @@ export interface Product {
     id: string;
     title: string;
     description: string ;
+    descShort?: string;
     country: string ;
     director: string ;
     year: string;

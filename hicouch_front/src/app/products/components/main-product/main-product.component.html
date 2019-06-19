@@ -15,7 +15,7 @@
                 {{mainProduct.country}}
             </div>
             <div class="description">
-                {{ mainProduct.description }}
+                {{ mainProduct.descShort }}
             </div>
         </div>
 
@@ -31,7 +31,7 @@
                     </mat-option> 
                 </mat-autocomplete>  -->
         </div>
-        <p *ngIf="displayConfirmation">Your request is being processed</p>
+        <p *ngIf="displayConfirmation">Merci ! Votre demande a été prise en compte.</p>
     </div>
     <div class="tags" *ngIf="tags && tags.length > 0">
         <span> Tags : </span>
