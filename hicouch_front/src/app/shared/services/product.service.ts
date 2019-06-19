@@ -28,6 +28,19 @@ export class ProductService {
     }
   }
 
+  getProductByTypeAndTitle(title: string, typeProduct: string): any {
+    switch (typeProduct) {
+      case 'film':
+        return this.getMoviesByTitle(title);
+      case 'book':
+        return this.getBooksByTitle(title);
+      case 'game':
+        return this.getGamesByTitle(title);
+      default:
+        return this.getMoviesByTitle(title);
+    }
+  }
+
   getMovieById(idMovie: string) {
     return this.api.getFilmByID(idMovie);
   }

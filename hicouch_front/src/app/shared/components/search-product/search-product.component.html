@@ -2,12 +2,13 @@
   <div class="search-bar">
     <input #searchInput class="search-field" placeholder="Rechercher..." (keyup)="onType(searchInput.value)"
       (keyup.enter)="onType(searchInput.value)" />
-      <mat-select multiple placeholder="Filter">
-        <mat-option value="film">Movies</mat-option>
-        <mat-option value="serie">TV Shows</mat-option>
-        <mat-option value="book">Books</mat-option>
-        <mat-option value="game">Games</mat-option>
-      </mat-select>
+      <!--TODO-->
+      <select #filterInput placeholder="Filtres" (change)="chooseFilter($event)">
+        <option value="film">Movies</option>
+        <option value="serie">TV Shows</option>
+        <option value="book">Books</option>
+        <option value="game">Games</option>
+      </select>
     <button (click)="onType(searchInput.value)">Search</button>
 
   </div>

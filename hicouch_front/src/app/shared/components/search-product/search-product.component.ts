@@ -15,9 +15,13 @@ export class SearchProductComponent {
   inputIsFocused = false;
   @Output() searchValue = new EventEmitter();
   @Output() productSelected = new EventEmitter();
+  @Output() filterSelected = new EventEmitter();
   @Input() productList: any[];
   @Input() selectedOption: Product;
   @ViewChild('searchInput') searchInput: ElementRef;
+  @ViewChild('filterInput') filterInput: ElementRef;
+  productType: any;
+
 
   selectProduct(product: Product): void {
     const newUser = {
@@ -54,6 +58,11 @@ export class SearchProductComponent {
       this.searchInput.nativeElement.value = '';
       this.productList = null;
     }
+  }
+
+  chooseFilter(event) {
+    this.productType = event.target.value;
+    this.filterSelected.emit(this.productType);
   }
 
 }
