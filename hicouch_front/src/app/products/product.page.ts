@@ -1,17 +1,17 @@
-import {Component, OnInit, OnDestroy, ChangeDetectorRef, OnChanges} from '@angular/core';
-import {ProductService} from '../shared/services/product.service';
-import {TagService} from '../shared/services/tag.service';
-import {Product} from '../shared/models/product';
-import {Router, ActivatedRoute, Params, RoutesRecognized} from '@angular/router';
-import {AssociationService} from '../shared/services/association.service';
-import {Association} from '../shared/models/association';
-import {HicouchAPIService} from '../shared/services/hicouchAPI.service';
-import {Subscription, Observable} from 'rxjs';
-import {MatAutocompleteModule, MatIconModule} from '@angular/material';
-import {FormControl} from '@angular/forms';
-import {map, startWith} from 'rxjs/operators';
-import {Tag} from '../shared/models/tag';
-import {User} from '../shared/models/user';
+import { Component, OnInit, OnDestroy, ChangeDetectorRef, OnChanges } from '@angular/core';
+import { ProductService } from '../shared/services/product.service';
+import { TagService } from '../shared/services/tag.service';
+import { Product } from '../shared/models/product';
+import { Router, ActivatedRoute, Params, RoutesRecognized } from '@angular/router';
+import { AssociationService } from '../shared/services/association.service';
+import { Association } from '../shared/models/association';
+import { HicouchAPIService } from '../shared/services/hicouchAPI.service';
+import { Subscription, Observable } from 'rxjs';
+import { MatAutocompleteModule, MatIconModule } from '@angular/material';
+import { FormControl } from '@angular/forms';
+import { map, startWith } from 'rxjs/operators';
+import { Tag } from '../shared/models/tag';
+import { User } from '../shared/models/user';
 
 @Component({
   selector: 'app-product-page',
@@ -29,10 +29,10 @@ export class ProductPageComponent implements OnInit, OnChanges, OnDestroy {
   productSubscription: Subscription;
   user: User;
 
-    tagControl = new FormControl();
-    tags: Tag[];
-    filteredTags: Observable<string[]>;
-    showInput = false;
+  tagControl = new FormControl();
+  tags: Tag[];
+  filteredTags: Observable<string[]>;
+  showInput = false;
 
 
   constructor(
@@ -44,49 +44,49 @@ export class ProductPageComponent implements OnInit, OnChanges, OnDestroy {
     private changeDetectorRef: ChangeDetectorRef,
   ) { }
 
-    ngOnInit() {
-        this.route.params.subscribe(param => {
+  ngOnInit() {
+    this.route.params.subscribe(param => {
+      this.productId = param['productId'];
+      this.productType = param['productType'];
+      console.log(this.productId);
+      console.log(this.productType);
+      this.fetchProducts();
+    });
+    /*this.router.events.subscribe(val => {
+
+        if (val instanceof RoutesRecognized) {
+
+            const param = val.state.root.firstChild.params;
             this.productId = param['productId'];
             this.productType = param['productType'];
             console.log(this.productId);
             console.log(this.productType);
             this.fetchProducts();
-        });
-        /*this.router.events.subscribe(val => {
+        }
+    });*/
 
-            if (val instanceof RoutesRecognized) {
+  }
 
-                const param = val.state.root.firstChild.params;
-                this.productId = param['productId'];
-                this.productType = param['productType'];
-                console.log(this.productId);
-                console.log(this.productType);
-                this.fetchProducts();
-            }
-        });*/
+  ngOnChanges() {
+    this.route.params.subscribe(param => {
+      this.productId = param['productId'];
+      this.productType = param['productType'];
+      console.log(this.productId);
+      console.log(this.productType);
+      this.fetchProducts();
+    });
 
-    }
+    /*this.router.events.subscribe(val => {
 
-    ngOnChanges() {
-        this.route.params.subscribe(param => {
+        if (val instanceof RoutesRecognized) {
+            const param = val.state.root.firstChild.params;
             this.productId = param['productId'];
             this.productType = param['productType'];
             console.log(this.productId);
             console.log(this.productType);
             this.fetchProducts();
-        });
-
-        /*this.router.events.subscribe(val => {
-
-            if (val instanceof RoutesRecognized) {
-                const param = val.state.root.firstChild.params;
-                this.productId = param['productId'];
-                this.productType = param['productType'];
-                console.log(this.productId);
-                console.log(this.productType);
-                this.fetchProducts();
-            }
-        });*/
+        }
+    });*/
   }
   // fetchProducts() {
   //   let productId;
@@ -115,39 +115,51 @@ export class ProductPageComponent implements OnInit, OnChanges, OnDestroy {
   //   });
   // }
 
-    fetchProducts() {
-        this.productSubscription = this.productService.getProductByTypeAndId(this.productId, this.productType).subscribe((p: Product) => {
-            this.mainProduct = p;
-            this.associationService.fetchtAssociationByProduct(this.mainProduct.id).subscribe((json: any) => {
-                this.allProducts = json;
-                this.filteredProducts = this.allProducts;
-                console.log(json);
-                if (this.allProducts && this.allProducts.length > 0) {
-                    this.tagService.getTags(this.productId).subscribe((tjson: any) => this.tags = tjson);
-                    this.productsRelated.push(json[0]);
-                }
-            });
-        });
-    }
+  fetchProducts() {
+    this.productSubscription = this.productService.getProductByTypeAndId(this.productId, this.productType).subscribe((p: Product) => {
+      this.mainProduct = p;
+      this.associationService.fetchtAssociationByProduct(this.mainProduct.id).subscribe((json: any) => {
+        this.allProducts = json;
+        const topMovie = json.filter(prod => prod.productB.type === 'film')[0];
+        const topBook = json.filter(prod => prod.productB.type === 'book')[0];
+        const topGame = json.filter(prod => prod.productB.type === 'game')[0];
+        const topSerie = json.filter(prod => prod.productB.type === 'serie')[0];
+        this.productsRelated = [];
+        // tslint:disable-next-line:curly
+        if (topMovie != null) this.productsRelated.push(topMovie);
+        // tslint:disable-next-line:curly
+        if (topSerie != null) this.productsRelated.push(topSerie);
+        // tslint:disable-next-line:curly
+        if (topBook != null) this.productsRelated.push(topBook);
+        // tslint:disable-next-line:curly
+        if (topGame != null) this.productsRelated.push(topGame);
+
+        this.filteredProducts = this.allProducts;
+        if (this.allProducts && this.allProducts.length > 0) {
+          this.tagService.getTags(this.productId).subscribe((tjson: any) => this.tags = tjson);
+        }
+      });
+    });
+  }
 
   ngOnDestroy() {
     if (this.productSubscription) { this.productSubscription.unsubscribe(); }
   }
-/*
-  private _filter(value: string): string[] {
-      const filterValue = value.toLowerCase();
-      return this.tags.filter(tag => tag.toLowerCase().includes(filterValue));
-  }
-*/
+  /*
+    private _filter(value: string): string[] {
+        const filterValue = value.toLowerCase();
+        return this.tags.filter(tag => tag.toLowerCase().includes(filterValue));
+    }
+  */
   submit() {
-      console.log(this.tagControl.value);
-        this.tagService.addTag(this.tagControl.value, this.productId)
-            .subscribe(() => this.tagService.getTags(this.productId).subscribe((json: any) => this.tags = json));
-      this.setInputFVisibility(false);
+    console.log(this.tagControl.value);
+    this.tagService.addTag(this.tagControl.value, this.productId)
+      .subscribe(() => this.tagService.getTags(this.productId).subscribe((json: any) => this.tags = json));
+    this.setInputFVisibility(false);
   }
 
   setInputFVisibility(visible: boolean) {
-      this.showInput = visible;
+    this.showInput = visible;
   }
   loadMoviePage(event) {
     this.router.navigate(['app/products/', event.id]);
@@ -168,11 +180,9 @@ export class ProductPageComponent implements OnInit, OnChanges, OnDestroy {
             }
           });
         });
-        console.log(event);
-        console.log(this.filteredProducts);
       } else {
         this.filteredProducts = [];
-       }
+      }
     }
   }
 
