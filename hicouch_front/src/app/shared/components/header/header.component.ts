@@ -29,22 +29,6 @@ export class HeaderComponent implements OnInit {
     if (this.auth.isAuthenticated()) {
       this.userService.getCurrentUser().subscribe((u: User) => this.user = u);
     }
-
-    /*
-    this.userService.getUser(1).subscribe(
-      (user: User) => {
-        this.user = {
-          id: user.id,
-          pseudo: user.pseudo,
-          score: user.score,
-          firstName: user.firstName,
-          lastName: user.lastName,
-          idToken: '',
-          accessToken: '',
-          expiresAt: 0,
-        };
-        this.userSelected.emit(this.user);
-      });*/
   }
 
   goToUser() {

@@ -46,6 +46,7 @@ export class ProductsRelatedComponent implements OnInit, OnChanges {
 
     ngOnInit() {
         this.fetchList(0);
+        this.showComments = false;
     }
 
 
@@ -56,6 +57,7 @@ export class ProductsRelatedComponent implements OnInit, OnChanges {
 
     ngOnChanges() {
         this.fetchList(0);
+        this.showComments = false;
     }
 
     fetchList(number: number): Association[] {
@@ -169,7 +171,7 @@ export class ProductsRelatedComponent implements OnInit, OnChanges {
 
     openDialog(): void {
         const dialogRef = this.dialog.open(ProductsRelatedAddDialogComponent, {
-            width: '50%',
+            width: '70%',
             data: { nomProduct: this.idProduct, id2: null, currentProduct: this.currentProduct }
         });
 
@@ -215,6 +217,7 @@ export class ProductsRelatedAddDialogComponent implements OnInit {
     isMovieSearched = new EventEmitter();
     selectedOption;
     form: FormGroup;
+    type: any;
     @ViewChild('commentInput') commentInput: ElementRef;
     options = [
         { title: 'One' },
@@ -245,24 +248,9 @@ export class ProductsRelatedAddDialogComponent implements OnInit {
         this.currentProduct = this.data.currentProduct;
     }
 
-    /*searchProducts(value : string): void {
-        if(value.length > 2){
-            console.log(value);
-            if(this.selectedType == 'BOOK'){
-                // this.options = this.productService.getMovieByTitle(value);
-                console.log('Vous recherchez un livre');
-            }
-            if(this.selectedType == 'MOVIE'){
-                console.log('Vous recherchez un film');
-            }
-            if(this.selectedType == 'TVSHOW'){
-                console.log('Vous recherchez une série');
-            }
-            if(this.selectedType == 'VIDEOGAMES'){
-                console.log('Vous recherchez un jeu vidéo');
-            }
-        }
-    }*/
+    setFilter(event) {
+        this.type = event;
+      }
     private _filter(value: string): any[] {
         const filterValue = value.toLowerCase();
         console.log(value);
@@ -307,9 +295,10 @@ export class ProductsRelatedAddDialogComponent implements OnInit {
 
     toggleSearchPropositions(value) {
         value = encodeURIComponent(value.trim());
-        this.productService.getMoviesByTitle(value).subscribe((movie) => {
+        this.productService.getProductByTypeAndTitle(value, this.type).subscribe((movie) => {
+          console.log(movie);
           this.products = movie;
-          this.isMovieSearched.emit(movie);
+          // this.isMovieSearched.emit(movie);
         });
       }
 

@@ -55,9 +55,9 @@ export class ProductRelatedCommentsComponent implements OnInit, OnChanges {
         this.canVoteF();
     }
 
-    goTo(productId) {
+    goTo(product) {
         console.log('go to this product');
-        this.router.navigate(['app/products', productId]);
+        this.router.navigate(['app/products', product.type, product.id]);
     }
 
     canVoteF() {
@@ -86,7 +86,6 @@ export class ProductRelatedCommentsComponent implements OnInit, OnChanges {
     }
 
     goToUserProfile(userId) {
-        console.log('go to the user profile who made the comment');
         this.router.navigate(['app/account', userId]);
     }
 
