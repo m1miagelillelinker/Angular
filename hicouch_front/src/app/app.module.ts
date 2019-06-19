@@ -78,7 +78,11 @@ import {UserModerationComponent} from './moderation/components/user-moderation/u
         DisplaySubscribersComponent,
         DisplayBadgesComponent,
         DisplayActivitiesComponent,
-        SpinnerDialogComponent
+        SpinnerDialogComponent,
+        ModerationPageComponent,
+        TagModerationComponent,
+        CommentModerationComponent,
+        UserModerationComponent,
     ],
     imports: [
         BrowserAnimationsModule,
@@ -125,9 +129,6 @@ import {UserModerationComponent} from './moderation/components/user-moderation/u
 
     ],
     bootstrap: [AppComponent],
-    ModerationPageComponent,
-    TagModerationComponent,
-    CommentModerationComponent,
-    UserModerationComponent,
+
 })
 export class AppModule { }
