@@ -56,7 +56,7 @@ export class ProductsTopRecommandationComponent implements OnInit, OnChanges {
   fetchDesc(title: string) {
     if (title) {
       if (title.length > 140) {
-        this.displayTitle = title.substr(0, 140) + '...';
+        this.displayTitle = title.substr(0, 340) + '...';
       } else {
         this.displayTitle = title;
       }

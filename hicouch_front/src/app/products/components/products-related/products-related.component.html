@@ -30,22 +30,22 @@
 
         <br />
 
-        <div class="list" >
+        <div class="list">
                 <div class="navigation-left">
                         <img *ngIf="currentIndex > 0" (click)="fetchIndex('left')"
                                 src="assets/images/white-arrow-right.png">
                 </div>
-                        <div class="item" *ngFor="let asso of fetchList(currentIndex)" (click)="showPopover(asso)">
-                                <div class="picto" *ngIf="asso.productB">
-                                        <img src="{{getPicto(asso.productB.type)}}">
-                                </div>
-                                <div class="image">
-                                        <img src="{{asso.productB.image}}">
-                                </div>
-                                <div class="title2" (mouseover)="getTitle(asso.productB)">
-                                        {{asso.productB.title}}
-                                </div>
+                <div class="item" *ngFor="let asso of fetchList(currentIndex)" (click)="showPopover(asso)">
+                        <div class="picto" *ngIf="asso.productB && !reloading">
+                                <img src="{{getPicto(asso.productB.type)}}">
                         </div>
+                        <div class="image" *ngIf="asso.productB  && !reloading">
+                                <img src="{{asso.productB.image}}">
+                        </div>
+                        <div class="title2" *ngIf="asso.productB && !reloading" (mouseover)="getTitle(asso.productB)">
+                                {{asso.productB.title}}
+                        </div>
+                </div>
                 <div class="item add-product">
                         <div class="image" (click)="addAssociation()">
                                 <img src="/assets/images/plus.png">
@@ -57,4 +57,5 @@
                 </div>
         </div>
 
-<app-product-related-comments #popover *ngIf="showComments" [asso]="assoComment" [loggedUser]="loggedUser"></app-product-related-comments>
+        <app-product-related-comments #popover *ngIf="showComments" [asso]="assoComment" [loggedUser]="loggedUser">
+        </app-product-related-comments>
