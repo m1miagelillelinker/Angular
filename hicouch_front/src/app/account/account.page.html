@@ -16,10 +16,10 @@
 <img height="150px" width="150px" src="{{user.picture}}" />
 <div class="username">
 	<h3>{{user.pseudo}}</h3>
-	<button class="editbutton">Edit Profil</button>
+	<button  mat-raised-button (click)="openDialog()" class="editbutton" >Edit Profil</button>
 </div>
 <!-- Display the profile-progess -->
-<span>Score</span>
+<h3>Score</h3>
 <div class="profile-progress">
 	<div class="progress-bar" [ngStyle]="{'width': profileProgress.fullProgress}"></div>
 	<div class="progress" [ngStyle]="{'width': profileProgress.userProgress}"></div>

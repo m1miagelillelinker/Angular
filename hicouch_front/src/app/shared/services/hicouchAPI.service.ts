@@ -6,7 +6,7 @@ import {HttpClient} from '@angular/common/http';
 })
 export class HicouchAPIService {
   
-
+  
     private DOMAIN = 'http://hicjv7.azurewebsites.net';
 
     private tagController = '/tag';
@@ -124,6 +124,13 @@ export class HicouchAPIService {
     getCurrentUser(): any {
         return this.get(this.userController + '/current', []);
     }
+
+    updatePseudo(pseudo: String): import("rxjs").Observable<import("../models/user").User> {
+        throw new Error("Method not implemented.");
+      }
+      uploadImage(image: File): import("rxjs").Observable<import("../models/user").User> {
+        throw new Error("Method not implemented.");
+      }
 
     //badges
 

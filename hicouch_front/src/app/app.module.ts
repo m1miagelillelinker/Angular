@@ -33,7 +33,7 @@ import {
 } from './products/components/products-top-recommandation/products-top-recommandation.component';
 // tslint:disable-next-line:max-line-length
 import { ProductsRelatedComponent, ProductsRelatedAddDialogComponent } from './products/components/products-related/products-related.component';
-import { AccountPageComponent } from './account/account.page';
+import { AccountPageComponent,DialogEditProfil} from './account/account.page';
 import { AuthenticationService } from './shared/services/authentification.service';
 import { AccountSideMenuComponent } from './account/components/account-side-menu/account-side-menu.component';
 import { ActivityFieldComponent } from './account/components/activity-field/activity-field.component';
@@ -74,7 +74,9 @@ import { DisplayActivitiesComponent } from './account/components/display-activit
         DisplaySubscribersComponent,
         DisplayBadgesComponent,
         DisplayActivitiesComponent,
-        SpinnerDialogComponent
+        SpinnerDialogComponent,
+        DialogEditProfil
+       
     ],
     imports: [
         BrowserAnimationsModule,
@@ -96,6 +98,7 @@ import { DisplayActivitiesComponent } from './account/components/display-activit
         MatListModule,
         MatProgressSpinnerModule,
         MatCheckboxModule,
+        
     ],
     providers: [
         UserService,
@@ -117,9 +120,13 @@ import { DisplayActivitiesComponent } from './account/components/display-activit
         ProductsRelatedAddDialogComponent,
         ProductsRelatedCommentUpdateDialogComponent,
         ProductsRelatedCommentSignalDialogComponent,
-        SpinnerDialogComponent
+        SpinnerDialogComponent,
+        AccountPageComponent,
+        DialogEditProfil
 
     ],
-    bootstrap: [AppComponent],
+    bootstrap: [AppComponent,AccountPageComponent],
 })
-export class AppModule { }
+export class AppModule {
+
+ }

@@ -29,4 +29,12 @@ export class UserService {
   getFollows(userId: number): Observable<User[]> {
     return this.api.getFollows(userId);
   }
+
+  editUserImage(image:File): Observable<User>{
+      return this.api.uploadImage(image);
+  }
+
+  editUserpseudo(pseudo:String): Observable<User>{
+    return this.api.updatePseudo(pseudo);
+}
 }

@@ -1,24 +1,29 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { ProductService } from '../shared/services/product.service';
-import { Movie, Book } from '../shared/models/product';
+import { Component,Inject, OnInit, Input } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { User } from '../shared/models/user';
 import { UserService } from '../shared/services/user.service';
 import { BadgesService } from '../shared/services/badges.service';
+import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
 
 
-
+export interface DialogData {
+  pseudo: string;
+}
 
 @Component({
   selector: 'app-account-page',
   templateUrl: './account.page.html',
   styleUrls: ['./account.page.scss'],
 })
+
+
+
 export class AccountPageComponent implements OnInit {
   user: User;
   activitiesSelected: boolean = true;
   friendsSelected: boolean = false;
   badgesSelected: boolean = false;
+  pseudo:string;
 
   profileProgress = {
     fullProgress: '180px', //'150px',
@@ -37,8 +42,9 @@ export class AccountPageComponent implements OnInit {
   constructor(
     private userService: UserService,
     private route: ActivatedRoute,
-    private BadgesService:BadgesService
-  ) { }
+    private BadgesService:BadgesService,
+    public dialog: MatDialog
+  ) {}
 
   ngOnInit() {
     // tt3896198
@@ -107,5 +113,70 @@ export class AccountPageComponent implements OnInit {
 
   showFriends() {
     this.toggleFeature('friends');
+  }
+
+//button edit profil
+
+  openDialog(): void {
+    const dialogRef = this.dialog.open(DialogEditProfil, {
+      width: '300px',
+      data: {pseudo: this.pseudo}
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+      this.pseudo = result;
+    });
+  }
+  
+}
+//Edit profil pseudo
+
+@Component({
+  selector: 'dialog-edit-profil',
+  templateUrl: 'dialog-edit-profil.html',
+})
+
+export class DialogEditProfil {
+
+  constructor(
+    public dialogRef: MatDialogRef<DialogEditProfil>,
+    @Inject(MAT_DIALOG_DATA) public data: DialogData) {}
+
+  onNoClick(): void {
+    this.dialogRef.close();
+  }
+}
+
+//edit profil image
+
+class ImageSnippet {
+  constructor(public src: string, public file: File) {}
+}
+
+export class ImageUploadComponent {
+
+  selectedFile: ImageSnippet;
+
+  constructor(private userService: UserService){}
+
+  processFile(imageInput: any) {
+    const file: File = imageInput.files[0];
+    const reader = new FileReader();
+
+    reader.addEventListener('load', (event: any) => {
+
+      this.selectedFile = new ImageSnippet(event.target.result, file);
+
+      this.userService.editUserImage(this.selectedFile.file).subscribe(
+        (res) => {
+        
+        },
+        (err) => {
+        
+        })
+    });
+
+    reader.readAsDataURL(file);
   }
 }
