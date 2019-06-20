@@ -68,8 +68,8 @@ export class HomeComponent implements OnInit {
         assos = list;*/
     }
 
-    goTo(productId) {
-        this.router.navigate(['app/products', productId]);
+    goTo(product) {
+        this.router.navigate(['app/products', product.type, product.id]);
     }
 
 
