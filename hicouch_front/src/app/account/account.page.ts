@@ -1,5 +1,5 @@
 import { Component,Inject, OnInit, Input } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Data } from '@angular/router';
 import { User } from '../shared/models/user';
 import { UserService } from '../shared/services/user.service';
 import { BadgesService } from '../shared/services/badges.service';
@@ -20,6 +20,7 @@ export interface DialogData {
 
 export class AccountPageComponent implements OnInit {
   user: User;
+  newUser: User;
   activitiesSelected: boolean = true;
   friendsSelected: boolean = false;
   badgesSelected: boolean = false;
@@ -64,6 +65,7 @@ export class AccountPageComponent implements OnInit {
         badges:user.badges
       };
     });
+    this.newUser=this.user;
     this.userService.getFollowers(parsedUserId).subscribe((json: User[]) => this.followersUsers = json);
     this.userService.getFollows(parsedUserId).subscribe((json: User[]) => this.followsUsers = json);
   }
@@ -122,10 +124,17 @@ export class AccountPageComponent implements OnInit {
       width: '300px',
       data: {pseudo: this.pseudo}
     });
+    
 
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed');
       this.pseudo = result;
+      if(this.pseudo!=null){
+        console.log('edit pseudo');
+          this.user.pseudo=this.pseudo;
+          console.log(this.user.id);
+          this.userService.editUserPseudo(this.user).subscribe((json: any) => this.user = json);
+      }
     });
   }
   
@@ -143,6 +152,7 @@ export class DialogEditProfil {
     public dialogRef: MatDialogRef<DialogEditProfil>,
     @Inject(MAT_DIALOG_DATA) public data: DialogData) {}
 
+
   onNoClick(): void {
     this.dialogRef.close();
   }
@@ -151,14 +161,28 @@ export class DialogEditProfil {
 //edit profil image
 
 class ImageSnippet {
+  pending: boolean = false;
+  status: string = 'init';
   constructor(public src: string, public file: File) {}
 }
-
+/*
 export class ImageUploadComponent {
 
   selectedFile: ImageSnippet;
 
   constructor(private userService: UserService){}
+
+  private onSuccess() {
+    this.selectedFile.pending = false;
+    this.selectedFile.status = 'ok';
+  }
+
+  private onError() {
+    this.selectedFile.pending = false;
+    this.selectedFile.status = 'fail';
+    this.selectedFile.src = '';
+  }
+
 
   processFile(imageInput: any) {
     const file: File = imageInput.files[0];
@@ -170,9 +194,10 @@ export class ImageUploadComponent {
 
       this.userService.editUserImage(this.selectedFile.file).subscribe(
         (res) => {
-        
+          this.onSuccess();
         },
         (err) => {
+          this.onError()
         
         })
     });
@@ -180,3 +205,4 @@ export class ImageUploadComponent {
     reader.readAsDataURL(file);
   }
 }
+*/

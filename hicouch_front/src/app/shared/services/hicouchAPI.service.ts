@@ -1,5 +1,6 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
+import { User } from '../models/user';
 
 @Injectable({
     providedIn: 'root',
@@ -7,7 +8,7 @@ import {HttpClient} from '@angular/common/http';
 export class HicouchAPIService {
   
   
-    private DOMAIN = 'http://hicjv7.azurewebsites.net';
+    private DOMAIN = 'http://localhost:8080';
 
     private tagController = '/tag';
     private abonnementController = '/abonnement';
@@ -125,11 +126,11 @@ export class HicouchAPIService {
         return this.get(this.userController + '/current', []);
     }
 
-    updatePseudo(pseudo: String): import("rxjs").Observable<import("../models/user").User> {
-        throw new Error("Method not implemented.");
+    updatePseudo(user:any){
+        return this.put(this.userController + '/update', [], user);
       }
-      uploadImage(image: File): import("rxjs").Observable<import("../models/user").User> {
-        throw new Error("Method not implemented.");
+    uploadImage(user:User) {
+        return this.put(this.userController + '/update', [], user);
       }
 
     //badges

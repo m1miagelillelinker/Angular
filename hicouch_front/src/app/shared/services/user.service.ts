@@ -30,11 +30,11 @@ export class UserService {
     return this.api.getFollows(userId);
   }
 
-  editUserImage(image:File): Observable<User>{
-      return this.api.uploadImage(image);
+  editUserImage(user:User): Observable<User>{
+      return this.api.uploadImage(user);
   }
 
-  editUserpseudo(pseudo:String): Observable<User>{
-    return this.api.updatePseudo(pseudo);
+  editUserPseudo(user:User): Observable<User>{
+    return this.api.updatePseudo({id: user.id, pseudo: user.pseudo});
 }
 }
