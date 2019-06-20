@@ -20,7 +20,7 @@
 
 <!-- Display the profile-infos -->
 <div *ngIf="user" class="profile-infos">
-	<!-- <img height="150px" width="150px" src="{{user.picture}}" /> -->
+	<img *ngIf="otherUser" height="150px" src="{{user.picture}}" />
 	<div class="username">
 		<span>{{user.pseudo}}</span>
 	</div>

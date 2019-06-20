@@ -2,7 +2,7 @@
   <h1>{{title}}</h1>
   <ul>
     <li *ngFor="let user of users">
-      <img height="100px" width="50px" [src]="user.picture">
+      <img [src]="user.picture">
       <div (click)="goToUser(user.id)">{{user.pseudo}}</div>
     </li>
   </ul>
