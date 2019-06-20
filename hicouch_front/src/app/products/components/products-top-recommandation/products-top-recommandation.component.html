@@ -1,15 +1,15 @@
 <div class="header">
     <div [ngClass]="{'selected': movieSelected}" (click)="selectTab('film')">
-        Movie
+        Film
     </div>
     <div [ngClass]="{'selected': serieSelected}" (click)="selectTab('serie')">
-        TVShow
+        Série
     </div>
     <div [ngClass]="{'selected': bookSelected}" (click)="selectTab('book')">
-        Book
+        Livre
     </div>
     <div [ngClass]="{'selected': gameSelected}" (click)="selectTab('game')">
-        Game
+        Jeu vidéo
     </div>
 </div>
 <div *ngFor="let asso of productsRelated">

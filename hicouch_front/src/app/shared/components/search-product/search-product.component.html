@@ -4,12 +4,12 @@
       (keyup.enter)="onType(searchInput.value)" />
       <!--TODO-->
       <select #filterInput placeholder="Filtres" (change)="chooseFilter($event)">
-        <option value="film">Movies</option>
-        <option value="serie">TV Shows</option>
-        <option value="book">Books</option>
-        <option value="game">Games</option>
+        <option value="film">Films</option>
+        <option value="serie">Séries</option>
+        <option value="book">Livres</option>
+        <option value="game">Jeux vidéos</option>
       </select>
-    <button (click)="onType(searchInput.value)">Search</button>
+    <button (click)="onType(searchInput.value)">Rechercher</button>
 
   </div>
 </div>
