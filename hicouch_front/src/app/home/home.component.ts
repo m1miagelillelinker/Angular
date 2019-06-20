@@ -29,6 +29,7 @@ export class HomeComponent implements OnInit {
     ) { }
 
     ngOnInit() {
+        this.associations = [];
         if (this.auth.isAuthenticated()) {
             this.userService.getCurrentUser().subscribe((u: User) => this.user = u);
         }
