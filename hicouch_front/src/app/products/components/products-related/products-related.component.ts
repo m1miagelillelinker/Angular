@@ -193,7 +193,6 @@ export class ProductsRelatedComponent implements OnInit, OnChanges {
         });
     }
 
-
     goTo(productId) {
         console.log('go to this product');
        // this.router.navigate(['app/products', productId]);

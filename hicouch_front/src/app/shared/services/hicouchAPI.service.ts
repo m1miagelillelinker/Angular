@@ -129,6 +129,10 @@ export class HicouchAPIService {
         return this.delete(this.associationController + '/delete', [{key: 'idAssociation', value: idAssociation}], {});
     }
 
+    lastAssociations(): any {
+        return this.get(this.associationController + '/last', []);
+    }
+
 
     // user
 

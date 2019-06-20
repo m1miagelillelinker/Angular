@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
 import {HicouchAPIService} from './hicouchAPI.service';
-
+import {Association} from '../models/association';
 
 
 @Injectable({
@@ -20,4 +19,7 @@ export class AssociationService {
         return this.api.newAssociation(idProductA, typeProductA, idProductB, typeProductB);
     }
 
+    getLastAssociations() { // Observable<Association>[]
+        return this.api.lastAssociations();
+    }
 }
