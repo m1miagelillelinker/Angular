@@ -14,13 +14,13 @@ export class VoteService {
     constructor(private http: HttpClient, private api: HicouchAPIService) {
     }
 
-    getVoteByUserId(userid: number) {
-        return this.api.getVoteByUser(userid);
-    }
+    // getVoteByUserId(userid: number) {
+    //     return this.api.getVoteByUser(userid);
+    // }
 
-    getVoteByAssoId(assoId: number) {
-        return this.api.getVoteByAsso(assoId);
-    }
+    // getVoteByAssoId(assoId: number) {
+    //     return this.api.getVoteByAsso(assoId);
+    // }
 
     vote(vote: Vote) {
         return this.api.putVote(vote);

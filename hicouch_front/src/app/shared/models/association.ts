@@ -16,5 +16,6 @@ export interface AssociationMeta {
     idfournA: string;
     idProduitB: string;
     idfournB: string;
-    idPair: number;
+    idPair?: number;
+    idComment?: number;
 }

@@ -163,8 +163,8 @@ export class HicouchAPIService {
         return this.get(this.voteController + '/userVote', [{key: 'userId', value: idUser}]);
     }
 
-    getVoteByAsso(idAsso: number): any {
-        return this.get(this.voteController + '/AssoVote', [{key: 'AssoId', value: idAsso}]);
+    getVoteByAsso(assoId: number): any {
+        return this.get(this.voteController + '/AssoVote', [{key: 'assoId', value: assoId}]);
     }
 
     // product
