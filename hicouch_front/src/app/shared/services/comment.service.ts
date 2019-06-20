@@ -11,8 +11,9 @@ export class CommentService {
     constructor(private api: HicouchAPIService) {
     }
 
-    putComment(comment: string, idPair: number) {
+    putComment(idUser: any, comment: string, idPair: number) {
         const secureComment = {
+            idUser,
             commentaire: comment,
             idPair: idPair,
         };

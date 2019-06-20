@@ -185,7 +185,9 @@ export class ProductsRelatedComponent implements OnInit, OnChanges {
     openDialog(): void {
         const dialogRef = this.dialog.open(ProductsRelatedAddDialogComponent, {
             width: '70%',
-            data: { nomProduct: this.idProduct, id2: null, currentProduct: this.currentProduct }
+            data: { nomProduct: this.idProduct,
+                id2: null, currentProduct: this.currentProduct,
+            user: this.loggedUser}
         });
 
         dialogRef.afterClosed().subscribe(result => {
@@ -290,7 +292,8 @@ export class ProductsRelatedAddDialogComponent implements OnInit {
             .subscribe(res => {
                 const idPair = res.idPair;
                 const comment = this.commentInput.nativeElement.value;
-                this.commentService.putComment(comment, idPair).subscribe();
+                // tslint:disable-next-line:no-shadowed-variable
+                this.commentService.putComment(this.data.user.id, comment, idPair).subscribe(ress => console.log(ress));
             });
     }
 

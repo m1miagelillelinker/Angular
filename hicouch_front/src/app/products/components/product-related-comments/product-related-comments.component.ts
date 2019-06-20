@@ -118,7 +118,7 @@ export class ProductRelatedCommentsComponent implements OnInit, OnChanges {
     }
 
     addComment() {
-        this.commentService.putComment(this.commentContentAdd.value, this.asso.association.idPair);
+        this.commentService.putComment(this.loggedUser.id, this.commentContentAdd.value, this.asso.association.idPair);
         this.commentService.getCommentByIdPair(this.asso.association.idPair).subscribe((comments: any) => {
             this.commentaires = comments;
         });
