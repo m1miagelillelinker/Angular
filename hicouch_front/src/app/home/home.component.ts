@@ -39,18 +39,8 @@ export class HomeComponent implements OnInit {
     }
 
     getLastAssociations(assos: Association[]) {
-        console.log(assos);
-        const list = [];
-        let x ;
-        for ( x = 0; x < assos.length; x++ ) {
-            list[assos[x]['association']['idPair']] = assos[x];
-        }
-        assos = new Array();
-        let asso;
-        for (asso in list ) {
-            assos.push(list[asso]);
-        }
-        return assos;
+      return  assos.filter((a) => a.association.id % 2 === 1);
+    }
 /*
 
         for (asso in assos) {
@@ -66,7 +56,6 @@ export class HomeComponent implements OnInit {
                   }*!/
         }
         assos = list;*/
-    }
 
     goTo(product) {
         this.router.navigate(['app/products', product.type, product.id]);
