@@ -6,7 +6,7 @@ import {HttpClient} from '@angular/common/http';
 })
 export class HicouchAPIService {
 
-    private DOMAIN = 'https://hicjv7.azurewebsites.net';
+    private DOMAIN = 'https://hicjv4.azurewebsites.net';
 
     private tagController = '/tag';
     private abonnementController = '/abonnement';
@@ -71,12 +71,12 @@ export class HicouchAPIService {
 
     follow(idFollower: number, idFollows: number): any {
         return this.put(this.abonnementController + '/follow',
-            [{key: 'follower', value: idFollower}, {key: 'follows', value: 'follows'}], {});
+            [{key: 'follower', value: idFollower}, {key: 'follows', value: idFollows}], {});
     }
 
     unfollow(idFollower: number, idFollows: number): any {
         return this.delete(this.abonnementController + '/unfollow',
-            [{key: 'follower', value: idFollower}, {key: 'follows', value: 'follows'}], {});
+            [{key: 'follower', value: idFollower}, {key: 'follows', value: idFollows}], {});
     }
 
     getFollows(idUser: number): any {

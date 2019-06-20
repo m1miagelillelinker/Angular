@@ -82,7 +82,7 @@ import {UserModerationComponent} from './moderation/components/user-moderation/u
         ModerationPageComponent,
         TagModerationComponent,
         CommentModerationComponent,
-        UserModerationComponent,
+        UserModerationComponent
     ],
     imports: [
         BrowserAnimationsModule,

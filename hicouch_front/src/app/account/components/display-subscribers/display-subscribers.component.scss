@@ -1,4 +1,5 @@
 .displayFriends {
+  margin-top: -30vh;
   ul {
     list-style-type: none;
     margin: 0;
@@ -22,6 +23,12 @@
       img {
           border-radius: 100%;
           width: 100%;
+      }
+      div {
+        cursor:pointer;
+        margin-top: auto;
+        margin-bottom: auto;
+        margin-left: 10px;
       }
     }  
   }

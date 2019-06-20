@@ -1,4 +1,5 @@
-import { Component, OnInit ,Input} from '@angular/core'
+import { Component, OnInit , Input} from '@angular/core';
+import { Badge } from 'src/app/shared/models/badge';
 
 @Component({
   selector: 'app-display-badges',
@@ -8,11 +9,12 @@ import { Component, OnInit ,Input} from '@angular/core'
 export class DisplayBadgesComponent implements OnInit {
 
   @Input() title: String;
-  @Input() badges: Array<Object>;
+  @Input() badges: Badge[];
 
   constructor() {}
 
   ngOnInit() {
+    console.log(this.badges);
   }
 
 }

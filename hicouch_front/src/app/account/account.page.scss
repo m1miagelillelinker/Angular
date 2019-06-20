@@ -22,6 +22,7 @@
     width: 30%;
     .displayActivites {
       display: flex;
+      margin-top: -25vh;
       .user-infos {
         display:block;
         margin-left: 10px;
@@ -53,11 +54,28 @@
 }
 
 .profile-infos {
-  margin: 30px 100px;
-  width: 98vw;
+  margin: 30px;
+  margin-left: 100px;
+  width: fit-content;
 
   img {
     border-radius: 100%;
+  }
+
+  .subscription {
+    cursor: pointer;
+    margin-top: 10px;
+    padding: 10px;
+    color: white;
+    background-color: #7c0000;
+  }
+
+  .unsubscription {
+    cursor: pointer;
+    margin-top: 10px;
+    padding: 10px;
+    color: #3e3e3e;
+    background-color: lightgray;
   }
 
   .username {

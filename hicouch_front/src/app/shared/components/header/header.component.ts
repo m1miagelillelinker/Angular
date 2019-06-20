@@ -40,7 +40,7 @@ export class HeaderComponent implements OnInit {
   }
 
   onType(value: string) {
-    value = encodeURIComponent(value.trim());
+    value = value.replace(' ', '+');
     this.productService.getMoviesByTitle(value).subscribe((movie) => {
       this.products = movie;
       // this.isMovieSearched.emit(movie);
@@ -48,7 +48,7 @@ export class HeaderComponent implements OnInit {
   }
 
   toggleSearchPropositions(value) {
-    value = encodeURIComponent(value.trim());
+    value = value.replace(' ', '+');
     this.productService.getProductByTypeAndTitle(value, this.type).subscribe((movie) => {
       console.log(movie);
       this.products = movie;
