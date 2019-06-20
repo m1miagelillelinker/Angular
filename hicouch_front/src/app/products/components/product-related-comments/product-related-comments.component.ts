@@ -30,7 +30,10 @@ export class ProductRelatedCommentsComponent implements OnInit, OnChanges {
         Validators.maxLength(500)
     ]);
 
-    canVote: boolean;
+    canVoteUpA: boolean;
+    canVoteDownA: boolean;
+    canVoteUp: boolean;
+    canVoteDown: boolean;
     checked = false;
 
     constructor(
@@ -45,48 +48,80 @@ export class ProductRelatedCommentsComponent implements OnInit, OnChanges {
         this.commentService.getCommentByIdPair(this.asso.association.idPair).subscribe((comments: any) => {
             this.commentaires = comments;
         });
-        this.canVoteF();
+        this.canVoteUpA = this.asso.vote ? (this.asso.vote.vote === (0 || -1)) : true;
+        this.canVoteDownA = this.asso.vote ? (this.asso.vote.vote === (0 || 1)) : true;
+
     }
 
     ngOnChanges(changes: SimpleChanges): void {
         this.commentService.getCommentByIdPair(this.asso.association.idPair).subscribe((comments: any) => {
             this.commentaires = comments;
         });
-        this.canVoteF();
     }
 
     goTo(product) {
-        console.log('go to this product');
         this.router.navigate(['app/products', product.type, product.id]);
     }
 
-    canVoteF() {
-        (this.asso.vote == null) ? this.canVote = true : this.canVote = false;
+    noteAsso(note: number) {
+
+        if (!this.asso.vote) {
+            this.canVoteUpA = true;
+            this.canVoteDownA = true;
+            const vote = {
+                idPair: this.asso.association.id, vote: note, idUser: this.loggedUser.id
+            };
+            this.voteService.vote(vote).subscribe();
+        } else {
+            if (this.asso.vote.vote === note) {
+                this.canVoteUpA = this.asso.vote.vote === (0 || -1);
+                this.canVoteDownA = this.asso.vote.vote === (0 || 1);
+                const vote = {
+                    idPair: this.asso.association.id, vote: 0, idUser: this.loggedUser.id
+                };
+                this.voteService.vote(vote).subscribe();
+            } else {
+                const vote = {
+                    idPair: this.asso.association.id, vote: note, idUser: this.loggedUser.id
+                };
+                this.voteService.vote(vote).subscribe();
+            }
+        }
+        this.commentService.getCommentByIdPair(this.asso.association.idPair).subscribe((comments: any) => {
+            this.commentaires = comments;
+        });
     }
 
-    riseNoteAsso() {
-        const vote = {
-            idPair: this.asso.association.idPair, vote: 1, idUser: this.loggedUser.id
-        };
-        this.canVote = false;
-        this.voteService.vote(vote).subscribe(res => console.log(res));
+    riseNoteComment(comment) {
+        // const v = comment.vote;
+        // console.log(v);
+        // const vote = {
+        //     idComment: this.asso.association.idComment, vote: , idUser: this.loggedUser.id
+        // };
+        // this.voteService.vote(vote).subscribe(res => console.log(res));
     }
 
-    decreaseNoteAsso() {
-        const vote = {
-            idPair: this.asso.association.idPair,  vote: -1, idUser: this.loggedUser.id
-        };
-        this.canVote = false;
-        this.voteService.vote(vote).subscribe(res => console.log(res));
+    decreaseNoteComment(comment) {
+        // let currentVote = null;
+        // this.voteService.getVoteByUserId(this.loggedUser.id).subscribe(res => currentVote = res.vote);
+        // const votee = currentVote === 0 ? 1 : 0;
+        // const vote = {
+        //     idComment: this.asso.association.idComment, vote: votee, idUser: this.loggedUser.id
+        // };
+        // this.canVoteDown = votee === 0 || this.canVoteUp;
+        // this.voteService.vote(vote).subscribe(res => console.log(res));
     }
 
     goToUserProfile(userId) {
+        // HERE
         this.router.navigate(['app/account', userId]);
     }
 
     addComment() {
         this.commentService.putComment(this.commentContentAdd.value, this.asso.association.idPair);
-        // this.animationLoad();
+        this.commentService.getCommentByIdPair(this.asso.association.idPair).subscribe((comments: any) => {
+            this.commentaires = comments;
+        });
     }
 
     animationLoad() {

@@ -43,7 +43,6 @@ export class AppComponent implements OnInit, OnDestroy {
     }
 
     loadMoviePage(event) {
-        console.log(event);
         // this.changeDetectorRef.detectChanges();
         event.id = event.id;
         this.router.navigate(['app/products/', event.id]);

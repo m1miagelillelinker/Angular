@@ -63,7 +63,6 @@ export class AccountPageComponent implements OnInit, OnChanges {
     const userId = this.route.snapshot.paramMap.get('userId');
     const parsedUserId = parseInt(userId, 10);
     this.userService.getUser(parsedUserId).subscribe((user) => {
-      console.log(user);
       const myUser = {
         id: user.id,
         badges: user.badges,
@@ -78,11 +77,15 @@ export class AccountPageComponent implements OnInit, OnChanges {
       };
       this.badges = user.badges;
       this.user = myUser;
+      console.log(myUser);
+      console.log(this.currentUser);
+      this.userService.getHistoryById(this.currentUser.id).subscribe(res => console.log(res));
+      this.newUser = this.user;
+      this.userService.getFollowers(parsedUserId).subscribe((json: User[]) => this.followersUsers = json);
+      this.userService.getFollows(parsedUserId).subscribe((json: User[]) => this.followsUsers = json);
+      this.otherUser = this.currentUser.id !== this.user.id;
     });
-    this.newUser = this.user;
-    this.userService.getFollowers(parsedUserId).subscribe((json: User[]) => this.followersUsers = json);
-    this.userService.getFollows(parsedUserId).subscribe((json: User[]) => this.followsUsers = json);
-    this.otherUser = this.currentUser.id !== this.user.id;
+
   }
 
   toggleFeature(event: string) {
@@ -132,14 +135,17 @@ export class AccountPageComponent implements OnInit, OnChanges {
       };
       this.badges = user.badges;
       this.user = myUser;
+      console.log(myUser);
+      this.userService.getHistoryById(user.id).subscribe(res => console.log(res));
+      this.userService.getFollowers(parsedUserId).subscribe((json: User[]) => this.followersUsers = json);
+      this.userService.getFollows(parsedUserId).subscribe((json: User[]) => {
+        this.followsUsers = json;
+        this.follows = this.followsUsers.find(u => u.id === event) != null;
+        console.log(this.currentUser.id);
+        console.log(event);
+        this.otherUser = this.currentUser.id !== event;
     });
-    this.userService.getFollowers(parsedUserId).subscribe((json: User[]) => this.followersUsers = json);
-    this.userService.getFollows(parsedUserId).subscribe((json: User[]) => {
-      this.followsUsers = json;
-      this.follows = this.followsUsers.find(u => u.id === event) != null;
-      console.log(this.currentUser.id);
-      console.log(event);
-      this.otherUser = this.currentUser.id !== event;
+
     });
     this.showActivities();
   }

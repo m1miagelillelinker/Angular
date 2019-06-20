@@ -50,14 +50,12 @@ export class HeaderComponent implements OnInit {
   toggleSearchPropositions(value) {
     value = value.replace(' ', '+');
     this.productService.getProductByTypeAndTitle(value, this.type).subscribe((movie) => {
-      console.log(movie);
       this.products = movie;
       // this.isMovieSearched.emit(movie);
     });
   }
 
   goToProduct(event) {
-    console.log(event);
     this.isMovieSearched.emit(event);
     this.router.navigate(['app/products', event.type, event.id]);
   }
