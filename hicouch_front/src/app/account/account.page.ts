@@ -1,8 +1,14 @@
-import { Component, OnInit, Input, OnChanges } from '@angular/core';
-import {ActivatedRoute, Router} from '@angular/router';
-import { User } from '../shared/models/user';
+import { Component, OnInit, Inject, Input, OnChanges } from '@angular/core';
+import {ActivatedRoute, Router, Data } from '@angular/router';
 import { UserService } from '../shared/services/user.service';
 import { Badge } from '../shared/models/badge';
+import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
+import { User } from '../shared/models/user';
+
+
+export interface DialogData {
+  pseudo: string;
+}
 
 @Component({
   selector: 'app-account-page',
@@ -18,10 +24,12 @@ export class AccountPageComponent implements OnInit, OnChanges {
   badges: Badge[];
   follows = false;
   otherUser = false;
+  newUser: User;
+  pseudo: string;
 
   profileProgress = {
-    fullProgress: '150px', // '150px',
-    userProgress: '100px', // user.score * 150 / 100
+    fullProgress: '180px',
+    userProgress: '100px',
   };
 
   tableActivites = {
@@ -35,6 +43,7 @@ export class AccountPageComponent implements OnInit, OnChanges {
   constructor(
     private userService: UserService,
     private route: ActivatedRoute,
+    public dialog: MatDialog,
     private router: Router,
   ) { }
 
@@ -65,11 +74,12 @@ export class AccountPageComponent implements OnInit, OnChanges {
         picture: user.picture,
         idToken: '',
         accessToken: '',
-        expiresAt: 0,
+        expiresAt: 0
       };
       this.badges = user.badges;
       this.user = myUser;
     });
+    this.newUser = this.user;
     this.userService.getFollowers(parsedUserId).subscribe((json: User[]) => this.followersUsers = json);
     this.userService.getFollows(parsedUserId).subscribe((json: User[]) => this.followsUsers = json);
     this.otherUser = this.currentUser.id !== this.user.id;
@@ -159,4 +169,86 @@ export class AccountPageComponent implements OnInit, OnChanges {
     this.userService.unFollow(this.currentUser.id, parsedUserId).subscribe(res => console.log(res));
   }
 
+
+  openDialog(): void {
+    const dialogRef = this.dialog.open(DialogEditProfilComponent, {
+      // width: '300px',
+      data: {pseudo: this.pseudo}
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+      this.pseudo = result;
+      if (this.pseudo != null) {
+        console.log('edit pseudo');
+          this.user.pseudo = this.pseudo;
+          console.log(this.user.id);
+          this.userService.editUserPseudo(this.user).subscribe((json: any) => this.user = json);
+      }
+    });
+  }
 }
+
+@Component({
+  // tslint:disable-next-line:component-selector
+  selector: 'dialog-edit-profil',
+  templateUrl: 'dialog-edit-profil.html',
+})
+export class DialogEditProfilComponent {
+
+  constructor(
+    public dialogRef: MatDialogRef<DialogEditProfilComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: DialogData) {}
+
+
+  onNoClick(): void {
+    this.dialogRef.close();
+  }
+}
+
+class ImageSnippet {
+  pending = false;
+  status = 'init';
+  constructor(public src: string, public file: File) {}
+}
+/*
+export class ImageUploadComponent {
+
+  selectedFile: ImageSnippet;
+
+  constructor(private userService: UserService){}
+
+  private onSuccess() {
+    this.selectedFile.pending = false;
+    this.selectedFile.status = 'ok';
+  }
+
+  private onError() {
+    this.selectedFile.pending = false;
+    this.selectedFile.status = 'fail';
+    this.selectedFile.src = '';
+  }
+
+
+  processFile(imageInput: any) {
+    const file: File = imageInput.files[0];
+    const reader = new FileReader();
+
+    reader.addEventListener('load', (event: any) => {
+
+      this.selectedFile = new ImageSnippet(event.target.result, file);
+
+      this.userService.editUserImage(this.selectedFile.file).subscribe(
+        (res) => {
+          this.onSuccess();
+        },
+        (err) => {
+          this.onError()
+
+        })
+    });
+
+    reader.readAsDataURL(file);
+  }
+}
+*/

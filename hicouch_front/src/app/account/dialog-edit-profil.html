@@ -1,0 +1,34 @@
+<h1 mat-dialog-title>Edit Profil</h1>
+<div mat-dialog-content>
+  <h4>What's your new pseudo ?</h4>
+  <mat-form-field>
+    <input matInput [(ngModel)]="data.pseudo">
+  </mat-form-field>
+  <label class="image-upload-container btn btn-bwm">
+    <h4>Select a new picture profil</h4>
+    <input #imageInput
+           type="file"
+           accept="image/*"
+           (change)="processFile(imageInput)">
+  </label>
+  <div *ngIf="selectedFile" class="img-preview-container">
+
+    <div class="img-preview{{selectedFile.status === 'fail' ? '-error' : ''}}"
+       [ngStyle]="{'background-image': 'url('+ selectedFile.src + ')'}">
+    </div>
+    
+    <div *ngIf="selectedFile.pending" class="img-loading-overlay">
+      <div class="img-spinning-circle"></div>
+    </div>
+    
+    <div *ngIf="selectedFile.status === 'ok'" class="alert alert-success"> Image Uploaded Succesfuly!</div>
+    <div *ngIf="selectedFile.status === 'fail'" class="alert alert-danger"> Image Upload Failed!</div>
+  </div>
+
+<div mat-dialog-actions>
+  <button mat-button (click)="onNoClick()">No Thanks</button>
+  <button mat-button
+  (click)="onClick()" 
+  [mat-dialog-close]="data.pseudo" 
+  cdkFocusInitial>Update</button>
+</div>

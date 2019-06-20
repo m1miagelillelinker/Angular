@@ -33,7 +33,7 @@ import {
 } from './products/components/products-top-recommandation/products-top-recommandation.component';
 // tslint:disable-next-line:max-line-length
 import { ProductsRelatedComponent, ProductsRelatedAddDialogComponent } from './products/components/products-related/products-related.component';
-import { AccountPageComponent } from './account/account.page';
+import { AccountPageComponent, DialogEditProfilComponent} from './account/account.page';
 import { AuthenticationService } from './shared/services/authentification.service';
 import { AccountSideMenuComponent } from './account/components/account-side-menu/account-side-menu.component';
 import { ActivityFieldComponent } from './account/components/activity-field/activity-field.component';
@@ -74,6 +74,7 @@ import {UserModerationComponent} from './moderation/components/user-moderation/u
         ProductRelatedCommentsComponent,
         ProductsRelatedCommentSignalDialogComponent,
         ProductsRelatedCommentUpdateDialogComponent,
+        DialogEditProfilComponent,
         ActivityFieldComponent,
         DisplaySubscribersComponent,
         DisplayBadgesComponent,
@@ -82,7 +83,8 @@ import {UserModerationComponent} from './moderation/components/user-moderation/u
         ModerationPageComponent,
         TagModerationComponent,
         CommentModerationComponent,
-        UserModerationComponent
+        UserModerationComponent,
+        SpinnerDialogComponent,
     ],
     imports: [
         BrowserAnimationsModule,
@@ -125,10 +127,14 @@ import {UserModerationComponent} from './moderation/components/user-moderation/u
         ProductsRelatedAddDialogComponent,
         ProductsRelatedCommentUpdateDialogComponent,
         ProductsRelatedCommentSignalDialogComponent,
-        SpinnerDialogComponent
+        SpinnerDialogComponent,
+        AccountPageComponent,
+        DialogEditProfilComponent
 
     ],
     bootstrap: [AppComponent],
 
 })
-export class AppModule { }
+export class AppModule {
+
+ }

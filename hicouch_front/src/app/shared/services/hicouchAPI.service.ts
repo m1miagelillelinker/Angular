@@ -1,5 +1,6 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
+import { User } from '../models/user';
 
 @Injectable({
     providedIn: 'root',
@@ -143,6 +144,13 @@ export class HicouchAPIService {
     getCurrentUser(): any {
         return this.get(this.userController + '/current', []);
     }
+
+    updatePseudo(user: any) {
+        return this.put(this.userController + '/update', [], user);
+      }
+    uploadImage(user: User) {
+        return this.put(this.userController + '/update', [], user);
+      }
 
     // vote
 

@@ -4,15 +4,7 @@
 <!-- <div *ngIf="user" class="content">
 <div class="profile">
 	<div class="display">
-			<img src="{{user.picture}}" />
-			<div class="user-infos">
-				{{user.firstName}}
-				<br />
-				{{user.lastName}}
-			</div>
-	</div>
-	<div class="action" (click)="goToEdition()">
-		Edit My Profile
+		
 	</div>
 </div>
 </div> -->
@@ -24,6 +16,8 @@
 	<div class="username">
 		<span>{{user.pseudo}}</span>
 	</div>
+	<button  mat-raised-button (click)="openDialog()" class="editbutton" >Edit Profil</button>
+
 
 	<!-- Display the profile-progess -->
 	<!-- <div class="profile-progress">
