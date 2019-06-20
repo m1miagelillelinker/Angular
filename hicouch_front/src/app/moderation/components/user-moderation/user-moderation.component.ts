@@ -2,6 +2,7 @@ import {ChangeDetectorRef, Component, Input, OnDestroy, OnInit} from '@angular/c
 import {HicouchAPIService} from '../../../shared/services/hicouchAPI.service';
 import {Signalement} from '../../../shared/models/signalement';
 import {Router} from '@angular/router';
+import {SignalementService} from '../../../shared/services/signalement.service';
 
 @Component({
     selector: 'app-user-moderation',
@@ -13,13 +14,12 @@ export class UserModerationComponent implements OnInit, OnDestroy {
     signalements: Array<Signalement>;
 
     constructor(
-        private api: HicouchAPIService,
+        private signalementService: SignalementService,
         private router: Router
     ) { }
 
     ngOnInit() {
         this.loadUsers();
-        this.signalements.forEach((s) => console.log(s));
     }
 
     ngOnDestroy() {
@@ -27,14 +27,8 @@ export class UserModerationComponent implements OnInit, OnDestroy {
     }
 
     loadUsers() {
-        this.api.listUsersToModerate().subscribe(
-            (json: Array<Signalement>) => {
-                if (json == undefined) {
-                    this.signalements = [];
-                } else {
-                    this.signalements = json ;
-                }
-            });
+        this.signalementService.getUsersToModerate()
+            .subscribe((json: Array<Signalement>) => this.signalements = json.filter(c => c.signaledUser !== undefined)); // double check
     }
 
     goToUser(userId: number) {
@@ -42,11 +36,11 @@ export class UserModerationComponent implements OnInit, OnDestroy {
     }
 
     acceptSignalement(idSignalement: number) {
-        this.api.confirmeSignalement(idSignalement).subscribe(() => this.loadUsers());
+        this.signalementService.acceptSignalement(idSignalement).subscribe(() => this.loadUsers());
     }
 
     refuseSignalement(idSignalement: number) {
-        this.api.refuseSignalement(idSignalement).subscribe(() => this.loadUsers());
+        this.signalementService.refuseSignalement(idSignalement).subscribe(() => this.loadUsers());
     }
 
 }

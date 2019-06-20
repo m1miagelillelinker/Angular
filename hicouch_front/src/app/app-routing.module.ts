@@ -37,7 +37,7 @@ export const routes: Routes = [
   {
     path: 'app/moderation',
     component: ModerationPageComponent,
-    },
+  },
 ];
 
 @NgModule({

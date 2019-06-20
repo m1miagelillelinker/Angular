@@ -4,6 +4,7 @@ import {HicouchAPIService} from '../../../shared/services/hicouchAPI.service';
 import {ProductService} from '../../../shared/services/product.service';
 import {AssociationService} from '../../../shared/services/association.service';
 import {ActivatedRoute, Router} from '@angular/router';
+import {SignalementService} from '../../../shared/services/signalement.service';
 
 @Component({
     selector: 'app-tag-moderation',
@@ -14,7 +15,7 @@ export class TagModerationComponent implements OnInit, OnDestroy {
     tags: Array<Tag>;
 
     constructor(
-        private api: HicouchAPIService
+        private signalementService: SignalementService,
     ) { }
 
     ngOnInit() {
@@ -26,15 +27,15 @@ export class TagModerationComponent implements OnInit, OnDestroy {
     }
 
     loadTags() {
-        this.api.getTagsToModerate().subscribe((json: Array<Tag>) => this.tags = json);
+        this.signalementService.loadTags().subscribe((json: Array<Tag>) => this.tags = json);
     }
 
     acceptTag(idTag: number) {
-        this.api.validateTag(idTag).subscribe(() => this.loadTags());
+        this.signalementService.acceptTag(idTag).subscribe(() => this.loadTags());
     }
 
     refuseTag(idTag: number) {
-        this.api.refuseTag(idTag).subscribe(() => this.loadTags());
+        this.signalementService.refuseTag(idTag).subscribe(() => this.loadTags());
     }
 
 }
