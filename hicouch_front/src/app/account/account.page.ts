@@ -63,6 +63,7 @@ export class AccountPageComponent implements OnInit, OnChanges {
     const userId = this.route.snapshot.paramMap.get('userId');
     const parsedUserId = parseInt(userId, 10);
     this.userService.getUser(parsedUserId).subscribe((user) => {
+      console.log(user);
       const myUser = {
         id: user.id,
         badges: user.badges,
@@ -79,7 +80,8 @@ export class AccountPageComponent implements OnInit, OnChanges {
       this.user = myUser;
       console.log(myUser);
       console.log(this.currentUser);
-      this.userService.getHistoryById(this.currentUser.id).subscribe(res => console.log(res));
+      console.log(this.user.id);
+      this.userService.getHistoryById(user.id).subscribe(res => console.log(res));
       this.newUser = this.user;
       this.userService.getFollowers(parsedUserId).subscribe((json: User[]) => this.followersUsers = json);
       this.userService.getFollows(parsedUserId).subscribe((json: User[]) => this.followsUsers = json);
@@ -136,6 +138,7 @@ export class AccountPageComponent implements OnInit, OnChanges {
       this.badges = user.badges;
       this.user = myUser;
       console.log(myUser);
+      console.log(this.user.id);
       this.userService.getHistoryById(user.id).subscribe(res => console.log(res));
       this.userService.getFollowers(parsedUserId).subscribe((json: User[]) => this.followersUsers = json);
       this.userService.getFollows(parsedUserId).subscribe((json: User[]) => {

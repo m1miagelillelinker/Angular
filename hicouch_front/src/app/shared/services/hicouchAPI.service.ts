@@ -209,6 +209,6 @@ export class HicouchAPIService {
 
     // history
     getHistory(id: number): any {
-        return this.get(this.historyController + '/', [{key: 'id', value: id}] );
+        return this.get(this.historyController, [{key: '', value: id}]);
     }
 }

@@ -3,7 +3,7 @@ export interface Vote {
     idPair?: number;
     idComment?: number;
     vote?: number;
-    idUser: number;
+    idUser?: number;
     createDat?: Date;
     updateDat?: Date;
 }
