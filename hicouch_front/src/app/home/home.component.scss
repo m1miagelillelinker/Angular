@@ -30,9 +30,13 @@
   margin: 0 auto;
 }
 
+.block {
+  width: 100%;
+}
+
 .image {
   margin: 10px;
-  width: 30%;
+  width: 40%;
 }
 
 .title {
@@ -45,4 +49,6 @@
 
 .titles {
   text-align: center;
+  width: 90%;
+  margin: 0 auto;
 }
