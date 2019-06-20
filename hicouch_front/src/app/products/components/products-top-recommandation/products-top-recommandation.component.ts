@@ -67,7 +67,6 @@ export class ProductsTopRecommandationComponent implements OnInit, OnChanges {
 
   fetchContent() {
     this.productsRelated.forEach(p => {
-      console.log(p);
       p.productB.titleShort = this.fetchTitle(p.productB.title);
       p.productB.descShort = this.fetchDesc(p.productB.description);
       if (!p.productB.type) {

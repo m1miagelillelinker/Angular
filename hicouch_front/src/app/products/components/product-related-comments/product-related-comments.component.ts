@@ -1,16 +1,16 @@
-import {Component, Inject, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';
-import {Association} from '../../../shared/models/association';
-import {Router} from '@angular/router';
-import {Comment} from '../../../shared/models/comment';
-import {User} from '../../../shared/models/user';
-import {CommentService} from '../../../shared/services/comment.service';
+import { Component, Inject, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import { Association } from '../../../shared/models/association';
+import { Router } from '@angular/router';
+import { Comment } from '../../../shared/models/comment';
+import { User } from '../../../shared/models/user';
+import { CommentService } from '../../../shared/services/comment.service';
 import { FormControl, Validators } from '@angular/forms';
 import { UserService } from '../../../shared/services/user.service';
-import {Signalement} from '../../../shared/models/signalement';
-import {SignalementService} from '../../../shared/services/signalement.service';
-import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from '@angular/material';
-import {ProductService} from '../../../shared/services/product.service';
-import {VoteService} from '../../../shared/services/vote.service';
+import { Signalement } from '../../../shared/models/signalement';
+import { SignalementService } from '../../../shared/services/signalement.service';
+import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material';
+import { ProductService } from '../../../shared/services/product.service';
+import { VoteService } from '../../../shared/services/vote.service';
 
 export interface DialogDataComment {
     comment: Comment;
@@ -65,16 +65,22 @@ export class ProductRelatedCommentsComponent implements OnInit, OnChanges {
     }
 
     riseNoteAsso() {
+        let currentVote = null;
+        this.voteService.getVoteByUserId(this.loggedUser.id).subscribe(res => currentVote = res.vote);
+        const votee = currentVote === 0 ? 1 : 0;
         const vote = {
             idPair: this.asso.association.idPair, vote: 1, idUser: this.loggedUser.id
         };
-        this.canVote = false;
+        this.canVote = votee === 0;
         this.voteService.vote(vote).subscribe(res => console.log(res));
+
     }
 
     decreaseNoteAsso() {
+        let currentVote = null;
+        this.voteService.getVoteByUserId(this.loggedUser.id).subscribe(res => currentVote = res.vote);
         const vote = {
-            idPair: this.asso.association.idPair,  vote: -1, idUser: this.loggedUser.id
+            idPair: this.asso.association.idPair, vote: currentVote === 0 ? -1 : 0, idUser: this.loggedUser.id
         };
         this.canVote = false;
         this.voteService.vote(vote).subscribe(res => console.log(res));
@@ -100,7 +106,7 @@ export class ProductRelatedCommentsComponent implements OnInit, OnChanges {
     getUserSpeudo(userId: number) {
         let user;
         this.userService.getUser(userId).subscribe(
-            value => {user = value; }
+            value => { user = value; }
         );
         return user.pseudo;
     }
@@ -109,7 +115,7 @@ export class ProductRelatedCommentsComponent implements OnInit, OnChanges {
         return comment.owned;
     }
 
-    canSignal( comment: Comment) {
+    canSignal(comment: Comment) {
         return !comment.owned;
     }
 
@@ -171,7 +177,7 @@ export class ProductsRelatedCommentUpdateDialogComponent implements OnInit {
     constructor(
         public dialogRef: MatDialogRef<ProductsRelatedCommentUpdateDialogComponent>,
         private commentService: CommentService,
-        @Inject(MAT_DIALOG_DATA) public data: DialogDataComment) {}
+        @Inject(MAT_DIALOG_DATA) public data: DialogDataComment) { }
 
     onNoClick(): void {
 
@@ -205,7 +211,7 @@ export class ProductsRelatedCommentSignalDialogComponent implements OnInit {
         public dialogRef: MatDialogRef<ProductsRelatedCommentSignalDialogComponent>,
         private productService: ProductService,
         private signalementService: SignalementService,
-        @Inject(MAT_DIALOG_DATA) public data: DialogDataComment) {}
+        @Inject(MAT_DIALOG_DATA) public data: DialogDataComment) { }
 
     onNoClick(): void {
         this.dialogRef.close();
@@ -228,7 +234,7 @@ export class ProductsRelatedCommentSignalDialogComponent implements OnInit {
 export class SpinnerDialogComponent implements OnInit {
 
     constructor(
-        public dialogRef: MatDialogRef<SpinnerDialogComponent>) {}
+        public dialogRef: MatDialogRef<SpinnerDialogComponent>) { }
 
 
     ngOnInit() {
