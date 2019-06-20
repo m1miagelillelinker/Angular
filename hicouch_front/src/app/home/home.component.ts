@@ -3,8 +3,6 @@ import {Component, OnInit, Input} from '@angular/core';
 import {User} from '../shared/models/user';
 import {Router} from '@angular/router';
 import {AuthenticationService} from '../shared/services/authentification.service';
-import {Product} from '../shared/models/product';
-import {Subscription} from 'rxjs';
 import {ProductService} from '../shared/services/product.service';
 import {UserService} from '../shared/services/user.service';
 import {AssociationService} from '../shared/services/association.service';
@@ -19,12 +17,6 @@ import {Association} from '../shared/models/association';
 @Injectable()
 export class HomeComponent implements OnInit {
     @Input() user: User;
-    mainProduct: Product;
-    productsRelated: Product[] = [];
-    allProducts: Product[] = [];
-    productId: string;
-    idRelated: string;
-    productSubscription: Subscription;
 
     associations: Association[];
 
@@ -53,13 +45,11 @@ export class HomeComponent implements OnInit {
         for ( x = 0; x < assos.length; x++ ) {
             list[assos[x]['association']['idPair']] = assos[x];
         }
-
         assos = new Array();
         let asso;
         for (asso in list ) {
             assos.push(list[asso]);
         }
-
         return assos;
 /*
 

@@ -1,9 +1,6 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
 import {HicouchAPIService} from './hicouchAPI.service';
 import {Association} from '../models/association';
-import {Observable} from 'rxjs';
-
 
 
 @Injectable({
