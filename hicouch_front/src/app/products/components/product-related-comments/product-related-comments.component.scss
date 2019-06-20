@@ -31,6 +31,12 @@
     cursor: pointer;
 }
 
+
+.selected {
+    // cursor: pointer;
+    color: #bdbdbd;
+}
+
 .signalement-container, .update-container {
     display: flex;
     flex-direction: column;

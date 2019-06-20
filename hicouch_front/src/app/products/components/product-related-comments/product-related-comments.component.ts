@@ -30,7 +30,8 @@ export class ProductRelatedCommentsComponent implements OnInit, OnChanges {
         Validators.maxLength(500)
     ]);
 
-    canVote: boolean;
+    canVoteUp: boolean;
+    canVoteDown: boolean;
     checked = false;
 
     constructor(
@@ -61,17 +62,20 @@ export class ProductRelatedCommentsComponent implements OnInit, OnChanges {
     }
 
     canVoteF() {
-        (this.asso.vote == null) ? this.canVote = true : this.canVote = false;
+        // (this.asso.vote == null) ? this.canVote = true : this.canVote = false;
     }
 
     riseNoteAsso() {
         let currentVote = null;
-        this.voteService.getVoteByUserId(this.loggedUser.id).subscribe(res => currentVote = res.vote);
+        this.voteService.getVoteByUserId(this.loggedUser.id).subscribe(res => {
+            console.log(res);
+            currentVote = res.vote;
+        });
         const votee = currentVote === 0 ? 1 : 0;
         const vote = {
             idPair: this.asso.association.idPair, vote: 1, idUser: this.loggedUser.id
         };
-        this.canVote = votee === 0;
+        this.canVoteUp = votee === 0 || this.canVoteDown;
         this.voteService.vote(vote).subscribe(res => console.log(res));
 
     }
@@ -79,10 +83,11 @@ export class ProductRelatedCommentsComponent implements OnInit, OnChanges {
     decreaseNoteAsso() {
         let currentVote = null;
         this.voteService.getVoteByUserId(this.loggedUser.id).subscribe(res => currentVote = res.vote);
+        const votee = currentVote === 0 ? 1 : 0;
         const vote = {
-            idPair: this.asso.association.idPair, vote: currentVote === 0 ? -1 : 0, idUser: this.loggedUser.id
+            idPair: this.asso.association.idPair, vote: 0, idUser: this.loggedUser.id
         };
-        this.canVote = false;
+        this.canVoteDown = votee === 0 || this.canVoteUp;
         this.voteService.vote(vote).subscribe(res => console.log(res));
     }
 
