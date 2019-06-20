@@ -70,4 +70,8 @@ export class HeaderComponent implements OnInit {
     this.auth.logout();
   }
 
+  goToModo() {
+    this.router.navigate(['app/moderation']);
+  }
+
 }

@@ -34,10 +34,10 @@
         </mat-spinner></span>-->
   </form>
   <div class="comments" *ngIf="asso">
-    <mat-list>
-      <mat-list-item class="comment" *ngFor="let comment of commentaires">
+    <div>
+      <div class="comment" *ngFor="let comment of commentaires">
         <!-- <img matListAvatar src="..." alt="...">-->
-        <h3 matLine *ngIf="showComment(comment)">
+        <h3>
             <span class="username url" (click)="goToUserProfile(comment.auteur.id)">
               {{comment.auteur.pseudo}}
             </span>&nbsp;&nbsp;
@@ -47,14 +47,16 @@
           <span class="date">{{(comment.commentaire.updatedAt) ? 'Modified' : null}}</span>
         </h3>
         <br>
-        <p class="content" matLine *ngIf="showComment(comment)"> {{comment.commentaire.commentaire}} </p>
+        <p class="content"> {{comment.commentaire.commentaire}} </p>
         <br>
-        <span matLine *ngIf="showComment(comment)">
-            <span class="note" *ngIf="true"><mat-icon class="url"(click)="riseNoteComment(comment)">thumb_up_alt</mat-icon>{{comment.note}}</span>
+        <span *ngIf="showComment(comment)">
+            {{comment.commentaire.note}} points
+            <span class="note" (click)="riseNoteAsso()"><mat-icon class="url">thumb_up_alt</mat-icon></span>
+            <span class="note" (click)="decreaseNoteAsso()"><mat-icon class="url">thumb_down_alt</mat-icon></span>
             <span class="url"(click)="showPopoverToEdit(comment)" *ngIf="canEdit(comment)">Modifier</span>
             <span class="url" (click)="showPopoverToSignal(comment)" *ngIf="canSignal(comment)">Signaler</span>
           </span>
-      </mat-list-item>
-    </mat-list>
+        </div>
+    </div>
   </div>
 </div>

@@ -6,7 +6,7 @@ import {HttpClient} from '@angular/common/http';
 })
 export class HicouchAPIService {
 
-    private DOMAIN = 'http://hicjv7.azurewebsites.net';
+    private DOMAIN = 'https://hicjv7.azurewebsites.net';
 
     private tagController = '/tag';
     private abonnementController = '/abonnement';

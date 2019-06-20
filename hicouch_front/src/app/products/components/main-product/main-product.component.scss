@@ -27,11 +27,18 @@
 
   }
   .tag{
-    > * {
-      width:50%;
-      display: block;
+    margin-top:15px;
+      width: 88%;
+      p {
+        font-size: 12px;
+      }
       input {
         background-color : white;
+      }
+    .tag-content {
+      display:flex;
+      .sub {
+        cursor: pointer;
       }
     }
   }

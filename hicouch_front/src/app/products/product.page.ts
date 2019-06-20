@@ -12,6 +12,7 @@ import { FormControl } from '@angular/forms';
 import { map, startWith } from 'rxjs/operators';
 import { Tag } from '../shared/models/tag';
 import { User } from '../shared/models/user';
+import { UserService } from '../shared/services/user.service';
 
 @Component({
   selector: 'app-product-page',
@@ -30,7 +31,7 @@ export class ProductPageComponent implements OnInit, OnChanges, OnDestroy {
   user: User;
 
   tagControl = new FormControl();
-  tags: Tag[];
+  tags: Tag[] = [];
   filteredTags: Observable<string[]>;
   showInput = false;
 
@@ -42,6 +43,7 @@ export class ProductPageComponent implements OnInit, OnChanges, OnDestroy {
     private route: ActivatedRoute,
     private router: Router,
     private changeDetectorRef: ChangeDetectorRef,
+    private userService: UserService
   ) { }
 
   ngOnInit() {
@@ -63,6 +65,7 @@ export class ProductPageComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   fetchProducts() {
+    this.userService.getCurrentUser().subscribe(user => this.user = user);
     this.productSubscription = this.productService.getProductByTypeAndId(this.productId, this.productType).subscribe((p: Product) => {
       this.mainProduct = p;
       this.associationService.fetchtAssociationByProduct(this.mainProduct.id).subscribe((json: any) => {
@@ -83,7 +86,13 @@ export class ProductPageComponent implements OnInit, OnChanges, OnDestroy {
 
         this.filteredProducts = this.allProducts;
         if (this.allProducts && this.allProducts.length > 0) {
-          this.tagService.getTags(this.productId).subscribe((tjson: any) => this.tags = tjson);
+          this.tagService.getTags(this.productId).subscribe((tjson: any) => {
+            tjson.forEach(tag => {
+              if (tag.status === 2) {
+                this.tags.push(tag);
+              }
+            });
+          });
         }
       });
     });

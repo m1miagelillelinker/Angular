@@ -5,9 +5,11 @@
 
     <div class="user-infos" (click)="goToUser()" *ngIf="user">
         <img src="{{user.picture}}" />
-        <p>{{user.pseudo}}</p>
+        <div *ngIf="user.typeUser === 1 "class="log-out" (click)="goToModo()">
+            Modération
+        </div>
         <div class="log-out" (click)="disconnect()">
-            Log Out
+            Déconnexion
         </div>
     </div>
 
