@@ -39,7 +39,7 @@ export class SignalementService {
     }
 
     getSignalementByStatus(statusId: string) {
-        return this.api.listSignalements(statusId);
+        // return this.api.listSignalements(statusId);
     }
 
 }
