@@ -31,7 +31,7 @@ export class ProductPageComponent implements OnInit, OnChanges, OnDestroy {
   user: User;
 
   tagControl = new FormControl();
-  tags: Tag[];
+  tags: Tag[] = [];
   filteredTags: Observable<string[]>;
   showInput = false;
 
@@ -86,7 +86,13 @@ export class ProductPageComponent implements OnInit, OnChanges, OnDestroy {
 
         this.filteredProducts = this.allProducts;
         if (this.allProducts && this.allProducts.length > 0) {
-          this.tagService.getTags(this.productId).subscribe((tjson: any) => this.tags = tjson);
+          this.tagService.getTags(this.productId).subscribe((tjson: any) => {
+            tjson.forEach(tag => {
+              if (tag.status === 2) {
+                this.tags.push(tag);
+              }
+            });
+          });
         }
       });
     });

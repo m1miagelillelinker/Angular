@@ -31,11 +31,7 @@ export class MainProductComponent implements OnInit, OnDestroy, OnChanges {
   ) { }
 
   ngOnInit() {
-    this.tagService.getTags(this.mainProduct.id).subscribe(res => {
-      this.tags = res;
-      this.filteredTags = res;
-      this.mainProduct.descShort = this.fetchDesc(this.mainProduct.description);
-    });
+    this.mainProduct.descShort = this.fetchDesc(this.mainProduct.description);
   }
 
   ngOnChanges(changes) {
@@ -50,8 +46,6 @@ export class MainProductComponent implements OnInit, OnDestroy, OnChanges {
     const t = this.tagInput.nativeElement;
     this.tagService.addTag(t.value, this.mainProduct.id)
       .subscribe();
-    this.tagService.getTags(this.mainProduct.id).subscribe((json: any) =>
-      this.tags = json);
     this.setInputFVisibility(false);
     this.displayConfirmation = true;
   }
