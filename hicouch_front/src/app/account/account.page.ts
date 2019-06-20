@@ -44,7 +44,9 @@ export class AccountPageComponent implements OnInit, OnChanges {
 
   ngOnChanges() {
     // this.user = null;
+    this.showActivities();
     this.fetchUser();
+
   }
 
   fetchUser() {
@@ -129,7 +131,7 @@ export class AccountPageComponent implements OnInit, OnChanges {
       console.log(event);
       this.otherUser = this.currentUser.id !== event;
     });
-
+    this.showActivities();
   }
   showBadges() {
     this.toggleFeature('badges');
