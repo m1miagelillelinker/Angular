@@ -1,7 +1,7 @@
-<div *ngIf="user" class="welcome">
+<!-- <div *ngIf="user" class="welcome">
 	Hello {{user.pseudo}} !
-</div>
-<div *ngIf="user" class="content">
+</div> -->
+<!-- <div *ngIf="user" class="content">
 <div class="profile">
 	<div class="display">
 			<img src="{{user.picture}}" />
@@ -15,21 +15,25 @@
 		Edit My Profile
 	</div>
 </div>
-</div>
+</div> -->
 <!-- Display the profile-information -->
 
 <!-- Display the profile-infos -->
-<div class="profile-infos">
-<img height="150px" width="150px" src="{{user.picture}}" />
+<div *ngIf="user" class="profile-infos">
+<!-- <img height="150px" width="150px" src="{{user.picture}}" /> -->
 <div class="username">
-	<span>Firstname</span>
-	<span>Lastname</span>
+	<span>{{user.pseudo}}</span>
 </div>
+
 <!-- Display the profile-progess -->
-<div class="profile-progress">
+<!-- <div class="profile-progress">
 	<div class="progress-bar" [ngStyle]="{'width': profileProgress.fullProgress}"></div>
 	<div class="progress" [ngStyle]="{'width': profileProgress.userProgress}"></div>
-</div>
+</div> -->
+
+<div *ngIf="otherUser && !follows" class="subscription" (click)="follow(user)">S'abonner</div>
+<div *ngIf="otherUser && follows" class="unsubscription" (click)="unFollow(user)">Se désabonner</div>
+
 </div>
 
 <!-- Display the buttoms of Activities/Badges/Amis -->
@@ -54,13 +58,14 @@
 <!-- Display subcribers -->
 <app-display-subscribers 
 	*ngIf="friendsSelected" 
-	title="Abonnées" 
+	title="Abonnés" 
 	[users]="followersUsers">
 </app-display-subscribers>
 
 <!-- Display subscriptions -->
 <app-display-subscribers
 	*ngIf="friendsSelected"
+	(change)="refresh($event)"
 	[ngStyle]="{'margin-left': '100px'}" 
 	title="Abonnements" [users]="followsUsers">
 </app-display-subscribers>

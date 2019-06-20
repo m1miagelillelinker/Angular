@@ -1,5 +1,6 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
 import {User} from '../../../shared/models/user';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-display-subscribers',
@@ -10,10 +11,19 @@ export class DisplaySubscribersComponent implements OnInit {
 
   @Input() title: String;
   @Input() users: Array<User>;
+  @Output() change = new EventEmitter();
 
-  constructor() { }
+  constructor(
+    public router: Router,
+  ) { }
 
   ngOnInit() {
+    console.log(this.users);
+  }
+
+  goToUser(id) {
+    this.change.emit(id);
+    this.router.navigate(['app/account', id]);
   }
 
 }

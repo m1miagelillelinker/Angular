@@ -1,18 +1,23 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, OnChanges } from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import { User } from '../shared/models/user';
 import { UserService } from '../shared/services/user.service';
+import { Badge } from '../shared/models/badge';
 
 @Component({
   selector: 'app-account-page',
   templateUrl: './account.page.html',
   styleUrls: ['./account.page.scss'],
 })
-export class AccountPageComponent implements OnInit {
+export class AccountPageComponent implements OnInit, OnChanges {
   user: User;
+  currentUser: User;
   activitiesSelected = true;
   friendsSelected = false;
   badgesSelected = false;
+  badges: Badge[];
+  follows = false;
+  otherUser = false;
 
   profileProgress = {
     fullProgress: '150px', // '150px',
@@ -27,40 +32,6 @@ export class AccountPageComponent implements OnInit {
   followersUsers: User[];
   followsUsers: User[];
 
-  badges = [
-    {
-      intitule: 'Youngling',
-      libelle: 'Vous avez fait 10 commentaires !',
-      image: '../../assets/images/youngling.png',
-      score: '80',
-      enabled: 2
-    },
-    {intitule: 'Padawan', libelle: 'Vous avez fait 100 commentaires !', image: '../../assets/images/padawan.png', score: '0', enabled: 4},
-    {intitule: 'Knight', libelle: 'Vous avez fait 500 commentaires !', image: '../../assets/images/knight.png', score: '0', enabled: 4},
-    {intitule: 'Master', libelle: 'Vous avez fait 1000 commentaires !', image: '../../assets/images/master.png', score: '0', enabled: 4},
-    {
-      intitule: 'Grand Master',
-      libelle: 'Vous avez fait plus de 1000 commentaires !',
-      image: '../../assets/images/grandmaster.jpg',
-      score: '0',
-      enabled: 4
-    },
-    {intitule: 'Youngling', libelle: 'Vous avez fait 10 Associations !', image: '../../assets/images/cup.jpg', score: '150', enabled: 4},
-    {intitule: 'Padawan', libelle: 'Vous avez fait 100 Associations !', image: '../../assets/images/cup.jpg', score: '100', enabled: 4},
-    {intitule: 'Knight', libelle: 'Vous avez fait 500 Associations !', image: '../../assets/images/cup.jpg', score: '0', enabled: 4},
-    {intitule: 'Master', libelle: 'Vous avez fait 1000 Associations !', image: '../../assets/images/cup.jpg', score: '0', enabled: 4},
-    {
-      intitule: 'Grand Master',
-      libelle: 'Vous avez fait plus de 1000 Associations !',
-      image: '../../assets/images/cup.jpg',
-      score: '0',
-      enabled: 4
-    }
-  ];
-  // 2 ok
-  // 4 hidden
-
-
   constructor(
     private userService: UserService,
     private route: ActivatedRoute,
@@ -68,12 +39,23 @@ export class AccountPageComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    // tt3896198
+    this.fetchUser();
+  }
+
+  ngOnChanges() {
+    // this.user = null;
+    this.fetchUser();
+  }
+
+  fetchUser() {
+    this.userService.getCurrentUser().subscribe(user => this.currentUser = user);
     const userId = this.route.snapshot.paramMap.get('userId');
     const parsedUserId = parseInt(userId, 10);
     this.userService.getUser(parsedUserId).subscribe((user) => {
+      console.log(user);
       const myUser = {
         id: user.id,
+        badges: user.badges,
         pseudo: user.pseudo,
         score: user.score,
         firstName: user.firstName,
@@ -83,10 +65,12 @@ export class AccountPageComponent implements OnInit {
         accessToken: '',
         expiresAt: 0,
       };
+      this.badges = user.badges;
       this.user = myUser;
     });
     this.userService.getFollowers(parsedUserId).subscribe((json: User[]) => this.followersUsers = json);
     this.userService.getFollows(parsedUserId).subscribe((json: User[]) => this.followsUsers = json);
+    this.otherUser = this.currentUser.id !== this.user.id;
   }
 
   toggleFeature(event: string) {
@@ -117,7 +101,36 @@ export class AccountPageComponent implements OnInit {
       [ 'Edouard', 'a créé une nouvelle association', 'a créé un tag DCMovies', '06/Août/2019' ]
     ];
   }
+  refresh(event) {
+    this.userService.getCurrentUser().subscribe(user => this.currentUser = user);
+    const parsedUserId = parseInt(event, 10);
+    this.userService.getUser(parsedUserId).subscribe((user) => {
+      console.log(user);
+      const myUser = {
+        id: user.id,
+        badges: user.badges,
+        pseudo: user.pseudo,
+        score: user.score,
+        firstName: user.firstName,
+        lastName: user.lastName,
+        picture: user.picture,
+        idToken: '',
+        accessToken: '',
+        expiresAt: 0,
+      };
+      this.badges = user.badges;
+      this.user = myUser;
+    });
+    this.userService.getFollowers(parsedUserId).subscribe((json: User[]) => this.followersUsers = json);
+    this.userService.getFollows(parsedUserId).subscribe((json: User[]) => {
+      this.followsUsers = json;
+      this.follows = this.followsUsers.find(u => u.id === event) != null;
+      console.log(this.currentUser.id);
+      console.log(event);
+      this.otherUser = this.currentUser.id !== event;
+    });
 
+  }
   showBadges() {
     this.toggleFeature('badges');
   }
@@ -129,6 +142,19 @@ export class AccountPageComponent implements OnInit {
 
   showFriends() {
     this.toggleFeature('friends');
+  }
+
+  follow(id) {
+    const userId = this.route.snapshot.paramMap.get('userId');
+    const parsedUserId = parseInt(userId, 10);
+    this.userService.follow(this.currentUser.id, parsedUserId).subscribe(res => console.log(res));
+  }
+
+  unFollow(id) {
+    console.log(id);
+    const userId = this.route.snapshot.paramMap.get('userId');
+    const parsedUserId = parseInt(userId, 10);
+    this.userService.unFollow(this.currentUser.id, parsedUserId).subscribe(res => console.log(res));
   }
 
 }

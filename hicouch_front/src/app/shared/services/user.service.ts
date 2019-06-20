@@ -29,4 +29,12 @@ export class UserService {
   getFollows(userId: number): Observable<User[]> {
     return this.api.getFollows(userId);
   }
+
+  follow(x, y) {
+    return this.api.follow(x, y);
+  }
+
+  unFollow(x, y) {
+    return this.api.unfollow(x, y);
+  }
 }

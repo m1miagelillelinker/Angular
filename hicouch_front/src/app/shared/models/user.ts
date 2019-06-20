@@ -1,5 +1,8 @@
+import { Badge } from './badge';
+
 export interface User {
     id: number;
+    badges?: Badge[];
     lastName?: string;
     firstName?: string;
     pseudo?: string;
