@@ -44,4 +44,8 @@ export class UserService {
   unFollow(x, y) {
     return this.api.unfollow(x, y);
   }
+
+  getHistoryById(id): Observable<any> {
+    return this.api.getHistory(id);
+  }
 }

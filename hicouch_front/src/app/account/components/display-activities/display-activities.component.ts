@@ -1,4 +1,5 @@
-import { Component, OnInit,Input } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { UserService } from '../../../shared/services/user.service';
 
 @Component({
   selector: 'app-display-activities',
@@ -7,10 +8,14 @@ import { Component, OnInit,Input } from '@angular/core';
 })
 export class DisplayActivitiesComponent implements OnInit {
 
-  @Input() activities:any;
-  constructor() { }
+  @Input() activities: any;
+  @Input() user: any;
+  constructor(
+    private userService: UserService,
+  ) { }
 
   ngOnInit() {
+    this.userService.getHistoryById(this.user.id).subscribe(res => console.log(res));
   }
 
 }

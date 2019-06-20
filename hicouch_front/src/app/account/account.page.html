@@ -48,7 +48,7 @@
 	</app-display-activities>
 
 	<!-- Display subcribers -->
-	<app-display-subscribers *ngIf="friendsSelected" (change)="refresh($event)" title="Abonnés" [users]="followersUsers">
+	<app-display-subscribers *ngIf="friendsSelected" [currentUser]="user"(change)="refresh($event)" title="Abonnés" [users]="followersUsers">
 	</app-display-subscribers>
 
 	<!-- Display subscriptions -->

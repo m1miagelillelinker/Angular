@@ -7,7 +7,7 @@ import { User } from '../models/user';
 })
 export class HicouchAPIService {
 
-    private DOMAIN = 'https://hicjv4.azurewebsites.net';
+    private DOMAIN = 'https://hicjv8.azurewebsites.net';
 
     private tagController = '/tag';
     private abonnementController = '/abonnement';
@@ -17,6 +17,7 @@ export class HicouchAPIService {
     private productController = '/product';
     private commentController = '/commentaire';
     private voteController = '/vote';
+    private historyController = '/historique';
 
     constructor(private http: HttpClient) {
     }
@@ -206,4 +207,8 @@ export class HicouchAPIService {
         return this.get(this.commentController + '/ByAssoPairId', [{key: 'pairId', value: idPair}]);
     }
 
+    // history
+    getHistory(id: number): any {
+        return this.get(this.historyController + '/', [{key: 'id', value: id}] );
+    }
 }

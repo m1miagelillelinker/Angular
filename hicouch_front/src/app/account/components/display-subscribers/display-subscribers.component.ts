@@ -10,6 +10,7 @@ import { Router } from '@angular/router';
 export class DisplaySubscribersComponent implements OnInit {
 
   @Input() title: String;
+  @Input() currentUser;
   @Input() users: Array<User>;
   @Output() change = new EventEmitter();
 
