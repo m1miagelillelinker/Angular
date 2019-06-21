@@ -29,6 +29,7 @@ export class HomeComponent implements OnInit {
     ) { }
 
     ngOnInit() {
+        this.associations = [];
         if (this.auth.isAuthenticated()) {
             this.userService.getCurrentUser().subscribe((u: User) => this.user = u);
         }
@@ -38,24 +39,19 @@ export class HomeComponent implements OnInit {
             });
     }
 
-    getLastAssociations(assos: Association[]) {
-      return  assos.filter((a) => a.association.id % 2 === 1);
-    }
-/*
-
-        for (asso in assos) {
-            /!*      if (list.length !== 0) {
-                    let j;
-                    for (j in list) {
-                      if (j.association.idPair !== i.association.idPair) {
-                        list.push(i);
-                      }
-                    }
-                  } else {
-                    list.push(i);
-                  }*!/
+    getLastAssociations(assos: Association[]) {const list = [];
+        let x;
+        for (x = 0; x < assos.length; x++) {
+            list[assos[x]['association']['idPair']] = assos[x];
         }
-        assos = list;*/
+
+        assos = new Array();
+        let asso;
+        for (asso in list) {
+            assos.push(list[asso]);
+        }
+        return assos;
+    }
 
     goTo(product) {
         this.router.navigate(['app/products', product.type, product.id]);
