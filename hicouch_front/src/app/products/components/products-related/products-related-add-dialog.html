@@ -1,0 +1,42 @@
+<div class="association">
+<div mat-dialog-content class="association-container" [formGroup]="form">
+
+  <h1 mat-dialog-title>Associer produit à : </h1>
+  <!-- <mat-form-field>
+    <mat-select [(value)]="selectedType" placeholder="Sélectionner un type"
+                formControlName="type">
+      <mat-option *ngFor="let product of Productstype" [value]="product.value">
+        {{product.viewValue}}
+      </mat-option>
+
+    </mat-select>
+  </mat-form-field> -->
+<div id="search-bar">
+    <app-search-product class="search-field" [selectedOption]="selectedOption" [productList]="products" 
+    (productSelected)="selectProduct($event)"
+    (searchValue)="toggleSearchPropositions($event)"
+    (filterSelected)="setFilter($event)"></app-search-product>
+</div>
+
+  <!-- <mat-form-field>
+    <input #search matInput type="text"  placeholder="Rechercher"
+           [formControl]="myControl" [matAutocomplete]="auto">
+              (keyup)="searchProducts(search.value)" 
+    <mat-autocomplete #auto="matAutocomplete" (optionSelected)="setSelectedOption($event.option.value)" [displayWith]="displayFn">
+    	
+      <mat-option *ngFor="let product of listProductsFound | async" [value]="product.title">
+      
+        {{product.title}}
+      </mat-option>
+    </mat-autocomplete>
+  </mat-form-field> -->
+
+  <mat-form-field >
+    <textarea rows="4" cols="50" matInput #commentInput placeholder="Pourquoi cette association ?"></textarea>
+  </mat-form-field>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onNoClick()">Annuler</button>
+  <button mat-button [mat-dialog-close]="data.animal" (click)="addAssociation()" cdkFocusInitial>Soumettre</button>
+</div>
+</div>

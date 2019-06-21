@@ -1,0 +1,14 @@
+.menu {
+    margin-top: 10vh;
+    margin-left: 8vw;
+    width: auto;
+    .friends, .activity, .badges{
+        margin-top: 5vh;
+        padding: 10px;
+        background-color: #ececec;
+        &.selected {
+            background-color:#7c0000;
+            color: white;
+        }
+    }
+}

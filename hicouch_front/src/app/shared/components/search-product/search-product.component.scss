@@ -1,0 +1,148 @@
+#search-bar {
+  margin-top: 20px;
+  width: auto;
+  min-width: 800px;
+  height: 56px;
+  border-radius: 4px;
+  position: relative;
+  z-index: 8;
+  background-color: #FFF;
+  display: flex;
+  align-items: center;
+  padding-left: 24px;
+
+  .search-bar {
+    margin-top: auto;
+    margin-bottom: auto;
+    height: 50px;
+    width: 60vw;
+    display: flex;
+
+    .search-field {
+      padding: 15px;
+      width: 100%;
+    }
+    .searchButton{
+      float: left;
+      width: 20%;
+      padding: 10px;
+      background: rgb(143, 18, 18);
+      color: white;
+      font-size: 17px;
+      border: 1px solid grey;
+      border-left: none;
+      cursor: pointer;
+    }
+    .searchButton:hover{
+      background:rgb(214, 31, 31);
+    }
+    
+
+    .mat-select {
+      // display: inline-block;
+      margin-top: 10px;
+      width: 20%;
+      outline: 0;
+
+    }
+    ::ng-deep .cdk-overlay-pane {
+      margin-top: 50px;
+      top: 75px !important;
+    }
+  }
+
+  .search-input {
+    margin-top: 20px;
+    font-size: 16px;
+    line-height: 20px;
+    color: #938d8e;
+    padding: 0;
+    margin: 0;
+    border: none;
+    height: 44px;
+    width: calc(95%);
+    display: inline-block;
+
+    ::-ms-clear {
+      display: none;
+    }
+
+    &.isFocused {
+      color: #3e3b3b;
+    }
+  }
+
+  #search-button {
+    height: 44px;
+    width: 5%;
+    padding: 0px 10px 0px 0px;
+    margin: 0;
+    display: inline-flex;
+    align-items: center;
+    cursor: pointer;
+  }
+
+
+}
+
+#search-autocomplete {
+  margin-left: 30px;
+  min-width: 53%;
+  padding: 20px 20px;
+  padding-bottom: 0;
+  display: block;
+  max-height: 300px;
+  position: absolute;
+  z-index: 5;
+  background-color: #FFF;
+  border: 0.5px solid #bdbdbd;
+  border-bottom-left-radius: 12px;
+  border-bottom-right-radius: 12px;
+  overflow-y: auto;
+
+  .prod-infos {
+    padding-bottom: 14px;
+    height: 34px;
+    font-size: 14px;
+    color: black;
+    display: flex;
+    margin-bottom: 10px;
+    // justify-content: space-around;
+    border-bottom: 0.5px solid #bdbdbd;
+    cursor: pointer;
+
+    .picture {
+      position: relative;
+
+      img {
+        height: 44px;
+        margin-right: 8px;
+      }
+
+      .cach {
+        position: absolute;
+        z-index: 3;
+        top: 0;
+        left: 0;
+      }
+    }
+
+    .user-name {
+      min-width: 20%;
+      display: block;
+
+      .gid {
+        margin-top: 10px;
+        font-size: 12px;
+        color: #938d8e;
+      }
+    }
+
+    .scope {
+      margin-left: 30px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+  }
+}

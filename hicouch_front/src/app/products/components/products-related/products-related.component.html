@@ -1,0 +1,61 @@
+<div class="banner">
+        <div class="title">
+                <p>Produits associés :</p>
+
+        </div>
+        <div class="filter">
+                <div class="filter-picto" [ngClass]="{'selected': movieSelected}">
+                        <img src="/assets/images/movie.png" (click)="selectType('film')">
+
+                </div>
+                <div class="filter-picto" [ngClass]="{'selected': tvSelected}">
+                        <img src="/assets/images/computer.png" (click)="selectType('serie')">
+
+                </div>
+                <div class="filter-picto" [ngClass]="{'selected': bookSelected}">
+                        <img src="/assets/images/book-cover.png" (click)="selectType('book')">
+
+                </div>
+                <div class="filter-picto" [ngClass]="{'selected': gameSelected}">
+                        <img src="/assets/images/gamepad.png" (click)="selectType('game')">
+
+                </div>
+        </div>
+        <div class="navigation" *ngIf="totalPages && totalPages > 0">
+                <div *ngFor="let in of counter(totalPages) ;let i = index">
+                        <div id="cercle" *ngIf="i !== this.currentPage"></div>
+                        <div id="cercle2" *ngIf="i === this.currentPage"></div>
+                </div>
+        </div>
+
+        <br />
+
+        <div class="list">
+                <div class="navigation-left">
+                        <img *ngIf="currentIndex > 0" (click)="fetchIndex('left')"
+                                src="assets/images/white-arrow-right.png">
+                </div>
+                <div class="item" *ngFor="let asso of fetchList(currentIndex)" (click)="showPopover(asso)">
+                        <div class="picto" *ngIf="asso.productB && !reloading">
+                                <img src="{{getPicto(asso.productB.type)}}">
+                        </div>
+                        <div class="image" *ngIf="asso.productB  && !reloading">
+                                <img src="{{asso.productB.image}}">
+                        </div>
+                        <div class="title2" *ngIf="asso.productB && !reloading" (mouseover)="getTitle(asso.productB)">
+                                {{asso.productB.title}}
+                        </div>
+                </div>
+                <div class="item add-product">
+                        <div class="image" (click)="addAssociation()">
+                                <img src="/assets/images/plus.png">
+                        </div>
+                </div>
+                <div class="navigation-right">
+                        <img *ngIf="currentIndex + 5 < allProducts.length" (click)="fetchIndex('right')"
+                                src="assets/images/white-arrow-right.png">
+                </div>
+        </div>
+
+        <app-product-related-comments #popover *ngIf="showComments" [asso]="assoComment" [loggedUser]="loggedUser">
+        </app-product-related-comments>

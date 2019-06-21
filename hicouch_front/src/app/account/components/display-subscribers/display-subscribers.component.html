@@ -1,0 +1,9 @@
+<div class="displayFriends">
+  <h1>{{title}}</h1>
+  <ul>
+    <li *ngFor="let user of users">
+      <img [src]="user.picture">
+      <div (click)="goToUser(user.id)">{{user.pseudo}}</div>
+    </li>
+  </ul>
+</div>

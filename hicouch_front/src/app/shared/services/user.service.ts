@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { User } from '../models/user';
+import {HicouchAPIService} from './hicouchAPI.service';
 
 
 
@@ -10,15 +11,42 @@ import { User } from '../models/user';
 })
 export class UserService {
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient,
+    private api: HicouchAPIService) {
   }
 
+  getUser(userId: number): Observable<User> {
+    return this.api.getUser(userId);
+  }
 
-  // getTest() {
-  //   return this.http.get('//localhost:8080/test');
-  // }
+  getCurrentUser(): Observable<User> {
+    return this.api.getCurrentUser();
+  }
 
-  getUser(userid: number): Observable<User> {
-    return this.http.get<User>(`//localhost:8080/user/get?userId=${userid}`);
+  getFollowers(userId: number): Observable<User[]> {
+    return this.api.getFollowers(userId);
+  }
+
+  getFollows(userId: number): Observable<User[]> {
+    return this.api.getFollows(userId);
+  }
+
+  editUserImage(user: User): Observable<User> {
+      return this.api.uploadImage(user);
+  }
+
+  editUserPseudo(user: User): Observable<User> {
+    return this.api.updatePseudo({id: user.id, pseudo: user.pseudo});
+  }
+  follow(x, y) {
+    return this.api.follow(x, y);
+  }
+
+  unFollow(x, y) {
+    return this.api.unfollow(x, y);
+  }
+
+  getHistoryById(id): Observable<any> {
+    return this.http.get( `//hicjv8.azurewebsites.net/historique/${id}`, id);
   }
 }

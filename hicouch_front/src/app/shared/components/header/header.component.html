@@ -1,10 +1,16 @@
 <div class="header-content">
-    <img src="/assets/images/logo.PNG"/>
-    <div class="search-bar">
-        <input class="search-field" placeholder="Rechercher..."/>
+    <img src="/assets/images/logo.png" (click)="goToHomePage()" />
+    <app-search-product class="search-field" [productList]="products" (productSelected)="goToProduct($event)"
+        (searchValue)="toggleSearchPropositions($event)" (filterSelected)="setFilter($event)"></app-search-product>
+
+    <div class="user-infos" (click)="goToUser()" *ngIf="user">
+        <img src="{{user.picture}}" />
+        <div *ngIf="user.typeUser === 1 "class="log-out" (click)="goToModo()">
+            Modération
+        </div>
+        <div class="log-out" (click)="disconnect()">
+            Déconnexion
+        </div>
     </div>
-    <div class="user-infos" >
-        <img src="/assets/images/user.png"/>
-        <p *ngIf="user" >{{user.firstName}} {{user.lastName}}</p>
-    </div>
+
 </div>

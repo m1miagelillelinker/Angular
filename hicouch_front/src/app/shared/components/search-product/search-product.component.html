@@ -1,0 +1,28 @@
+<div id="search-bar">
+  <div class="search-bar">
+    <input #searchInput class="search-field" placeholder="Rechercher..." (keyup)="onType(searchInput.value)"
+      (keyup.enter)="onType(searchInput.value)" />
+      <!--TODO-->
+      <select #filterInput placeholder="Filtres" (change)="chooseFilter($event)">
+        <option value="film">Films</option>
+        <option value="serie">Séries</option>
+        <option value="book">Livres</option>
+        <option value="game">Jeux vidéos</option>
+      </select>
+    <button (click)="onType(searchInput.value)">Rechercher</button>
+
+  </div>
+</div>
+<div *ngIf="productList && productList.length > 0" id="search-autocomplete">
+  <div *ngFor="let product of productList" class="prod-infos" (click)="selectProduct(product)">
+    <div class="picture">
+      <img src="{{product.image}}">
+    </div>
+    <div class="user-name">
+      {{product.title}}
+      <div class="gid">
+        {{product.year}}
+      </div>
+    </div>
+  </div>
+</div>

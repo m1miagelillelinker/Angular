@@ -1,0 +1,15 @@
+<div class="signal">
+    <div mat-dialog-content class="signalement-container">
+
+        <h1 mat-dialog-title>Signaler un commentaire </h1>
+
+        <mat-form-field >
+            <textarea matInput [formControl]="signalementContentAdd" placeholder="Pourquoi signalez vous ce commentaire ?"></textarea>
+        </mat-form-field>
+    </div>
+    <div mat-dialog-actions>
+        <button mat-button (click)="onNoClick()">Annuler</button>
+        <button mat-button [mat-dialog-close]="true" (click)="signalComment()" [disabled]="signalementContentAdd.value == ''" cdkFocusInitial>Soumettre</button>
+    </div>
+</div>
+

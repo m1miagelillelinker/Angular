@@ -1,11 +1,13 @@
 .header-content {
     display: flex;
-    width: 100vw;
+    width: 98vw;
     margin: 0 auto;
     img {
         height : 130px;
-        margin-left: 5%;
+        margin-left: 2%;
         margin-right: 5%;
+        cursor: pointer;
+        border-radius: 100%;
     }
     
     .search-bar {
@@ -20,13 +22,18 @@
         }
     }
     .user-infos {
+        cursor: pointer;
         float:right;
         img {
             height: 100px; 
+            border-radius: 100%;
         }
-        margin-top: auto;
-        margin-bottom: auto;
-        margin-left: 5%;
+        margin-top: 2%;
+        margin-left: 2%;
+        .log-out {
+            text-decoration: underline;
+            margin-left:2%;
+        }
     }
 
 }

@@ -1,0 +1,10 @@
+<div *ngIf="mainProduct " class="content">
+	<app-main-product [tags]="tags"[mainProduct]="mainProduct"></app-main-product>
+		
+<div class="related" *ngIf="productsRelated">
+	<app-products-top-recommandation [mainProduct]="mainProduct" [productsRelated]="productsRelated"></app-products-top-recommandation>
+</div>
+</div>
+<div *ngIf="mainProduct && allProducts" >
+	<app-products-related (isMovieSearched)="loadMoviePage($event)" [currentProduct]="mainProduct"[allProducts]="allProducts" (filters)="filterList($event)" [filteredProducts]="filteredProducts" [loggedUser]="user"></app-products-related>
+</div>

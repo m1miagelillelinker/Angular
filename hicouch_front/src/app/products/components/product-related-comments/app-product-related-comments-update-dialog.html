@@ -1,0 +1,15 @@
+<div class="edit">
+    <div mat-dialog-content class="update-container" >
+
+        <h1 mat-dialog-title>Modifier ce commentaire</h1>
+
+        <mat-form-field >
+            <textarea matInput [formControl]="commentContentUpdate" placeholder="Commentez l'association"></textarea>
+        </mat-form-field>
+    </div>
+    <div mat-dialog-actions>
+        <!-- <mat-checkbox [checked]="checked">Cacher le commentaire</mat-checkbox> -->
+        <button mat-button (click)="onNoClick()">Annuler</button>
+        <button mat-button [mat-dialog-close]="true" (click)="editComment()" [disabled]="commentContentUpdate.value == ''">Soumettre</button>
+    </div>
+</div>

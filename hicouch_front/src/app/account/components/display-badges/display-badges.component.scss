@@ -1,0 +1,71 @@
+
+.displayBadges {
+  width: 36vw;
+  margin-left: 35%;
+  margin-top: -30vh;
+  h1 {
+    margin-left:-35%;
+  }
+  ul {
+    margin-left: auto;
+    margin-right: auto;
+    // width: 40vw;
+    height: auto;
+
+    li {
+      background: rgba(114, 50, 34, 0.671);
+      padding: 1em;
+      border-radius: 10px;
+      margin-bottom: 4px;
+      display: flex;
+      grid-template-columns: 70px auto ;
+
+      &.disabled{
+        opacity: 0.8;
+        filter: blur(2px);
+        background: rgba(172, 156, 152, 0.671);
+    }
+  
+      .intitule {
+          font-weight: bold;
+          font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+          font-size: 19px;
+          letter-spacing: 4px;
+          word-spacing: 0px;
+          color: #000000;
+          text-align: center;
+          margin-left: 20px;
+          margin-top: 30px;
+      }
+      .libelle{
+        display: grid;
+        margin-left: 30px;
+        margin-top: 35px;
+        text-align: center;
+        
+      }
+      img {
+          border-radius: 100%;
+          
+      }
+      .imageHidden
+      {
+        filter: grayscale(1);
+        -webkit-filter: grayscale(1);
+        -moz-filter: grayscale(1);
+        -o-filter: grayscale(1);
+        -ms-filter: grayscale(1);
+      }
+      .imgHidden:hover
+      {
+        filter: grayscale(0);
+        -webkit-filter: grayscale(0);
+        -moz-filter: grayscale(0);
+        -o-filter: grayscale(0);
+        -ms-filter: grayscale(0);
+      }
+    } 
+  }
+
+  
+ }

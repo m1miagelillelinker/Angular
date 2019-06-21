@@ -1,0 +1,72 @@
+
+<div id="popover" >
+  <mat-list>
+    <mat-list-item>
+      <span matLine>
+        <span (click)="goTo(asso.productB)" class="popoverTitle url">{{asso.productB.title}} </span>
+        <span class="note" >
+          <mat-icon *ngIf="!canVoteUpA" (click)="riseNoteAsso()">star</mat-icon>
+          <mat-icon *ngIf="canVoteDownA" (click)="decreaseNoteAsso()">star_border</mat-icon>
+          {{asso.vote}}
+        </span>
+        <span class="note" (click)="noteAsso(1)">
+          <mat-icon [ngClass]="{'selected': canVoteUpA}">thumb_up_alt</mat-icon>
+        </span>
+        <span class="note" (click)="noteAsso(-1)">
+          <mat-icon [ngClass]="{'selected': canVoteDownA}">thumb_down_alt</mat-icon>
+        </span>
+      </span>
+    </mat-list-item>
+  </mat-list>
+  <form class="addComment">
+    <mat-form-field>
+      <mat-label>Votre commentaire</mat-label>
+      <textarea matInput
+                [formControl]="commentContentAdd"
+                cdkTextareaAutosize
+                #autosize="cdkTextareaAutosize"
+                cdkAutosizeMinRows="2"
+                cdkAutosizeMaxRows="5"></textarea>
+    </mat-form-field>
+    <mat-error *ngIf="commentContentAdd.hasError('maxlength')">
+      500 characters max
+    </mat-error>
+    <!-- <mat-checkbox [checked]="checked">Cacher le commentaire</mat-checkbox> -->
+    <button mat-raised-button [disabled]="commentContentAdd.value == ''" (click)="addComment()">Soumettre</button>
+    <!--    <span *ngIf="load"><mat-spinner>
+        <app-progress-spinner class="example-margin" [backdropEnabled]="true" [positionGloballyCenter]="true">
+    </app-progress-spinner>
+        </mat-spinner></span>-->
+  </form>
+  <div class="comments" *ngIf="asso">
+    <div>
+      <div class="comment" *ngFor="let comment of commentaires">
+        <!-- <img matListAvatar src="..." alt="...">-->
+        <h3>
+          <span class="username url" (click)="goToUserProfile(comment.auteur.id)">
+            {{comment.auteur.pseudo}}
+          </span>&nbsp;&nbsp;
+          <!--          {{getUserSpeudo(comment.iduser)}}</span>&nbsp;&nbsp;-->
+          <span class="date">{{(comment.commentaire.updatedAt) ? comment.commentaire.updatedAt : comment.commentaire.createdAt}}</span>
+          &nbsp;&nbsp;
+          <span class="date">{{(comment.commentaire.updatedAt) ? 'Modified' : null}}</span>
+        </h3>
+        <br>
+        <p class="content"> {{comment.commentaire.commentaire}} </p>
+        <br>
+        <span *ngIf="showComment(comment)">
+          {{comment.commentaire.note}} points
+          <span class="note" (click)="riseNoteAsso()">
+            <mat-icon [ngClass]="{'selected': canVoteUp}">thumb_up_alt</mat-icon>
+          </span>
+          <span class="note" (click)="decreaseNoteAsso()">
+            <mat-icon [ngClass]="{'selected': canVoteDown}">thumb_down_alt</mat-icon>
+          </span>
+         </span>
+         <span class="url" (click)="showPopoverToEdit(comment)" *ngIf="canEdit(comment)">Modifier</span>
+         <span class="url" (click)="showPopoverToSignal(comment)" *ngIf="canSignal(comment)">Signaler</span>
+       
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,6 +1,10 @@
 /* You can add global styles to this file, and also import other style files */
 
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
 
+body {
+  margin: 0;
+}
 @font-face {
     font-family: 'ubuntu_google-font-bold-italic';
     src: url('./assets/fonts/Ubuntu-BoldItalic.ttf') format('truetype');
@@ -58,20 +62,19 @@
   }
   
   * {
-    font-family: 'ubuntu_google-font-regular';
-    
+    font-family: 'ubuntu_google-font-regular';    
   }
   
-  button {
-  	cursor: pointer;
-  }
+  // button {
+  // 	cursor: pointer;
+  // }
   
-  button:hover {
-  	opacity: 0.8;
-  }
+  // button:hover {
+  // 	opacity: 0.8;
+  // }
   
-  .title{
-	font-size: 72px;
-	font-family: Abril Fatface;
-	text-align: center;
-  }
+  // .title{
+	// font-size: 72px;
+	// font-family: Abril Fatface;
+	// text-align: center;
+  // }

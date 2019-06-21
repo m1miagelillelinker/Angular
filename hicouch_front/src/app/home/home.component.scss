@@ -1,12 +1,50 @@
 #login {
-    margin: 0 auto;
+  margin: 0 auto;
   width: 100px;
   height: 100px;
   background-color: #ccc;
   border-radius: 3px;
 }
-.title{
-	font-size: 72px;
-	font-family: Abril Fatface;
-	text-align: center;
+.welcome {
+  font-size: 1.8em;
+  margin-bottom: 20px;
+  margin-top: 20px;
+  padding: 15px;
+  padding-left: 91px;
+  width: 100vw;
+  margin-left: auto;
+  margin-right: auto;
+  background-color: #7c0000;
+  color: white;
+  /* border-radius: 10px; */
+}
+
+
+.inline {
+  display: inline-block;
+  width: 30%;
+  height: 10%;
+}
+
+.lastAssos {
+  text-align: center;
+  padding: 20px;
+  margin: 0 auto;
+}
+
+.image {
+  margin: 10px;
+  width: 30%;
+}
+
+.title {
+  text-decoration: underline;
+}
+
+.clickable {
+  cursor: pointer;
+}
+
+.titles {
+  text-align: center;
 }
