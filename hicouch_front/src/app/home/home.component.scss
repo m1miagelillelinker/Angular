@@ -16,7 +16,7 @@
   margin-right: auto;
   background-color: #7c0000;
   color: white;
-  /* border-radius: 10px; */
+  border-radius: 10px;
 }
 
 
@@ -26,6 +26,9 @@
   height: 10%;
 }
 
+.block {
+  width: 100%;
+}
 .lastAssos {
   text-align: center;
   padding: 20px;
@@ -34,7 +37,7 @@
 
 .image {
   margin: 10px;
-  width: 30%;
+  width: 40%;
 }
 
 .title {
@@ -47,4 +50,6 @@
 
 .titles {
   text-align: center;
+  margin : 0 auto;
+  width: 90%;
 }
