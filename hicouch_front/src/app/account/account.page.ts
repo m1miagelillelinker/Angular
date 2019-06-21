@@ -204,7 +204,8 @@ export class AccountPageComponent implements OnInit, OnChanges {
   templateUrl: 'dialog-edit-profil.html',
 })
 export class DialogEditProfilComponent {
-
+  selectedFile: boolean;
+  processFile: boolean;
   constructor(
     public dialogRef: MatDialogRef<DialogEditProfilComponent>,
     @Inject(MAT_DIALOG_DATA) public data: DialogData) {}
@@ -212,6 +213,10 @@ export class DialogEditProfilComponent {
 
   onNoClick(): void {
     this.dialogRef.close();
+  }
+
+  onClick() {
+    //
   }
 }
 
