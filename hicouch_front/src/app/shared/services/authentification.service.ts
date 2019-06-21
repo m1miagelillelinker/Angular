@@ -95,7 +95,7 @@ export class AuthenticationService {
         this._expiresAt = 0;
 
         this.auth0.logout({
-            return_to: this.router.navigate(['app/login'])
+            returnTo: AUTH_CONFIG.callbackURL
         });
 
 
