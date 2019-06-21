@@ -37,6 +37,7 @@ export const routes: Routes = [
   {
     path: 'app/moderation',
     component: ModerationPageComponent,
+    canActivate: [CanActivateGuardService]
   },
 ];
 
