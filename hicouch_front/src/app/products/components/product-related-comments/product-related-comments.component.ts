@@ -59,12 +59,19 @@ export class ProductRelatedCommentsComponent implements OnInit, OnChanges {
         });
     }
 
+    /**
+     * Goes to product page
+     * @param product
+     */
     goTo(product) {
         this.router.navigate(['app/products', product.type, product.id]);
     }
 
+    /**
+     * saves given note bu logged user in database
+     * @param note
+     */
     noteAsso(note: number) {
-
         if (!this.asso.vote) {
             this.canVoteUpA = true;
             this.canVoteDownA = true;
@@ -92,6 +99,10 @@ export class ProductRelatedCommentsComponent implements OnInit, OnChanges {
         });
     }
 
+    /**
+     * Rises the note of a comment
+     * @param comment
+     */
     riseNoteComment(comment) {
         const v = comment.vote;
         console.log(v);
@@ -101,6 +112,10 @@ export class ProductRelatedCommentsComponent implements OnInit, OnChanges {
         this.voteService.vote(vote).subscribe(res => console.log(res));
     }
 
+    /**
+     * Decreases note of a comment
+     * @param comment
+     */
     decreaseNoteComment(comment) {
         let currentVote = null;
         this.voteService.getVoteByUserId(this.loggedUser.id).subscribe(res => currentVote = res.vote);
@@ -112,11 +127,18 @@ export class ProductRelatedCommentsComponent implements OnInit, OnChanges {
         this.voteService.vote(vote).subscribe(res => console.log(res));
     }
 
+    /**
+     * Goes to user profile page
+     * @param userId
+     */
     goToUserProfile(userId) {
         // HERE
         this.router.navigate(['app/account', userId]);
     }
 
+    /**
+     * Adds a  new comment on a n association
+     */
     addComment() {
         this.commentService.putComment(this.loggedUser.id, this.commentContentAdd.value, this.asso.association.idPair);
         this.commentService.getCommentByIdPair(this.asso.association.idPair).subscribe((comments: any) => {
@@ -140,14 +162,33 @@ export class ProductRelatedCommentsComponent implements OnInit, OnChanges {
         return user.pseudo;
     }
 
+    /**
+     * Checks is logged user can edit a comment
+     *
+     * @param comment
+     *
+     * @return true if it is his own comment
+     */
     canEdit(comment: Comment) {
         return comment.owned;
     }
 
+    /**
+     * Checks is logged user can signal a comment
+     *
+     * @param comment
+     *
+     * @return false if it is his own comment
+     */
     canSignal( comment: Comment) {
         return !comment.owned;
     }
 
+    /**
+     * shows modal to signal a comment
+     *
+     * @param comment
+     */
     showPopoverToSignal(comment: Comment) {
         const dialogRef = this.dialog.open(ProductsRelatedCommentSignalDialogComponent, {
             width: '50%',
@@ -163,6 +204,10 @@ export class ProductRelatedCommentsComponent implements OnInit, OnChanges {
 
     }
 
+    /**
+     * shows modal to edit a comment
+     * @param comment
+     */
     showPopoverToEdit(comment: Comment) {
         const dialogRef = this.dialog.open(ProductsRelatedCommentUpdateDialogComponent, {
             width: '50%',
@@ -177,6 +222,10 @@ export class ProductRelatedCommentsComponent implements OnInit, OnChanges {
         });
     }
 
+    /**
+     * shows comment if not hidden
+     * @param comment
+     */
     showComment(comment: Comment) {
         if (comment.commentaire.status === 0 && comment.owned) {
             return true;
@@ -218,6 +267,9 @@ export class ProductsRelatedCommentUpdateDialogComponent implements OnInit {
         this.commentContentUpdate.setValue(this.data.comment.commentaire.commentaire);
     }
 
+    /**
+     * updates coment in database
+     */
     editComment() {
         this.data.comment.commentaire.commentaire = this.commentContentUpdate.value;
         this.data.comment.commentaire.status = (this.checked) ? 0 : null;
@@ -249,6 +301,9 @@ export class ProductsRelatedCommentSignalDialogComponent implements OnInit {
     ngOnInit() {
     }
 
+    /**
+     * Saves signalement of comment in database
+     */
     signalComment() {
         this.signalementService.signalCommentaire(this.data.comment.commentaire.id, this.data.user.id, this.signalementContentAdd.value);
     }

@@ -7,7 +7,7 @@ import { User } from '../models/user';
 })
 export class HicouchAPIService {
 
-    private DOMAIN = 'https://hicjv8.azurewebsites.net';
+    private DOMAIN = 'https://hicjv4.azurewebsites.net';
 
     private tagController = '/tag';
     private abonnementController = '/abonnement';
