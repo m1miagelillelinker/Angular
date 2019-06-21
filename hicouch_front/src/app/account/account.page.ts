@@ -215,54 +215,6 @@ export class DialogEditProfilComponent {
     this.dialogRef.close();
   }
 
-  onClick() {
-    //
-  }
 }
 
-class ImageSnippet {
-  pending = false;
-  status = 'init';
-  constructor(public src: string, public file: File) {}
-}
-/*
-export class ImageUploadComponent {
 
-  selectedFile: ImageSnippet;
-
-  constructor(private userService: UserService){}
-
-  private onSuccess() {
-    this.selectedFile.pending = false;
-    this.selectedFile.status = 'ok';
-  }
-
-  private onError() {
-    this.selectedFile.pending = false;
-    this.selectedFile.status = 'fail';
-    this.selectedFile.src = '';
-  }
-
-
-  processFile(imageInput: any) {
-    const file: File = imageInput.files[0];
-    const reader = new FileReader();
-
-    reader.addEventListener('load', (event: any) => {
-
-      this.selectedFile = new ImageSnippet(event.target.result, file);
-
-      this.userService.editUserImage(this.selectedFile.file).subscribe(
-        (res) => {
-          this.onSuccess();
-        },
-        (err) => {
-          this.onError()
-
-        })
-    });
-
-    reader.readAsDataURL(file);
-  }
-}
-*/
