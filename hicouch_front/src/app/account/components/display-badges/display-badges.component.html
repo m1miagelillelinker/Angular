@@ -1,7 +1,7 @@
 <div class="displayBadges" >
 <h1>{{title}}</h1>
   <ul>
-    <li *ngFor="let badge of badges" [ngClass]="{'disabled' : badge.status==2}" >
+    <li *ngFor="let badge of badges" [ngClass]="{'disabled' : badge.status==4}" >
     <img height="100px" width="50px" [src]="badge.imgUrl">
     <p class="intitule">{{badge.description}}</p>
     <div *ngIf="badge.applyOn === 'association'">
