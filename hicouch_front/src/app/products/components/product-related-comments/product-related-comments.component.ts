@@ -11,6 +11,7 @@ import {SignalementService} from '../../../shared/services/signalement.service';
 import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from '@angular/material';
 import {ProductService} from '../../../shared/services/product.service';
 import {VoteService} from '../../../shared/services/vote.service';
+import {Vote} from '../../../shared/models/vote';
 
 export interface DialogDataComment {
     comment: Comment;
@@ -64,52 +65,24 @@ export class ProductRelatedCommentsComponent implements OnInit, OnChanges {
     }
 
     noteAsso(note: number) {
+        const vote = {
+            id: this.asso.vote ? this.asso.vote.id : undefined,
+            idPair: this.asso.association.id,
+            vote: this.asso.vote && this.asso.vote.vote === note ? 0 : note,
+            idUser: this.loggedUser.id
+        };
+        this.voteService.vote(vote).subscribe((v: Vote) => this.asso.vote = v.vote !== 0 ? v : null);
 
-        if (!this.asso.vote) {
-            this.canVoteUpA = true;
-            this.canVoteDownA = true;
-            const vote = {
-                idPair: this.asso.association.id, vote: note, idUser: this.loggedUser.id
-            };
-            this.voteService.vote(vote).subscribe();
-        } else {
-            if (this.asso.vote.vote === note) {
-                this.canVoteUpA = this.asso.vote.vote === (0 || -1);
-                this.canVoteDownA = this.asso.vote.vote === (0 || 1);
-                const vote = {
-                    idPair: this.asso.association.id, vote: 0, idUser: this.loggedUser.id
-                };
-                this.voteService.vote(vote).subscribe();
-            } else {
-                const vote = {
-                    idPair: this.asso.association.id, vote: note, idUser: this.loggedUser.id
-                };
-                this.voteService.vote(vote).subscribe();
-            }
-        }
-        this.commentService.getCommentByIdPair(this.asso.association.idPair).subscribe((comments: any) => {
-            this.commentaires = comments;
-        });
     }
 
-    riseNoteComment(comment) {
-        const v = comment.vote;
-        console.log(v);
+    noteComment(note: number, comment: Comment) {
         const vote = {
-            idComment: this.asso.association.idComment, vote: 1, idUser: this.loggedUser.id
+            id: comment.vote ? comment.vote.id : undefined,
+            idCommentaire: comment.commentaire.id,
+            vote: comment.vote && comment.vote.vote === note ? 0 : note,
+            idUser: this.loggedUser.id
         };
-        this.voteService.vote(vote).subscribe(res => console.log(res));
-    }
-
-    decreaseNoteComment(comment) {
-        let currentVote = null;
-        this.voteService.getVoteByUserId(this.loggedUser.id).subscribe(res => currentVote = res.vote);
-        const votee = currentVote === 0 ? 1 : 0;
-        const vote = {
-            idComment: this.asso.association.idComment, vote: votee, idUser: this.loggedUser.id
-        };
-        this.canVoteDown = votee === 0 || this.canVoteUp;
-        this.voteService.vote(vote).subscribe(res => console.log(res));
+        this.voteService.vote(vote).subscribe((v: Vote) => comment.vote = v.vote !== 0 ? v : null);
     }
 
     goToUserProfile(userId) {

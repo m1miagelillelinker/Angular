@@ -56,10 +56,10 @@
         <br>
         <span *ngIf="showComment(comment)">
           {{comment.commentaire.note}} points
-          <span class="note" (click)="riseNoteAsso()">
+          <span class="note" (click)="noteComment(1, comment)">
             <mat-icon [ngClass]="{'selected': canVoteUp}">thumb_up_alt</mat-icon>
           </span>
-          <span class="note" (click)="decreaseNoteAsso()">
+          <span class="note" (click)="noteComment(-1, comment)">
             <mat-icon [ngClass]="{'selected': canVoteDown}">thumb_down_alt</mat-icon>
           </span>
          </span>
