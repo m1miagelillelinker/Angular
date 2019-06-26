@@ -58,6 +58,9 @@ export class AccountPageComponent implements OnInit, OnChanges {
 
   }
 
+  /**
+   * Retrieves the informations of logged user
+   */
   fetchUser() {
     this.userService.getCurrentUser().subscribe(user => this.currentUser = user);
     const userId = this.route.snapshot.paramMap.get('userId');
@@ -90,6 +93,11 @@ export class AccountPageComponent implements OnInit, OnChanges {
 
   }
 
+  /**
+   * Display the tab corresponding to the name in parameter
+   *
+   * @param tab
+   */
   toggleFeature(event: string) {
     switch (event) {
       case 'activities':
@@ -110,6 +118,9 @@ export class AccountPageComponent implements OnInit, OnChanges {
     }
   }
 
+  /**
+   * Gets recent activities
+   */
   getActivities() {
     return [
       [ 'Elise', 'a créé une nouvelle association', 'a créé un tag personnageFéminin', '06/juin/2019'],
@@ -118,6 +129,11 @@ export class AccountPageComponent implements OnInit, OnChanges {
       [ 'Edouard', 'a créé une nouvelle association', 'a créé un tag DCMovies', '06/Août/2019' ]
     ];
   }
+
+  /**
+   * Updates informations of user and list of recent activities
+   * @param event
+   */
   refresh(event) {
     this.userService.getCurrentUser().subscribe(user => this.currentUser = user);
     const parsedUserId = parseInt(event, 10);
@@ -152,25 +168,43 @@ export class AccountPageComponent implements OnInit, OnChanges {
     });
     this.showActivities();
   }
+
+  /**
+   * Display tab for badges
+   */
   showBadges() {
     this.toggleFeature('badges');
   }
 
+  /**
+   * Display tab for activities
+   */
   showActivities() {
     this.toggleFeature('activities');
     this.tableActivites.rows = this.getActivities();
   }
 
+  /**
+   * Display tab for the list of friends
+   */
   showFriends() {
     this.toggleFeature('friends');
   }
 
+  /**
+   * Follows the user with this id
+   * @param id
+   */
   follow(id) {
     const userId = this.route.snapshot.paramMap.get('userId');
     const parsedUserId = parseInt(userId, 10);
     this.userService.follow(this.currentUser.id, parsedUserId).subscribe(res => console.log(res));
   }
 
+  /**
+   * Unfollows the user with this id
+   * @param id
+   */
   unFollow(id) {
     console.log(id);
     const userId = this.route.snapshot.paramMap.get('userId');
@@ -179,6 +213,9 @@ export class AccountPageComponent implements OnInit, OnChanges {
   }
 
 
+  /**
+   * Opens modal to edit profil
+   */
   openDialog(): void {
     const dialogRef = this.dialog.open(DialogEditProfilComponent, {
       // width: '300px',

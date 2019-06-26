@@ -26,19 +26,34 @@ export class UserModerationComponent implements OnInit, OnDestroy {
 
     }
 
+    /**
+     * Retrieves the signaled users
+     */
     loadUsers() {
         this.signalementService.getUsersToModerate()
             .subscribe((json: Array<Signalement>) => this.signalements = json.filter(c => c.signaledUser !== undefined)); // double check
     }
 
+    /**
+     * Goes to the user page with this id
+     * @param userId
+     */
     goToUser(userId: number) {
         this.router.navigate(['app/account', userId]);
     }
 
+    /**
+     * Accepts the signalement
+     * @param idSignalement
+     */
     acceptSignalement(idSignalement: number) {
         this.signalementService.acceptSignalement(idSignalement).subscribe(() => this.loadUsers());
     }
 
+    /**
+     * Refuses the signalement
+     * @param idSignalement
+     */
     refuseSignalement(idSignalement: number) {
         this.signalementService.refuseSignalement(idSignalement).subscribe(() => this.loadUsers());
     }

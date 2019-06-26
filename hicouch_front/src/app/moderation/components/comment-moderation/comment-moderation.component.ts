@@ -27,15 +27,26 @@ export class CommentModerationComponent implements OnInit, OnDestroy {
 
     }
 
+    /**
+     * Retrieves the signaled comments
+     */
     loadCommentaires() {
         this.signalementService.getCommentairesToModerate()
             .subscribe((json: Array<Signalement>) => this.signalements = json.filter(c => c.signaledComment !== undefined)); // double check
     }
 
+    /**
+     * Accepts the signalement
+     * @param idSignalement
+     */
     acceptSignalement(idSignalement: number) {
         this.signalementService.acceptSignalement(idSignalement).subscribe(() => this.loadCommentaires());
     }
 
+    /**
+     * Refuses the signalement
+     * @param idSignalement
+     */
     refuseSignalement(idSignalement: number) {
         this.signalementService.refuseSignalement(idSignalement).subscribe(() => this.loadCommentaires());
     }

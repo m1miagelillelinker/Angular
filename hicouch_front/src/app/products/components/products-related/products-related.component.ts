@@ -63,6 +63,10 @@ export class ProductsRelatedComponent implements OnInit, OnChanges {
         this.showComments = false;
     }
 
+    /**
+     * Retrieves the associations of this product
+     * @param number
+     */
     fetchList(number: number): Association[] {
         if (this.allProducts.length > this.filteredProducts.length) {
             this.reloading = true;
@@ -89,6 +93,10 @@ export class ProductsRelatedComponent implements OnInit, OnChanges {
         }
     }
 
+    /**
+     * Returns an url corresponding to a picture of the associated product type
+     * @param type
+     */
     getPicto(type) {
         if (type === 'film') {
             return '/assets/images/movie.png';
@@ -103,10 +111,18 @@ export class ProductsRelatedComponent implements OnInit, OnChanges {
         }
     }
 
+    /**
+     * Gets the title of this product
+     * @param product
+     */
     getTitle(product) {
         return product.title;
     }
 
+    /**
+     * Reduces the title if it is too long (40 characters)
+     * @param title
+     */
     fetchTitle(title: string) {
         if (title) {
             if (title.length > 17) {
@@ -123,6 +139,10 @@ export class ProductsRelatedComponent implements OnInit, OnChanges {
         return new Array(i);
     }
 
+    /**
+     * Navigates between associated products to this product
+     * @param direction
+     */
     fetchIndex(direction) {
         if (direction === 'right') {
             this.currentPage += 1;
@@ -195,11 +215,19 @@ export class ProductsRelatedComponent implements OnInit, OnChanges {
         });
     }
 
+    /**
+     * Goes to this product page
+     * @param productId
+     */
     goTo(productId) {
         console.log('go to this product');
        // this.router.navigate(['app/products', productId]);
     }
 
+    /**
+     * Shows component for the comments about this association
+     * @param asso
+     */
     showPopover(asso: Association) {
         this.showComments = true;
         this.assoComment = asso;
@@ -284,6 +312,9 @@ export class ProductsRelatedAddDialogComponent implements OnInit {
         return this.options.filter(option => option.title.toLowerCase().includes(filterValue));
     }
 
+    /**
+     * Adds an association between two products in database
+     */
     addAssociation() {
         this.associationService.createAssociation(this.currentProduct.id,
             this.currentProduct.type,

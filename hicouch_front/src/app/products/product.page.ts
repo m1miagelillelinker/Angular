@@ -64,6 +64,9 @@ export class ProductPageComponent implements OnInit, OnChanges, OnDestroy {
 
   }
 
+  /**
+   * Retrieves all informations about a product
+   */
   fetchProducts() {
     this.userService.getCurrentUser().subscribe(user => this.user = user);
     this.productSubscription = this.productService.getProductByTypeAndId(this.productId, this.productType).subscribe((p: Product) => {
@@ -102,15 +105,27 @@ export class ProductPageComponent implements OnInit, OnChanges, OnDestroy {
     if (this.productSubscription) { this.productSubscription.unsubscribe(); }
   }
 
+  /**
+   * Submits a proposed tag to moderation
+   */
   submit() {
     this.tagService.addTag(this.tagControl.value, this.productId)
       .subscribe(() => this.tagService.getTags(this.productId).subscribe((json: any) => this.tags = json));
     this.setInputFVisibility(false);
   }
 
+  /**
+   * Manage the visibility of the input to add a tag
+   * @param visible
+   */
   setInputFVisibility(visible: boolean) {
     this.showInput = visible;
   }
+
+  /**
+   *
+   * @param event
+   */
   loadMoviePage(event) {
     this.router.navigate(['app/products/', event.id]);
     this.fetchProducts();

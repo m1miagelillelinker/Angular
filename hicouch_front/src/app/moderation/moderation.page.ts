@@ -29,24 +29,4 @@ export class ModerationPageComponent implements OnInit, OnDestroy {
     ngOnDestroy() {
 
     }
-
-    toggleFeature(event: string) {
-        switch (event) {
-            case 'tag':
-                this.tagMode = true;
-                this.commentMode = false;
-                this.userMode = false;
-                break;
-            case 'comment':
-                this.tagMode = false;
-                this.commentMode = true;
-                this.userMode = false;
-                break;
-            case 'user':
-                this.tagMode = false;
-                this.commentMode = false;
-                this.userMode = true;
-                break;
-        }
-    }
 }

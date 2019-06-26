@@ -27,6 +27,9 @@ export class LoginComponent implements OnInit {
         }
     }
 
+    /**
+     * Checks if the authentication is well done and redirect to homepage
+     */
     logIn() {
         if (!this.auth.isAuthenticated()) {
             this.auth.login();

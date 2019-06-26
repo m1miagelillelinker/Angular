@@ -26,14 +26,25 @@ export class TagModerationComponent implements OnInit, OnDestroy {
 
     }
 
+    /**
+     * Retrieves the proposed tags
+     */
     loadTags() {
         this.signalementService.loadTags().subscribe((json: Array<Tag>) => this.tags = json);
     }
 
+    /**
+     * Accepts the proposed tag
+     * @param idSignalement
+     */
     acceptTag(idTag: number) {
         this.signalementService.acceptTag(idTag).subscribe(() => this.loadTags());
     }
 
+    /**
+     * Refuses the proposed tag
+     * @param idSignalement
+     */
     refuseTag(idTag: number) {
         this.signalementService.refuseTag(idTag).subscribe(() => this.loadTags());
     }

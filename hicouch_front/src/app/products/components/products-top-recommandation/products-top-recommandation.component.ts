@@ -42,6 +42,10 @@ export class ProductsTopRecommandationComponent implements OnInit, OnChanges {
 
   }
 
+  /**
+   * Reduces the title if it is too long (40 characters)
+   * @param title
+   */
   fetchTitle(title: string) {
     if (title) {
       if (title.length > 40) {
@@ -53,6 +57,11 @@ export class ProductsTopRecommandationComponent implements OnInit, OnChanges {
     }
 
   }
+
+  /**
+   * Reduces the description if it is too long (140 characters)
+   * @param title
+   */
   fetchDesc(title: string) {
     if (title) {
       if (title.length > 140) {
@@ -65,6 +74,9 @@ export class ProductsTopRecommandationComponent implements OnInit, OnChanges {
 
   }
 
+  /**
+   * Change the product content for a nice display
+   */
   fetchContent() {
     this.productsRelated.forEach(p => {
       console.log(p);
@@ -88,6 +100,10 @@ export class ProductsTopRecommandationComponent implements OnInit, OnChanges {
     });
   }
 
+  /**
+   * Display the right tab correspoding to the title
+   * @param tab
+   */
   selectTab(tab: string) {
 
     switch (tab) {
@@ -117,6 +133,10 @@ export class ProductsTopRecommandationComponent implements OnInit, OnChanges {
         break;
     }
   }
+
+  /**
+   * Associates another product with this product
+   */
   addProduct() {
     const dialogRef = this.dialog.open(ProductsRelatedAddDialogComponent, {
       width: '70%',

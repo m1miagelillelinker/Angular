@@ -22,6 +22,10 @@ export class DisplaySubscribersComponent implements OnInit {
     console.log(this.users);
   }
 
+  /**
+   * Goes to the user page with this id
+   * @param id
+   */
   goToUser(id) {
     this.change.emit(id);
     this.router.navigate(['app/account', id]);

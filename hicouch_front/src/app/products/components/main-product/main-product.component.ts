@@ -42,6 +42,9 @@ export class MainProductComponent implements OnInit, OnDestroy, OnChanges {
   ngOnDestroy() {
   }
 
+  /**
+   * Submits a proposed tag to moderation
+   */
   submit() {
     const t = this.tagInput.nativeElement;
     this.tagService.addTag(t.value, this.mainProduct.id)
@@ -50,10 +53,19 @@ export class MainProductComponent implements OnInit, OnDestroy, OnChanges {
     this.displayConfirmation = true;
   }
 
+  /**
+   * Manage the visibility of the input to add a tag
+   * @param visible
+   */
   setInputFVisibility(visible: boolean) {
     this.showInput = visible;
     this.displayConfirmation = !visible;
   }
+
+  /**
+   * Reduces the description if it is too long (140 characters)
+   * @param title
+   */
   fetchDesc(title: string) {
     if (title) {
       if (title.length > 140) {

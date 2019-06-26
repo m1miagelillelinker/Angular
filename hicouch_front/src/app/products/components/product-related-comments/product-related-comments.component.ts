@@ -146,20 +146,14 @@ export class ProductRelatedCommentsComponent implements OnInit, OnChanges {
         });
     }
 
+    /**
+     * Display a spinner before a refresh of the page
+     */
     animationLoad() {
         const dialogRef = this.dialog.open(SpinnerDialogComponent, {
             width: '15%',
             disableClose: true
         });
-    }
-
-    // TODO : display name of user for each comment
-    getUserSpeudo(userId: number) {
-        let user;
-        this.userService.getUser(userId).subscribe(
-            value => {user = value; }
-        );
-        return user.pseudo;
     }
 
     /**

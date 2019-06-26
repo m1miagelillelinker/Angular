@@ -20,6 +20,11 @@ export class AccountSideMenuComponent implements OnInit {
   ngOnInit() {
   }
 
+  /**
+   * Display the tab corresponding to the name in parameter
+   *
+   * @param tab
+   */
   selectTab(tab: string): void {
     switch (tab) {
       case 'activity':
