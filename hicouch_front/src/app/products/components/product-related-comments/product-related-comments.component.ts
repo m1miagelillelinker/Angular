@@ -12,6 +12,7 @@ import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from '@angular/material';
 import {ProductService} from '../../../shared/services/product.service';
 import {VoteService} from '../../../shared/services/vote.service';
 import {Vote} from '../../../shared/models/vote';
+import { AssociationService } from '../../../shared/services/association.service';
 
 export interface DialogDataComment {
     comment: Comment;
@@ -42,22 +43,26 @@ export class ProductRelatedCommentsComponent implements OnInit, OnChanges {
         private commentService: CommentService,
         private userService: UserService,
         private voteService: VoteService,
-        public dialog: MatDialog
+        public dialog: MatDialog,
+        private associationService: AssociationService,
     ) { }
 
     ngOnInit() {
         this.commentService.getCommentByIdPair(this.asso.association.idPair).subscribe((comments: any) => {
             this.commentaires = comments;
         });
+        this.associationService.fetchtAssociationByProduct(this.asso.association.idPair).subscribe(res => console.log(res));
         this.canVoteUpA = this.asso.vote ? (this.asso.vote.vote === (0 || -1)) : true;
         this.canVoteDownA = this.asso.vote ? (this.asso.vote.vote === (0 || 1)) : true;
-
+        console.log(this.asso);
     }
 
     ngOnChanges(changes: SimpleChanges): void {
         this.commentService.getCommentByIdPair(this.asso.association.idPair).subscribe((comments: any) => {
             this.commentaires = comments;
         });
+        this.canVoteUpA = this.asso.vote ? (this.asso.vote.vote === (0 || -1)) : true;
+        this.canVoteDownA = this.asso.vote ? (this.asso.vote.vote === (0 || 1)) : true;
     }
 
     goTo(product) {
@@ -72,7 +77,8 @@ export class ProductRelatedCommentsComponent implements OnInit, OnChanges {
             idUser: this.loggedUser.id
         };
         this.voteService.vote(vote).subscribe((v: Vote) => this.asso.vote = v.vote !== 0 ? v : null);
-
+        this.canVoteUpA = note === (0 || -1);
+        this.canVoteDownA = note === (0 || 1);
     }
 
     noteComment(note: number, comment: Comment) {
@@ -82,6 +88,8 @@ export class ProductRelatedCommentsComponent implements OnInit, OnChanges {
             vote: comment.vote && comment.vote.vote === note ? 0 : note,
             idUser: this.loggedUser.id
         };
+        console.log(comment.vote.vote);
+        console.log(note);
         this.voteService.vote(vote).subscribe((v: Vote) => comment.vote = v.vote !== 0 ? v : null);
     }
 
