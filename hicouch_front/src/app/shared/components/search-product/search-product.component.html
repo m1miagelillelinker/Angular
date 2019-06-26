@@ -1,6 +1,6 @@
 <div id="search-bar">
   <div class="search-bar">
-    <input #searchInput class="search-field" placeholder="Rechercher..." (keyup)="onType(searchInput.value)"
+    <input #searchInput class="search-field" (focusout)="onBlur()" placeholder="Rechercher..." (keyup)="onType(searchInput.value)"
       (keyup.enter)="onType(searchInput.value)" />
       <!--TODO-->
       <select #filterInput placeholder="Filtres" (change)="chooseFilter($event)">
