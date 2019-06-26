@@ -16,7 +16,7 @@
 	<div class="username">
 		<span>{{user.pseudo}}</span>
 	</div>
-	<button  mat-raised-button (click)="openDialog()" class="editbutton" >Editer le profil</button>
+	<button  mat-raised-button *ngIf="!otherUser"(click)="openDialog()" class="editbutton" >Editer le profil</button>
 
 
 	<!-- Display the profile-progess -->

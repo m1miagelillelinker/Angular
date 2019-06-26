@@ -78,9 +78,6 @@ export class AccountPageComponent implements OnInit, OnChanges {
       };
       this.badges = user.badges;
       this.user = myUser;
-      console.log(myUser);
-      console.log(this.currentUser);
-      console.log(this.user.id);
       this.userService.getHistoryById(user.id).subscribe(res => console.log(res));
       this.newUser = this.user;
       this.userService.getFollowers(parsedUserId).subscribe((json: User[]) => this.followersUsers = json);
@@ -143,11 +140,17 @@ export class AccountPageComponent implements OnInit, OnChanges {
       this.userService.getFollowers(parsedUserId).subscribe((json: User[]) => this.followersUsers = json);
       this.userService.getFollows(parsedUserId).subscribe((json: User[]) => {
         this.followsUsers = json;
-        this.follows = this.followsUsers.find(u => u.id === event) != null;
-        console.log(this.currentUser.id);
-        console.log(event);
+
         this.otherUser = this.currentUser.id !== event;
     });
+    this.userService.getFollows(this.currentUser.id).subscribe((json: User[]) => {
+
+      this.follows = this.followsUsers.find(u => u.id === event) != null;
+      console.log(this.currentUser.id);
+      console.log(event);
+
+      this.otherUser = this.currentUser.id !== event;
+  });
 
     });
     this.showActivities();
