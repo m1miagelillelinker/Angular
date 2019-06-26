@@ -18,4 +18,5 @@ export interface CommentaireMeta {
     status: number;
     createdAt: Date;
     updatedAt: Date;
+    note?: number;
 }
