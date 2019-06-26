@@ -1,5 +1,6 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { UserService } from '../../../shared/services/user.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-display-activities',
@@ -10,13 +11,23 @@ export class DisplayActivitiesComponent implements OnInit {
 
   @Input() activities: any;
   @Input() user: any;
+  @Output() change = new EventEmitter();
+
   constructor(
     private userService: UserService,
+    private router: Router,
   ) { }
 
   ngOnInit() {
-    console.log(this.user);
-    // this.userService.getHistoryById(this.user.id).subscribe(res => console.log(res));
+  }
+
+  goToProduct(type, id) {
+    this.router.navigate(['app/products', type, id]);
+  }
+
+  goToUser(id) {
+    this.change.emit(id);
+    this.router.navigate(['app/account', id]);
   }
 
 }

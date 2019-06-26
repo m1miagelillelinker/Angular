@@ -20,6 +20,13 @@
 
 .note {
     text-align: left;
+    cursor: auto;
+    color: gray;
+
+    .selected {
+        color: black;
+        cursor: pointer;
+    }
 }
 
 .popoverTitle {

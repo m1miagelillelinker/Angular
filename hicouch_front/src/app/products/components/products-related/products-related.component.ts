@@ -73,18 +73,14 @@ export class ProductsRelatedComponent implements OnInit, OnChanges {
             });
         }
         let tab = [];
-        console.log(this.allProducts);
-        console.log(this.filteredProducts);
         this.fetchNavigation();
         if (number >= 5) {
             tab = this.filteredProducts.slice(number, number + 5);
             this.reloading = false;
-            console.log(tab);
             return tab;
         } else {
             tab = this.filteredProducts.slice(0, 5);
             this.reloading = false;
-            console.log(tab);
             return tab;
         }
     }
@@ -203,10 +199,10 @@ export class ProductsRelatedComponent implements OnInit, OnChanges {
     showPopover(asso: Association) {
         this.showComments = true;
         this.assoComment = asso;
+        const element = document.querySelector('#popover');
+        element.scrollIntoView();
         if (this.showComments) {
             this.assoComment = asso;
-
-            // TODO : be able to scroll to comments
         }
     }
 

@@ -16,7 +16,7 @@
 	<div class="username">
 		<span>{{user.pseudo}}</span>
 	</div>
-	<button  mat-raised-button (click)="openDialog()" class="editbutton" >Editer le profil</button>
+	<button  mat-raised-button *ngIf="!otherUser"(click)="openDialog()" class="editbutton" >Editer le profil</button>
 
 
 	<!-- Display the profile-progess -->
@@ -44,7 +44,7 @@
 		</div>
 	</div>
 	<!-- Display the table of Activities -->
-	<app-display-activities *ngIf="activitiesSelected && user" [user]="user"[activities]="tableActivites">
+	<app-display-activities (change)="refresh($event)" *ngIf="activitiesSelected && user && tableActivites.rows != null" [user]="user"[activities]="tableActivites">
 	</app-display-activities>
 
 	<!-- Display subcribers -->

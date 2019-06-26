@@ -33,8 +33,8 @@ export class AccountPageComponent implements OnInit, OnChanges {
   };
 
   tableActivites = {
-    columns: ['Utilisateur', 'Activité', 'Détails de l\'activité', 'Date'],
-    rows: this.getActivities()
+    columns: ['Utilisateur', 'Activité', 'Produit 1', 'Produit 2'],
+    rows: null
   };
 
   followersUsers: User[];
@@ -78,14 +78,11 @@ export class AccountPageComponent implements OnInit, OnChanges {
       };
       this.badges = user.badges;
       this.user = myUser;
-      console.log(myUser);
-      console.log(this.currentUser);
-      console.log(this.user.id);
-      this.userService.getHistoryById(user.id).subscribe(res => console.log(res));
       this.newUser = this.user;
       this.userService.getFollowers(parsedUserId).subscribe((json: User[]) => this.followersUsers = json);
       this.userService.getFollows(parsedUserId).subscribe((json: User[]) => this.followsUsers = json);
       this.otherUser = this.currentUser.id !== this.user.id;
+      this.getActivities();
     });
 
   }
@@ -111,12 +108,12 @@ export class AccountPageComponent implements OnInit, OnChanges {
   }
 
   getActivities() {
-    return [
-      [ 'Elise', 'a créé une nouvelle association', 'a créé un tag personnageFéminin', '06/juin/2019'],
-      [ 'Mathieu', 'a créé une nouvelle association', 'a créé un tag BestMovies', '06/juillet/2019' ],
-      [ 'Anass', 'a modifié une nouvelle association', 'a créé un tag MarvelMovies', '06/juillet/2019' ],
-      [ 'Edouard', 'a créé une nouvelle association', 'a créé un tag DCMovies', '06/Août/2019' ]
-    ];
+    if (this.user.id) {
+      return this.userService.getHistoryById(this.user.id).subscribe((res) => {
+        this.tableActivites.rows = res;
+      });
+    }
+
   }
   refresh(event) {
     this.userService.getCurrentUser().subscribe(user => this.currentUser = user);
@@ -137,17 +134,17 @@ export class AccountPageComponent implements OnInit, OnChanges {
       };
       this.badges = user.badges;
       this.user = myUser;
-      console.log(myUser);
-      console.log(this.user.id);
-      this.userService.getHistoryById(user.id).subscribe(res => console.log(res));
       this.userService.getFollowers(parsedUserId).subscribe((json: User[]) => this.followersUsers = json);
       this.userService.getFollows(parsedUserId).subscribe((json: User[]) => {
         this.followsUsers = json;
-        this.follows = this.followsUsers.find(u => u.id === event) != null;
-        console.log(this.currentUser.id);
-        console.log(event);
+
         this.otherUser = this.currentUser.id !== event;
     });
+    this.userService.getFollows(this.currentUser.id).subscribe((json: User[]) => {
+
+      this.follows = this.followsUsers.find(u => u.id === event) != null;
+      this.otherUser = this.currentUser.id !== event;
+  });
 
     });
     this.showActivities();
@@ -172,7 +169,6 @@ export class AccountPageComponent implements OnInit, OnChanges {
   }
 
   unFollow(id) {
-    console.log(id);
     const userId = this.route.snapshot.paramMap.get('userId');
     const parsedUserId = parseInt(userId, 10);
     this.userService.unFollow(this.currentUser.id, parsedUserId).subscribe(res => console.log(res));

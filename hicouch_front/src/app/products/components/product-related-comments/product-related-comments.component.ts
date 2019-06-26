@@ -1,16 +1,18 @@
-import {Component, Inject, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';
-import {Association} from '../../../shared/models/association';
-import {Router} from '@angular/router';
-import {Comment} from '../../../shared/models/comment';
-import {User} from '../../../shared/models/user';
-import {CommentService} from '../../../shared/services/comment.service';
+import { Component, Inject, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import { Association } from '../../../shared/models/association';
+import { Router } from '@angular/router';
+import { Comment } from '../../../shared/models/comment';
+import { User } from '../../../shared/models/user';
+import { CommentService } from '../../../shared/services/comment.service';
 import { FormControl, Validators } from '@angular/forms';
 import { UserService } from '../../../shared/services/user.service';
-import {Signalement} from '../../../shared/models/signalement';
-import {SignalementService} from '../../../shared/services/signalement.service';
-import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from '@angular/material';
-import {ProductService} from '../../../shared/services/product.service';
-import {VoteService} from '../../../shared/services/vote.service';
+import { Signalement } from '../../../shared/models/signalement';
+import { SignalementService } from '../../../shared/services/signalement.service';
+import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material';
+import { ProductService } from '../../../shared/services/product.service';
+import { VoteService } from '../../../shared/services/vote.service';
+import { Vote } from '../../../shared/models/vote';
+import { AssociationService } from '../../../shared/services/association.service';
 
 export interface DialogDataComment {
     comment: Comment;
@@ -41,22 +43,28 @@ export class ProductRelatedCommentsComponent implements OnInit, OnChanges {
         private commentService: CommentService,
         private userService: UserService,
         private voteService: VoteService,
-        public dialog: MatDialog
+        public dialog: MatDialog,
+        private associationService: AssociationService,
     ) { }
 
     ngOnInit() {
+        const element = document.querySelector('#scrollId');
+        element.scrollIntoView();
         this.commentService.getCommentByIdPair(this.asso.association.idPair).subscribe((comments: any) => {
             this.commentaires = comments;
         });
+        // this.associationService.fetchtAssociationByProduct(this.asso.association.idPair).subscribe(res => console.log(res));
         this.canVoteUpA = this.asso.vote ? (this.asso.vote.vote === (0 || -1)) : true;
         this.canVoteDownA = this.asso.vote ? (this.asso.vote.vote === (0 || 1)) : true;
-
+        console.log(this.asso);
     }
 
     ngOnChanges(changes: SimpleChanges): void {
         this.commentService.getCommentByIdPair(this.asso.association.idPair).subscribe((comments: any) => {
             this.commentaires = comments;
         });
+        this.canVoteUpA = this.asso.vote ? (this.asso.vote.vote === (0 || -1)) : true;
+        this.canVoteDownA = this.asso.vote ? (this.asso.vote.vote === (0 || 1)) : true;
     }
 
     goTo(product) {
@@ -64,52 +72,32 @@ export class ProductRelatedCommentsComponent implements OnInit, OnChanges {
     }
 
     noteAsso(note: number) {
+        const vote = {
+            id: this.asso.vote ? this.asso.vote.id : undefined,
+            idPair: this.asso.association.id,
+            vote: this.asso.vote && (this.asso.vote.vote === note) ? 0 : note,
+            idUser: this.loggedUser.id
+        };
+        this.voteService.vote(vote).subscribe((v: Vote) => this.asso.vote = v.vote !== 0 ? v : null);
+        this.canVoteUpA = note === (0 || -1);
+        this.canVoteDownA = note === (0 || 1);
+        this.associationService.fetchtAssociationByProduct(this.asso.productA.id).subscribe(res => this.asso.note = res[0].note);
 
-        if (!this.asso.vote) {
-            this.canVoteUpA = true;
-            this.canVoteDownA = true;
-            const vote = {
-                idPair: this.asso.association.id, vote: note, idUser: this.loggedUser.id
-            };
-            this.voteService.vote(vote).subscribe();
-        } else {
-            if (this.asso.vote.vote === note) {
-                this.canVoteUpA = this.asso.vote.vote === (0 || -1);
-                this.canVoteDownA = this.asso.vote.vote === (0 || 1);
-                const vote = {
-                    idPair: this.asso.association.id, vote: 0, idUser: this.loggedUser.id
-                };
-                this.voteService.vote(vote).subscribe();
-            } else {
-                const vote = {
-                    idPair: this.asso.association.id, vote: note, idUser: this.loggedUser.id
-                };
-                this.voteService.vote(vote).subscribe();
-            }
-        }
+    }
+
+    noteComment(note: number, comment: Comment) {
+        const vote = {
+            id: comment.vote ? comment.vote.id : undefined,
+            idCommentaire: comment.commentaire.id,
+            vote: comment.vote && (comment.vote.vote === note) ? 0 : note,
+            idUser: this.loggedUser.id
+        };
+        this.canVoteUp = note === (0 || -1);
+        this.canVoteDown = note === (0 || 1);
+        this.voteService.vote(vote).subscribe((v: Vote) => comment.vote = v.vote !== 0 ? v : null);
         this.commentService.getCommentByIdPair(this.asso.association.idPair).subscribe((comments: any) => {
             this.commentaires = comments;
         });
-    }
-
-    riseNoteComment(comment) {
-        const v = comment.vote;
-        console.log(v);
-        const vote = {
-            idComment: this.asso.association.idComment, vote: 1, idUser: this.loggedUser.id
-        };
-        this.voteService.vote(vote).subscribe(res => console.log(res));
-    }
-
-    decreaseNoteComment(comment) {
-        let currentVote = null;
-        this.voteService.getVoteByUserId(this.loggedUser.id).subscribe(res => currentVote = res.vote);
-        const votee = currentVote === 0 ? 1 : 0;
-        const vote = {
-            idComment: this.asso.association.idComment, vote: votee, idUser: this.loggedUser.id
-        };
-        this.canVoteDown = votee === 0 || this.canVoteUp;
-        this.voteService.vote(vote).subscribe(res => console.log(res));
     }
 
     goToUserProfile(userId) {
@@ -135,7 +123,7 @@ export class ProductRelatedCommentsComponent implements OnInit, OnChanges {
     getUserSpeudo(userId: number) {
         let user;
         this.userService.getUser(userId).subscribe(
-            value => {user = value; }
+            value => { user = value; }
         );
         return user.pseudo;
     }
@@ -144,7 +132,7 @@ export class ProductRelatedCommentsComponent implements OnInit, OnChanges {
         return comment.owned;
     }
 
-    canSignal( comment: Comment) {
+    canSignal(comment: Comment) {
         return !comment.owned;
     }
 
@@ -206,7 +194,7 @@ export class ProductsRelatedCommentUpdateDialogComponent implements OnInit {
     constructor(
         public dialogRef: MatDialogRef<ProductsRelatedCommentUpdateDialogComponent>,
         private commentService: CommentService,
-        @Inject(MAT_DIALOG_DATA) public data: DialogDataComment) {}
+        @Inject(MAT_DIALOG_DATA) public data: DialogDataComment) { }
 
     onNoClick(): void {
 
@@ -240,7 +228,7 @@ export class ProductsRelatedCommentSignalDialogComponent implements OnInit {
         public dialogRef: MatDialogRef<ProductsRelatedCommentSignalDialogComponent>,
         private productService: ProductService,
         private signalementService: SignalementService,
-        @Inject(MAT_DIALOG_DATA) public data: DialogDataComment) {}
+        @Inject(MAT_DIALOG_DATA) public data: DialogDataComment) { }
 
     onNoClick(): void {
         this.dialogRef.close();
@@ -263,7 +251,7 @@ export class ProductsRelatedCommentSignalDialogComponent implements OnInit {
 export class SpinnerDialogComponent implements OnInit {
 
     constructor(
-        public dialogRef: MatDialogRef<SpinnerDialogComponent>) {}
+        public dialogRef: MatDialogRef<SpinnerDialogComponent>) { }
 
 
     ngOnInit() {

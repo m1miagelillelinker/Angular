@@ -23,11 +23,8 @@ export class VoteService {
     }
 
     vote(vote: Vote) {
+        console.log('voting : ', vote);
         return this.api.putVote(vote);
-    }
-
-    unvote(vote: Vote) {
-        return this.http.put<Vote>(  `//hicjv8.azurewebsites.net/vote/unvote/`, vote);
     }
 
 }

@@ -1,15 +1,13 @@
 
-<div id="popover" >
+<div #scrollId id="popover" >
   <mat-list>
     <mat-list-item>
       <span matLine>
         <span (click)="goTo(asso.productB)" class="popoverTitle url">{{asso.productB.title}} </span>
         <span class="note" >
-          <mat-icon *ngIf="!canVoteUpA" (click)="riseNoteAsso()">star</mat-icon>
-          <mat-icon *ngIf="canVoteDownA" (click)="decreaseNoteAsso()">star_border</mat-icon>
-          {{asso.vote}}
+          {{asso.note}}
         </span>
-        <span class="note" (click)="noteAsso(1)">
+        <span class="note"  (click)="noteAsso(1)">
           <mat-icon [ngClass]="{'selected': canVoteUpA}">thumb_up_alt</mat-icon>
         </span>
         <span class="note" (click)="noteAsso(-1)">
@@ -56,10 +54,10 @@
         <br>
         <span *ngIf="showComment(comment)">
           {{comment.commentaire.note}} points
-          <span class="note" (click)="riseNoteAsso()">
+          <span class="note" (click)="noteComment(1, comment)">
             <mat-icon [ngClass]="{'selected': canVoteUp}">thumb_up_alt</mat-icon>
           </span>
-          <span class="note" (click)="decreaseNoteAsso()">
+          <span class="note" (click)="noteComment(-1, comment)">
             <mat-icon [ngClass]="{'selected': canVoteDown}">thumb_down_alt</mat-icon>
           </span>
          </span>
