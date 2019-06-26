@@ -10,6 +10,13 @@
   display: flex;
   align-items: center;
   padding-left: 24px;
+  .empty {
+    margin-top: auto;
+    margin-bottom: auto;
+    margin-right: 5px;
+    font-size: 20px;
+    cursor: pointer;
+  }
 
   .search-bar {
     margin-top: auto;

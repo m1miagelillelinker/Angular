@@ -1,6 +1,7 @@
 <div id="search-bar">
   <div class="search-bar">
-    <input #searchInput class="search-field" (focusout)="onBlur()" placeholder="Rechercher..." (keyup)="onType(searchInput.value)"
+    <div class="empty" (click)="emptySearch()">X</div>
+    <input #searchInput class="search-field" placeholder="Rechercher..." (keyup)="onType(searchInput.value)"
       (keyup.enter)="onType(searchInput.value)" />
       <!--TODO-->
       <select #filterInput placeholder="Filtres" (change)="chooseFilter($event)">
@@ -9,6 +10,7 @@
         <option value="book">Livres</option>
         <option value="game">Jeux vidéos</option>
       </select>
+
     <button (click)="onType(searchInput.value)">Rechercher</button>
 
   </div>

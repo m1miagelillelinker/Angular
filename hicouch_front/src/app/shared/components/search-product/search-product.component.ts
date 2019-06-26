@@ -40,7 +40,7 @@ export class SearchProductComponent {
     this.inputIsFocused = true;
   }
 
-  onBlur(): void {
+  emptySearch(): void {
     this.inputIsFocused = false;
     this.inputValue = '';
     this.searchInput.nativeElement.value = '';

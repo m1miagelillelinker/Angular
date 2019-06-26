@@ -17,7 +17,7 @@ export class HeaderComponent implements OnInit {
   @Output() isMovieSearched = new EventEmitter();
   products: any;
   type: any;
-  inputValue: any;
+  // inputValue: any;
 
   constructor(
     private userService: UserService,
@@ -49,7 +49,7 @@ export class HeaderComponent implements OnInit {
   }
 
   toggleSearchPropositions(value) {
-    this.inputValue = '';
+    // this.inputValue = '';
     value = value.replace(' ', '+');
     this.productService.getProductByTypeAndTitle(value, this.type).subscribe((movie) => {
       this.products = movie;
