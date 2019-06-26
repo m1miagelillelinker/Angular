@@ -12,8 +12,12 @@
       }
 
       th, td {
-        width: 29%;
+        max-width: 25%;
         padding: 4px 50px 4px 5px;
+        &.clickable{
+          text-decoration: underline;
+          cursor:pointer;
+        }
       }
 
       th {

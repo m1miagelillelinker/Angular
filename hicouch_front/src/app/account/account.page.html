@@ -44,7 +44,7 @@
 		</div>
 	</div>
 	<!-- Display the table of Activities -->
-	<app-display-activities *ngIf="activitiesSelected && user" [user]="user"[activities]="tableActivites">
+	<app-display-activities (change)="refresh($event)" *ngIf="activitiesSelected && user && tableActivites.rows != null" [user]="user"[activities]="tableActivites">
 	</app-display-activities>
 
 	<!-- Display subcribers -->

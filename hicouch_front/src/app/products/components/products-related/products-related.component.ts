@@ -199,10 +199,10 @@ export class ProductsRelatedComponent implements OnInit, OnChanges {
     showPopover(asso: Association) {
         this.showComments = true;
         this.assoComment = asso;
+        const element = document.querySelector('#popover');
+        element.scrollIntoView();
         if (this.showComments) {
             this.assoComment = asso;
-
-            // TODO : be able to scroll to comments
         }
     }
 

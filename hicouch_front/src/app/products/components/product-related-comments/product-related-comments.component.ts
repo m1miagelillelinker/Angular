@@ -48,6 +48,8 @@ export class ProductRelatedCommentsComponent implements OnInit, OnChanges {
     ) { }
 
     ngOnInit() {
+        const element = document.querySelector('#scrollId');
+        element.scrollIntoView();
         this.commentService.getCommentByIdPair(this.asso.association.idPair).subscribe((comments: any) => {
             this.commentaires = comments;
         });

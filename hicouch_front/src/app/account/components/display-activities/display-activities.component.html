@@ -7,7 +7,22 @@
     </thead>
     <tbody>
       <tr *ngFor="let row of activities.rows">
-        <td *ngFor="let item of row">{{item}}</td>
+        <td class="clickable" (click)="goToUser(row.userId)">
+          {{row.username}}
+        </td>
+        <!-- <td *ngFor="let item of row">{{item}}</td> -->
+        <td>
+          <div *ngIf="row.historique.type === 'COMMENTAIRE'">a commenté une association</div>
+          <div *ngIf="row.historique.type === 'ASSOCIATION'">a créé une association</div>
+
+        </td>
+        <td class="clickable" (click)="goToProduct(row.idTypeProduitA, row.idProduitA)">
+          {{row.nomProduitA}}
+        </td>
+        <td class="clickable" (click)="goToProduct(row.idTypeProduitB, row.idProduitB)">
+          {{row.nomProduitB}}
+        </td>
+        <!-- <td *ngFor="let item of row">{{item}}</td> -->
       </tr>
     </tbody>
   </table>

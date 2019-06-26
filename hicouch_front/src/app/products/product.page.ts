@@ -51,6 +51,9 @@ export class ProductPageComponent implements OnInit, OnChanges, OnDestroy {
       this.productId = param['productId'];
       this.productType = param['productType'];
       this.fetchProducts();
+      this.router.events.subscribe((evt) => {
+        window.scrollTo(0, 0);
+    });
     });
 
   }
@@ -60,6 +63,9 @@ export class ProductPageComponent implements OnInit, OnChanges, OnDestroy {
       this.productId = param['productId'];
       this.productType = param['productType'];
       this.fetchProducts();
+      this.router.events.subscribe((evt) => {
+        window.scrollTo(0, 0);
+    });
     });
 
   }
