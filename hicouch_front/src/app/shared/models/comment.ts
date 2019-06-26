@@ -1,11 +1,13 @@
 import {Association} from './association';
 import {User} from './user';
+import {Vote} from './vote';
 
 export interface Comment {
     association: Association;
     auteur: User;
     commentaire: CommentaireMeta;
     owned: boolean;
+    vote: Vote;
 }
 
 export interface CommentaireMeta {
@@ -16,4 +18,5 @@ export interface CommentaireMeta {
     status: number;
     createdAt: Date;
     updatedAt: Date;
+    note?: number;
 }
