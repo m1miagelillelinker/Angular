@@ -6,7 +6,6 @@ import { User } from '../../../shared/models/user';
 import { CommentService } from '../../../shared/services/comment.service';
 import { FormControl, Validators } from '@angular/forms';
 import { UserService } from '../../../shared/services/user.service';
-import { Signalement } from '../../../shared/models/signalement';
 import { SignalementService } from '../../../shared/services/signalement.service';
 import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material';
 import { ProductService } from '../../../shared/services/product.service';
@@ -72,20 +71,21 @@ export class ProductRelatedCommentsComponent implements OnInit, OnChanges {
     }
 
     noteAsso(note: number) {
+        this.asso.association.note += this.asso.vote && (this.asso.vote.vote === note) ? -note : note;
         const vote = {
             id: this.asso.vote ? this.asso.vote.id : undefined,
-            idPair: this.asso.association.id,
+            idPair: this.asso.association.idPair,
             vote: this.asso.vote && (this.asso.vote.vote === note) ? 0 : note,
             idUser: this.loggedUser.id
         };
         this.voteService.vote(vote).subscribe((v: Vote) => this.asso.vote = v.vote !== 0 ? v : null);
         this.canVoteUpA = note === (0 || -1);
         this.canVoteDownA = note === (0 || 1);
-        this.associationService.fetchtAssociationByProduct(this.asso.productA.id).subscribe(res => this.asso.note = res[0].note);
 
     }
 
     noteComment(note: number, comment: Comment) {
+        comment.commentaire.note += comment.vote && (comment.vote.vote === note) ? -note : note;
         const vote = {
             id: comment.vote ? comment.vote.id : undefined,
             idCommentaire: comment.commentaire.id,
@@ -95,9 +95,6 @@ export class ProductRelatedCommentsComponent implements OnInit, OnChanges {
         this.canVoteUp = note === (0 || -1);
         this.canVoteDown = note === (0 || 1);
         this.voteService.vote(vote).subscribe((v: Vote) => comment.vote = v.vote !== 0 ? v : null);
-        this.commentService.getCommentByIdPair(this.asso.association.idPair).subscribe((comments: any) => {
-            this.commentaires = comments;
-        });
     }
 
     goToUserProfile(userId) {

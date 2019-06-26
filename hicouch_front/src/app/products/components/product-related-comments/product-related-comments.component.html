@@ -5,7 +5,7 @@
       <span matLine>
         <span (click)="goTo(asso.productB)" class="popoverTitle url">{{asso.productB.title}} </span>
         <span class="note" >
-          {{asso.note}}
+          {{asso.association.note}}
         </span>
         <span class="note"  (click)="noteAsso(1)">
           <mat-icon [ngClass]="{'selected': canVoteUpA}">thumb_up_alt</mat-icon>
