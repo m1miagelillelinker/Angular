@@ -11,7 +11,8 @@ import {HicouchAPIService} from './hicouchAPI.service';
 })
 export class UserService {
 
-  constructor(private api: HicouchAPIService) {
+  constructor(private http: HttpClient,
+    private api: HicouchAPIService) {
   }
 
   getUser(userId: number): Observable<User> {
@@ -46,6 +47,6 @@ export class UserService {
   }
 
   getHistoryById(id): Observable<any> {
-    return this.api.getHistory(id);
+    return this.http.get( `//hicjv8.azurewebsites.net/historique/${id}`, id);
   }
 }

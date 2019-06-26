@@ -93,23 +93,23 @@ export class ProductRelatedCommentsComponent implements OnInit, OnChanges {
     }
 
     riseNoteComment(comment) {
-        // const v = comment.vote;
-        // console.log(v);
-        // const vote = {
-        //     idComment: this.asso.association.idComment, vote: , idUser: this.loggedUser.id
-        // };
-        // this.voteService.vote(vote).subscribe(res => console.log(res));
+        const v = comment.vote;
+        console.log(v);
+        const vote = {
+            idComment: this.asso.association.idComment, vote: 1, idUser: this.loggedUser.id
+        };
+        this.voteService.vote(vote).subscribe(res => console.log(res));
     }
 
     decreaseNoteComment(comment) {
-        // let currentVote = null;
-        // this.voteService.getVoteByUserId(this.loggedUser.id).subscribe(res => currentVote = res.vote);
-        // const votee = currentVote === 0 ? 1 : 0;
-        // const vote = {
-        //     idComment: this.asso.association.idComment, vote: votee, idUser: this.loggedUser.id
-        // };
-        // this.canVoteDown = votee === 0 || this.canVoteUp;
-        // this.voteService.vote(vote).subscribe(res => console.log(res));
+        let currentVote = null;
+        this.voteService.getVoteByUserId(this.loggedUser.id).subscribe(res => currentVote = res.vote);
+        const votee = currentVote === 0 ? 1 : 0;
+        const vote = {
+            idComment: this.asso.association.idComment, vote: votee, idUser: this.loggedUser.id
+        };
+        this.canVoteDown = votee === 0 || this.canVoteUp;
+        this.voteService.vote(vote).subscribe(res => console.log(res));
     }
 
     goToUserProfile(userId) {
@@ -118,7 +118,7 @@ export class ProductRelatedCommentsComponent implements OnInit, OnChanges {
     }
 
     addComment() {
-        this.commentService.putComment(this.commentContentAdd.value, this.asso.association.idPair);
+        this.commentService.putComment(this.loggedUser.id, this.commentContentAdd.value, this.asso.association.idPair);
         this.commentService.getCommentByIdPair(this.asso.association.idPair).subscribe((comments: any) => {
             this.commentaires = comments;
         });

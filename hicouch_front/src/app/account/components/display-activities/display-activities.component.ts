@@ -15,7 +15,8 @@ export class DisplayActivitiesComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.userService.getHistoryById(this.user.id).subscribe(res => console.log(res));
+    console.log(this.user);
+    // this.userService.getHistoryById(this.user.id).subscribe(res => console.log(res));
   }
 
 }

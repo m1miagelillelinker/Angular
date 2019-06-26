@@ -3,8 +3,8 @@
     <app-search-product class="search-field" [productList]="products" (productSelected)="goToProduct($event)"
         (searchValue)="toggleSearchPropositions($event)" (filterSelected)="setFilter($event)"></app-search-product>
 
-    <div class="user-infos" (click)="goToUser()" *ngIf="user">
-        <img src="{{user.picture}}" />
+    <div class="user-infos"  *ngIf="user">
+        <img src="{{user.picture}}" (click)="goToUser()"/>
         <div *ngIf="user.typeUser === 1 "class="log-out" (click)="goToModo()">
             Modération
         </div>

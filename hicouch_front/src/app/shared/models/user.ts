@@ -11,6 +11,7 @@ export interface User {
     idToken: string;
     accessToken: string;
     expiresAt: number;
+    typeUser?: number;
 }
 
 /*export interface User {

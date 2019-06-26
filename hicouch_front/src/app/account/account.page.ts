@@ -63,6 +63,7 @@ export class AccountPageComponent implements OnInit, OnChanges {
     const userId = this.route.snapshot.paramMap.get('userId');
     const parsedUserId = parseInt(userId, 10);
     this.userService.getUser(parsedUserId).subscribe((user) => {
+      console.log(user);
       const myUser = {
         id: user.id,
         badges: user.badges,
@@ -79,7 +80,8 @@ export class AccountPageComponent implements OnInit, OnChanges {
       this.user = myUser;
       console.log(myUser);
       console.log(this.currentUser);
-      this.userService.getHistoryById(this.currentUser.id).subscribe(res => console.log(res));
+      console.log(this.user.id);
+      this.userService.getHistoryById(user.id).subscribe(res => console.log(res));
       this.newUser = this.user;
       this.userService.getFollowers(parsedUserId).subscribe((json: User[]) => this.followersUsers = json);
       this.userService.getFollows(parsedUserId).subscribe((json: User[]) => this.followsUsers = json);
@@ -136,6 +138,7 @@ export class AccountPageComponent implements OnInit, OnChanges {
       this.badges = user.badges;
       this.user = myUser;
       console.log(myUser);
+      console.log(this.user.id);
       this.userService.getHistoryById(user.id).subscribe(res => console.log(res));
       this.userService.getFollowers(parsedUserId).subscribe((json: User[]) => this.followersUsers = json);
       this.userService.getFollows(parsedUserId).subscribe((json: User[]) => {
@@ -201,7 +204,8 @@ export class AccountPageComponent implements OnInit, OnChanges {
   templateUrl: 'dialog-edit-profil.html',
 })
 export class DialogEditProfilComponent {
-
+  selectedFile: boolean;
+  processFile: boolean;
   constructor(
     public dialogRef: MatDialogRef<DialogEditProfilComponent>,
     @Inject(MAT_DIALOG_DATA) public data: DialogData) {}
@@ -210,51 +214,7 @@ export class DialogEditProfilComponent {
   onNoClick(): void {
     this.dialogRef.close();
   }
+
 }
 
-class ImageSnippet {
-  pending = false;
-  status = 'init';
-  constructor(public src: string, public file: File) {}
-}
-/*
-export class ImageUploadComponent {
 
-  selectedFile: ImageSnippet;
-
-  constructor(private userService: UserService){}
-
-  private onSuccess() {
-    this.selectedFile.pending = false;
-    this.selectedFile.status = 'ok';
-  }
-
-  private onError() {
-    this.selectedFile.pending = false;
-    this.selectedFile.status = 'fail';
-    this.selectedFile.src = '';
-  }
-
-
-  processFile(imageInput: any) {
-    const file: File = imageInput.files[0];
-    const reader = new FileReader();
-
-    reader.addEventListener('load', (event: any) => {
-
-      this.selectedFile = new ImageSnippet(event.target.result, file);
-
-      this.userService.editUserImage(this.selectedFile.file).subscribe(
-        (res) => {
-          this.onSuccess();
-        },
-        (err) => {
-          this.onError()
-
-        })
-    });
-
-    reader.readAsDataURL(file);
-  }
-}
-*/
