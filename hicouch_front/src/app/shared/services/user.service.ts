@@ -47,6 +47,6 @@ export class UserService {
   }
 
   getHistoryById(id): Observable<any> {
-    return this.http.get( `//hicjv8.azurewebsites.net/historique/${id}`, id);
+    return this.http.get( `https://hicjvdev.azurewebsites.net/historique/${id}`, id);
   }
 }

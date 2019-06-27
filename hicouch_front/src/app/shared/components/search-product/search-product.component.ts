@@ -18,7 +18,6 @@ export class SearchProductComponent {
   @Output() filterSelected = new EventEmitter();
   @Input() productList: any[];
   @Input() selectedOption: Product;
-  @Input() inputValue;
   @ViewChild('searchInput') searchInput: ElementRef;
   @ViewChild('filterInput') filterInput: ElementRef;
   productType: any;
@@ -42,7 +41,6 @@ export class SearchProductComponent {
 
   emptySearch(): void {
     this.inputIsFocused = false;
-    this.inputValue = '';
     this.searchInput.nativeElement.value = '';
     this.productList = [];
   }

@@ -1,6 +1,6 @@
 <div class="header-content">
     <img src="/assets/images/logo.png" (click)="goToHomePage()" />
-    <app-search-product class="search-field" [inputValue]="inputValue" [productList]="products" (productSelected)="goToProduct($event)"
+    <app-search-product class="search-field" [productList]="products" (productSelected)="goToProduct($event)"
         (searchValue)="toggleSearchPropositions($event)" (filterSelected)="setFilter($event)"></app-search-product>
 
     <div class="user-infos"  *ngIf="user">

@@ -1,8 +1,8 @@
 import { Component, OnInit, Inject, Input, OnChanges } from '@angular/core';
-import {ActivatedRoute, Router, Data } from '@angular/router';
+import { ActivatedRoute, Router, Data } from '@angular/router';
 import { UserService } from '../shared/services/user.service';
 import { Badge } from '../shared/models/badge';
-import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { User } from '../shared/models/user';
 
 
@@ -59,6 +59,8 @@ export class AccountPageComponent implements OnInit, OnChanges {
   }
 
   fetchUser() {
+    this.followsUsers = [];
+    this.followersUsers = [];
     this.userService.getCurrentUser().subscribe(user => this.currentUser = user);
     const userId = this.route.snapshot.paramMap.get('userId');
     const parsedUserId = parseInt(userId, 10);
@@ -79,8 +81,25 @@ export class AccountPageComponent implements OnInit, OnChanges {
       this.badges = user.badges;
       this.user = myUser;
       this.newUser = this.user;
-      this.userService.getFollowers(parsedUserId).subscribe((json: User[]) => this.followersUsers = json);
-      this.userService.getFollows(parsedUserId).subscribe((json: User[]) => this.followsUsers = json);
+      this.userService.getFollowers(parsedUserId).subscribe((json: User[]) => {
+        json.forEach((us: any) => {
+          const found = this.followersUsers.find(u => u.id === user.id);
+          if (!found) {
+            this.followersUsers.push(user);
+          }
+        });
+      });
+      this.userService.getFollows(parsedUserId).subscribe((json: User[]) => {
+        json.forEach((us: any) => {
+          const found = this.followsUsers.find(u => u.id === us.id);
+          if (!found) {
+            this.followsUsers.push(us);
+          }
+        });
+        this.follows = this.followsUsers.find(u => u.id === parsedUserId) != null ||
+          this.followersUsers.find(u => u.id === this.currentUser.id) != null;
+        this.otherUser = this.currentUser.id !== parsedUserId;
+      });
       this.otherUser = this.currentUser.id !== this.user.id;
       this.getActivities();
     });
@@ -116,10 +135,11 @@ export class AccountPageComponent implements OnInit, OnChanges {
 
   }
   refresh(event) {
+    this.followsUsers = [];
+    this.followersUsers = [];
     this.userService.getCurrentUser().subscribe(user => this.currentUser = user);
     const parsedUserId = parseInt(event, 10);
     this.userService.getUser(parsedUserId).subscribe((user) => {
-      console.log(user);
       const myUser = {
         id: user.id,
         badges: user.badges,
@@ -134,18 +154,24 @@ export class AccountPageComponent implements OnInit, OnChanges {
       };
       this.badges = user.badges;
       this.user = myUser;
-      this.userService.getFollowers(parsedUserId).subscribe((json: User[]) => this.followersUsers = json);
+      this.userService.getFollowers(parsedUserId).subscribe((json: User[]) => {
+        json.forEach((us: any) => {
+          const found = this.followsUsers.find(u => u.id === user.id);
+          if (!found) {
+            this.followersUsers.push(user);
+          }
+        });
+      });
       this.userService.getFollows(parsedUserId).subscribe((json: User[]) => {
-        this.followsUsers = json;
-
-        this.otherUser = this.currentUser.id !== event;
-    });
-    this.userService.getFollows(this.currentUser.id).subscribe((json: User[]) => {
-
-      this.follows = this.followsUsers.find(u => u.id === event) != null;
-      this.otherUser = this.currentUser.id !== event;
-  });
-
+        json.forEach((us: any) => {
+          const found = this.followsUsers.find(u => u.id === us.id);
+          if (!found) {
+            this.followsUsers.push(us);
+          }
+        });
+        this.follows = this.followsUsers.find(u => u.id === parsedUserId) != null;
+        this.otherUser = this.currentUser.id !== parsedUserId;
+      });
     });
     this.showActivities();
   }
@@ -165,20 +191,22 @@ export class AccountPageComponent implements OnInit, OnChanges {
   follow(id) {
     const userId = this.route.snapshot.paramMap.get('userId');
     const parsedUserId = parseInt(userId, 10);
-    this.userService.follow(this.currentUser.id, parsedUserId).subscribe(res => console.log(res));
+    this.follows = true;
+    this.userService.follow(this.currentUser.id, parsedUserId).subscribe(res => this.refresh(parsedUserId));
   }
 
   unFollow(id) {
     const userId = this.route.snapshot.paramMap.get('userId');
     const parsedUserId = parseInt(userId, 10);
-    this.userService.unFollow(this.currentUser.id, parsedUserId).subscribe(res => console.log(res));
+    this.follows = false;
+    this.userService.unFollow(this.currentUser.id, parsedUserId).subscribe(res => this.refresh(parsedUserId));
   }
 
 
   openDialog(): void {
     const dialogRef = this.dialog.open(DialogEditProfilComponent, {
       // width: '300px',
-      data: {pseudo: this.pseudo}
+      data: { pseudo: this.pseudo }
     });
 
     dialogRef.afterClosed().subscribe(result => {
@@ -186,9 +214,9 @@ export class AccountPageComponent implements OnInit, OnChanges {
       this.pseudo = result;
       if (this.pseudo != null) {
         console.log('edit pseudo');
-          this.user.pseudo = this.pseudo;
-          console.log(this.user.id);
-          this.userService.editUserPseudo(this.user).subscribe((json: any) => this.user = json);
+        this.user.pseudo = this.pseudo;
+        console.log(this.user.id);
+        this.userService.editUserPseudo(this.user).subscribe((json: any) => this.user = json);
       }
     });
   }
@@ -204,7 +232,7 @@ export class DialogEditProfilComponent {
   processFile: boolean;
   constructor(
     public dialogRef: MatDialogRef<DialogEditProfilComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: DialogData) {}
+    @Inject(MAT_DIALOG_DATA) public data: DialogData) { }
 
 
   onNoClick(): void {

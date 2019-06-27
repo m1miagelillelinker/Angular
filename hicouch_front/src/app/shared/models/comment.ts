@@ -8,6 +8,8 @@ export interface Comment {
     commentaire: CommentaireMeta;
     owned: boolean;
     vote: Vote;
+    voteUp?: boolean;
+    voteDown?: boolean;
 }
 
 export interface CommentaireMeta {
