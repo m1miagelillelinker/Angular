@@ -37,6 +37,6 @@
 </div>
 <div mat-dialog-actions>
   <button mat-button (click)="onNoClick()">Annuler</button>
-  <button mat-button [mat-dialog-close]="data.animal" (click)="addAssociation()" cdkFocusInitial>Soumettre</button>
+  <button mat-button [mat-dialog-close]="data.animal" (click)="addAssociation()" (click)="showSuccess()" cdkFocusInitial>Soumettre</button>
 </div>
 </div>

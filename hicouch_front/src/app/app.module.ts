@@ -55,6 +55,7 @@ import {ModerationPageComponent} from './moderation/moderation.page';
 import {TagModerationComponent} from './moderation/components/tag-moderation/tag-moderation.component';
 import {CommentModerationComponent} from './moderation/components/comment-moderation/comment-moderation.component';
 import {UserModerationComponent} from './moderation/components/user-moderation/user-moderation.component';
+import { ToastrModule } from 'ngx-toastr';
 
 @NgModule({
     declarations: [
@@ -106,6 +107,7 @@ import {UserModerationComponent} from './moderation/components/user-moderation/u
         MatListModule,
         MatProgressSpinnerModule,
         MatCheckboxModule,
+        ToastrModule.forRoot(),
     ],
     providers: [
         UserService,

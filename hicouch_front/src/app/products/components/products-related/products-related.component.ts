@@ -11,6 +11,10 @@ import { Comment } from '../../../shared/models/comment';
 import { User } from '../../../shared/models/user';
 import { AssociationService } from '../../../shared/services/association.service';
 import { Product } from '../../../shared/models/product';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ToastrService } from 'ngx-toastr';
+
+
 
 @Component({
     selector: 'app-products-related',
@@ -49,6 +53,7 @@ export class ProductsRelatedComponent implements OnInit, OnChanges {
         this.fetchList(0);
         this.showComments = false;
     }
+   
 
 
     fetchNavigation() {
@@ -241,6 +246,7 @@ export class ProductsRelatedAddDialogComponent implements OnInit {
         private productService: ProductService,
         private associationService: AssociationService,
         private commentService: CommentService,
+        private toastr:ToastrService,
         @Inject(MAT_DIALOG_DATA) public data: any) { }
 
     onNoClick(): void {
@@ -325,5 +331,14 @@ export class ProductsRelatedAddDialogComponent implements OnInit {
         this.selectedOption = event;
         this.setSelectedOption(event);
       }
+
+      showSuccess(){
+        this.toastr.info('Association added Succesfuly', 'Félicitation !',{
+          timeOut:3000,
+          positionClass:"toast-top-right",   
+        });
+      } 
+
+      
 
 }
