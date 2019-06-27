@@ -127,9 +127,16 @@ export class AccountPageComponent implements OnInit, OnChanges {
   }
 
   getActivities() {
+    this.tableActivites.rows = [];
     if (this.user.id) {
       return this.userService.getHistoryById(this.user.id).subscribe((res) => {
-        this.tableActivites.rows = res;
+        console.log(res);
+        res.forEach((act: any) => {
+          const found = this.tableActivites.rows.find(u => u.historique.id === act.historique.id);
+          if (!found) {
+            this.tableActivites.rows.push(act);
+          }
+        });
       });
     }
 
@@ -181,7 +188,7 @@ export class AccountPageComponent implements OnInit, OnChanges {
 
   showActivities() {
     this.toggleFeature('activities');
-    this.tableActivites.rows = this.getActivities();
+    this.getActivities();
   }
 
   showFriends() {
