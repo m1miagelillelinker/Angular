@@ -5,13 +5,13 @@
       <span matLine>
         <span (click)="goTo(asso.productB)" class="popoverTitle url">{{asso.productB.title}} </span>
         <span class="note" >
-          {{asso.note}}
+          {{asso.association.note}}
         </span>
         <span class="note"  (click)="noteAsso(1)">
-          <mat-icon [ngClass]="{'selected': canVoteUpA}">thumb_up_alt</mat-icon>
+          <mat-icon [ngClass]="{'selected': isAssoUpvoted}">thumb_up_alt</mat-icon>
         </span>
         <span class="note" (click)="noteAsso(-1)">
-          <mat-icon [ngClass]="{'selected': canVoteDownA}">thumb_down_alt</mat-icon>
+          <mat-icon [ngClass]="{'selected': isAssoDownvoted}">thumb_down_alt</mat-icon>
         </span>
       </span>
     </mat-list-item>
@@ -55,10 +55,10 @@
         <span *ngIf="showComment(comment)">
           {{comment.commentaire.note}} points
           <span class="note" (click)="noteComment(1, comment)">
-            <mat-icon [ngClass]="{'selected': canVoteUp}">thumb_up_alt</mat-icon>
+            <mat-icon [ngClass]="{'selected': comment.isUpvoted}">thumb_up_alt</mat-icon>
           </span>
           <span class="note" (click)="noteComment(-1, comment)">
-            <mat-icon [ngClass]="{'selected': canVoteDown}">thumb_down_alt</mat-icon>
+            <mat-icon [ngClass]="{'selected': comment.isDownvoted}">thumb_down_alt</mat-icon>
           </span>
          </span>
          <span class="url" (click)="showPopoverToEdit(comment)" *ngIf="canEdit(comment)">Modifier</span>

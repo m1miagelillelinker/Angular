@@ -7,7 +7,6 @@ export interface Association {
     productA?: Product;
     productB?: Product;
     vote?: Vote;
-    note?: number;
 }
 
 export interface AssociationMeta {
@@ -18,4 +17,5 @@ export interface AssociationMeta {
     idfournB: string;
     idPair?: number;
     idComment?: number;
+    note?: number;
 }

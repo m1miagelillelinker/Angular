@@ -6,7 +6,6 @@ import { User } from '../../../shared/models/user';
 import { CommentService } from '../../../shared/services/comment.service';
 import { FormControl, Validators } from '@angular/forms';
 import { UserService } from '../../../shared/services/user.service';
-import { Signalement } from '../../../shared/models/signalement';
 import { SignalementService } from '../../../shared/services/signalement.service';
 import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material';
 import { ProductService } from '../../../shared/services/product.service';
@@ -32,11 +31,8 @@ export class ProductRelatedCommentsComponent implements OnInit, OnChanges {
         Validators.maxLength(500)
     ]);
 
-    canVoteUpA: boolean;
-    canVoteDownA: boolean;
-    canVoteUp: boolean;
-    canVoteDown: boolean;
-    checked = false;
+    isAssoUpvoted: boolean;
+    isAssoDownvoted: boolean;
 
     constructor(
         private router: Router,
@@ -52,19 +48,27 @@ export class ProductRelatedCommentsComponent implements OnInit, OnChanges {
         element.scrollIntoView();
         this.commentService.getCommentByIdPair(this.asso.association.idPair).subscribe((comments: any) => {
             this.commentaires = comments;
+            this.commentaires.forEach((c: Comment) => {
+                c.isUpvoted   = c.vote ? c.vote.vote === 1 : false;
+                c.isDownvoted = c.vote ? c.vote.vote === -1 : false;
+            } );
         });
         // this.associationService.fetchtAssociationByProduct(this.asso.association.idPair).subscribe(res => console.log(res));
-        this.canVoteUpA = this.asso.vote ? (this.asso.vote.vote === (0 || -1)) : true;
-        this.canVoteDownA = this.asso.vote ? (this.asso.vote.vote === (0 || 1)) : true;
+        this.isAssoUpvoted   = this.asso.vote ? (this.asso.vote.vote === 1) : false;
+        this.isAssoDownvoted = this.asso.vote ? (this.asso.vote.vote === -1) : false;
         console.log(this.asso);
     }
 
     ngOnChanges(changes: SimpleChanges): void {
         this.commentService.getCommentByIdPair(this.asso.association.idPair).subscribe((comments: any) => {
             this.commentaires = comments;
+            this.commentaires.forEach((c: Comment) => {
+                c.isUpvoted   = c.vote ? c.vote.vote === 1 : false;
+                c.isDownvoted = c.vote ? c.vote.vote === -1 : false;
+            } );
         });
-        this.canVoteUpA = this.asso.vote ? (this.asso.vote.vote === (0 || -1)) : true;
-        this.canVoteDownA = this.asso.vote ? (this.asso.vote.vote === (0 || 1)) : true;
+        this.isAssoUpvoted   = this.asso.vote ? (this.asso.vote.vote === 1) : false;
+        this.isAssoDownvoted = this.asso.vote ? (this.asso.vote.vote === -1) : false;
     }
 
     goTo(product) {
@@ -72,32 +76,32 @@ export class ProductRelatedCommentsComponent implements OnInit, OnChanges {
     }
 
     noteAsso(note: number) {
+        this.asso.association.note += this.asso.vote && (this.asso.vote.vote === note) ? -note : note;
         const vote = {
             id: this.asso.vote ? this.asso.vote.id : undefined,
-            idPair: this.asso.association.id,
+            idPair: this.asso.association.idPair,
             vote: this.asso.vote && (this.asso.vote.vote === note) ? 0 : note,
             idUser: this.loggedUser.id
         };
         this.voteService.vote(vote).subscribe((v: Vote) => this.asso.vote = v.vote !== 0 ? v : null);
-        this.canVoteUpA = note === (0 || -1);
-        this.canVoteDownA = note === (0 || 1);
-        this.associationService.fetchtAssociationByProduct(this.asso.productA.id).subscribe(res => this.asso.note = res[0].note);
+        this.isAssoUpvoted   = vote.vote === 1;
+        this.isAssoDownvoted = vote.vote === -1;
 
     }
 
     noteComment(note: number, comment: Comment) {
+        comment.commentaire.note += comment.vote && (comment.vote.vote === note) ? -note : note;
         const vote = {
             id: comment.vote ? comment.vote.id : undefined,
             idCommentaire: comment.commentaire.id,
             vote: comment.vote && (comment.vote.vote === note) ? 0 : note,
             idUser: this.loggedUser.id
         };
-        this.canVoteUp = note === (0 || -1);
-        this.canVoteDown = note === (0 || 1);
+
+        comment.isUpvoted = vote.vote === 1;
+        comment.isDownvoted = vote.vote === -1;
+
         this.voteService.vote(vote).subscribe((v: Vote) => comment.vote = v.vote !== 0 ? v : null);
-        this.commentService.getCommentByIdPair(this.asso.association.idPair).subscribe((comments: any) => {
-            this.commentaires = comments;
-        });
     }
 
     goToUserProfile(userId) {
