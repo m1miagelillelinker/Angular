@@ -39,23 +39,8 @@ export class HomeComponent implements OnInit {
     }
 
     getLastAssociations(assos: Association[]) {
-      return  assos.filter((a) => a.association.id % 2 === 1);
+      return  assos.filter((a) => a.association.id % 2 === 0);
     }
-/*
-
-        for (asso in assos) {
-            /!*      if (list.length !== 0) {
-                    let j;
-                    for (j in list) {
-                      if (j.association.idPair !== i.association.idPair) {
-                        list.push(i);
-                      }
-                    }
-                  } else {
-                    list.push(i);
-                  }*!/
-        }
-        assos = list;*/
 
     goTo(product) {
         this.router.navigate(['app/products', product.type, product.id]);

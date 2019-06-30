@@ -12,6 +12,7 @@
       margin-bottom: 4px;
       display: grid;
       grid-template-columns: 70px auto;
+      cursor:pointer;
 
       p {
           font-weight: bold;
@@ -25,7 +26,6 @@
           width: 100%;
       }
       div {
-        cursor:pointer;
         margin-top: auto;
         margin-bottom: auto;
         margin-left: 10px;

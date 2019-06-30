@@ -18,15 +18,18 @@
 	</div>
 	<button  mat-raised-button *ngIf="!otherUser"(click)="openDialog()" class="editbutton" >Editer le profil</button>
 
-
 	<!-- Display the profile-progess -->
 	<!-- <div class="profile-progress">
 	<div class="progress-bar" [ngStyle]="{'width': profileProgress.fullProgress}"></div>
 	<div class="progress" [ngStyle]="{'width': profileProgress.userProgress}"></div>
 </div> -->
 
-	<div *ngIf="otherUser && !follows" class="subscription" (click)="follow(user)">S'abonner</div>
-	<div *ngIf="otherUser && follows" class="unsubscription" (click)="unFollow(user)">Se désabonner</div>
+	<div *ngIf="otherUser && !follows">
+		<button class="subscription" (click)="follow(user)">S'abonner</button>
+	</div>
+	<div *ngIf="otherUser && follows">
+		<button class="unsubscription" (click)="unFollow(user)">Abonné(s)</button>
+	</div>
 
 </div>
 
