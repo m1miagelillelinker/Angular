@@ -22,7 +22,6 @@
     width: 30%;
     .displayActivites {
       display: flex;
-      margin-top: -25vh;
       .user-infos {
         display:block;
         margin-left: 10px;
@@ -54,31 +53,54 @@
 }
 
 .profile-infos {
-  margin: 30px;
-  margin-left: 60px;
+  width: 180px;
+  text-align: center;
+  margin: 30px 30px 30px 100px;
   width: fit-content;
 
   img {
     border-radius: 100%;
   }
 
-  .subscription {
+  .subscription {cursor: pointer;
+    outline: 0;
+    height: 50px;
+    width: 180px;
+    margin-bottom: 10px;
+    background-color: #3e3e3e;
+    border: 1px solid #3e3e3e;
+    color: white;
+    border-radius: 2px;
+    /*width: 180px;
     cursor: pointer;
     margin-top: 10px;
     padding: 10px;
     color: white;
-    background-color: #7c0000;
+    background-color: #7c0000;*/
   }
 
-  .unsubscription {
-    cursor: pointer;
-    margin-top: 10px;
-    padding: 10px;
+  .unsubscription {cursor: pointer;
+    outline: 0;
+    height: 50px;
+    width: 180px;
+    margin-bottom: 10px;
+    background-color: #3e3e3e;
+    border: 1px solid #3e3e3e;
+    color: white;
+    border-radius: 2px;
+    /*cursor: pointer;
+    outline: 0;
+    height: 50px;
+    width: 180px;
+    margin-bottom: 10px;
+    border: 1px solid #3e3e3e;
     color: #3e3e3e;
-    background-color: lightgray;
+    background-color: lightgray;*/
   }
 
   .username {
+    margin-top: 10px;
+    margin-bottom: 10px;
     h3 {
         display: inline-block;
         padding-top: 10px;
@@ -86,10 +108,15 @@
     }
   }
   .editbutton{
-    margin-top: 5vh;
-    /* margin-left: 55px; */
-    padding: 4px;
-    background-color: #ececec;
+    cursor: pointer;
+    outline: 0;
+    height: 50px;
+    width: 180px;
+    margin-bottom: 10px;
+    background-color: #3e3e3e;
+    border: 1px solid #3e3e3e;
+    color: white;
+    border-radius: 2px;
     &.selected {
         background-color:#7c0000;
         color: white;
@@ -127,7 +154,6 @@
 .profile-actions {
   display: flex;
   margin: 50px 100px 0;
-  width: 98vw;
 
   button {
     cursor: pointer;
@@ -144,7 +170,7 @@
         background-color: #7c0000;
         border-color: #7c0000;
     }
-    
+
   }
 
   .actions-trigger {

@@ -85,9 +85,10 @@ export class AccountPageComponent implements OnInit, OnChanges {
         json.forEach((us: any) => {
           const found = this.followersUsers.find(u => u.id === user.id);
           if (!found) {
-            this.followersUsers.push(user);
+            this.followersUsers.push(us);
           }
         });
+        this.follows = this.followersUsers.find(u => u.id === this.currentUser.id) != null;
       });
       this.userService.getFollows(parsedUserId).subscribe((json: User[]) => {
         json.forEach((us: any) => {
@@ -96,8 +97,6 @@ export class AccountPageComponent implements OnInit, OnChanges {
             this.followsUsers.push(us);
           }
         });
-        this.follows = this.followsUsers.find(u => u.id === parsedUserId) != null ||
-          this.followersUsers.find(u => u.id === this.currentUser.id) != null;
         this.otherUser = this.currentUser.id !== parsedUserId;
       });
       this.otherUser = this.currentUser.id !== this.user.id;
@@ -158,9 +157,10 @@ export class AccountPageComponent implements OnInit, OnChanges {
         json.forEach((us: any) => {
           const found = this.followsUsers.find(u => u.id === user.id);
           if (!found) {
-            this.followersUsers.push(user);
+            this.followersUsers.push(us);
           }
         });
+        this.follows = this.followersUsers.find(u => u.id === this.currentUser.id) != null;
       });
       this.userService.getFollows(parsedUserId).subscribe((json: User[]) => {
         json.forEach((us: any) => {
@@ -169,11 +169,11 @@ export class AccountPageComponent implements OnInit, OnChanges {
             this.followsUsers.push(us);
           }
         });
-        this.follows = this.followsUsers.find(u => u.id === parsedUserId) != null;
         this.otherUser = this.currentUser.id !== parsedUserId;
       });
+      this.showActivities();
     });
-    this.showActivities();
+
   }
   showBadges() {
     this.toggleFeature('badges');

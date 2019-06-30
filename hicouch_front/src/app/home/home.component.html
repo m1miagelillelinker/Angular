@@ -8,14 +8,14 @@
 </div>
 <!-- <button (click)="goToProducts()">see products</button> -->
 
-<div *ngIf="associations && associations. length > 0" class="lastAssos">
-	<h2 class="title">Dernières associations</h2>
+<div *ngIf="associations && associations.length > 0" class="lastAssos">
+	<h2 class="title">Associations récentes :</h2>
 
 	<div class="list">
 		<div class="item inline" *ngFor="let asso of associations" >
 			<div class="block">
-				<img class="image clickable" (click)="goTo(asso.productA)" src="{{asso.productA.image}}">
-				<img class="image clickable" (click)="goTo(asso.productB)" src="{{asso.productB.image}}">
+				<img class="image clickable" (click)="goTo(asso.productA)" src="{{asso.productA.image}}" alt="produitA">
+				<img class="image clickable" (click)="goTo(asso.productB)" src="{{asso.productB.image}}" alt="produitB">
 			</div>
 			<div class="titles">
 				<span class="title clickable" (click)="goTo(asso.productA)">{{asso.productA.title}}</span> et
