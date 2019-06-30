@@ -1,12 +1,12 @@
-<h1 mat-dialog-title>Edit Profil</h1>
+<h1 mat-dialog-title>Editer le Profil</h1>
 <div mat-dialog-content>
-  <h4>What's your new pseudo ?</h4>
+  <h4>Quel est votre nouveau pseudo ?</h4>
   <mat-form-field>
     <input matInput [(ngModel)]="data.pseudo">
   </mat-form-field>
 <div mat-dialog-actions>
-  <button mat-button (click)="onNoClick()">No Thanks</button>
+  <button mat-button (click)="onNoClick()">Annuler</button>
   <button mat-button
   [mat-dialog-close]="data.pseudo" 
-  cdkFocusInitial>Update</button>
+  cdkFocusInitial>Mettre à jour</button>
 </div>
